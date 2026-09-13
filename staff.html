@@ -844,7 +844,7 @@ td .sub{ font-size: .74rem; color: var(--muted-2); }
     <div class="sidebar-foot">
       <div><i class="fa-solid fa-database" style="color:var(--accent)"></i> Business Management System</div>
       <div class="mono" style="font-size:.66rem;word-break:break-all;margin-top:.25rem">
-        NGT-BMS V1.2026
+                 NGT-BMS V1.2026
       </div>
     </div>
   </aside>
@@ -927,7 +927,7 @@ const DB = {
       if (typeof firebase !== "undefined" && firebase.initializeApp){
         // Avoid double init
         if (!firebase.apps || !firebase.apps.length){
-          firebase.initializeApp({ databaseURL: "https://ngt-hr-management-system-default-rtdb.firebaseio.com/" });
+          firebase.initializeApp({ databaseURL: https://ngt-hr-management-system-default-rtdb.firebaseio.com/ });
         }
         this.fb = firebase.database();
         this.mode = "firebase";
@@ -1455,12 +1455,12 @@ function viewDashboard(){
     </div>
   </div>
 
-  ${DB.mode === "local" ? `
+  ${DB.mode === "production" ? `
   <div class="alert warn mb-3 animate-on-view">
     <i class="fa-solid fa-triangle-exclamation"></i>
     <div><b>Running in local fallback mode.</b> The Firebase Realtime Database could not be reached (offline or rules denied).
     Records are being stored in this browser only. Reconnect to sync with
-    <span class="mono">ngure-gacheru-technologies-default-rtdb</span>.</div>
+    <span class="mono">ngt-hr-management-system-default-rtdb</span>.</div>
   </div>` : ""}
 
   <div class="stat-grid animate-on-view">
@@ -2768,11 +2768,11 @@ function viewSettings(){
   <div class="card animate-on-view mb-3">
     <div class="card-title"><i class="fa-solid fa-database"></i> Data Source</div>
     <div class="info-list">
-      <div class="info-row"><span class="k">Mode</span><span class="v">${DB.mode === "firebase" ? "Firebase Realtime Database" : "Local browser storage (fallback)"}</span></div>
-      <div class="info-row"><span class="k">Database URL</span><span class="v mono" style="font-size:.74rem">${esc(https://ngt-hr-management-system-default-rtdb.firebaseio.com/)}</span></div>
+      <div class="info-row"><span class="k">Mode</span><span class="v">${DB.mode === "production" ? "Firebase Realtime Database" : "Local browser storage (fallback)"}</span></div>
+      <div class="info-row"><span class="k">Database URL</span><span class="v mono" style="font-size:.74rem">${esc("https://ngt-hr-management-system-default-rtdb.firebaseio.com/")}</span></div>
       <div class="info-row"><span class="k">Root path</span><span class="v mono">/</span></div>
     </div>
-    ${DB.mode === "local" ? `<div class="alert warn mt-2"><i class="fa-solid fa-triangle-exclamation"></i>
+    ${DB.mode === "production" ? `<div class="alert warn mt-2"><i class="fa-solid fa-triangle-exclamation"></i>
       <div>Firebase could not be reached. Records are stored locally in this browser. Check the database rules and network connection, then reload.</div>
     </div>` : ""}
   </div>
@@ -3829,7 +3829,7 @@ document.addEventListener("click", async (e) => {
         snapshot[col] = await DB.get(col) || {};
       }
       snapshot._exportedAt = nowISO();
-      snapshot._source = FIREBASE_DB_URL;
+      snapshot._source = "https://ngt-hr-management-system-default-rtdb.firebaseio.com/";
       const blob = new Blob([JSON.stringify(snapshot, null, 2)], { type: "application/json" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
@@ -3927,7 +3927,7 @@ document.addEventListener("click", async (e) => {
       const rows = [
         ["NGT STAFF MANAGEMENT — HR SUMMARY REPORT"],
         ["Generated", fmtDateTime(nowISO())],
-        ["Data Source", FIREBASE_DB_URL],
+        ["Data Source", "https://ngt-hr-management-system-default-rtdb.firebaseio.com/"],
         [],
         ["STAFF SUMMARY"],
         ["Total Staff", staff.length],
@@ -4115,8 +4115,8 @@ async function runScheduledChecks(){
   console.log(
     "%cNGT Staff Management System",
     "color:#38bdf8;font-weight:800;font-size:14px",
-    "\nDatabase:", FIREBASE_DB_URL,
-    "\nMode:", DB.mode
+    "\nDatabase:", https://ngt-hr-management-system-default-rtdb.firebaseio.com/,
+    "\nMode:", "locked" or false
   );
 })();
 </script>

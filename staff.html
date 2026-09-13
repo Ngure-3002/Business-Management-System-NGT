@@ -1567,7 +1567,7 @@ function viewDashboard(){
     </div>
   </div>
 
-  ${DB.mode === "local" ? `
+  ${DB.mode === "firebase" ? `
   <div class="alert warn mb-3 animate-on-view">
     <i class="fa-solid fa-triangle-exclamation"></i>
     <div><b>Running in local fallback mode.</b> The Firebase Realtime Database could not be reached (offline or rules denied).
@@ -3947,7 +3947,7 @@ document.addEventListener("click", async (e) => {
         snapshot[col] = await DB.get(col) || {};
       }
       snapshot._exportedAt = nowISO();
-      snapshot._source = FIREBASE_DB_URL;
+      snapshot._source = "https://ngt-hr-management-system-default-rtdb.firebaseio.com/";
       const blob = new Blob([JSON.stringify(snapshot, null, 2)], { type: "application/json" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");

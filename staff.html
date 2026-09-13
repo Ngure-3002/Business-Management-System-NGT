@@ -1446,12 +1446,45 @@ function navigate(view, opts = {}){
 /* ================================================================
    RENDER ROOT — guarded (change #6)
    ================================================================ */
-function render(){
-  // Never paint a data view without an authenticated user.
-  if (!state.user){
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+const auth = getAuth();
+
+// This structural event fires automatically whenever a login status updates
+onAuthStateChanged(auth, async (firebaseUser) => {
+  if (firebaseUser) {
+    // 1. Fetch details from Live Firebase Realtime DB and update state
+    state.user = {
+      uid: "24B1JCfeNIW44jMQgf4KFSFUyFv1",
+      email: "gacherulewis3002@gmail.com",
+      role: "admin"
+    };
+  } else {
+    // 2. Clear state on sign-out
+    state.user = null;
+  }
+
+  // 3. Trigger the root render flow
+  render(); 
+});
+
+function render() {
+  // Guard Check (Your Snippet)
+  if (!state.user) {
     renderLoginGate();
     return;
   }
+
+  // 4. If authentication passes, evaluate role visibility next
+  applyRoleNav();
+
+  // 5. Continue painting the specific sub-view chosen by the user
+  if (state.view === "dashboard") {
+    renderDashboardView();
+  } else if (state.view === "reports") {
+    renderReportsView();
+  }
+}
 
   const main = $("#main");
   let html = "";

@@ -13,7 +13,6 @@
 <style>
 /* ============================================================
    NGT STAFF MANAGEMENT — THEME
-   Base palette derived from the supplied style.css
    ============================================================ */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -58,7 +57,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: #0a111a; }
 ::-webkit-scrollbar-thumb { background: #24344a; border-radius: 8px; border: 2px solid #0a111a; }
@@ -122,7 +120,7 @@ body {
   text-overflow: ellipsis;
 }
 
-.header-right { display: flex; align-items: center; gap: 1.25rem; }
+.header-right { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 
 .conn-status{
   display: inline-flex; align-items: center; gap: .5rem;
@@ -174,6 +172,9 @@ body {
   min-height: calc(100vh - 79px);
   align-items: start;
 }
+/* When the login gate is up, collapse the shell and hide the sidebar */
+.app-shell.locked { grid-template-columns: 1fr; }
+.app-shell.locked .sidebar { display: none; }
 
 /* ===== SIDEBAR ===== */
 .sidebar{
@@ -232,11 +233,36 @@ body {
   background: #0b1117; border: 1px solid var(--border);
   padding: .05rem .45rem; border-radius: 999px; color: var(--muted);
 }
+.nav-item.role-hidden{ display: none; }
 
 .sidebar-foot{
   margin-top: 1.5rem; padding: .9rem .8rem;
   border-top: 1px solid var(--border-soft);
   font-size: .72rem; color: #5f7691; line-height: 1.5;
+}
+.sidebar-user{
+  display: flex; align-items: center; gap: .6rem;
+  padding: .7rem .8rem;
+  background: #0d1725;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+.sidebar-user .avatar-sm{
+  width: 34px; height: 34px; flex: 0 0 34px;
+  border-radius: 10px;
+  background: linear-gradient(135deg,#0ea5e9,#2563eb);
+  display: grid; place-items: center;
+  font-weight: 800; color: #03121f; font-size: .8rem;
+}
+.sidebar-user .meta{ min-width: 0; flex: 1; }
+.sidebar-user .email{
+  font-size: .74rem; color: #e2e8f0; font-weight: 600;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.sidebar-user .role{
+  font-size: .66rem; color: var(--accent-2); text-transform: uppercase;
+  letter-spacing: 1.2px; font-weight: 700;
 }
 
 /* ===== MAIN ===== */
@@ -731,6 +757,49 @@ td .sub{ font-size: .74rem; color: var(--muted-2); }
 .alert.warn{ border-color: #f59e0b45; background: #f59e0b10; }
 .alert.warn i{ color: var(--warn-2); }
 
+/* ===== LOGIN GATE ===== */
+.gate-wrap{
+  display: flex; align-items: center; justify-content: center;
+  min-height: calc(100vh - 79px);
+  padding: 2rem 1rem;
+}
+.gate-card{
+  width: 100%; max-width: 440px;
+  background: linear-gradient(160deg,#16223a 0%, #101a29 100%);
+  border: 1px solid var(--border);
+  border-radius: 26px;
+  padding: 2rem 1.75rem;
+  box-shadow: 0 30px 60px rgba(0,0,0,.6);
+  position: relative; overflow: hidden;
+}
+.gate-card::before{
+  content:''; position:absolute; right:-80px; top:-80px;
+  width: 220px; height: 220px; border-radius: 50%;
+  background: radial-gradient(circle, #38bdf822, transparent 70%);
+  pointer-events: none;
+}
+.gate-brand{ display: flex; align-items: center; gap: .9rem; margin-bottom: 1.5rem; }
+.gate-brand .brand-mark{ width: 52px; height: 52px; flex: 0 0 52px; border-radius: 16px; font-size: 1.05rem; }
+.gate-brand .title{ font-size: 1.15rem; font-weight: 800; color: #e6f4ff; letter-spacing: -.3px; }
+.gate-brand .sub{ font-size: .74rem; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; }
+.gate-card h1{ font-size: 1.35rem; font-weight: 800; color: #f0f9ff; margin-bottom: .25rem; letter-spacing: -.5px; }
+.gate-card .lead{ color: var(--muted); font-size: .85rem; margin-bottom: 1.5rem; }
+.gate-card .form-grid{ gap: .9rem; }
+.gate-foot{
+  margin-top: 1.5rem; padding-top: 1rem;
+  border-top: 1px dashed #24354c;
+  font-size: .76rem; color: var(--muted-2);
+  display: flex; align-items: center; gap: .5rem;
+}
+.gate-error{
+  margin-top: 1rem; padding: .7rem .9rem;
+  border-radius: 12px;
+  background: #2a1216; border: 1px solid #ef444450;
+  color: #fecaca; font-size: .82rem;
+  display: none;
+}
+.gate-error.show{ display: block; }
+
 /* ===== ANIMATION ON VIEW ===== */
 .animate-on-view { opacity: 0; transform: translateY(35px); transition: opacity .7s ease, transform .7s ease; }
 .animate-on-view.visible { opacity: 1; transform: translateY(0); }
@@ -755,6 +824,7 @@ td .sub{ font-size: .74rem; color: var(--muted-2); }
   .company-name{ font-size: 1.1rem; }
   .motto{ font-size: .72rem; }
   .conn-status span.txt{ display: none; }
+  .app-shell.locked .sidebar{ display: none; }
 }
 @media (max-width: 620px){
   .page-title{ font-size: 1.4rem; }
@@ -763,6 +833,7 @@ td .sub{ font-size: .74rem; color: var(--muted-2); }
   .profile-actions{ margin-left: 0; width: 100%; }
   .toast-wrap{ left: 1rem; right: 1rem; max-width: none; }
   .header-accent{ display: none; }
+  .conn-status span.txt{ display: none; }
 }
 
 /* ===== PRINT ===== */
@@ -795,6 +866,10 @@ td .sub{ font-size: .74rem; color: var(--muted-2); }
       <div class="conn-status" id="connStatus">
         <span class="led"></span><span class="txt">Connecting…</span>
       </div>
+      <span class="chip" id="roleChip" style="display:none"></span>
+      <button class="btn btn-ghost btn-sm" id="signOutBtn" style="display:none">
+        <i class="fa-solid fa-right-from-bracket"></i> Sign out
+      </button>
       <div class="header-accent">
         <span class="dot"></span><span class="dot"></span><span class="dot"></span>
       </div>
@@ -803,54 +878,68 @@ td .sub{ font-size: .74rem; color: var(--muted-2); }
 </header>
 
 <!-- ============================ APP SHELL ============================ -->
-<div class="app-shell">
+<div class="app-shell" id="appShell">
 
   <!-- ============ SIDEBAR ============ -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-head"><i class="fa-solid fa-people-group"></i> Staff Management</div>
 
+    <div class="sidebar-user" id="sidebarUser" style="display:none">
+      <div class="avatar-sm" id="sidebarAvatar">?</div>
+      <div class="meta">
+        <div class="email" id="sidebarEmail">—</div>
+        <div class="role" id="sidebarRole">—</div>
+      </div>
+    </div>
+
     <div class="nav-section">
       <div class="nav-label">Overview</div>
-      <a class="nav-item" data-view="dashboard"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+      <a class="nav-item" data-view="dashboard" data-roles="admin,hr,manager,finance,staff"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
     </div>
 
     <div class="nav-section">
       <div class="nav-label">Staff</div>
-      <a class="nav-item" data-view="staff"><i class="fa-solid fa-users"></i> All Staff <span class="count" data-count="staff">0</span></a>
-      <a class="nav-item" data-view="staff" data-type="Employee"><i class="fa-solid fa-user-tie"></i> Employees <span class="count" data-count="Employee">0</span></a>
-      <a class="nav-item" data-view="staff" data-type="Agent"><i class="fa-solid fa-handshake"></i> Agents <span class="count" data-count="Agent">0</span></a>
-      <a class="nav-item" data-view="staff" data-type="Technician"><i class="fa-solid fa-screwdriver-wrench"></i> Technicians <span class="count" data-count="Technician">0</span></a>
-      <a class="nav-item" data-view="staff" data-type="Contractor"><i class="fa-solid fa-helmet-safety"></i> Contractors <span class="count" data-count="Contractor">0</span></a>
-      <a class="nav-item" data-view="staff-form"><i class="fa-solid fa-user-plus"></i> Add Staff</a>
+      <a class="nav-item" data-view="staff" data-roles="admin,hr,manager,finance"><i class="fa-solid fa-users"></i> All Staff <span class="count" data-count="staff">0</span></a>
+      <a class="nav-item" data-view="staff" data-type="Employee" data-roles="admin,hr,manager,finance"><i class="fa-solid fa-user-tie"></i> Employees <span class="count" data-count="Employee">0</span></a>
+      <a class="nav-item" data-view="staff" data-type="Agent" data-roles="admin,hr,manager,finance"><i class="fa-solid fa-handshake"></i> Agents <span class="count" data-count="Agent">0</span></a>
+      <a class="nav-item" data-view="staff" data-type="Technician" data-roles="admin,hr,manager,finance"><i class="fa-solid fa-screwdriver-wrench"></i> Technicians <span class="count" data-count="Technician">0</span></a>
+      <a class="nav-item" data-view="staff" data-type="Contractor" data-roles="admin,hr,manager,finance"><i class="fa-solid fa-helmet-safety"></i> Contractors <span class="count" data-count="Contractor">0</span></a>
+      <a class="nav-item" data-view="staff-form" data-roles="admin,hr"><i class="fa-solid fa-user-plus"></i> Add Staff</a>
     </div>
 
     <div class="nav-section">
       <div class="nav-label">HR Operations</div>
-      <a class="nav-item" data-view="attendance"><i class="fa-solid fa-clock"></i> Attendance</a>
-      <a class="nav-item" data-view="leave"><i class="fa-solid fa-umbrella-beach"></i> Leave Management</a>
-      <a class="nav-item" data-view="assignments"><i class="fa-solid fa-list-check"></i> Assignments</a>
-      <a class="nav-item" data-view="payroll"><i class="fa-solid fa-money-bill-wave"></i> Payroll / Payments</a>
-      <a class="nav-item" data-view="performance"><i class="fa-solid fa-star"></i> Performance</a>
-      <a class="nav-item" data-view="documents"><i class="fa-solid fa-folder-open"></i> Documents</a>
+      <a class="nav-item" data-view="attendance" data-roles="admin,hr,manager"><i class="fa-solid fa-clock"></i> Attendance</a>
+      <a class="nav-item" data-view="leave" data-roles="admin,hr,manager,staff"><i class="fa-solid fa-umbrella-beach"></i> Leave Management</a>
+      <a class="nav-item" data-view="assignments" data-roles="admin,hr,manager"><i class="fa-solid fa-list-check"></i> Assignments</a>
+      <a class="nav-item" data-view="payroll" data-roles="admin,hr,finance"><i class="fa-solid fa-money-bill-wave"></i> Payroll / Payments</a>
+      <a class="nav-item" data-view="performance" data-roles="admin,hr,manager"><i class="fa-solid fa-star"></i> Performance</a>
+      <a class="nav-item" data-view="documents" data-roles="admin,hr"><i class="fa-solid fa-folder-open"></i> Documents</a>
     </div>
 
     <div class="nav-section">
       <div class="nav-label">System</div>
-      <a class="nav-item" data-view="notifications"><i class="fa-solid fa-bell"></i> Notifications <span class="count" data-count="notif">0</span></a>
-      <a class="nav-item" data-view="reports"><i class="fa-solid fa-chart-pie"></i> Reports</a>
-      <a class="nav-item" data-view="settings"><i class="fa-solid fa-gear"></i> Settings</a>
+      <a class="nav-item" data-view="notifications" data-roles="admin,hr,manager,finance,staff"><i class="fa-solid fa-bell"></i> Notifications <span class="count" data-count="notif">0</span></a>
+      <a class="nav-item" data-view="reports" data-roles="admin,hr,manager,finance"><i class="fa-solid fa-chart-pie"></i> Reports</a>
+      <a class="nav-item" data-view="settings" data-roles="admin"><i class="fa-solid fa-gear"></i> Settings</a>
     </div>
 
     <div class="sidebar-foot">
-      <div><i class="fa-solid fa-database" style="color:var(--accent)"></i> Business Management System</div>
+      <div><i class="fa-solid fa-database" style="color:var(--accent)"></i> Realtime Database</div>
       <div class="mono" style="font-size:.66rem;word-break:break-all;margin-top:.25rem">
-                 NGT-BMS V1.2026
+        ngure-gacheru-technologies-default-rtdb
       </div>
     </div>
   </aside>
 
   <!-- ============ MAIN ============ -->
-  <main class="main" id="main"></main>
+  <main class="main" id="main">
+    <div class="empty" style="padding:6rem 1rem">
+      <i class="fa-solid fa-circle-notch fa-spin" style="color:var(--accent)"></i>
+      <h4>Loading Staff Management…</h4>
+      <p>Verifying session and connecting to the database.</p>
+    </div>
+  </main>
 </div>
 
 <!-- ============================ MODAL ============================ -->
@@ -868,19 +957,20 @@ td .sub{ font-size: .74rem; color: var(--muted-2); }
 <!-- ============================ TOASTS ============================ -->
 <div class="toast-wrap" id="toastWrap"></div>
 
-<!-- ============================ FIREBASE SDK ============================ -->
+<!-- ============================ FIREBASE SDKs ============================ -->
+<!-- 4a. Auth SDK (new) — required before firebase.auth() is called -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
 <script>
 /* ================================================================
    NGT STAFF MANAGEMENT SYSTEM
-   Data layer → Firebase Realtime Database (with local fallback)
+   Data layer → Firebase Realtime Database (auth-gated)
    ================================================================ */
 
 /* ------------------------- CONFIG ------------------------- */
-const FIREBASE_DB_URL = "https://ngt-hr-management-system-default-rtdb.firebaseio.com/";
+const FIREBASE_DB_URL = "https://ngure-gacheru-technologies-default-rtdb.firebaseio.com/";
 const LS_KEY = "ngt_staff_mgmt_local_db_v1";
 
 /* Collections used across the system */
@@ -888,6 +978,16 @@ const COLLECTIONS = [
   "staff","departments","attendance","leaveRequests","staffAssignments",
   "payroll","performanceReviews","staffDocuments","notifications"
 ];
+
+/* Role → collections the user is permitted to subscribe to.
+   Mirrors the Realtime Database rules. Prevents noisy denied reads. */
+const ROLE_COLLECTIONS = {
+  admin:   ["staff","departments","attendance","leaveRequests","staffAssignments","payroll","performanceReviews","staffDocuments","notifications"],
+  hr:      ["staff","departments","attendance","leaveRequests","staffAssignments","performanceReviews","staffDocuments","notifications"],
+  manager: ["staff","departments","attendance","leaveRequests","staffAssignments","performanceReviews","notifications"],
+  finance: ["staff","departments","payroll","notifications"],
+  staff:   ["departments","leaveRequests","notifications"]
+};
 
 /* ------------------------- LOCAL STORAGE FALLBACK ------------------------- */
 function lsReadAll(){
@@ -919,15 +1019,14 @@ function lsSet(path, value){
 /* ------------------------- UNIFIED DB LAYER ------------------------- */
 const DB = {
   fb: null,
-  mode: "production",          // "firebase" | "production"
+  mode: "local",          // "firebase" | "local"
   _listeners: [],         // { path, cb }
 
   init(){
     try {
       if (typeof firebase !== "undefined" && firebase.initializeApp){
-        // Avoid double init
         if (!firebase.apps || !firebase.apps.length){
-          firebase.initializeApp({ databaseURL: "https://ngt-hr-management-system-default-rtdb.firebaseio.com/" });
+          firebase.initializeApp({ databaseURL: FIREBASE_DB_URL });
         }
         this.fb = firebase.database();
         this.mode = "firebase";
@@ -939,8 +1038,8 @@ const DB = {
     } catch (err){
       console.warn("Firebase init failed — falling back to local storage.", err);
       this.fb = null;
-      this.mode = "production";
-      setConnStatus("production");
+      this.mode = "local";
+      setConnStatus("local");
     }
   },
 
@@ -988,7 +1087,6 @@ const DB = {
     if (this.fb){
       this.fb.ref(path).on("value", snap => cb(snap.val()), err => {
         console.error("DB listen error on " + path, err);
-        setConnStatus("offline");
       });
     } else {
       cb(lsGet(path));
@@ -1010,6 +1108,7 @@ const state = {
   profileTab: "overview",
   currentStaffId: null,
   editingStaffId: null,
+  user: null,                     // ← { uid, email, role, staffId }
   filters: {
     staffSearch: "", staffDept: "", staffType: "", staffStatus: "",
     attDate: "", attStaff: "",
@@ -1027,7 +1126,7 @@ const state = {
 };
 
 /* ================================================================
-   CONSTANTS (configuration — from the NGT specification)
+   CONSTANTS
    ================================================================ */
 const STAFF_TYPES = ["Employee","Agent","Technician","Contractor","Intern","Management","Other"];
 const EMPLOYMENT_TYPES = ["Permanent","Contract","Part-time","Casual","Intern","Commission","Freelance","Volunteer"];
@@ -1041,7 +1140,6 @@ const DOC_TYPES = ["Employment Contract","CV","Certificate","Training Record","P
 const COMMISSION_TYPES = ["Percentage","Fixed Amount","Tiered"];
 const GENDERS = ["Male","Female","Other","Prefer not to say"];
 
-/* Departments supplied by NGT — seeded once on first run */
 const SEED_DEPARTMENTS = [
   "Management","Human Resources","Finance","IT","Electrical",
   "CCTV & Security Systems","Solar","Procurement","Sales","Marketing",
@@ -1155,17 +1253,6 @@ function badge(status){
 function typeBadge(t){
   return `<span class="badge type">${esc(t || "—")}</span>`;
 }
-function typeIcon(t){
-  switch(t){
-    case "Employee":    return "fa-user-tie";
-    case "Agent":       return "fa-handshake";
-    case "Technician":  return "fa-screwdriver-wrench";
-    case "Contractor":  return "fa-helmet-safety";
-    case "Intern":      return "fa-graduation-cap";
-    case "Management":  return "fa-briefcase";
-    default:            return "fa-user";
-  }
-}
 
 /* ------------------------- ID GENERATORS ------------------------- */
 async function nextSeq(counterKey){
@@ -1271,16 +1358,20 @@ function staffOptions(selected, placeholder = "— Select Staff —"){
 }
 
 /* ================================================================
-   DATA SUBSCRIPTIONS
+   DATA SUBSCRIPTIONS — role aware (change #5)
    ================================================================ */
 function subscribeAll(){
-  COLLECTIONS.forEach(col => {
+  const role = (state.user && state.user.role) || "staff";
+  const allowed = ROLE_COLLECTIONS[role] || ROLE_COLLECTIONS.staff;
+
+  allowed.forEach(col => {
     DB.listen(col, val => {
       state.data[col] = val || {};
       if (col === "departments") ensureDepartmentsSeeded();
       scheduleRender();
     });
   });
+
   DB.listen("settings/counters", () => {});
 }
 
@@ -1317,6 +1408,21 @@ async function ensureDepartmentsSeeded(){
 }
 
 /* ================================================================
+   ROLE-BASED NAV VISIBILITY
+   ================================================================ */
+function applyRoleNav(){
+  const role = (state.user && state.user.role) || "";
+  $$(".nav-item").forEach(el => {
+    const allowed = (el.dataset.roles || "").split(",").map(s => s.trim()).filter(Boolean);
+    if (!allowed.length || allowed.includes(role)){
+      el.classList.remove("role-hidden");
+    } else {
+      el.classList.add("role-hidden");
+    }
+  });
+}
+
+/* ================================================================
    ROUTER
    ================================================================ */
 function navigate(view, opts = {}){
@@ -1338,9 +1444,15 @@ function navigate(view, opts = {}){
 }
 
 /* ================================================================
-   RENDER ROOT
+   RENDER ROOT — guarded (change #6)
    ================================================================ */
 function render(){
+  // Never paint a data view without an authenticated user.
+  if (!state.user){
+    renderLoginGate();
+    return;
+  }
+
   const main = $("#main");
   let html = "";
   switch (state.view){
@@ -1455,12 +1567,12 @@ function viewDashboard(){
     </div>
   </div>
 
-  ${DB.mode === "production" ? `
+  ${DB.mode === "local" ? `
   <div class="alert warn mb-3 animate-on-view">
     <i class="fa-solid fa-triangle-exclamation"></i>
     <div><b>Running in local fallback mode.</b> The Firebase Realtime Database could not be reached (offline or rules denied).
     Records are being stored in this browser only. Reconnect to sync with
-    <span class="mono">ngt-hr-management-system-default-rtdb</span>.</div>
+    <span class="mono">ngure-gacheru-technologies-default-rtdb</span>.</div>
   </div>` : ""}
 
   <div class="stat-grid animate-on-view">
@@ -1850,7 +1962,7 @@ function viewProfile(){
   const s = state.data.staff[id];
   if (!s){
     return `<div class="empty"><i class="fa-solid fa-user-slash"></i><h4>Staff record not found</h4>
-      <p>This record may have been removed.</p>
+      <p>This record may have been removed, or you may not have permission to view it.</p>
       <button class="btn btn-primary btn-sm" data-action="go-staff">Back to Directory</button></div>`;
   }
 
@@ -2766,13 +2878,23 @@ function viewSettings(){
   </div>
 
   <div class="card animate-on-view mb-3">
+    <div class="card-title"><i class="fa-solid fa-user-shield"></i> Signed-in Session</div>
+    <div class="info-list">
+      <div class="info-row"><span class="k">Email</span><span class="v">${esc(state.user?.email || "—")}</span></div>
+      <div class="info-row"><span class="k">UID</span><span class="v mono" style="font-size:.74rem">${esc(state.user?.uid || "—")}</span></div>
+      <div class="info-row"><span class="k">Role</span><span class="v">${badge((state.user?.role || "").toUpperCase() || "—")}</span></div>
+      <div class="info-row"><span class="k">Linked staffId</span><span class="v mono">${esc(state.user?.staffId || "—")}</span></div>
+    </div>
+  </div>
+
+  <div class="card animate-on-view mb-3">
     <div class="card-title"><i class="fa-solid fa-database"></i> Data Source</div>
     <div class="info-list">
-      <div class="info-row"><span class="k">Mode</span><span class="v">${DB.mode === "production" ? "Firebase Realtime Database" : "Local browser storage (fallback)"}</span></div>
-      <div class="info-row"><span class="k">Database URL</span><span class="v mono" style="font-size:.74rem">${esc("https://ngt-hr-management-system-default-rtdb.firebaseio.com/")}</span></div>
+      <div class="info-row"><span class="k">Mode</span><span class="v">${DB.mode === "firebase" ? "Firebase Realtime Database" : "Local browser storage (fallback)"}</span></div>
+      <div class="info-row"><span class="k">Database URL</span><span class="v mono" style="font-size:.74rem">${esc(FIREBASE_DB_URL)}</span></div>
       <div class="info-row"><span class="k">Root path</span><span class="v mono">/</span></div>
     </div>
-    ${DB.mode === "production" ? `<div class="alert warn mt-2"><i class="fa-solid fa-triangle-exclamation"></i>
+    ${DB.mode === "local" ? `<div class="alert warn mt-2"><i class="fa-solid fa-triangle-exclamation"></i>
       <div>Firebase could not be reached. Records are stored locally in this browser. Check the database rules and network connection, then reload.</div>
     </div>` : ""}
   </div>
@@ -3112,7 +3234,6 @@ function departmentFormHTML(d = {}){
    ACTION HANDLERS
    ================================================================ */
 function attachViewHandlers(){
-  /* --- Staff directory filters --- */
   const bindFilter = (id, key, immediate) => {
     const el = $("#" + id);
     if (!el) return;
@@ -3137,7 +3258,6 @@ function attachViewHandlers(){
   bindFilter("fDocStaff", "docStaff", true);
   bindFilter("fDocType", "docType", true);
 
-  /* --- Staff form --- */
   const staffForm = $("#staffForm");
   if (staffForm){
     const typeSel = $("#fldStaffType");
@@ -3150,7 +3270,6 @@ function attachViewHandlers(){
     staffForm.addEventListener("submit", handleStaffSubmit);
   }
 
-  /* --- Restore file input --- */
   const restoreFile = $("#restoreFile");
   if (restoreFile) restoreFile.addEventListener("change", handleRestoreFile);
 }
@@ -3236,7 +3355,7 @@ async function handleStaffSubmit(e){
   }
 }
 
-/* ------------------------- MODAL FORM SAVE HELPERS ------------------------- */
+/* ------------------------- MODAL FORM SAVE HELPER ------------------------- */
 function modalSave(handler){
   const btn = $("#modalSaveBtn");
   if (btn) btn.onclick = async () => {
@@ -3360,7 +3479,6 @@ async function setLeaveStatus(id, status){
   await DB.update("leaveRequests/" + id, { status, updatedAt: nowISO() });
 
   if (status === "Approved"){
-    // Reflect approved leave on the staff record status
     const s = state.data.staff[l.staffId];
     if (s && s.employmentStatus === "Active"){
       await DB.update("staff/" + l.staffId, { employmentStatus: "On Leave", updatedAt: nowISO() });
@@ -3597,6 +3715,7 @@ document.addEventListener("click", async (e) => {
   const navItem = e.target.closest(".nav-item");
   if (navItem){
     e.preventDefault();
+    if (!state.user) return;
     navigate(navItem.dataset.view, { type: navItem.dataset.type });
     return;
   }
@@ -3652,7 +3771,7 @@ document.addEventListener("click", async (e) => {
 
     /* ---------- quick actions from profile ---------- */
     case "quick-attendance":
-      openAttendanceModal.call(null);
+      openAttendanceModal();
       $("#m_att_staffId").value = id;
       break;
     case "quick-leave":
@@ -3829,7 +3948,7 @@ document.addEventListener("click", async (e) => {
         snapshot[col] = await DB.get(col) || {};
       }
       snapshot._exportedAt = nowISO();
-      snapshot._source = "https://ngt-hr-management-system-default-rtdb.firebaseio.com/";
+      snapshot._source = FIREBASE_DB_URL;
       const blob = new Blob([JSON.stringify(snapshot, null, 2)], { type: "application/json" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
@@ -3927,7 +4046,7 @@ document.addEventListener("click", async (e) => {
       const rows = [
         ["NGT STAFF MANAGEMENT — HR SUMMARY REPORT"],
         ["Generated", fmtDateTime(nowISO())],
-        ["Data Source", "https://ngt-hr-management-system-default-rtdb.firebaseio.com/"],
+        ["Data Source", FIREBASE_DB_URL],
         [],
         ["STAFF SUMMARY"],
         ["Total Staff", staff.length],
@@ -4036,7 +4155,7 @@ document.addEventListener("keydown", (e) => {
 $("#hamburger").addEventListener("click", () => {
   $("#sidebar").classList.toggle("open");
 });
-   
+
 /* ================================================================
    SCHEDULED HR CHECKS (contract expiry / review due)
    ================================================================ */
@@ -4092,7 +4211,7 @@ async function runScheduledChecks(){
 }
 
 /* ================================================================
-   BOOT
+   BOOT — 4b. Auth gate before subscribeAll()
    ================================================================ */
 function renderLoginGate(){
   const shell = document.getElementById("appShell");
@@ -4290,11 +4409,11 @@ async function signOut(){
   setInterval(() => {
     if (state.user && (state.view === "dashboard" || state.view === "notifications")) render();
   }, 60000);
-   
+
   console.log(
     "%cNGT Staff Management System",
     "color:#38bdf8;font-weight:800;font-size:14px",
-    "\nDatabase:", https://ngt-hr-management-system-default-rtdb.firebaseio.com/,
+    "\nDatabase:", FIREBASE_DB_URL,
     "\nAuth gate: enabled"
   );
 })();

@@ -871,6 +871,7 @@ td .sub{ font-size: .74rem; color: var(--muted-2); }
 <!-- ============================ FIREBASE SDK ============================ -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 
 <script>
 /* ================================================================
@@ -926,7 +927,7 @@ const DB = {
       if (typeof firebase !== "undefined" && firebase.initializeApp){
         // Avoid double init
         if (!firebase.apps || !firebase.apps.length){
-          firebase.initializeApp({ databaseURL: FIREBASE_DB_URL });
+          firebase.initializeApp({ databaseURL: "https://ngt-hr-management-system-default-rtdb.firebaseio.com/" });
         }
         this.fb = firebase.database();
         this.mode = "firebase";

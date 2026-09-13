@@ -1019,14 +1019,14 @@ function lsSet(path, value){
 /* ------------------------- UNIFIED DB LAYER ------------------------- */
 const DB = {
   fb: null,
-  mode: "firebase",          // "firebase" | "local"
-  _listeners: [],         // { path, cb }
+  mode: "firebase",          
+  _listeners: [{ path, cb }],         
 
   init(){
     try {
       if (typeof firebase !== "undefined" && firebase.initializeApp){
         if (!firebase.apps || !firebase.apps.length){
-          firebase.initializeApp({ databaseURL: FIREBASE_DB_URL });
+          firebase.initializeApp({ databaseURL: "https://ngt-hr-management-system-default-rtdb.firebaseio.com/" });
         }
         this.fb = firebase.database();
         this.mode = "firebase";
@@ -1108,7 +1108,12 @@ const state = {
   profileTab: "overview",
   currentStaffId: null,
   editingStaffId: null,
-  user: null,                     // ← { uid, email, role, staffId }
+  state.user: {
+    uid: "24B1JCfeNIW44jMQgf4KFSFUyFv1",
+    email: "gacherulewis3002@gmail.com",
+    role: "admin",     
+    staffId: "NGT-STF-001" 
+  }
   filters: {
     staffSearch: "", staffDept: "", staffType: "", staffStatus: "",
     attDate: "", attStaff: "",

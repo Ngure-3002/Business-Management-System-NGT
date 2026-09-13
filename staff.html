@@ -925,9 +925,9 @@ td .sub{ font-size: .74rem; color: var(--muted-2); }
     </div>
 
     <div class="sidebar-foot">
-      <div><i class="fa-solid fa-database" style="color:var(--accent)"></i> Realtime Database</div>
+      <div><i class="fa-solid fa-database" style="color:var(--accent)"></i> BUSINESS MANAGEMENT SYSTEM</div>
       <div class="mono" style="font-size:.66rem;word-break:break-all;margin-top:.25rem">
-        ngure-gacheru-technologies-default-rtdb
+        NGT-BMS V1.2026
       </div>
     </div>
   </aside>
@@ -970,7 +970,7 @@ td .sub{ font-size: .74rem; color: var(--muted-2); }
    ================================================================ */
 
 /* ------------------------- CONFIG ------------------------- */
-const FIREBASE_DB_URL = "https://ngure-gacheru-technologies-default-rtdb.firebaseio.com/";
+const FIREBASE_DB_URL = "https://ngt-hr-management-system-default-rtdb.firebaseio.com/";
 const LS_KEY = "ngt_staff_mgmt_local_db_v1";
 
 /* Collections used across the system */
@@ -1019,7 +1019,7 @@ function lsSet(path, value){
 /* ------------------------- UNIFIED DB LAYER ------------------------- */
 const DB = {
   fb: null,
-  mode: "local",          // "firebase" | "local"
+  mode: "firebase",          // "firebase" | "local"
   _listeners: [],         // { path, cb }
 
   init(){
@@ -1038,8 +1038,8 @@ const DB = {
     } catch (err){
       console.warn("Firebase init failed — falling back to local storage.", err);
       this.fb = null;
-      this.mode = "local";
-      setConnStatus("local");
+      this.mode = "firebase";
+      setConnStatus("firebase");
     }
   },
 
@@ -1571,8 +1571,7 @@ function viewDashboard(){
   <div class="alert warn mb-3 animate-on-view">
     <i class="fa-solid fa-triangle-exclamation"></i>
     <div><b>Running in local fallback mode.</b> The Firebase Realtime Database could not be reached (offline or rules denied).
-    Records are being stored in this browser only. Reconnect to sync with
-    <span class="mono">ngure-gacheru-technologies-default-rtdb</span>.</div>
+    Records are being>ngt-hr-management-system-default-rtdb</span>.</div>
   </div>` : ""}
 
   <div class="stat-grid animate-on-view">
@@ -2891,7 +2890,7 @@ function viewSettings(){
     <div class="card-title"><i class="fa-solid fa-database"></i> Data Source</div>
     <div class="info-list">
       <div class="info-row"><span class="k">Mode</span><span class="v">${DB.mode === "firebase" ? "Firebase Realtime Database" : "Local browser storage (fallback)"}</span></div>
-      <div class="info-row"><span class="k">Database URL</span><span class="v mono" style="font-size:.74rem">${esc(FIREBASE_DB_URL)}</span></div>
+      <div class="info-row"><span class="k">Database URL</span><span class="v mono" style="font-size:.74rem">${esc("https://ngt-hr-management-system-default-rtdb.firebaseio.com/")}</span></div>
       <div class="info-row"><span class="k">Root path</span><span class="v mono">/</span></div>
     </div>
     ${DB.mode === "local" ? `<div class="alert warn mt-2"><i class="fa-solid fa-triangle-exclamation"></i>
@@ -4046,7 +4045,7 @@ document.addEventListener("click", async (e) => {
       const rows = [
         ["NGT STAFF MANAGEMENT — HR SUMMARY REPORT"],
         ["Generated", fmtDateTime(nowISO())],
-        ["Data Source", FIREBASE_DB_URL],
+        ["Data Source", "https://ngt-hr-management-system-default-rtdb.firebaseio.com/"],
         [],
         ["STAFF SUMMARY"],
         ["Total Staff", staff.length],
@@ -4413,7 +4412,7 @@ async function signOut(){
   console.log(
     "%cNGT Staff Management System",
     "color:#38bdf8;font-weight:800;font-size:14px",
-    "\nDatabase:", FIREBASE_DB_URL,
+    "\nDatabase:", "https://ngt-hr-management-system-default-rtdb.firebaseio.com/",
     "\nAuth gate: enabled"
   );
 })();

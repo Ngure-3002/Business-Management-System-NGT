@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="NGT Business Management System Portal — central entry point for CRM, Finance, Jobs, Staff, Inventory, Notifications, Suppliers and Procurement modules." />
+<meta name="theme-color" content="#0b1117" />
+<title>NGT BMS Portal | Ngure Gacheru Technologies</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   NGT BUSINESS MANAGEMENT SYSTEM — PORTAL STYLESHEET
+   Theme: Modern Tech (Dark) — cyan / blue accents
+   ============================================================ */
+
+/* ---------- 1. RESET & TOKENS ---------- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Surfaces */
+  --bg:            #0b1117;
+  --bg-alt:        #0e1623;
+  --surface:       #0f172a;
+  --surface-2:     #111c2e;
+  --card:          #1a2536;
+  --card-hover:    #1f2d42;
+  --border:        #2d3a4f;
+  --border-soft:   #1e2c3a;
+
+  /* Brand */
+  --accent:        #38bdf8;
+  --accent-soft:   #7dd3fc;
+  --accent-deep:   #2563eb;
+  --accent-glow:   rgba(56, 189, 248, .35);
+
+  /* Text */
+  --text:          #e0e7ff;
+  --text-strong:   #f0f9ff;
+  --muted:         #9ab3d8;
+  --muted-dim:     #8ba0bc;
+
+  /* Status */
+  --ok:            #34d399;
+  --warn:          #fbbf24;
+
+  /* Shape */
+  --radius-sm:     12px;
+  --radius:        20px;
+  --radius-lg:     28px;
+  --radius-pill:   60px;
+
+  /* Motion */
+  --ease:          cubic-bezier(.25,.46,.45,.94);
+  --t-fast:        .18s ease;
+  --t-med:         .3s var(--ease);
+
+  /* Shadow */
+  --shadow-sm:     0 4px 12px rgba(0,0,0,.5);
+  --shadow-md:     0 12px 28px rgba(0,0,0,.45);
+  --shadow-glow:   0 25px 35px -10px #0f172a, 0 0 0 2px rgba(56,189,248,.25);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image:
+    radial-gradient(900px 520px at 10% -12%, rgba(37, 99, 235, .20), transparent 62%),
+    radial-gradient(760px 520px at 102% -4%, rgba(56, 189, 248, .13), transparent 58%),
+    radial-gradient(700px 700px at 50% 120%, rgba(37, 99, 235, .10), transparent 60%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; border: none; background: none; }
+
+::selection { background: var(--accent); color: #0b1117; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #0b1117; }
+::-webkit-scrollbar-thumb {
+  background: #24344a;
+  border-radius: 20px;
+  border: 2px solid #0b1117;
+}
+::-webkit-scrollbar-thumb:hover { background: #2f4considerable; }
+::-webkit-scrollbar-thumb:hover { background: #31465f; }
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ---------- 2. LAYOUT HELPERS ---------- */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- 3. HEADER ---------- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(15, 23, 42, .92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--border-soft);
+  box-shadow: 0 4px 20px rgba(0, 180, 255, .1);
+}
+
+.header-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+/* Brand */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.logo {
+  flex: 0 0 auto;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, rgba(56,189,248,.16), rgba(37,99,235,.08));
+  border: 1px solid rgba(56,189,248,.35);
+  box-shadow: 0 0 22px rgba(56,189,248,.18), inset 0 1px 0 rgba(255,255,255,.06);
+  transition: transform var(--t-med), box-shadow var(--t-med);
+}
+.logo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(56,189,248,.35), inset 0 1px 0 rgba(255,255,255,.08);
+}
+.logo svg { width: 34px; height: 34px; }
+
+.brand-text { min-width: 0; }
+
+.company-name {
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -.4px;
+  line-height: 1.15;
+  background: linear-gradient(135deg, #a5f3fc, #38bdf8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.motto {
+  font-size: .9rem;
+  color: var(--muted);
+  font-style: italic;
+  border-left: 3px solid var(--accent);
+  padding-left: .7rem;
+  margin-top: .15rem;
+  letter-spacing: .2px;
+}
+
+/* Header right cluster */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.header-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.25;
+}
+#liveClock {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent-soft);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .5px;
+}
+#liveDate {
+  font-size: .78rem;
+  color: var(--muted-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+.header-accent { display: flex; gap: 8px; }
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--accent);
+  border-radius: 50%;
+  opacity: .7;
+  animation: pulse 2s infinite;
+}
+.dot:nth-child(2) { animation-delay: .4s; }
+.dot:nth-child(3) { animation-delay: .8s; }
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1);   opacity: .7; }
+  50%      { transform: scale(1.3); opacity: 1;  }
+}
+
+/* ---------- 4. WELCOME / HERO ---------- */
+.welcome {
+  padding: 3rem 0 1.5rem;
+  position: relative;
+}
+
+.welcome-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background:
+    linear-gradient(145deg, rgba(16,42,60,.85) 0%, rgba(11,26,42,.92) 100%);
+  padding: 2.75rem;
+  display: grid;
+  grid-template-columns: 1.35fr .85fr;
+  gap: 2.5rem;
+  align-items: center;
+  box-shadow: var(--shadow-md);
+}
+
+.welcome-card::before {
+  content: '';
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  top: -180px;
+  right: -140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(37,99,235,.28) 0%, transparent 70%);
+  pointer-events: none;
+}
+.welcome-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(56,189,248,.08) 1px, transparent 1px) 0 0 / 46px 46px,
+    linear-gradient(rgba(56,189,248,.06) 1px, transparent 1px) 0 0 / 46px 46px;
+  mask-image: radial-gradient(circle at 100% 0%, #000 0%, transparent 62%);
+  -webkit-mask-image: radial-gradient(circle at 100% 0%, #000 0%, transparent 62%);
+  pointer-events: none;
+  opacity: .55;
+}
+
+.welcome-left, .welcome-right { position: relative; z-index: 1; }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(56,189,248,.09);
+  border: 1px solid rgba(56,189,248,.28);
+  padding: .38rem .9rem;
+  border-radius: var(--radius-pill);
+  margin-bottom: 1.1rem;
+}
+.eyebrow .live-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 0 0 rgba(52,211,153,.7);
+  animation: livePing 2s infinite;
+}
+@keyframes livePing {
+  0%   { box-shadow: 0 0 0 0 rgba(52,211,153,.6); }
+  70%  { box-shadow: 0 0 0 9px rgba(52,211,153,0); }
+  100% { box-shadow: 0 0 0 0 rgba(52,211,153,0); }
+}
+
+.welcome-title {
+  font-size: clamp(2rem, 3.4vw, 2.9rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  color: var(--text-strong);
+  margin-bottom: .85rem;
+}
+.welcome-title .accent {
+  background: linear-gradient(135deg, #bae6fd, #38bdf8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.welcome-sub {
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 56ch;
+  margin-bottom: 1.8rem;
+}
+
+.welcome-actions {
+  display: flex;
+  gap: .9rem;
+  flex-wrap: wrap;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  padding: .9rem 2rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: .97rem;
+  letter-spacing: .2px;
+  border: 1px solid transparent;
+  transition: transform var(--t-med), background var(--t-med),
+              box-shadow var(--t-med), color var(--t-med), border-color var(--t-med);
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #0b1117;
+  box-shadow: 0 8px 16px rgba(56,189,248,.19);
+}
+.btn-primary:hover {
+  background: var(--accent-soft);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 26px rgba(56,189,248,.38);
+}
+.btn-outline {
+  border: 2px solid var(--accent);
+  color: #e0f2fe;
+  background: transparent;
+}
+.btn-outline:hover {
+  background: var(--accent);
+  color: #0b1117;
+  transform: translateY(-4px);
+}
+.btn .arrow { transition: transform var(--t-med); }
+.btn:hover .arrow { transform: translateX(5px); }
+
+/* Welcome right — status panel */
+.status-panel {
+  background: rgba(11,17,23,.55);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  backdrop-filter: blur(6px);
+}
+.status-panel h2 {
+  font-size: .74rem;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  color: var(--muted-dim);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .62rem 0;
+  border-bottom: 1px dashed rgba(45,58,79,.75);
+  font-size: .9rem;
+}
+.status-row:last-child { border-bottom: none; padding-bottom: 0; }
+.status-row .label {
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+}
+.status-row .label i { font-style: normal; font-size: 1rem; }
+.status-row .value {
+  font-weight: 700;
+  color: var(--text-strong);
+  font-variant-numeric: tabular-nums;
+}
+.badge-ok {
+  color: var(--ok);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .85rem;
+}
+.badge-ok::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 10px var(--ok);
+}
+
+/* ---------- 5. MODULES SECTION ---------- */
+.modules {
+  padding: 3rem 0 4rem;
+  flex: 1 0 auto;
+}
+
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.75rem;
+}
+
+.section-title {
+  font-size: clamp(1.55rem, 2.4vw, 2.05rem);
+  font-weight: 700;
+  letter-spacing: -.5px;
+  background: linear-gradient(135deg, #bae6fd, #38bdf8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.section-subtitle {
+  color: var(--muted-dim);
+  font-size: .95rem;
+  margin-top: .2rem;
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+
+.search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.search-wrap .search-icon {
+  position: absolute;
+  left: 1rem;
+  font-size: .95rem;
+  opacity: .6;
+  pointer-events: none;
+}
+#moduleSearch {
+  width: 280px;
+  max-width: 100%;
+  padding: .72rem 3rem .72rem 2.6rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  color: var(--text);
+  font-size: .9rem;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast), background var(--t-fast);
+}
+#moduleSearch::placeholder { color: #6d829e; }
+#moduleSearch:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: #0d1827;
+  box-shadow: 0 0 0 4px rgba(56,189,248,.12);
+}
+.kbd-hint {
+  position: absolute;
+  right: .85rem;
+  font-size: .7rem;
+  font-weight: 700;
+  color: var(--muted-dim);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: .1rem .4rem;
+  background: #0b1420;
+  pointer-events: none;
+}
+
+/* Filter chips */
+.filters {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+}
+.chip {
+  padding: .55rem 1.1rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--muted);
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .3px;
+  transition: all var(--t-fast);
+}
+.chip:hover {
+  border-color: var(--accent);
+  color: var(--accent-soft);
+  transform: translateY(-2px);
+}
+.chip.active {
+  background: rgba(56,189,248,.14);
+  border-color: var(--accent);
+  color: var(--accent-soft);
+  box-shadow: 0 0 0 3px rgba(56,189,248,.08);
+}
+
+/* Result meta */
+.result-meta {
+  font-size: .82rem;
+  color: var(--muted-dim);
+  margin-bottom: 1.1rem;
+  letter-spacing: .3px;
+}
+.result-meta strong { color: var(--accent-soft); }
+
+/* Grid */
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.35rem;
+}
+
+/* Module card */
+.module-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 1.4rem 1.35rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  z-index: 1;
+  transition: transform var(--t-med), border-color var(--t-med),
+              box-shadow var(--t-med), background var(--t-med);
+}
+.module-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(37,99,235,.22), transparent 68%);
+  opacity: 0;
+  transition: opacity var(--t-med);
+  z-index: -1;
+}
+.module-card::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-deep));
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform var(--t-med);
+}
+.module-card:hover,
+.module-card:focus-visible {
+  transform: translateY(-8px);
+  border-color: rgba(56,189,248,.55);
+  background: var(--card-hover);
+  box-shadow: var(--shadow-glow);
+  outline: none;
+}
+.module-card:hover::before,
+.module-card:focus-visible::before { opacity: 1; }
+.module-card:hover::after,
+.module-card:focus-visible::after { transform: scaleY(1); }
+
+.module-icon {
+  flex: 0 0 auto;
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  font-size: 1.65rem;
+  background: linear-gradient(145deg, rgba(56,189,248,.15), rgba(37,99,235,.07));
+  border: 1px solid rgba(56,189,248,.24);
+  transition: transform var(--t-med), box-shadow var(--t-med);
+  line-height: 1;
+}
+.module-card:hover .module-icon {
+  transform: scale(1.08) rotate(-4deg);
+  box-shadow: 0 0 22px rgba(56,189,248,.3);
+}
+
+.module-body { flex: 1 1 auto; min-width: 0; }
+.module-body h3 {
+  font-size: 1.06rem;
+  font-weight: 700;
+  color: var(--text-strong);
+  letter-spacing: -.2px;
+  margin-bottom: .18rem;
+}
+.module-body p {
+  font-size: .84rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.module-arrow {
+  flex: 0 0 auto;
+  font-size: 1.05rem;
+  color: var(--accent);
+  opacity: .45;
+  transition: transform var(--t-med), opacity var(--t-med);
+}
+.module-card:hover .module-arrow {
+  transform: translateX(5px);
+  opacity: 1;
+}
+
+.module-tag {
+  position: absolute;
+  top: .8rem;
+  right: .9rem;
+  font-size: .6rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--muted-dim);
+  opacity: .55;
+  transition: opacity var(--t-med), color var(--t-med);
+}
+.module-card:hover .module-tag { opacity: .95; color: var(--accent-soft); }
+
+/* Hidden by filter */
+.module-card.is-hidden { display: none; }
+
+/* No results */
+.no-results {
+  text-align: center;
+  padding: 3.5rem 1rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  color: var(--muted);
+  background: rgba(17,28,46,.4);
+}
+.no-results .nr-icon { font-size: 2.4rem; margin-bottom: .6rem; opacity: .7; }
+.no-results h3 { color: var(--text-strong); font-size: 1.1rem; margin-bottom: .3rem; }
+.no-results p { font-size: .9rem; }
+
+/* ---------- 6. RECENTLY OPENED ---------- */
+.recent {
+  padding: 0 0 3rem;
+}
+.recent-inner {
+  border: 1px solid var(--border-soft);
+  background: linear-gradient(145deg, rgba(15,23,42,.75), rgba(11,17,23,.6));
+  border-radius: var(--radius);
+  padding: 1.35rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+.recent-label {
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted-dim);
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  white-space: nowrap;
+}
+.recent-list {
+  display: flex;
+  gap: .6rem;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+}
+.recent-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .45rem 1rem;
+  border-radius: var(--radius-pill);
+  background: rgba(56,189,248,.08);
+  border: 1px solid rgba(56,189,248,.22);
+  color: var(--accent-soft);
+  font-size: .82rem;
+  font-weight: 600;
+  transition: all var(--t-fast);
+}
+.recent-pill:hover {
+  background: rgba(56,189,248,.18);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.recent-clear {
+  font-size: .78rem;
+  color: var(--muted-dim);
+  border: 1px solid var(--border);
+  padding: .4rem .9rem;
+  border-radius: var(--radius-pill);
+  transition: all var(--t-fast);
+  white-space: nowrap;
+}
+.recent-clear:hover { color: #fca5a5; border-color: #7f1d1d; }
+
+/* ---------- 7. FOOTER ---------- */
+.footer {
+  background: #0a111a;
+  border-top: 1px solid var(--border-soft);
+  padding: 2rem 0;
+  margin-top: auto;
+}
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  color: var(--muted-dim);
+  font-size: .85rem;
+}
+.footer-inner strong { color: var(--accent-soft); font-weight: 600; }
+.footer-links { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+.footer-links a {
+  color: var(--muted-dim);
+  transition: color var(--t-fast);
+}
+.footer-links a:hover { color: var(--accent); }
+
+/* ---------- 8. TOAST ---------- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translate(-50%, 140%);
+  background: #101b2b;
+  border: 1px solid rgba(56,189,248,.35);
+  border-left: 4px solid var(--accent);
+  color: var(--text);
+  padding: .85rem 1.35rem;
+  border-radius: 14px;
+  font-size: .88rem;
+  font-weight: 500;
+  box-shadow: 0 18px 40px rgba(0,0,0,.6);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  opacity: 0;
+  transition: transform .38s var(--ease), opacity .38s var(--ease);
+  pointer-events: none;
+  max-width: calc(100vw - 2rem);
+}
+.toast.show {
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+.toast .t-icon { font-size: 1.1rem; }
+
+/* ---------- 9. SCROLL REVEAL ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .65s ease, transform .65s ease;
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- 10. RESPONSIVE ---------- */
+@media (max-width: 1024px) {
+  .welcome-card { grid-template-columns: 1fr; padding: 2.25rem; }
+  .status-panel { max-width: 520px; }
+}
+
+@media (max-width: 860px) {
+  .header-container {
+    flex-direction: column;
+    text-align: center;
+    gap: .75rem;
+  }
+  .brand { flex-direction: column; text-align: center; gap: .65rem; }
+  .company-name { white-space: normal; font-size: 1.25rem; }
+  .motto {
+    border-left: none;
+    border-top: 2px solid var(--accent);
+    padding-left: 0;
+    padding-top: .35rem;
+  }
+  .header-right { flex-direction: row; justify-content: center; }
+  .header-meta { align-items: center; }
+
+  .section-head { flex-direction: column; align-items: stretch; }
+  .toolbar { flex-direction: column; align-items: stretch; }
+  #moduleSearch { width: 100%; }
+  .kbd-hint { display: none; }
+  .filters { justify-content: flex-start; }
+}
+
+@media (max-width: 640px) {
+  .container, .header-container, .footer-inner { padding-left: 1.15rem; padding-right: 1.15rem; }
+  .welcome { padding-top: 1.75rem; }
+  .welcome-card { padding: 1.6rem 1.35rem; border-radius: var(--radius); }
+  .welcome-actions { flex-direction: column; }
+  .btn { width: 100%; }
+  .modules { padding: 2rem 0 2.5rem; }
+  .modules-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .module-card { padding: 1.15rem; }
+  .module-icon { width: 50px; height: 50px; font-size: 1.4rem; border-radius: 14px; }
+  .recent-inner { flex-direction: column; align-items: flex-start; }
+  .footer-inner { flex-direction: column; text-align: center; justify-content: center; }
+}
+
+/* ---------- 11. ACCESSIBILITY / MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+
+@media print {
+  .header, .footer, .toolbar, .welcome-actions, .recent { display: none !important; }
+  body { background: #fff; color: #000; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="header">
+  <div class="header-container">
+
+    <div class="brand">
+      <div class="logo" aria-hidden="true">
+        <svg viewBox="0 0 48 48" role="img">
+          <defs>
+            <linearGradient id="ngtGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"   stop-color="#7dd3fc"/>
+              <stop offset="100%" stop-color="#2563eb"/>
+            </linearGradient>
+          </defs>
+          <rect x="2.5" y="2.5" width="43" height="43" rx="13"
+                fill="rgba(56,189,248,0.10)"
+                stroke="url(#ngtGrad)" stroke-width="1.6"/>
+          <text x="24" y="30" text-anchor="middle"
+                font-family="Inter, sans-serif" font-size="14.5"
+                font-weight="800" fill="#7dd3fc" letter-spacing=".5">NGT</text>
+          <circle cx="38.5" cy="9.5" r="2.2" fill="#38bdf8"/>
+        </svg>
+      </div>
+
+      <div class="brand-text">
+        <div class="company-name">NGURE GACHERU TECHNOLOGIES</div>
+        <div class="motto">Business Management System</div>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <div class="header-meta" aria-live="off">
+        <span id="liveClock">--:--:--</span>
+        <span id="liveDate">Loading…</span>
+      </div>
+      <div class="header-accent" aria-hidden="true">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+
+<!-- ============================================================
+     MAIN
+     ============================================================ -->
+<main>
+
+  <!-- ---------- WELCOME / HERO ---------- -->
+  <section class="welcome" aria-labelledby="welcomeTitle">
+    <div class="container">
+      <div class="welcome-card reveal">
+
+        <div class="welcome-left">
+          <span class="eyebrow">
+            <span class="live-dot" aria-hidden="true"></span>
+            NGT BMS Portal
+          </span>
+
+          <h1 class="welcome-title" id="welcomeTitle">
+            <span id="greeting">Welcome 👋</span><br>
+            <span class="accent">to your Business System</span>
+          </h1>
+
+          <p class="welcome-sub">
+            Manage your business operations from one central system.
+            Select a module below to continue — CRM, Finance, Jobs, Staff,
+            Inventory, Suppliers, Procurement and Notifications are all one click away.
+          </p>
+
+          <div class="welcome-actions">
+            <a href="dashboard.html" class="btn btn-primary" data-nav="Dashboard">
+              Enter System <span class="arrow" aria-hidden="true">→</span>
+            </a>
+            <button type="button" class="btn btn-outline" id="scrollToModules">
+              Browse Modules
+            </button>
+          </div>
+        </div>
+
+        <aside class="welcome-right" aria-label="System status">
+          <div class="status-panel">
+            <h2>System Status</h2>
+
+            <div class="status-row">
+              <span class="label"><i aria-hidden="true">🟢</i> Portal</span>
+              <span class="badge-ok">Online</span>
+            </div>
+
+            <div class="status-row">
+              <span class="label"><i aria-hidden="true">🧩</i> Modules Available</span>
+              <span class="value" id="moduleCount">8</span>
+            </div>
+
+            <div class="status-row">
+              <span class="label"><i aria-hidden="true">🗄️</i> Central Data</span>
+              <span class="value">Firebase</span>
+            </div>
+
+            <div class="status-row">
+              <span class="label"><i aria-hidden="true">🔐</i> Access Mode</span>
+              <span class="value">Open Portal</span>
+            </div>
+
+            <div class="status-row">
+              <span class="label"><i aria-hidden="true">🕒</i> Session Started</span>
+              <span class="value" id="sessionTime">—</span>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ---------- MODULE LAUNCHER ---------- -->
+  <section class="modules" id="modulesSection" aria-labelledby="modulesTitle">
+    <div class="container">
+
+      <div class="section-head reveal">
+        <div>
+          <h2 class="section-title" id="modulesTitle">Select a Module</h2>
+          <p class="section-subtitle">
+            Each module opens in its own workspace. Data is shared across the system.
+          </p>
+        </div>
+
+        <div class="toolbar" role="search">
+          <div class="search-wrap">
+            <span class="search-icon" aria-hidden="true">🔍</span>
+            <label for="moduleSearch" class="sr-only">Search modules</label>
+            <input
+              type="search"
+              id="moduleSearch"
+              placeholder="Search modules…"
+              autocomplete="off"
+              spellcheck="false" />
+            <span class="kbd-hint" aria-hidden="true">/</span>
+          </div>
+
+          <div class="filters" role="group" aria-label="Filter modules by category">
+            <button type="button" class="chip active" data-filter="all">All</button>
+            <button type="button" class="chip" data-filter="core">Core</button>
+            <button type="button" class="chip" data-filter="operations">Operations</button>
+            <button type="button" class="chip" data-filter="system">System</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="result-meta" id="resultMeta" aria-live="polite">
+        Showing <strong>8</strong> of 8 modules
+      </p>
+
+      <!-- ---------- GRID ---------- -->
+      <div class="modules-grid" id="modulesGrid" role="list">
+
+        <!-- CRM -->
+        <a class="module-card reveal" role="listitem"
+           href="modules/crm/crm.html"
+           data-name="CRM"
+           data-category="core"
+           data-tags="crm customers clients leads pipeline relationships sales contacts">
+          <span class="module-tag">Core</span>
+          <span class="module-icon" aria-hidden="true">👥</span>
+          <span class="module-body">
+            <h3>CRM</h3>
+            <p>Customers, leads &amp; relationships</p>
+          </span>
+          <span class="module-arrow" aria-hidden="true">→</span>
+        </a>
+
+        <!-- Finance -->
+        <a class="module-card reveal" role="listitem"
+           href="modules/finance/finance.html"
+           data-name="Finance"
+           data-category="core"
+           data-tags="finance accounting invoices payments expenses sales revenue quotations budget">
+          <span class="module-tag">Core</span>
+          <span class="module-icon" aria-hidden="true">💰</span>
+          <span class="module-body">
+            <h3>Finance</h3>
+            <p>Sales, expenses &amp; financial records</p>
+          </span>
+          <span class="module-arrow" aria-hidden="true">→</span>
+        </a>
+
+        <!-- Jobs & Projects -->
+        <a class="module-card reveal" role="listitem"
+           href="modules/jobs/jobs.html"
+           data-name="Jobs &amp; Projects"
+           data-category="core"
+           data-tags="jobs projects work orders tasks installation schedule technicians site">
+          <span class="module-tag">Core</span>
+          <span class="module-icon" aria-hidden="true">🛠️</span>
+          <span class="module-body">
+            <h3>Jobs &amp; Projects</h3>
+            <p>Jobs, projects &amp; work orders</p>
+          </span>
+          <span class="module-arrow" aria-hidden="true">→</span>
+        </a>
+
+        <!-- Staff -->
+        <a class="module-card reveal" role="listitem"
+           href="modules/staff/staff.html"
+           data-name="Staff Management"
+           data-category="operations"
+           data-tags="staff employees agents hr payroll attendance team human resource">
+          <span class="module-tag">Operations</span>
+          <span class="module-icon" aria-hidden="true">👨‍💼</span>
+          <span class="module-body">
+            <h3>Staff Management</h3>
+            <p>Employees, agents &amp; staff records</p>
+          </span>
+          <span class="module-arrow" aria-hidden="true">→</span>
+        </a>
+
+        <!-- Inventory -->
+        <a class="module-card reveal" role="listitem"
+           href="modules/inventory/inventory.html"
+           data-name="Inventory"
+           data-category="operations"
+           data-tags="inventory stock products items warehouse quantities goods store">
+          <span class="module-tag">Operations</span>
+          <span class="module-icon" aria-hidden="true">📦</span>
+          <span class="module-body">
+            <h3>Inventory</h3>
+            <p>Products &amp; stock control</p>
+          </span>
+          <span class="module-arrow" aria-hidden="true">→</span>
+        </a>
+
+        <!-- Notifications -->
+        <a class="module-card reveal" role="listitem"
+           href="modules/notifications/notifications.html"
+           data-name="Notifications"
+           data-category="system"
+           data-tags="notifications alerts reminders messages system announcements inbox">
+          <span class="module-tag">System</span>
+          <span class="module-icon" aria-hidden="true">🔔</span>
+          <span class="module-body">
+            <h3>Notifications</h3>
+            <p>System alerts &amp; reminders</p>
+          </span>
+          <span class="module-arrow" aria-hidden="true">→</span>
+        </a>
+
+        <!-- Suppliers -->
+        <a class="module-card reveal" role="listitem"
+           href="modules/suppliers/suppliers.html"
+           data-name="Supplier Management"
+           data-category="operations"
+           data-tags="suppliers vendors contractors supplier records contacts delivery">
+          <span class="module-tag">Operations</span>
+          <span class="module-icon" aria-hidden="true">🚚</span>
+          <span class="module-body">
+            <h3>Supplier Management</h3>
+            <p>Suppliers &amp; supplier records</p>
+          </span>
+          <span class="module-arrow" aria-hidden="true">→</span>
+        </a>
+
+        <!-- Procurement -->
+        <a class="module-card reveal" role="listitem"
+           href="modules/procurement/procurement.html"
+           data-name="Procurement"
+           data-category="operations"
+           data-tags="procurement purchasing purchase orders requisitions buying lpo tenders">
+          <span class="module-tag">Operations</span>
+          <span class="module-icon" aria-hidden="true">🛒</span>
+          <span class="module-body">
+            <h3>Procurement</h3>
+            <p>Purchasing &amp; procurement</p>
+          </span>
+          <span class="module-arrow" aria-hidden="true">→</span>
+        </a>
+
+      </div>
+
+      <!-- No results -->
+      <div class="no-results" id="noResults" hidden>
+        <div class="nr-icon" aria-hidden="true">🔎</div>
+        <h3>No modules found</h3>
+        <p>Try a different keyword or reset the filters.</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ---------- RECENTLY OPENED ---------- -->
+  <section class="recent" id="recentSection" hidden aria-labelledby="recentTitle">
+    <div class="container">
+      <div class="recent-inner">
+        <span class="recent-label" id="recentTitle">
+          <span aria-hidden="true">⏱️</span> Recently Opened
+        </span>
+        <div class="recent-list" id="recentList"></div>
+        <button type="button" class="recent-clear" id="clearRecent">Clear</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <span>
+      © <span id="year">2026</span> <strong>Ngure Gacheru Technologies</strong>
+      &nbsp;|&nbsp; Powering Your Digital World
+    </span>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="modules/notifications/notifications.html">Notifications</a>
+      <a href="#modulesSection">Modules</a>
+    </nav>
+  </div>
+</footer>
+
+
+<!-- Toast -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <span class="t-icon" aria-hidden="true">🚀</span>
+  <span id="toastMsg">Opening module…</span>
+</div>
+
+
+<script>
+/* ============================================================
+   NGT BMS PORTAL — APPLICATION SCRIPT
+   Vanilla JS. No dependencies. Safe for file:// and http(s).
+   ============================================================ */
+(function () {
+  'use strict';
+
+  /* ---------- Tiny helpers ---------- */
+  const $  = (sel, ctx = document) => ctx.querySelector(sel);
+  const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
+
+  const STORAGE_KEY = 'ngt-bms:recent-modules';
+  const MAX_RECENT  = 4;
+
+  /* ============================================================
+     1. LIVE CLOCK & DATE
+     ============================================================ */
+  const clockEl = $('#liveClock');
+  const dateEl  = $('#liveDate');
+
+  function updateClock() {
+    const now = new Date();
+
+    if (clockEl) {
+      clockEl.textContent = now.toLocaleTimeString([], {
+        hour: '2-digit', minute: '2-digit', second: '2-digit'
+      });
+    }
+
+    if (dateEl) {
+      dateEl.textContent = now.toLocaleDateString([], {
+        weekday: 'short', day: '2-digit', month: 'short', year: 'numeric'
+      });
+    }
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  /* ============================================================
+     2. TIME-BASED GREETING
+     ============================================================ */
+  const greetingEl = $('#greeting');
+
+  function buildGreeting() {
+    const h = new Date().getHours();
+
+    if (h >= 5  && h < 12) return 'Good morning';
+    if (h >= 12 && h < 17) return 'Good afternoon';
+    if (h >= 17 && h < 21) return 'Good evening';
+    return 'Welcome back';
+  }
+
+  if (greetingEl) {
+    greetingEl.textContent = buildGreeting() + ' 👋';
+  }
+
+  /* ---------- Session start time ---------- */
+  const sessionEl = $('#sessionTime');
+  if (sessionEl) {
+    sessionEl.textContent = new Date().toLocaleTimeString([], {
+      hour: '2-digit', minute: '2-digit'
+    });
+  }
+
+  /* ---------- Footer year ---------- */
+  const yearEl = $('#year');
+  if (yearEl) {
+    yearEl.textContent = String(Math.max(2026, new Date().getFullYear()));
+  }
+
+  /* ============================================================
+     3. MODULE SEARCH + CATEGORY FILTER
+     ============================================================ */
+  const grid      = $('#modulesGrid');
+  const searchBox = $('#moduleSearch');
+  const noResults = $('#noResults');
+  const resultMeta= $('#resultMeta');
+  const chips     = $$('.chip');
+  const cards     = $$('.module-card', grid);
+
+  const TOTAL_MODULES = cards.length;
+
+  /* Update the module count in the status panel */
+  const moduleCountEl = $('#moduleCount');
+  if (moduleCountEl) moduleCountEl.textContent = String(TOTAL_MODULES);
+
+  let activeFilter = 'all';
+
+  /* Build a searchable haystack once, at load */
+  cards.forEach(card => {
+    const haystack = [
+      card.dataset.name || '',
+      card.dataset.tags || '',
+      card.dataset.category || '',
+      card.textContent || ''
+    ].join(' ').toLowerCase().replace(/\s+/g, ' ').trim();
+
+    card._haystack = haystack;
+  });
+
+  function applyFilters() {
+    const query = (searchBox?.value || '').trim().toLowerCase();
+    let visible = 0;
+
+    cards.forEach(card => {
+      const matchesCategory =
+        activeFilter === 'all' || card.dataset.category === activeFilter;
+
+      const matchesQuery =
+        query === '' || card._haystack.includes(query);
+
+      const show = matchesCategory && matchesQuery;
+      card.classList.toggle('is-hidden', !show);
+      if (show) visible++;
+    });
+
+    /* Result meta */
+    if (resultMeta) {
+      resultMeta.innerHTML = query || activeFilter !== 'all'
+        ? `Showing <strong>${visible}</strong> of ${TOTAL_MODULES} modules`
+        : `Showing <strong>${TOTAL_MODULES}</strong> of ${TOTAL_MODULES} modules`;
+    }
+
+    /* Empty state */
+    if (noResults) noResults.hidden = visible !== 0;
+
+    return visible;
+  }
+
+  /* Search input (debounced lightly for smoothness) */
+  let searchTimer = null;
+  if (searchBox) {
+    searchBox.addEventListener('input', () => {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(applyFilters, 90);
+    });
+
+    /* Escape clears the search */
+    searchBox.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        searchBox.value = '';
+        applyFilters();
+        searchBox.blur();
+      }
+    });
+  }
+
+  /* Filter chips */
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeFilter = chip.dataset.filter || 'all';
+      applyFilters();
+    });
+  });
+
+  /* Keyboard shortcut: "/" focuses search */
+  document.addEventListener('keydown', e => {
+    const tag = (e.target.tagName || '').toLowerCase();
+    const typing = tag === 'input' || tag === 'textarea' || e.target.isContentEditable;
+
+    if (e.key === '/' && !typing) {
+      e.preventDefault();
+      searchBox?.focus();
+      searchBox?.select();
+    }
+  });
+
+  /* ============================================================
+     4. KEYBOARD GRID NAVIGATION (arrow keys)
+     ============================================================ */
+  function visibleCards() {
+    return cards.filter(c => !c.classList.contains('is-hidden'));
+  }
+
+  function columnCount() {
+    if (!grid) return 1;
+    const cols = getComputedStyle(grid).gridTemplateColumns
+      .split(' ')
+      .filter(Boolean).length;
+    return Math.max(1, cols);
+  }
+
+  if (grid) {
+    grid.addEventListener('keydown', e => {
+      const list = visibleCards();
+      const current = document.activeElement;
+      const index = list.indexOf(current);
+      if (index === -1) return;
+
+      const cols = columnCount();
+      let target = null;
+
+      switch (e.key) {
+        case 'ArrowRight': target = list[index + 1];      break;
+        case 'ArrowLeft':  target = list[index - 1];      break;
+        case 'ArrowDown':  target = list[index + cols];   break;
+        case 'ArrowUp':    target = list[index - cols];   break;
+        case 'Home':       target = list[0];              break;
+        case 'End':        target = list[list.length - 1];break;
+        default: return;
+      }
+
+      if (target) {
+        e.preventDefault();
+        target.focus();
+      }
+    });
+  }
+
+  /* ============================================================
+     5. RECENTLY OPENED MODULES (localStorage)
+     ============================================================ */
+  const recentSection = $('#recentSection');
+  const recentList    = $('#recentList');
+  const clearRecentBtn= $('#clearRecent');
+
+  function readRecent() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (err) {
+      return [];
+    }
+  }
+
+  function writeRecent(list) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    } catch (err) {
+      /* Storage unavailable (private mode / disabled) — fail silently */
+    }
+  }
+
+  function renderRecent() {
+    if (!recentSection || !recentList) return;
+
+    const list = readRecent();
+
+    if (!list.length) {
+      recentSection.hidden = true;
+      recentList.innerHTML = '';
+      return;
+    }
+
+    recentSection.hidden = false;
+    recentList.innerHTML = '';
+
+    list.forEach(item => {
+      const a = document.createElement('a');
+      a.className = 'recent-pill';
+      a.href = item.href;
+      a.dataset.nav = item.name;
+      a.innerHTML =
+        `<span aria-hidden="true">${item.icon || '📁'}</span>` +
+        `<span>${item.name}</span>`;
+      recentList.appendChild(a);
+    });
+  }
+
+  function pushRecent(card) {
+    const href = card.getAttribute('href');
+    const name = card.dataset.name || 'Module';
+    const iconEl = card.querySelector('.module-icon');
+    const icon = iconEl ? iconEl.textContent.trim() : '📁';
+
+    let list = readRecent();
+    list = list.filter(item => item.href !== href);
+    list.unshift({ href, name, icon });
+    list = list.slice(0, MAX_RECENT);
+
+    writeRecent(list);
+    renderRecent();
+  }
+
+  if (clearRecentBtn) {
+    clearRecentBtn.addEventListener('click', () => {
+      writeRecent([]);
+      renderRecent();
+      showToast('Recent history cleared', '🧹');
+    });
+  }
+
+  /* ============================================================
+     6. CARD INTERACTIONS — toast + recent tracking
+     ============================================================ */
+  const toastEl  = $('#toast');
+  const toastMsg = $('#toastMsg');
+  const toastIcon= toastEl ? toastEl.querySelector('.t-icon') : null;
+  let toastTimer = null;
+
+  function showToast(message, icon = '🚀') {
+    if (!toastEl) return;
+
+    if (toastMsg)  toastMsg.textContent = message;
+    if (toastIcon) toastIcon.textContent = icon;
+
+    toastEl.classList.add('show');
+
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2400);
+  }
+
+  /* Track every module card click */
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      const name = card.dataset.name || 'Module';
+      pushRecent(card);
+      showToast(`Opening ${name}…`, '🚀');
+    });
+  });
+
+  /* Track the "Enter System" / footer navigation links too */
+  $$('[data-nav]').forEach(link => {
+    link.addEventListener('click', () => {
+      showToast(`Opening ${link.dataset.nav}…`, '⚡');
+    });
+  });
+
+  /* ============================================================
+     7. SMOOTH SCROLL TO MODULES
+     ============================================================ */
+  const scrollBtn = $('#scrollToModules');
+  if (scrollBtn) {
+    scrollBtn.addEventListener('click', () => {
+      $('#modulesSection')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      /* Focus the search box for quick access */
+      setTimeout(() => searchBox?.focus({ preventScroll: true }), 520);
+    });
+  }
+
+  /* ============================================================
+     8. SCROLL REVEAL (IntersectionObserver)
+     ============================================================ */
+  const revealEls = $$('.reveal');
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          /* Slight stagger for a polished feel */
+          setTimeout(() => entry.target.classList.add('is-visible'), i * 55);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.08,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealEls.forEach(el => observer.observe(el));
+  } else {
+    /* Fallback for very old browsers */
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  }
+
+  /* ============================================================
+     9. INIT
+     ============================================================ */
+  applyFilters();
+  renderRecent();
+
+  /* Friendly console signature */
+  console.log(
+    '%cNGT BMS PORTAL%c  Ngure Gacheru Technologies — Business Management System',
+    'background:#38bdf8;color:#0b1117;font-weight:800;padding:4px 10px;border-radius:4px;',
+    'color:#9ab3d8;'
+  );
+
+})();
+</script>
+
+</body>
+</html>

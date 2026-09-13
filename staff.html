@@ -919,7 +919,7 @@ function lsSet(path, value){
 /* ------------------------- UNIFIED DB LAYER ------------------------- */
 const DB = {
   fb: null,
-  mode: "local",          // "firebase" | "local"
+  mode: "production",          // "firebase" | "production"
   _listeners: [],         // { path, cb }
 
   init(){
@@ -927,7 +927,7 @@ const DB = {
       if (typeof firebase !== "undefined" && firebase.initializeApp){
         // Avoid double init
         if (!firebase.apps || !firebase.apps.length){
-          firebase.initializeApp({ databaseURL: https://ngt-hr-management-system-default-rtdb.firebaseio.com/ });
+          firebase.initializeApp({ databaseURL: "https://ngt-hr-management-system-default-rtdb.firebaseio.com/" });
         }
         this.fb = firebase.database();
         this.mode = "firebase";
@@ -939,8 +939,8 @@ const DB = {
     } catch (err){
       console.warn("Firebase init failed — falling back to local storage.", err);
       this.fb = null;
-      this.mode = "local";
-      setConnStatus("local");
+      this.mode = "production";
+      setConnStatus("production");
     }
   },
 
@@ -4036,13 +4036,14 @@ document.addEventListener("keydown", (e) => {
 $("#hamburger").addEventListener("click", () => {
   $("#sidebar").classList.toggle("open");
 });
-
+   
 /* ================================================================
    SCHEDULED HR CHECKS (contract expiry / review due)
    ================================================================ */
 async function runScheduledChecks(){
+  if (!state.user) return;
   const now = Date.now();
-  if (now - state.lastNotifCheck < 6 * 60 * 60 * 1000) return; // once every 6 hours
+  if (now - state.lastNotifCheck < 6 * 60 * 60 * 1000) return;
   state.lastNotifCheck = now;
 
   const staff = list(state.data.staff);
@@ -4051,7 +4052,6 @@ async function runScheduledChecks(){
     (n.title || "").includes(needle) && (now - new Date(n.createdAt).getTime()) < 7 * 86400000
   );
 
-  /* Contract ending within 30 days */
   const expiring = staff.filter(s => {
     if (!s.contractEnd) return false;
     const diff = new Date(s.contractEnd).getTime() - now;
@@ -4065,7 +4065,6 @@ async function runScheduledChecks(){
     });
   }
 
-  /* Performance reviews due */
   const due = list(state.data.performanceReviews).filter(r => {
     if (!r.nextReviewDate) return false;
     const d = new Date(r.nextReviewDate).getTime();
@@ -4079,7 +4078,6 @@ async function runScheduledChecks(){
     });
   }
 
-  /* Attendance anomaly: staff active but no attendance today */
   const today = todayISO();
   const attToday = list(state.data.attendance).filter(a => a.date === today).map(a => a.staffId);
   const activeStaff = staff.filter(s => s.employmentStatus === "Active");
@@ -4096,27 +4094,208 @@ async function runScheduledChecks(){
 /* ================================================================
    BOOT
    ================================================================ */
-(function boot(){
+function renderLoginGate(){
+  const shell = document.getElementById("appShell");
+  if (shell) shell.classList.add("locked");
+
+  $("#main").innerHTML = `
+    <div class="gate-wrap">
+      <div class="gate-card">
+        <div class="gate-brand">
+          <div class="brand-mark">NGT</div>
+          <div>
+            <div class="title">Staff Management</div>
+            <div class="sub">Ngure Gacheru Technologies</div>
+          </div>
+        </div>
+
+        <h1>Sign in to continue</h1>
+        <p class="lead">Use the account issued to you by the HR administrator. Your role determines which staff data you can access.</p>
+
+        <div class="form-grid">
+          <div class="span-2">
+            <label class="field-label">Email Address</label>
+            <input class="input" id="loginEmail" type="email" autocomplete="username" placeholder="you@nguregacheru.co.ke" />
+          </div>
+          <div class="span-2">
+            <label class="field-label">Password</label>
+            <input class="input" id="loginPassword" type="password" autocomplete="current-password" placeholder="••••••••" />
+          </div>
+        </div>
+
+        <div class="gate-error" id="gateError"></div>
+
+        <div class="form-actions" style="margin-top:1.25rem">
+          <button class="btn btn-primary" id="loginBtn" style="width:100%">
+            <i class="fa-solid fa-right-to-bracket"></i> <span>Sign in</span>
+          </button>
+        </div>
+
+        <div class="gate-foot">
+          <i class="fa-solid fa-shield-halved" style="color:var(--accent)"></i>
+          <span>Accounts are provisioned by the administrator. Contact your HR manager if you don't have one.</span>
+        </div>
+      </div>
+    </div>`;
+
+  const errEl = $("#gateError");
+  const showError = (msg) => {
+    errEl.textContent = msg;
+    errEl.classList.add("show");
+  };
+  const clearError = () => errEl.classList.remove("show");
+
+  const submit = async () => {
+    clearError();
+    const email = $("#loginEmail").value.trim();
+    const pass  = $("#loginPassword").value;
+    if (!email || !pass){ showError("Please enter both email and password."); return; }
+
+    const btn = $("#loginBtn");
+    const original = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Signing in…`;
+
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, pass);
+      // onAuthStateChanged handles the rest.
+    } catch (e){
+      const messages = {
+        "auth/invalid-email": "That email address is not valid.",
+        "auth/user-not-found": "No account found with that email.",
+        "auth/wrong-password": "Incorrect password.",
+        "auth/invalid-credential": "Invalid email or password.",
+        "auth/too-many-requests": "Too many attempts. Try again later.",
+        "auth/network-request-failed": "Network error. Check your connection."
+      };
+      showError(messages[e.code] || e.message || "Sign-in failed.");
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = original;
+    }
+  };
+
+  $("#loginBtn").onclick = submit;
+  $("#loginPassword").addEventListener("keydown", e => {
+    if (e.key === "Enter") submit();
+  });
+  $("#loginEmail").addEventListener("keydown", e => {
+    if (e.key === "Enter") $("#loginPassword").focus();
+  });
+
+  setTimeout(() => $("#loginEmail").focus(), 60);
+}
+
+async function signOut(){
+  try {
+    await firebase.auth().signOut();
+  } catch (e){
+    console.error(e);
+    toast("Sign-out failed", e.message || "Unexpected error", "error");
+  }
+}
+
+(async function boot(){
   DB.init();
-  subscribeAll();
 
-  // Initial paint
-  render();
-  updateCounts();
+  if (typeof firebase === "undefined" || !firebase.auth){
+    // Auth SDK missing — cannot operate safely. Show a clear message.
+    $("#main").innerHTML = `
+      <div class="empty" style="padding:6rem 1rem">
+        <i class="fa-solid fa-triangle-exclamation" style="color:var(--warn-2)"></i>
+        <h4>Authentication unavailable</h4>
+        <p>The Firebase Auth SDK failed to load. Check your network and reload the page.</p>
+      </div>`;
+    return;
+  }
 
-  // Scheduled checks after data settles
-  setTimeout(() => { runScheduledChecks().catch(() => {}); }, 4000);
+  const auth = firebase.auth();
 
-  // Keep relative timestamps fresh
+  auth.onAuthStateChanged(async (user) => {
+    if (!user){
+      // 4c — hide sign-out button while signed out
+      state.user = null;
+      const soBtn = document.getElementById("signOutBtn");
+      if (soBtn) soBtn.style.display = "none";
+      const rChip = document.getElementById("roleChip");
+      if (rChip){ rChip.style.display = "none"; rChip.innerHTML = ""; }
+      const sUser = document.getElementById("sidebarUser");
+      if (sUser) sUser.style.display = "none";
+      renderLoginGate();
+      return;
+    }
+
+    // Look up role / staffId
+    let profile = null;
+    try {
+      profile = await DB.get("users/" + user.uid);
+    } catch (e){
+      console.error("Failed to load user profile", e);
+    }
+
+    if (!profile){
+      await auth.signOut();
+      toast("Access denied", "Your account has no role assigned. Contact an administrator.", "error");
+      renderLoginGate();
+      return;
+    }
+
+    state.user = { uid: user.uid, email: user.email, ...profile };
+
+    // Unlock the shell
+    const shell = document.getElementById("appShell");
+    if (shell) shell.classList.remove("locked");
+
+    // 4c — show sign-out button and wire it up
+    const soBtn = document.getElementById("signOutBtn");
+    if (soBtn){
+      soBtn.style.display = "inline-flex";
+      soBtn.onclick = signOut;
+    }
+
+    // Role chip in the header
+    const roleChip = document.getElementById("roleChip");
+    if (roleChip){
+      roleChip.style.display = "inline-flex";
+      roleChip.innerHTML = `<i class="fa-solid fa-user-shield"></i> ${esc((state.user.role || "user").toUpperCase())}`;
+    }
+
+    // Sidebar user block
+    const sUser = document.getElementById("sidebarUser");
+    if (sUser){
+      sUser.style.display = "flex";
+      document.getElementById("sidebarEmail").textContent = state.user.email || "—";
+      document.getElementById("sidebarRole").textContent = (state.user.role || "user");
+      document.getElementById("sidebarAvatar").textContent =
+        (state.user.email || "?").slice(0,2).toUpperCase();
+    }
+
+    // Apply role-based visibility on the sidebar
+    applyRoleNav();
+
+    // Reset to dashboard on every fresh sign-in
+    state.view = "dashboard";
+    state.profileTab = "overview";
+    state.currentStaffId = null;
+    state.editingStaffId = null;
+
+    // Only now subscribe — the rules will allow the relevant reads
+    subscribeAll();
+    render();
+    updateCounts();
+    setTimeout(() => { runScheduledChecks().catch(() => {}); }, 4000);
+  });
+
+  // Keep relative timestamps fresh (only when signed in)
   setInterval(() => {
-    if (state.view === "dashboard" || state.view === "notifications") render();
+    if (state.user && (state.view === "dashboard" || state.view === "notifications")) render();
   }, 60000);
-
+   
   console.log(
     "%cNGT Staff Management System",
     "color:#38bdf8;font-weight:800;font-size:14px",
     "\nDatabase:", https://ngt-hr-management-system-default-rtdb.firebaseio.com/,
-    "\nMode:", "locked" or false
+    "\nAuth gate: enabled"
   );
 })();
 </script>

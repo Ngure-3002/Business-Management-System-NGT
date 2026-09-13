@@ -1038,8 +1038,8 @@ const DB = {
     } catch (err){
       console.warn("Firebase init failed — falling back to local storage.", err);
       this.fb = null;
-      this.mode = "firebase";
-      setConnStatus("firebase");
+      this.mode = "local";
+      setConnStatus("offline");
     }
   },
 

@@ -965,7 +965,7 @@ button { cursor: pointer; border: none; background: none; }
           </p>
 
           <div class="welcome-actions">
-            <a href="dashboard.html" class="btn btn-primary" data-nav="Dashboard">
+            <a href="index.html" class="btn btn-primary" data-nav="Dashboard">
               Enter System <span class="arrow" aria-hidden="true">→</span>
             </a>
             <button type="button" class="btn btn-outline" id="scrollToModules">
@@ -1210,7 +1210,7 @@ button { cursor: pointer; border: none; background: none; }
       &nbsp;|&nbsp; Powering Your Digital World
     </span>
     <nav class="footer-links" aria-label="Footer navigation">
-      <a href="dashboard.html">Dashboard</a>
+      <a href="index.html">Dashboard</a>
       <a href="modules/notifications/notifications.html">Notifications</a>
       <a href="#modulesSection">Modules</a>
     </nav>
@@ -1272,9 +1272,9 @@ button { cursor: pointer; border: none; background: none; }
   function buildGreeting() {
     const h = new Date().getHours();
 
-    if (h >= 3  && h < 12) return 'Good morning! Welcome';
-    if (h >= 12 && h < 17) return 'Good afternoon! Welcome';
-    if (h >= 17 && h < 24) return 'Good evening! Thank Welcome';
+    if (h >= 3  && h < 12) return 'Good morning!';
+    if (h >= 12 && h < 17) return 'Good afternoon!';
+    if (h >= 17 && h < 24) return 'Good evening!';
     return 'Welcome back';
   }
 

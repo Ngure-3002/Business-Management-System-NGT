@@ -1,0 +1,3024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NGT CRM — Ngure Gacheru Technologies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+/* ============================================================
+   NGT CRM — CORE THEME (dark tech / cyan accent)
+   ============================================================ */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0b1117; --bg2:#0e1623; --panel:#131e2c; --panel2:#1a2536; --panel3:#1e2c40;
+  --border:#243447; --border2:#2d3a4f;
+  --text:#e0e7ff; --muted:#8ba0bc; --dim:#64748b;
+  --accent:#38bdf8; --accent2:#7dd3fc; --accent-dim:#0ea5e9;
+  --green:#22c55e; --amber:#f59e0b; --red:#ef4444; --purple:#a78bfa; --pink:#f472b6;
+  --sidebar-w:252px;
+  --shadow:0 8px 24px rgba(0,0,0,.45);
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);
+  line-height:1.55;-webkit-font-smoothing:antialiased;font-size:14px;
+}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-track{background:#0a121c}
+::-webkit-scrollbar-thumb{background:#22344a;border-radius:6px}
+::-webkit-scrollbar-thumb:hover{background:#31485f}
+
+/* ============================ APP SHELL ============================ */
+.app{display:flex;min-height:100vh}
+.sidebar{
+  width:var(--sidebar-w);background:#09111b;border-right:1px solid var(--border);
+  position:fixed;top:0;bottom:0;left:0;overflow-y:auto;z-index:300;
+  transition:transform .28s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;
+}
+.brand{padding:1.1rem 1.15rem;border-bottom:1px solid var(--border);display:flex;gap:.7rem;align-items:center;flex-shrink:0}
+.brand-logo{
+  width:40px;height:40px;border-radius:11px;flex-shrink:0;
+  background:linear-gradient(135deg,#0ea5e9,#2563eb);display:grid;place-items:center;
+  font-weight:800;color:#031018;font-size:.95rem;letter-spacing:-.5px;
+  box-shadow:0 6px 18px rgba(56,189,248,.35)
+}
+.brand-txt h1{
+  font-size:.92rem;font-weight:800;letter-spacing:-.3px;line-height:1.15;
+  background:linear-gradient(135deg,#a5f3fc,#38bdf8);-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.brand-txt span{font-size:.62rem;color:var(--dim);letter-spacing:2.4px;text-transform:uppercase;font-weight:600}
+.nav{padding:.55rem .6rem 1.2rem;flex:1;overflow-y:auto}
+.nav-group{margin-top:.7rem}
+.nav-group-label{
+  font-size:.6rem;text-transform:uppercase;letter-spacing:1.6px;color:#4a5f78;
+  padding:.4rem .65rem;font-weight:700
+}
+.nav-item{
+  display:flex;align-items:center;gap:.7rem;padding:.53rem .68rem;border-radius:9px;
+  color:#a9bdd6;cursor:pointer;font-size:.815rem;font-weight:500;
+  transition:background .16s,color .16s;user-select:none;position:relative
+}
+.nav-item i{width:17px;text-align:center;font-size:.83rem;color:#5d7governance}
+.nav-item i{color:#5d7a99;transition:color .16s}
+.nav-item:hover{background:#122031;color:#e2f2ff}
+.nav-item:hover i{color:var(--accent)}
+.nav-item.active{background:linear-gradient(90deg,rgba(56,189,248,.16),rgba(56,189,248,.03));color:#bae6fd;font-weight:600}
+.nav-item.active i{color:var(--accent)}
+.nav-item.active::before{
+  content:'';position:absolute;left:-.6rem;top:50%;transform:translateY(-50%);
+  width:3px;height:60%;background:var(--accent);border-radius:0 3px 3px 0
+}
+.nav-badge{
+  margin-left:auto;background:#1e3a52;color:#7dd3fc;font-size:.62rem;font-weight:700;
+  padding:.1rem .42rem;border-radius:20px;min-width:20px;text-align:center
+}
+.nav-badge.alert{background:#4a1d1d;color:#fca5a5}
+
+.main{margin-left:var(--sidebar-w);flex:1;min-width:0;display:flex;flex-direction:column}
+
+/* ============================ TOPBAR ============================ */
+.topbar{
+  position:sticky;top:0;z-index:200;display:flex;align-items:center;gap:.9rem;
+  padding:.7rem 1.4rem;background:rgba(11,17,23,.9);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);min-height:62px
+}
+.menu-btn{
+  display:none;background:#16233a;border:1px solid var(--border2);color:var(--text);
+  width:36px;height:36px;border-radius:9px;cursor:pointer;font-size:.95rem
+}
+.search-wrap{position:relative;flex:1;max-width:560px}
+.search-wrap > i{
+  position:absolute;left:.85rem;top:50%;transform:translateY(-50%);
+  color:#4f6b88;font-size:.8rem;pointer-events:none
+}
+.search-wrap input{
+  width:100%;background:#101c2b;border:1px solid var(--border);border-radius:11px;
+  padding:.55rem .9rem .55rem 2.3rem;color:var(--text);font-size:.83rem;outline:none;
+  font-family:inherit;transition:border-color .2s,box-shadow .2s
+}
+.search-wrap input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(56,189,248,.12)}
+.search-wrap input::placeholder{color:#4a5f78}
+.search-results{
+  position:absolute;top:calc(100% + .5rem);left:0;right:0;background:#101c2b;
+  border:1px solid var(--border2);border-radius:13px;box-shadow:var(--shadow);
+  max-height:420px;overflow-y:auto;display:none;z-index:400
+}
+.search-results.show{display:block}
+.sr-item{padding:.6rem .85rem;display:flex;gap:.7rem;align-items:center;cursor:pointer;border-bottom:1px solid #16233a}
+.sr-item:last-child{border-bottom:none}
+.sr-item:hover{background:#16273a}
+.sr-item .sr-ico{
+  width:28px;height:28px;border-radius:8px;background:#1b2f45;display:grid;place-items:center;
+  color:var(--accent);font-size:.72rem;flex-shrink:0
+}
+.sr-item .sr-t{font-size:.8rem;font-weight:600;color:#dbeafe}
+.sr-item .sr-s{font-size:.68rem;color:var(--dim)}
+.sr-empty{padding:1rem;text-align:center;color:var(--dim);font-size:.78rem}
+
+.topbar-actions{margin-left:auto;display:flex;align-items:center;gap:.5rem}
+.icon-btn{
+  background:#131f2f;border:1px solid var(--border);color:#9ab3d8;width:37px;height:37px;
+  border-radius:10px;cursor:pointer;font-size:.86rem;position:relative;transition:.18s;
+  display:grid;place-items:center
+}
+.icon-btn:hover{background:#1b2c42;color:var(--accent);border-color:#2f4a66}
+.notif-count{
+  position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:.56rem;
+  font-weight:800;min-width:17px;height:17px;border-radius:9px;display:none;
+  align-items:center;justify-content:center;padding:0 4px;border:2px solid var(--bg)
+}
+.notif-count.show{display:flex}
+.user-chip{
+  display:flex;align-items:center;gap:.55rem;background:#131f2f;border:1px solid var(--border);
+  padding:.3rem .7rem .3rem .32rem;border-radius:30px;cursor:default
+}
+.user-av{
+  width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#0ea5e9,#6366f1);
+  display:grid;place-items:center;font-size:.68rem;font-weight:800;color:#03121e
+}
+.user-chip .un{font-size:.74rem;font-weight:600;color:#c7d9ef;line-height:1.1}
+.user-chip .ur{font-size:.6rem;color:var(--dim)}
+
+/* ============================ VIEW ============================ */
+.view{padding:1.4rem;flex:1;max-width:1600px;width:100%;margin:0 auto}
+.page-head{display:flex;align-items:flex-start;gap:1rem;flex-wrap:wrap;margin-bottom:1.15rem}
+.page-head h2{font-size:1.35rem;font-weight:700;letter-spacing:-.4px;display:flex;align-items:center;gap:.55rem}
+.page-head h2 i{color:var(--accent);font-size:1.05rem}
+.page-head p{color:var(--muted);font-size:.78rem;margin-top:.15rem}
+.page-actions{margin-left:auto;display:flex;gap:.5rem;flex-wrap:wrap}
+
+/* ============================ BUTTONS ============================ */
+.btn{
+  display:inline-flex;align-items:center;gap:.42rem;padding:.5rem 1rem;border-radius:9px;
+  font-size:.78rem;font-weight:600;cursor:pointer;border:1px solid transparent;
+  transition:.18s;font-family:inherit;text-decoration:none;white-space:nowrap
+}
+.btn i{font-size:.75rem}
+.btn-primary{background:var(--accent);color:#04141f;box-shadow:0 4px 14px rgba(56,189,248,.28)}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:0 8px 20px rgba(56,189,248,.4)}
+.btn-outline{background:transparent;border-color:#2e4661;color:#a9c8e6}
+.btn-outline:hover{background:#16273a;border-color:var(--accent);color:var(--accent)}
+.btn-ghost{background:#131f2f;border-color:var(--border);color:#9ab3d8}
+.btn-ghost:hover{background:#1b2c42;color:var(--accent)}
+.btn-danger{background:#3a1616;border-color:#5b2323;color:#fca5a5}
+.btn-danger:hover{background:#4d1d1d;border-color:var(--red);color:#fecaca}
+.btn-success{background:#0f2e1e;border-color:#1d5138;color:#86efac}
+.btn-success:hover{background:#143a26;border-color:var(--green)}
+.btn-sm{padding:.34rem .68rem;font-size:.71rem;border-radius:8px}
+.btn-xs{padding:.2rem .5rem;font-size:.66rem;border-radius:6px}
+
+/* ============================ CARDS / KPI ============================ */
+.card{
+  background:linear-gradient(160deg,#131e2c,#0f1926);border:1px solid var(--border);
+  border-radius:15px;padding:1.1rem 1.2rem;position:relative;overflow:hidden
+}
+.card::before{
+  content:'';position:absolute;top:-60px;right:-60px;width:150px;height:150px;
+  background:radial-gradient(circle,rgba(37,99,235,.13),transparent 70%);border-radius:50%
+}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.85rem;margin-bottom:1.15rem}
+.kpi{
+  background:linear-gradient(160deg,#131e2c,#0f1926);border:1px solid var(--border);
+  border-radius:14px;padding:.9rem 1rem;position:relative;overflow:hidden;transition:.2s
+}
+.kpi:hover{border-color:#31506e;transform:translateY(-2px)}
+.kpi::after{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);opacity:.85
+}
+.kpi.g::after{background:var(--green)} .kpi.a::after{background:var(--amber)}
+.kpi.r::after{background:var(--red)} .kpi.p::after{background:var(--purple)}
+.kpi .k-top{display:flex;align-items:center;gap:.4rem;margin-bottom:.4rem}
+.kpi .k-ico{
+  width:26px;height:26px;border-radius:8px;background:#1a2c42;display:grid;place-items:center;
+  color:var(--accent);font-size:.68rem
+}
+.kpi.g .k-ico{color:var(--green)} .kpi.a .k-ico{color:var(--amber)}
+.kpi.r .k-ico{color:var(--red)} .kpi.p .k-ico{color:var(--purple)}
+.kpi .k-lbl{font-size:.66rem;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:600}
+.kpi .k-val{font-size:1.35rem;font-weight:700;letter-spacing:-.6px;color:#f0f9ff;line-height:1.15}
+.kpi .k-sub{font-size:.66rem;color:var(--dim);margin-top:.15rem}
+
+.section{margin-bottom:1.4rem}
+.section-head{display:flex;align-items:center;gap:.6rem;margin-bottom:.75rem}
+.section-head h3{font-size:.95rem;font-weight:700;letter-spacing:-.2px;display:flex;align-items:center;gap:.45rem}
+.section-head h3 i{color:var(--accent);font-size:.83rem}
+.section-head .spacer{margin-left:auto}
+
+/* ============================ TABLE ============================ */
+.table-wrap{
+  background:#101a27;border:1px solid var(--border);border-radius:14px;overflow:hidden
+}
+.table-scroll{overflow-x:auto}
+table.tbl{width:100%;border-collapse:collapse;font-size:.78rem;min-width:640px}
+table.tbl thead th{
+  background:#0d1723;text-align:left;padding:.62rem .8rem;font-size:.64rem;
+  text-transform:uppercase;letter-spacing:.85px;color:#7189a5;font-weight:700;
+  border-bottom:1px solid var(--border);white-space:nowrap;position:sticky;top:0
+}
+table.tbl tbody td{
+  padding:.58rem .8rem;border-bottom:1px solid #16222f;color:#c3d5ea;vertical-align:middle
+}
+table.tbl tbody tr{transition:background .14s;cursor:pointer}
+table.tbl tbody tr:hover{background:#152233}
+table.tbl tbody tr:last-child td{border-bottom:none}
+table.tbl td.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.72rem;color:#7dd3fc}
+table.tbl td.money{font-weight:600;color:#a7f3d0;white-space:nowrap}
+table.tbl td.actions{text-align:right;white-space:nowrap}
+.row-actions{display:flex;gap:.28rem;justify-content:flex-end}
+.empty-state{padding:3rem 1rem;text-align:center;color:var(--dim)}
+.empty-state i{font-size:2.2rem;opacity:.35;display:block;margin-bottom:.7rem}
+.empty-state p{font-size:.82rem}
+
+/* ============================ BADGES ============================ */
+.badge{
+  display:inline-flex;align-items:center;gap:.28rem;padding:.15rem .5rem;border-radius:20px;
+  font-size:.66rem;font-weight:700;letter-spacing:.2px;white-space:nowrap;
+  background:#1b2c42;color:#93b4d4;border:1px solid #263c55
+}
+.badge::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.9}
+.badge.green{background:rgba(34,197,94,.12);color:#6ee7a8;border-color:rgba(34,197,94,.28)}
+.badge.amber{background:rgba(245,158,11,.12);color:#fcd34d;border-color:rgba(245,158,11,.28)}
+.badge.red{background:rgba(239,68,68,.12);color:#fca5a5;border-color:rgba(239,68,68,.28)}
+.badge.blue{background:rgba(56,189,248,.12);color:#7dd3fc;border-color:rgba(56,189,248,.28)}
+.badge.purple{background:rgba(167,139,250,.12);color:#c4b5fd;border-color:rgba(167,139,250,.28)}
+.badge.pink{background:rgba(244,114,182,.12);color:#f9a8d4;border-color:rgba(244,114,182,.28)}
+.badge.gray{background:#1a2634;color:#8ba0bc;border-color:#26384c}
+
+/* ============================ TOOLBAR ============================ */
+.toolbar{
+  display:flex;gap:.55rem;align-items:center;flex-wrap:wrap;padding:.7rem .85rem;
+  background:#0d1723;border-bottom:1px solid var(--border)
+}
+.toolbar input[type=text],.toolbar select{
+  background:#131f2f;border:1px solid var(--border);border-radius:8px;padding:.4rem .7rem;
+  color:var(--text);font-size:.75rem;outline:none;font-family:inherit
+}
+.toolbar input[type=text]{min-width:200px}
+.toolbar input:focus,.toolbar select:focus{border-color:var(--accent)}
+.count-pill{
+  margin-left:auto;font-size:.68rem;color:var(--muted);background:#131f2f;
+  padding:.28rem .65rem;border-radius:20px;border:1px solid var(--border);white-space:nowrap
+}
+
+/* ============================ MODAL ============================ */
+.modal-backdrop{
+  position:fixed;inset:0;background:rgba(3,8,14,.78);backdrop-filter:blur(5px);
+  z-index:900;display:flex;align-items:flex-start;justify-content:center;
+  padding:2.2rem 1rem;overflow-y:auto;animation:fadeIn .18s ease
+}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.modal{
+  background:#0f1a27;border:1px solid var(--border2);border-radius:17px;width:100%;
+  max-width:760px;box-shadow:0 30px 70px rgba(0,0,0,.7);animation:slideUp .24s cubic-bezier(.2,.8,.3,1);
+  overflow:hidden;margin:auto 0
+}
+.modal.wide{max-width:1080px}
+.modal.narrow{max-width:480px}
+.modal-head{
+  display:flex;align-items:center;gap:.7rem;padding:1rem 1.25rem;
+  border-bottom:1px solid var(--border);background:linear-gradient(180deg,#132234,#0f1a27)
+}
+.modal-head h3{font-size:.98rem;font-weight:700;letter-spacing:-.2px;flex:1;display:flex;align-items:center;gap:.5rem}
+.modal-head h3 i{color:var(--accent);font-size:.85rem}
+.modal-body{padding:1.15rem 1.25rem;max-height:calc(100vh - 250px);overflow-y:auto}
+.modal-foot{
+  padding:.8rem 1.25rem;border-top:1px solid var(--border);display:flex;gap:.5rem;
+  justify-content:flex-end;background:#0d1723
+}
+
+/* ============================ FORM ============================ */
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.85rem}
+.form-grid .full{grid-column:1/-1}
+.fld{display:flex;flex-direction:column;gap:.28rem}
+.fld label{font-size:.68rem;font-weight:700;color:#8ea8c6;text-transform:uppercase;letter-spacing:.6px}
+.fld label .req{color:var(--red);margin-left:2px}
+.fld input,.fld select,.fld textarea{
+  background:#131f2f;border:1px solid var(--border);border-radius:9px;padding:.52rem .72rem;
+  color:var(--text);font-size:.8rem;outline:none;font-family:inherit;transition:.16s;width:100%
+}
+.fld input:focus,.fld select:focus,.fld textarea:focus{
+  border-color:var(--accent);box-shadow:0 0 0 3px rgba(56,189,248,.11);background:#152437
+}
+.fld textarea{resize:vertical;min-height:74px;line-height:1.5}
+.fld select option{background:#131f2f;color:var(--text)}
+.fld .hint{font-size:.64rem;color:var(--dim)}
+
+/* ============================ LINE ITEMS ============================ */
+.items-editor{border:1px solid var(--border);border-radius:11px;overflow:hidden;background:#101a27}
+.items-editor table{width:100%;border-collapse:collapse;font-size:.76rem}
+.items-editor th{
+  background:#0d1723;padding:.48rem .55rem;text-align:left;font-size:.62rem;
+  text-transform:uppercase;letter-spacing:.7px;color:#7189a5;font-weight:700
+}
+.items-editor td{padding:.34rem .4rem;border-top:1px solid #16222f}
+.items-editor input{
+  width:100%;background:#131f2f;border:1px solid #22344a;border-radius:7px;
+  padding:.36rem .5rem;color:var(--text);font-size:.75rem;outline:none;font-family:inherit
+}
+.items-editor input:focus{border-color:var(--accent)}
+.items-editor input.num{text-align:right}
+.items-editor .line-total{text-align:right;font-weight:700;color:#a7f3d0;padding-right:.6rem;white-space:nowrap}
+.items-foot{
+  display:flex;justify-content:flex-end;gap:1.6rem;padding:.7rem 1rem;
+  background:#0d1723;border-top:1px solid var(--border)
+}
+.items-foot .tot{font-size:.76rem;color:var(--muted);display:flex;gap:.55rem;align-items:baseline}
+.items-foot .tot b{font-size:1rem;color:#f0f9ff;font-weight:700}
+.items-foot .tot.grand b{color:#7dd3fc;font-size:1.15rem}
+
+/* ============================ CUSTOMER 360 ============================ */
+.c360-hero{
+  background:linear-gradient(135deg,#12263b,#0d1a29);border:1px solid var(--border2);
+  border-radius:17px;padding:1.3rem 1.4rem;margin-bottom:1.15rem;position:relative;overflow:hidden
+}
+.c360-hero::before{
+  content:'';position:absolute;top:-90px;right:-90px;width:260px;height:260px;
+  background:radial-gradient(circle,rgba(56,189,248,.16),transparent 70%);border-radius:50%
+}
+.c360-top{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;position:relative}
+.c360-avatar{
+  width:58px;height:58px;border-radius:15px;background:linear-gradient(135deg,#0ea5e9,#6366f1);
+  display:grid;place-items:center;font-size:1.35rem;font-weight:800;color:#04141f;flex-shrink:0
+}
+.c360-name{font-size:1.3rem;font-weight:800;letter-spacing:-.5px;color:#f0f9ff;line-height:1.2}
+.c360-meta{display:flex;gap:.85rem;flex-wrap:wrap;font-size:.74rem;color:var(--muted);margin-top:.3rem}
+.c360-meta span{display:flex;align-items:center;gap:.32rem}
+.c360-meta i{color:var(--accent);font-size:.7rem}
+.c360-stats{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.6rem;margin-top:1.1rem;position:relative
+}
+.c360-stat{background:rgba(19,31,47,.75);border:1px solid var(--border);border-radius:11px;padding:.6rem .75rem}
+.c360-stat .l{font-size:.6rem;text-transform:uppercase;letter-spacing:.7px;color:var(--dim);font-weight:700}
+.c360-stat .v{font-size:1rem;font-weight:700;color:#e6f4ff;letter-spacing:-.3px}
+.c360-stat .v.green{color:#6ee7a8} .c360-stat .v.red{color:#fca5a5} .c360-stat .v.amber{color:#fcd34d}
+
+.tabs{display:flex;gap:.3rem;border-bottom:1px solid var(--border);margin-bottom:1rem;overflow-x:auto;padding-bottom:1px}
+.tab{
+  padding:.5rem .9rem;font-size:.76rem;font-weight:600;color:#7f97b3;cursor:pointer;
+  border-bottom:2px solid transparent;white-space:nowrap;transition:.16s
+}
+.tab:hover{color:#b8d4ef}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+
+/* ============================ TIMELINE ============================ */
+.timeline{position:relative;padding-left:1.5rem}
+.timeline::before{content:'';position:absolute;left:6px;top:5px;bottom:5px;width:2px;background:#1e2f42}
+.tl-item{position:relative;padding-bottom:1rem}
+.tl-item::before{
+  content:'';position:absolute;left:-1.5rem;top:5px;width:11px;height:11px;border-radius:50%;
+  background:#0f1a27;border:2px solid var(--accent);box-shadow:0 0 0 3px rgba(56,189,248,.1)
+}
+.tl-item.green::before{border-color:var(--green);box-shadow:0 0 0 3px rgba(34,197,94,.1)}
+.tl-item.amber::before{border-color:var(--amber);box-shadow:0 0 0 3px rgba(245,158,11,.1)}
+.tl-item.red::before{border-color:var(--red);box-shadow:0 0 0 3px rgba(239,68,68,.1)}
+.tl-date{font-size:.63rem;color:var(--dim);text-transform:uppercase;letter-spacing:.7px;font-weight:700}
+.tl-title{font-size:.79rem;font-weight:600;color:#cfe3f7;margin-top:.08rem}
+.tl-sub{font-size:.71rem;color:var(--muted)}
+
+/* ============================ DETAIL LIST ============================ */
+.dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.7rem 1.2rem}
+.dl-item{border-bottom:1px dashed #1d2c3d;padding-bottom:.45rem}
+.dl-item .k{font-size:.62rem;text-transform:uppercase;letter-spacing:.7px;color:var(--dim);font-weight:700}
+.dl-item .v{font-size:.81rem;color:#d5e5f5;margin-top:.1rem;word-break:break-word}
+
+/* ============================ TOAST ============================ */
+.toast-root{position:fixed;bottom:1.2rem;right:1.2rem;z-index:1200;display:flex;flex-direction:column;gap:.5rem}
+.toast{
+  background:#132234;border:1px solid var(--border2);border-left:3px solid var(--accent);
+  border-radius:11px;padding:.65rem .9rem;font-size:.78rem;color:#dbeafe;min-width:250px;
+  box-shadow:var(--shadow);animation:slideUp .22s ease;display:flex;gap:.6rem;align-items:center
+}
+.toast.success{border-left-color:var(--green)} .toast.success i{color:var(--green)}
+.toast.error{border-left-color:var(--red)} .toast.error i{color:var(--red)}
+.toast.info i{color:var(--accent)}
+.toast i{font-size:.9rem}
+
+/* ============================ MISC ============================ */
+.divider{height:1px;background:var(--border);margin:1rem 0}
+.pill-row{display:flex;gap:.35rem;flex-wrap:wrap}
+.progress{height:6px;background:#16222f;border-radius:6px;overflow:hidden}
+.progress span{display:block;height:100%;background:linear-gradient(90deg,#0ea5e9,#38bdf8);border-radius:6px}
+.muted{color:var(--muted)}
+.dim{color:var(--dim)}
+.small{font-size:.72rem}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.text-right{text-align:right}
+.mt1{margin-top:.5rem}.mt2{margin-top:1rem}.mt3{margin-top:1.5rem}
+.mb1{margin-bottom:.5rem}.mb2{margin-bottom:1rem}
+.flex{display:flex;gap:.6rem;align-items:center}
+.flex-wrap{flex-wrap:wrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.spinner{
+  width:34px;height:34px;border:3px solid #1e2f42;border-top-color:var(--accent);
+  border-radius:50%;animation:spin .8s linear infinite;margin:3rem auto
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.conn-badge{
+  display:inline-flex;align-items:center;gap:.3rem;font-size:.62rem;font-weight:700;
+  padding:.15rem .5rem;border-radius:20px;background:#0f2e1e;color:#86efac;border:1px solid #1d5138
+}
+.conn-badge.off{background:#3a1616;color:#fca5a5;border-color:#5b2323}
+.dot-live{width:6px;height:6px;border-radius:50%;background:currentColor;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+/* ============================ RESPONSIVE ============================ */
+@media(max-width:1024px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0);box-shadow:0 0 50px rgba(0,0,0,.7)}
+  .main{margin-left:0}
+  .menu-btn{display:grid;place-items:center}
+  .grid2{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .view{padding:.9rem}
+  .topbar{padding:.55rem .85rem;gap:.5rem}
+  .user-chip .un,.user-chip .ur{display:none}
+  .user-chip{padding:.3rem}
+  .kpi-grid{grid-template-columns:1fr 1fr;gap:.55rem}
+  .kpi .k-val{font-size:1.05rem}
+  .page-head h2{font-size:1.1rem}
+  .modal-backdrop{padding:.6rem}
+  .modal-body{max-height:calc(100vh - 190px)}
+}
+.sidebar-overlay{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:250
+}
+.sidebar-overlay.show{display:block}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-logo">NGT</div>
+      <div class="brand-txt">
+        <h1>NGURE GACHERU<br>TECHNOLOGIES</h1>
+        <span>CRM SYSTEM</span>
+      </div>
+    </div>
+    <nav class="nav" id="nav"></nav>
+    <div style="padding:.75rem 1rem;border-top:1px solid var(--border);flex-shrink:0">
+      <div class="conn-badge" id="connBadge"><span class="dot-live"></span> LIVE</div>
+      <div style="font-size:.6rem;color:var(--dim);margin-top:.4rem">ngt-crm-system</div>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+  <!-- ================= MAIN ================= -->
+  <div class="main">
+    <header class="topbar">
+      <button class="menu-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+      <div class="search-wrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input id="globalSearch" type="text" placeholder="Search customers, leads, quotations, invoices, projects…" autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-btn" onclick="openNotifications()" title="Notifications">
+          <i class="fa-regular fa-bell"></i>
+          <span class="notif-count" id="notifCount"></span>
+        </button>
+        <button class="icon-btn" onclick="setView('settings')" title="Settings"><i class="fa-solid fa-gear"></i></button>
+        <div class="user-chip">
+          <div class="user-av">NG</div>
+          <div>
+            <div class="un">Administrator</div>
+            <div class="ur">Full Access</div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="view" id="view">
+      <div class="spinner"></div>
+    </main>
+  </div>
+</div>
+
+<div id="modalRoot"></div>
+<div class="toast-root" id="toastRoot"></div>
+
+<!-- ================= FIREBASE SDK ================= -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script>
+/* ============================================================
+   NGT CRM — APPLICATION SCRIPT
+   Firebase Realtime Database: ngt-crm-system-default-rtdb
+   ============================================================ */
+
+/* ---------- FIREBASE INIT ---------- */
+const firebaseConfig = {
+  databaseURL: "https://ngt-crm-system-default-rtdb.firebaseio.com/"
+};
+firebase.initializeApp(firebaseConfig);
+const DB = firebase.database();
+
+/* ============================================================
+   1. GLOBAL OPTION LISTS
+   ============================================================ */
+const SERVICE_TYPES = [
+  'IT Services','Website Development','Software Development','IT Support','Networking',
+  'Cybersecurity','Computer Installation','Graphic Design','Electrical Works',
+  'CCTV Installation','Electric Fencing','Solar Installation','Solar Water Heating',
+  'Biometric / Access Control','Procurement','Electronics Brokerage','Hire Purchase',
+  'Maintenance Contract','Consultancy','Other'
+];
+
+const LEAD_SOURCES = [
+  'WhatsApp','WhatsApp Channel','Facebook','Instagram','Threads','TikTok','Website',
+  'Google','Referral','Existing Customer','Agent','Walk-in','Phone Call','Email',
+  'Advertisement','Networking','Tender','Direct Outreach','Other'
+];
+
+const CUSTOMER_CATEGORIES = [
+  'Individual','Household','School','College','University','Hospital','Clinic','Pharmacy',
+  'Corporate','NGO','Government Institution','Landlord','Property Manager','Contractor',
+  'Retailer','Wholesaler','Reseller','Agent','Other'
+];
+
+const INDUSTRIES = ['Education','Healthcare','Corporate','Retail','Property','Residential','Government','Hospitality','NGO','Other'];
+const PRIORITIES = ['Low','Medium','High','Urgent'];
+const PAYMENT_METHODS = ['M-Pesa','Bank Transfer','Cash','Card','Cheque','Other'];
+const COUNTIES = ['Nairobi','Kiambu','Murang\'a','Nyeri','Kirinyaga','Nyandarua','Nakuru','Machakos','Kajiado','Meru','Embu','Thika','Other'];
+
+const PIPE_STAGES = [
+  'New','Contacted','Requirement Identified','Site Visit Required','Site Assessment',
+  'Costing','Quotation Prepared','Quotation Sent','Negotiation','Deposit Requested',
+  'Won','Lost','Cancelled'
+];
+
+const QUOTE_STATUS = ['Draft','Pending Approval','Sent','Accepted','Rejected','Expired','Cancelled'];
+const INVOICE_STATUS = ['Draft','Issued','Partially Paid','Paid','Overdue','Cancelled'];
+const PROJECT_STATUS = ['Pending Site Assessment','Awaiting Deposit','Scheduled','In Progress','On Hold','Testing','Completed','Warranty','Cancelled'];
+const TICKET_STATUS = ['Open','Assigned','Diagnosis','Repair','Testing','Resolved','Closed'];
+const REQUEST_STATUS = ['Searching','Supplier Found','Quoted','Customer Accepted','Ordered','Received','Delivered','Closed','Cancelled'];
+const HP_STATUS = ['Draft','Active','Completed','Defaulted','Cancelled'];
+
+/* ============================================================
+   2. SCHEMA DEFINITIONS (drives the entire CRUD engine)
+   ============================================================ */
+const SCHEMAS = {
+
+/* --------------------------- LEADS --------------------------- */
+leads: {
+  label:'Leads', icon:'fa-bullseye', prefix:'NGT-LD', group:'Sales',
+  titleField:'name', subtitle:'Prospect management & lead source tracking',
+  columns:[
+    {k:'id',t:'Lead ID',cls:'mono'},
+    {k:'name',t:'Lead Name'},
+    {k:'company',t:'Company'},
+    {k:'phone',t:'Phone'},
+    {k:'source',t:'Source'},
+    {k:'service',t:'Interest'},
+    {k:'estimatedValue',t:'Est. Value',type:'money'},
+    {k:'status',t:'Status',type:'badge'},
+    {k:'nextFollowUp',t:'Follow-up',type:'date'}
+  ],
+  fields:[
+    {k:'name',l:'Lead Name',t:'text',req:true},
+    {k:'company',l:'Company / Institution',t:'text'},
+    {k:'phone',l:'Phone',t:'tel'},
+    {k:'email',l:'Email',t:'email'},
+    {k:'county',l:'County',t:'select',o:COUNTIES},
+    {k:'town',l:'Town / Location',t:'text'},
+    {k:'source',l:'Lead Source',t:'select',o:LEAD_SOURCES},
+    {k:'service',l:'Service / Product Interested In',t:'select',o:SERVICE_TYPES},
+    {k:'estimatedValue',l:'Estimated Value (KES)',t:'number'},
+    {k:'assignedTo',l:'Assigned Salesperson',t:'text'},
+    {k:'priority',l:'Priority',t:'select',o:PRIORITIES,def:'Medium'},
+    {k:'status',l:'Status',t:'select',o:['New','Contacted','Qualified','Converted','Lost','Dormant'],def:'New'},
+    {k:'nextFollowUp',l:'Next Follow-up Date',t:'date'},
+    {k:'notes',l:'Notes',t:'textarea',full:true}
+  ]
+},
+
+/* ------------------------- CUSTOMERS ------------------------- */
+customers: {
+  label:'Customers', icon:'fa-users', prefix:'NGT-CU', group:'Sales',
+  titleField:'name', subtitle:'Customer master records & 360° view',
+  columns:[
+    {k:'id',t:'Customer ID',cls:'mono'},
+    {k:'name',t:'Customer Name'},
+    {k:'company',t:'Company'},
+    {k:'phone',t:'Phone'},
+    {k:'category',t:'Category'},
+    {k:'industry',t:'Industry'},
+    {k:'town',t:'Town'},
+    {k:'status',t:'Status',type:'badge'}
+  ],
+  fields:[
+    {k:'type',l:'Customer Type',t:'select',o:['Individual','Company','Institution'],def:'Individual'},
+    {k:'name',l:'Full Name / Trading Name',t:'text',req:true},
+    {k:'company',l:'Company / Institution Name',t:'text'},
+    {k:'contactPerson',l:'Contact Person',t:'text'},
+    {k:'phone',l:'Phone',t:'tel'},
+    {k:'whatsapp',l:'WhatsApp',t:'tel'},
+    {k:'email',l:'Email',t:'email'},
+    {k:'county',l:'County',t:'select',o:COUNTIES},
+    {k:'town',l:'Town',t:'text'},
+    {k:'location',l:'Physical Address / Location',t:'text'},
+    {k:'kraPin',l:'KRA PIN',t:'text'},
+    {k:'category',l:'Customer Classification',t:'select',o:CUSTOMER_CATEGORIES},
+    {k:'industry',l:'Industry',t:'select',o:INDUSTRIES},
+    {k:'segment',l:'Value Segment',t:'select',o:['Low-Value','Medium-Value','High-Value','VIP'],def:'Medium-Value'},
+    {k:'preferredChannel',l:'Preferred Communication',t:'select',o:['WhatsApp','Phone Call','Email','SMS','In-Person']},
+    {k:'status',l:'Status',t:'select',o:['Prospect','Active','Dormant','Lost','Blacklisted'],def:'Active'},
+    {k:'leadSource',l:'Original Lead Source',t:'select',o:LEAD_SOURCES},
+    {k:'notes',l:'Notes',t:'textarea',full:true}
+  ]
+},
+
+/* ------------------------ OPPORTUNITIES ---------------------- */
+opportunities: {
+  label:'Opportunities', icon:'fa-filter-circle-dollar', prefix:'NGT-OP', group:'Sales',
+  titleField:'title', subtitle:'Sales pipeline & deal progression',
+  columns:[
+    {k:'id',t:'Opp ID',cls:'mono'},
+    {k:'title',t:'Opportunity'},
+    {k:'customer',t:'Customer',type:'ref',ref:'customers'},
+    {k:'service',t:'Service'},
+    {k:'estimatedValue',t:'Value',type:'money'},
+    {k:'stage',t:'Stage',type:'badge'},
+    {k:'probability',t:'Prob %',type:'pct'},
+    {k:'expectedCloseDate',t:'Close Date',type:'date'}
+  ],
+  fields:[
+    {k:'title',l:'Opportunity Title',t:'text',req:true},
+    {k:'customer',l:'Customer',t:'ref',ref:'customers',req:true},
+    {k:'service',l:'Service / Product',t:'select',o:SERVICE_TYPES},
+    {k:'estimatedValue',l:'Estimated Value (KES)',t:'number'},
+    {k:'expectedProfit',l:'Expected Profit (KES)',t:'number'},
+    {k:'stage',l:'Pipeline Stage',t:'select',o:PIPE_STAGES,def:'New'},
+    {k:'probability',l:'Probability (%)',t:'number',def:10},
+    {k:'expectedCloseDate',l:'Expected Closing Date',t:'date'},
+    {k:'assignedTo',l:'Assigned To',t:'text'},
+    {k:'priority',l:'Priority',t:'select',o:PRIORITIES,def:'Medium'},
+    {k:'requirement',l:'Requirement / Technical Scope',t:'textarea',full:true},
+    {k:'notes',l:'Notes',t:'textarea',full:true}
+  ]
+},
+
+/* ---------------------- CUSTOMER REQUESTS -------------------- */
+requests: {
+  label:'Customer Requests', icon:'fa-cart-flatbed', prefix:'NGT-REQ', group:'Sales',
+  titleField:'product', subtitle:'Product sourcing, brokerage & procurement requests',
+  columns:[
+    {k:'id',t:'Request ID',cls:'mono'},
+    {k:'customer',t:'Customer',type:'ref',ref:'customers'},
+    {k:'product',t:'Product'},
+    {k:'quantity',t:'Qty',type:'num'},
+    {k:'targetPrice',t:'Target Price',type:'money'},
+    {k:'supplierPrice',t:'Supplier Cost',type:'money'},
+    {k:'sellingPrice',t:'Selling Price',type:'money'},
+    {k:'status',t:'Status',type:'badge'}
+  ],
+  fields:[
+    {k:'customer',l:'Customer',t:'ref',ref:'customers',req:true},
+    {k:'product',l:'Product / Service Requested',t:'text',req:true},
+    {k:'specification',l:'Specification',t:'textarea',full:true},
+    {k:'quantity',l:'Quantity',t:'number',def:1},
+    {k:'targetPrice',l:'Customer Target Price (KES)',t:'number'},
+    {k:'dateRequested',l:'Date Requested',t:'date'},
+    {k:'supplier',l:'Supplier / Source',t:'text'},
+    {k:'supplierPrice',l:'Supplier Cost (KES)',t:'number'},
+    {k:'sellingPrice',l:'Agreed Selling Price (KES)',t:'number'},
+    {k:'deliveryTime',l:'Delivery Time',t:'text'},
+    {k:'warranty',l:'Warranty',t:'text'},
+    {k:'status',l:'Status',t:'select',o:REQUEST_STATUS,def:'Searching'},
+    {k:'notes',l:'Notes',t:'textarea',full:true}
+  ]
+},
+
+/* ---------------------- SITE ASSESSMENTS --------------------- */
+assessments: {
+  label:'Site Assessments', icon:'fa-clipboard-check', prefix:'NGT-SA', group:'Operations',
+  titleField:'site', subtitle:'Technical site surveys, findings & recommendations',
+  columns:[
+    {k:'id',t:'Assessment ID',cls:'mono'},
+    {k:'customer',t:'Customer',type:'ref',ref:'customers'},
+    {k:'serviceType',t:'Service'},
+    {k:'site',t:'Site'},
+    {k:'assessmentDate',t:'Date',type:'date'},
+    {k:'technician',t:'Technician'},
+    {k:'status',t:'Status',type:'badge'}
+  ],
+  fields:[
+    {k:'customer',l:'Customer',t:'ref',ref:'customers',req:true},
+    {k:'serviceType',l:'Service Type',t:'select',o:SERVICE_TYPES,req:true},
+    {k:'site',l:'Site / Location',t:'text',req:true},
+    {k:'assessmentDate',l:'Assessment Date',t:'date'},
+    {k:'technician',l:'Assigned Technician',t:'text'},
+    {k:'requirements',l:'Client Requirements',t:'textarea',full:true},
+    {k:'findings',l:'Site Findings',t:'textarea',full:true},
+    {k:'recommendations',l:'Recommendations',t:'textarea',full:true},
+    {k:'equipmentRequired',l:'Equipment / Materials Required',t:'textarea',full:true},
+    {k:'photoLinks',l:'Photo Links (comma separated URLs)',t:'text',full:true},
+    {k:'status',l:'Status',t:'select',o:['Scheduled','In Progress','Completed','Cancelled'],def:'Scheduled'},
+    {k:'notes',l:'Notes',t:'textarea',full:true}
+  ]
+},
+
+/* ------------------------- QUOTATIONS ------------------------ */
+quotations: {
+  label:'Quotations', icon:'fa-file-invoice-dollar', prefix:'NGT-Q', group:'Sales',
+  titleField:'id', subtitle:'Professional quotation engine with line items',
+  columns:[
+    {k:'id',t:'Quotation #',cls:'mono'},
+    {k:'customer',t:'Customer',type:'ref',ref:'customers'},
+    {k:'date',t:'Date',type:'date'},
+    {k:'validity',t:'Valid Until',type:'date'},
+    {k:'total',t:'Total',type:'money'},
+    {k:'status',t:'Status',type:'badge'},
+    {k:'preparedBy',t:'Prepared By'}
+  ],
+  fields:[
+    {k:'customer',l:'Customer',t:'ref',ref:'customers',req:true},
+    {k:'opportunity',l:'Linked Opportunity',t:'ref',ref:'opportunities'},
+    {k:'date',l:'Quotation Date',t:'date',req:true},
+    {k:'validity',l:'Valid Until',t:'date'},
+    {k:'items',l:'Line Items',t:'items',full:true},
+    {k:'taxRate',l:'VAT / Tax Rate (%)',t:'number',def:0},
+    {k:'terms',l:'Terms & Conditions',t:'textarea',full:true},
+    {k:'paymentInstructions',l:'Payment Instructions',t:'textarea',full:true},
+    {k:'status',l:'Status',t:'select',o:QUOTE_STATUS,def:'Draft'},
+    {k:'preparedBy',l:'Prepared By',t:'text'},
+    {k:'notes',l:'Notes',t:'textarea',full:true}
+  ]
+},
+
+/* ------------------------ SALES ORDERS ----------------------- */
+salesorders: {
+  label:'Sales Orders', icon:'fa-file-contract', prefix:'NGT-SO', group:'Sales',
+  titleField:'id', subtitle:'Confirmed orders converted from accepted quotations',
+  columns:[
+    {k:'id',t:'Order #',cls:'mono'},
+    {k:'customer',t:'Customer',type:'ref',ref:'customers'},
+    {k:'date',t:'Date',type:'date'},
+    {k:'total',t:'Total',type:'money'},
+    {k:'assignedTo',t:'Assigned To'},
+    {k:'status',t:'Status',type:'badge'}
+  ],
+  fields:[
+    {k:'customer',l:'Customer',t:'ref',ref:'customers',req:true},
+    {k:'quotation',l:'Source Quotation',t:'ref',ref:'quotations'},
+    {k:'date',l:'Order Date',t:'date',req:true},
+    {k:'items',l:'Order Items',t:'items',full:true},
+    {k:'taxRate',l:'VAT / Tax Rate (%)',t:'number',def:0},
+    {k:'deliveryTerms',l:'Delivery Terms',t:'text'},
+    {k:'paymentTerms',l:'Payment Terms',t:'text'},
+    {k:'assignedTo',l:'Assigned Staff',t:'text'},
+    {k:'status',l:'Status',t:'select',o:['Pending','Confirmed','In Progress','Delivered','Completed','Cancelled'],def:'Pending'},
+    {k:'notes',l:'Notes',t:'textarea',full:true}
+  ]
+},
+
+/* -------------------------- INVOICES ------------------------- */
+invoices: {
+  label:'Invoices', icon:'fa-file-invoice', prefix:'NGT-INV', group:'Finance',
+  titleField:'id', subtitle:'Customer invoicing & receivables tracking',
+  columns:[
+    {k:'id',t:'Invoice #',cls:'mono'},
+    {k:'customer',t:'Customer',type:'ref',ref:'customers'},
+    {k:'date',t:'Date',type:'date'},
+    {k:'dueDate',t:'Due',type:'date'},
+    {k:'total',t:'Total',type:'money'},
+    {k:'paidCalc',t:'Paid',type:'money'},
+    {k:'balanceCalc',t:'Balance',type:'money'},
+    {k:'status',t:'Status',type:'badge'}
+  ],
+  fields:[
+    {k:'customer',l:'Customer',t:'ref',ref:'customers',req:true},
+    {k:'salesOrder',l:'Sales Order',t:'ref',ref:'salesorders'},
+    {k:'date',l:'Invoice Date',t:'date',req:true},
+    {k:'dueDate',l:'Due Date',t:'date'},
+    {k:'items',l:'Invoice Items',t:'items',full:true},
+    {k:'taxRate',l:'VAT / Tax Rate (%)',t:'number',def:0},
+    {k:'status',l:'Status',t:'select',o:INVOICE_STATUS,def:'Draft'},
+    {k:'notes',l:'Notes',t:'textarea',full:true}
+  ]
+},
+
+/* -------------------------- PAYMENTS ------------------------- */
+payments: {
+  label:'Payments', icon:'fa-money-bill-transfer', prefix:'NGT-PAY', group:'Finance',
+  titleField:'id', subtitle:'Customer receipts across all payment channels',
+  columns:[
+    {k:'id',t:'Payment ID',cls:'mono'},
+    {k:'customer',t:'Customer',type:'ref',ref:'customers'},
+    {k:'invoice',t:'Invoice',type:'ref',ref:'invoices'},
+    {k:'amount',t:'Amount',type:'money'},
+    {k:'date',t:'Date',type:'date'},
+    {k:'method',t:'Method'},
+    {k:'reference',t:'Reference'}
+  ],
+  fields:[
+    {k:'customer',l:'Customer',t:'ref',ref:'customers',req:true},
+    {k:'invoice',l:'Invoice',t:'ref',ref:'invoices'},
+    {k:'amount',l:'Amount (KES)',t:'number',req:true},
+    {k:'date',l:'Payment Date',t:'date',req:true},
+    {k:'method',l:'Payment Method',t:'select',o:PAYMENT_METHODS,def:'M-Pesa'},
+    {k:'reference',l:'Transaction / Reference No.',t:'text'},
+    {k:'receivedBy',l:'Received By',t:'text'},
+    {k:'notes',l:'Notes',t:'textarea',full:true}
+  ]
+},
+
+/* ---------------------- PROJECTS & JOBS ---------------------- */
+projects: {
+  label:'Projects & Jobs', icon:'fa-diagram-project', prefix:'NGT-PRJ', group:'Operations',
+  titleField:'name', subtitle:'Installation, delivery & project execution',
+  columns:[
+    {k:'id',t:'Project #',cls:'mono'},
+    {k:'name',t:'Project'},
+    {k:'customer',t:'Customer',type:'ref',ref:'customers'},
+    {k:'serviceType',t:'Service'},
+    {k:'startDate',t:'Start',type:'date'},
+    {k:'status',t:'Status',type:'badge'},
+    {k:'assignedTo',t:'Lead'}
+  ],
+  fields:[
+    {k:'name',l:'Project / Job Name',t:'text',req:true},
+    {k:'customer',l:'Customer',t:'ref',ref:'customers',req:true},
+    {k:'serviceType',l:'Service Type',t:'select',o:SERVICE_TYPES},
+    {k:'salesOrder',l:'Sales Order',t:'ref',ref:'salesorders'},
+    {k:'startDate',l:'Start Date',t:'date'},
+    {k:'endDate',l:'Target Completion',t:'date'},
+    {k:'assignedTo',l:'Project Lead / Technician',t:'text'},
+    {k:'budget',l:'Project Value (KES)',t:'number'},
+    {k:'expenses',l:'Direct Costs (KES)',t:'number'},
+    {k:'progress',l:'Progress (%)',t:'number',def:0},
+    {k:'status',l:'Status',t:'select',o:PROJECT_STATUS,def:'Scheduled'},
+    {k:'scope',l:'Scope of Work',t:'textarea',full:true},
+    {k:'notes',l:'Notes',t:'textarea',full:true}
+  ]
+},
+
+/* ------------------------- FOLLOW-UPS ------------------------ */
+followups: {
+  label:'Follow-Ups', icon:'fa-bell-concierge', prefix:'NGT-FU', group:'Sales',
+  titleField:'subject', subtitle:'Tasks, reminders & scheduled customer contact',
+  columns:[
+    {k:'id',t:'Task ID',cls:'mono'},
+    {k:'subject',t:'Subject'},
+    {k:'customer',t:'Customer',type:'ref',ref:'customers'},
+    {k:'assignedTo',t:'Assigned To'},
+    {k:'priority',t:'Priority',type:'badge'},
+    {k:'dueDate',t:'Due',type:'date'},
+    {k:'status',t:'Status',type:'badge'}
+  ],
+  fields:[
+    {k:'subject',l:'Task / Follow-up Subject',t:'text',req:true},
+    {k:'customer',l:'Customer',t:'ref',ref:'customers'},
+    {k:'opportunity',l:'Related Opportunity',t:'ref',ref:'opportunities'},
+    {k:'quotation',l:'Related Quotation',t:'ref',ref:'quotations'},
+    {k:'assignedTo',l:'Assigned To',t:'text'},
+    {k:'priority',l:'Priority',t:'select',o:PRIORITIES,def:'Medium'},
+    {k:'dueDate',l:'Due Date',t:'date'},
+    {k:'status',l:'Status',t:'select',o:['Pending','In Progress','Completed','Cancelled'],def:'Pending'},
+    {k:'notes',l:'Notes',t:'textarea',full:true}
+  ]
+},
+
+/* ----------------------- COMMUNICATIONS ---------------------- */
+communications: {
+  label:'Communications', icon:'fa-comments', prefix:'NGT-COM', group:'Sales',
+  titleField:'subject', subtitle:'Complete customer interaction timeline',
+  columns:[
+    {k:'id',t:'Ref',cls:'mono'},
+    {k:'customer',t:'Customer',type:'ref',ref:'customers'},
+    {k:'channel',t:'Channel'},
+    {k:'direction',t:'Direction'},
+    {k:'subject',t:'Subject'},
+    {k:'date',t:'Date',type:'date'},
+    {k:'staff',t:'Staff'}
+  ],
+  fields:[
+    {k:'customer',l:'Customer',t:'ref',ref:'customers',req:true},
+    {k:'channel',l:'Channel',t:'select',o:['Phone Call','WhatsApp','Email','SMS','In-Person Meeting','Video Call','Other'],req:true},
+    {k:'direction',l:'Direction',t:'select',o:['Outbound','Inbound'],def:'Outbound'},
+    {k:'subject',l:'Subject',t:'text',req:true},
+    {k:'date',l:'Date',t:'date',req:true},
+    {k:'staff',l:'Staff Member',t:'text'},
+    {k:'message',l:'Details / Message',t:'textarea',full:true}
+  ]
+},
+
+/* ------------------------ SUPPORT TICKETS -------------------- */
+tickets: {
+  label:'Support Tickets', icon:'fa-headset', prefix:'NGT-TKT', group:'Operations',
+  titleField:'issue', subtitle:'Complaints, service requests & after-sales support',
+  columns:[
+    {k:'id',t:'Ticket #',cls:'mono'},
+    {k:'customer',t:'Customer',type:'ref',ref:'customers'},
+    {k:'issue',t:'Issue'},
+    {k:'priority',t:'Priority',type:'badge'},
+    {k:'assignedTo',t:'Technician'},
+    {k:'status',t:'Status',type:'badge'}
+  ],
+  fields:[
+    {k:'customer',l:'Customer',t:'ref',ref:'customers',req:true},
+    {k:'issue',l:'Issue / Complaint',t:'text',req:true},
+    {k:'description',l:'Description',t:'textarea',full:true},
+    {k:'priority',l:'Priority',t:'select',o:PRIORITIES,def:'Medium'},
+    {k:'assignedTo',l:'Assigned Technician',t:'text'},
+    {k:'openedDate',l:'Date Opened',t:'date'},
+    {k:'resolvedDate',l:'Date Resolved',t:'date'},
+    {k:'resolution',l:'Resolution Notes',t:'textarea',full:true},
+    {k:'status',l:'Status',t:'select',o:TICKET_STATUS,def:'Open'}
+  ]
+},
+
+/* -------------------------- WARRANTIES ----------------------- */
+warranties: {
+  label:'Warranties', icon:'fa-shield-halved', prefix:'NGT-WR', group:'Operations',
+  titleField:'product', subtitle:'Equipment & installation warranty register',
+  columns:[
+    {k:'id',t:'Warranty #',cls:'mono'},
+    {k:'customer',t:'Customer',type:'ref',ref:'customers'},
+    {k:'product',t:'Product'},
+    {k:'serial',t:'Serial / IMEI'},
+    {k:'warrantyEnd',t:'Expires',type:'date'},
+    {k:'status',t:'Status',type:'badge'}
+  ],
+  fields:[
+    {k:'customer',l:'Customer',t:'ref',ref:'customers',req:true},
+    {k:'product',l:'Product / Installation',t:'text',req:true},
+    {k:'serial',l:'Serial Number / IMEI',t:'text'},
+    {k:'installationDate',l:'Installation Date',t:'date'},
+    {k:'warrantyStart',l:'Warranty Start',t:'date'},
+    {k:'warrantyEnd',l:'Warranty End',t:'date'},
+    {k:'provider',l:'Warranty Provider',t:'text'},
+    {k:'terms',l:'Warranty Terms',t:'textarea',full:true},
+    {k:'claims',l:'Claims History',t:'textarea',full:true},
+    {k:'status',l:'Status',t:'select',o:['Active','Expiring Soon','Expired','Claimed','Void'],def:'Active'}
+  ]
+},
+
+/* ------------------------ HIRE PURCHASE ---------------------- */
+hirepurchase: {
+  label:'Hire Purchase', icon:'fa-handshake-angle', prefix:'NGT-HP', group:'Finance',
+  titleField:'product', subtitle:'Installment agreements & payment schedules',
+  columns:[
+    {k:'id',t:'Agreement #',cls:'mono'},
+    {k:'customer',t:'Customer',type:'ref',ref:'customers'},
+    {k:'product',t:'Product'},
+    {k:'cashPrice',t:'Cash Price',type:'money'},
+    {k:'deposit',t:'Deposit',type:'money'},
+    {k:'installmentAmount',t:'Installment',type:'money'},
+    {k:'amountPaid',t:'Paid',type:'money'},
+    {k:'status',t:'Status',type:'badge'}
+  ],
+  fields:[
+    {k:'customer',l:'Customer',t:'ref',ref:'customers',req:true},
+    {k:'product',l:'Product',t:'text',req:true},
+    {k:'serial',l:'Serial Number / IMEI',t:'text'},
+    {k:'cashPrice',l:'Cash Price (KES)',t:'number',req:true},
+    {k:'deposit',l:'Deposit Paid (KES)',t:'number'},
+    {k:'installmentAmount',l:'Installment Amount (KES)',t:'number'},
+    {k:'numInstallments',l:'Number of Installments',t:'number',def:12},
+    {k:'startDate',l:'Start Date',t:'date'},
+    {k:'endDate',l:'End Date',t:'date'},
+    {k:'amountPaid',l:'Total Amount Paid (KES)',t:'number',def:0},
+    {k:'status',l:'Agreement Status',t:'select',o:HP_STATUS,def:'Draft'},
+    {k:'notes',l:'Notes / Terms',t:'textarea',full:true}
+  ]
+},
+
+/* ---------------------- AGENTS & COMMISSIONS ----------------- */
+agents: {
+  label:'Agents & Commissions', icon:'fa-user-tie', prefix:'NGT-AG', group:'Sales',
+  titleField:'name', subtitle:'Sales agent performance & commission tracking',
+  columns:[
+    {k:'id',t:'Agent ID',cls:'mono'},
+    {k:'name',t:'Agent Name'},
+    {k:'phone',t:'Phone'},
+    {k:'commissionRate',t:'Rate %',type:'pct'},
+    {k:'totalSales',t:'Sales',type:'money'},
+    {k:'commissionEarned',t:'Commission',type:'money'},
+    {k:'commissionPaid',t:'Paid',type:'money'},
+    {k:'status',t:'Status',type:'badge'}
+  ],
+  fields:[
+    {k:'name',l:'Agent Name',t:'text',req:true},
+    {k:'phone',l:'Phone',t:'tel'},
+    {k:'email',l:'Email',t:'email'},
+    {k:'idNumber',l:'ID Number',t:'text'},
+    {k:'commissionRate',l:'Commission Rate (%)',t:'number',def:5},
+    {k:'totalSales',l:'Total Sales Generated (KES)',t:'number',def:0},
+    {k:'commissionEarned',l:'Commission Earned (KES)',t:'number',def:0},
+    {k:'commissionPaid',l:'Commission Paid (KES)',t:'number',def:0},
+    {k:'status',l:'Status',t:'select',o:['Active','Inactive','Suspended'],def:'Active'},
+    {k:'notes',l:'Notes',t:'textarea',full:true}
+  ]
+},
+
+/* ------------------------- DOCUMENTS ------------------------- */
+documents: {
+  label:'Documents', icon:'fa-folder-open', prefix:'NGT-DOC', group:'System',
+  titleField:'name', subtitle:'Document registry — contracts, BOQs, certificates',
+  columns:[
+    {k:'id',t:'Doc ID',cls:'mono'},
+    {k:'name',t:'Document'},
+    {k:'docType',t:'Type'},
+    {k:'customer',t:'Customer',type:'ref',ref:'customers'},
+    {k:'date',t:'Date',type:'date'}
+  ],
+  fields:[
+    {k:'name',l:'Document Name',t:'text',req:true},
+    {k:'docType',l:'Document Type',t:'select',o:['Quotation','Invoice','Receipt','Contract','Purchase Order','Agreement','Site Assessment Report','BOQ','Warranty Certificate','Delivery Note','Completion Certificate','Other']},
+    {k:'customer',l:'Customer',t:'ref',ref:'customers'},
+    {k:'date',l:'Date',t:'date'},
+    {k:'url',l:'Document Link / URL',t:'text',full:true},
+    {k:'notes',l:'Notes',t:'textarea',full:true}
+  ]
+}
+
+};
+
+/* ============================================================
+   3. APPLICATION STATE
+   ============================================================ */
+const state = {
+  data: {},           // { collection: { key: record } }
+  view: 'dashboard',
+  params: {},
+  ready: false,
+  q: {},              // per-collection quick filter
+  c360tab: 'overview'
+};
+
+const COLLECTIONS = Object.keys(SCHEMAS);
+
+/* ============================================================
+   4. UTILITIES
+   ============================================================ */
+const esc = s => String(s === null || s === undefined ? '' : s)
+  .replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+const money = n => 'KES ' + Number(n || 0).toLocaleString('en-KE', {maximumFractionDigits: 0});
+const money2 = n => 'KES ' + Number(n || 0).toLocaleString('en-KE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+const num = n => Number(n || 0);
+
+const todayISO = () => new Date().toISOString().slice(0, 10);
+
+function fmtDate(d) {
+  if (!d) return '—';
+  const dt = new Date(d);
+  if (isNaN(dt)) return d;
+  return dt.toLocaleDateString('en-GB', {day: '2-digit', month: 'short', year: 'numeric'});
+}
+function fmtDateTime(d) {
+  if (!d) return '—';
+  const dt = new Date(d);
+  if (isNaN(dt)) return d;
+  return dt.toLocaleDateString('en-GB', {day: '2-digit', month: 'short', year: 'numeric'}) +
+    ' ' + dt.toLocaleTimeString('en-GB', {hour: '2-digit', minute: '2-digit'});
+}
+function daysBetween(a, b) {
+  return Math.round((new Date(b) - new Date(a)) / 86400000);
+}
+function isOverdue(d) {
+  if (!d) return false;
+  return new Date(d) < new Date(todayISO());
+}
+
+/* Toast notifications */
+function toast(msg, type = 'info') {
+  const el = document.createElement('div');
+  el.className = 'toast ' + type;
+  const ico = type === 'success' ? 'fa-circle-check' : type === 'error' ? 'fa-circle-exclamation' : 'fa-circle-info';
+  el.innerHTML = '<i class="fa-solid ' + ico + '"></i><span>' + esc(msg) + '</span>';
+  document.getElementById('toastRoot').appendChild(el);
+  setTimeout(() => {
+    el.style.transition = 'opacity .3s, transform .3s';
+    el.style.opacity = '0';
+    el.style.transform = 'translateX(20px)';
+    setTimeout(() => el.remove(), 320);
+  }, 3200);
+}
+
+/* Badge colour mapping by keyword */
+function badgeClass(v) {
+  const s = String(v || '').toLowerCase();
+  if (['won','paid','completed','resolved','closed','accepted','active','delivered','confirmed','qualified','converted','supplier found','received','customer accepted'].includes(s)) return 'green';
+  if (['lost','overdue','cancelled','rejected','defaulted','expired','urgent','void','blacklisted','open'].includes(s)) return 'red';
+  if (['pending','pending approval','partially paid','negotiation','in progress','awaiting deposit','assigned','repair','diagnosis','testing','expiring soon','on hold','draft','searching','quotation sent','sent','ordered','new'].includes(s)) return 'amber';
+  if (['contacted','requirement identified','site assessment','site visit required','costing','quotation prepared','deposit requested','scheduled','dormant','prospect','issued'].includes(s)) return 'blue';
+  if (['high','vip','high-value','won'].includes(s)) return 'purple';
+  return 'gray';
+}
+function badge(v) {
+  if (!v) return '<span class="badge gray">—</span>';
+  return '<span class="badge ' + badgeClass(v) + '">' + esc(v) + '</span>';
+}
+
+/* Resolve a reference key to a display name */
+function refName(col, key) {
+  if (!key) return '—';
+  const rec = (state.data[col] || {})[key];
+  if (!rec) return key;
+  const sch = SCHEMAS[col];
+  return rec[sch.titleField] || rec.name || rec.id || key;
+}
+
+/* Generate sequential display IDs via RTDB transaction */
+async function genId(prefix) {
+  try {
+    const ref = DB.ref('meta/counters/' + prefix);
+    const res = await ref.transaction(cur => (cur || 0) + 1);
+    const n = res.snapshot.val() || 1;
+    return prefix + '-' + String(n).padStart(4, '0');
+  } catch (e) {
+    return prefix + '-' + Date.now().toString().slice(-6);
+  }
+}
+
+/* Audit trail */
+function logAudit(action, collection, recordId, details) {
+  DB.ref('audit').push({
+    action: action,
+    collection: collection,
+    recordId: recordId || '',
+    details: details || '',
+    user: 'Administrator',
+    timestamp: new Date().toISOString()
+  }).catch(() => {});
+}
+
+/* ============================================================
+   5. FIREBASE REALTIME LISTENERS
+   ============================================================ */
+let renderTimer = null;
+function scheduleRender() {
+  clearTimeout(renderTimer);
+  renderTimer = setTimeout(() => render(), 90);
+}
+
+function initListeners() {
+  let loaded = 0;
+  COLLECTIONS.forEach(col => {
+    DB.ref(col).on('value', snap => {
+      const val = snap.val() || {};
+      // attach firebase key onto each record
+      Object.keys(val).forEach(k => { if (val[k] && typeof val[k] === 'object') val[k]._key = k; });
+      state.data[col] = val;
+      loaded++;
+      if (!state.ready && loaded >= 1) { state.ready = true; }
+      scheduleRender();
+    }, err => {
+      console.error('DB error on ' + col, err);
+      setConn(false);
+    });
+  });
+
+  DB.ref('.info/connected').on('value', snap => setConn(!!snap.val()));
+}
+
+function setConn(ok) {
+  const b = document.getElementById('connBadge');
+  if (!b) return;
+  b.className = 'conn-badge' + (ok ? '' : ' off');
+  b.innerHTML = '<span class="dot-live"></span> ' + (ok ? 'LIVE' : 'OFFLINE');
+}
+
+/* ============================================================
+   6. DATA HELPERS
+   ============================================================ */
+function list(col) {
+  const obj = state.data[col] || {};
+  return Object.keys(obj).map(k => obj[k]).filter(Boolean);
+}
+
+function findRec(col, key) {
+  return (state.data[col] || {})[key] || null;
+}
+
+function paymentsForInvoice(invKey) {
+  return list('payments').filter(p => p.invoice === invKey);
+}
+function invoicePaid(invKey) {
+  return paymentsForInvoice(invKey).reduce((s, p) => s + num(p.amount), 0);
+}
+function invoiceBalance(inv) {
+  return num(inv.total) - invoicePaid(inv._key);
+}
+function invoiceStatus(inv) {
+  if (inv.status === 'Cancelled' || inv.status === 'Draft') return inv.status;
+  const bal = invoiceBalance(inv);
+  const paid = invoicePaid(inv._key);
+  if (bal <= 0.01) return 'Paid';
+  if (paid > 0) return 'Partially Paid';
+  if (inv.dueDate && isOverdue(inv.dueDate)) return 'Overdue';
+  return inv.status || 'Issued';
+}
+
+function customerRevenue(custKey) {
+  return list('invoices')
+    .filter(i => i.customer === custKey && i.status !== 'Cancelled')
+    .reduce((s, i) => s + num(i.total), 0);
+}
+function customerPaid(custKey) {
+  return list('payments').filter(p => p.customer === custKey).reduce((s, p) => s + num(p.amount), 0);
+}
+function customerOutstanding(custKey) {
+  return list('invoices')
+    .filter(i => i.customer === custKey && i.status !== 'Cancelled')
+    .reduce((s, i) => s + Math.max(0, invoiceBalance(i)), 0);
+}
+function customerOverdue(custKey) {
+  return list('invoices')
+    .filter(i => i.customer === custKey && i.status !== 'Cancelled' && i.dueDate && isOverdue(i.dueDate))
+    .reduce((s, i) => s + Math.max(0, invoiceBalance(i)), 0);
+}
+function customerProfit(custKey) {
+  const rev = customerRevenue(custKey);
+  const cost = list('projects').filter(p => p.customer === custKey).reduce((s, p) => s + num(p.expenses), 0);
+  return rev - cost;
+}
+
+/* ============================================================
+   7. NAVIGATION
+   ============================================================ */
+const NAV_GROUPS = [
+  { label: 'Overview', items: [
+    { id: 'dashboard', label: 'Dashboard', icon: 'fa-gauge-high' },
+    { id: 'reports', label: 'Reports & Analytics', icon: 'fa-chart-pie' }
+  ]},
+  { label: 'Sales', items: ['leads','customers','opportunities','requests','quotations','salesorders','followups','communications','agents'] },
+  { label: 'Finance', items: ['invoices','payments','hirepurchase'] },
+  { label: 'Operations', items: ['projects','assessments','tickets','warranties'] },
+  { label: 'System', items: ['documents','settings'] }
+];
+
+function buildNav() {
+  const nav = document.getElementById('nav');
+  let html = '';
+  NAV_GROUPS.forEach(g => {
+    html += '<div class="nav-group"><div class="nav-group-label">' + g.label + '</div>';
+    g.items.forEach(it => {
+      let id, label, icon;
+      if (typeof it === 'string') {
+        const s = SCHEMAS[it];
+        id = it; label = s.label; icon = s.icon;
+      } else { id = it.id; label = it.label; icon = it.icon; }
+      html += '<div class="nav-item" data-nav="' + id + '" onclick="setView(\'' + id + '\')">' +
+        '<i class="fa-solid ' + icon + '"></i><span>' + label + '</span>' +
+        '<span class="nav-badge" id="nb-' + id + '" style="display:none"></span></div>';
+    });
+    html += '</div>';
+  });
+  nav.innerHTML = html;
+}
+
+function setView(v, params) {
+  state.view = v;
+  state.params = params || {};
+  if (window.innerWidth <= 1024) closeSidebar();
+  document.querySelectorAll('.nav-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.nav === v);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  render();
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('show');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('show');
+}
+
+/* ============================================================
+   8. MASTER RENDER
+   ============================================================ */
+function render() {
+  if (!state.ready) return;
+  updateNavBadges();
+  updateNotifCount();
+
+  const view = state.view;
+  const root = document.getElementById('view');
+
+  if (view === 'dashboard') { root.innerHTML = viewDashboard(); }
+  else if (view === 'reports') { root.innerHTML = viewReports(); }
+  else if (view === 'settings') { root.innerHTML = viewSettings(); }
+  else if (view === 'customer360') { root.innerHTML = viewCustomer360(state.params.id); }
+  else if (SCHEMAS[view]) { root.innerHTML = viewCollection(view); }
+  else { root.innerHTML = viewDashboard(); }
+
+  if (view === 'dashboard') animateBars();
+}
+
+function updateNavBadges() {
+  const counts = {
+    leads: list('leads').filter(l => l.status === 'New').length,
+    opportunities: list('opportunities').filter(o => !['Won','Lost','Cancelled'].includes(o.stage)).length,
+    followups: list('followups').filter(f => f.status === 'Pending' && f.dueDate && isOverdue(f.dueDate)).length,
+    invoices: list('invoices').filter(i => i.status !== 'Cancelled' && invoiceBalance(i) > 0.01 && i.dueDate && isOverdue(i.dueDate)).length,
+    tickets: list('tickets').filter(t => !['Resolved','Closed'].includes(t.status)).length
+  };
+  Object.keys(counts).forEach(k => {
+    const el = document.getElementById('nb-' + k);
+    if (!el) return;
+    if (counts[k] > 0) { el.style.display = ''; el.textContent = counts[k]; el.className = 'nav-badge' + (k === 'invoices' || k === 'followups' ? ' alert' : ''); }
+    else el.style.display = 'none';
+  });
+}
+
+/* ============================================================
+   9. DASHBOARD
+   ============================================================ */
+function viewDashboard() {
+  const leads = list('leads');
+  const opps = list('opportunities');
+  const quotes = list('quotations');
+  const invs = list('invoices');
+  const pays = list('payments');
+  const custs = list('customers');
+  const projs = list('projects');
+  const tickets = list('tickets');
+  const warrant = list('warranties');
+  const hp = list('hirepurchase');
+
+  const today = todayISO();
+  const newLeadsToday = leads.filter(l => (l.createdAt || '').slice(0, 10) === today).length;
+  const activeOpps = opps.filter(o => !['Won','Lost','Cancelled'].includes(o.stage));
+  const wonOpps = opps.filter(o => o.stage === 'Won');
+  const lostOpps = opps.filter(o => o.stage === 'Lost');
+  const closedOpps = wonOpps.length + lostOpps.length;
+  const convRate = closedOpps ? Math.round((wonOpps.length / closedOpps) * 100) : 0;
+
+  const quoteValue = quotes.filter(q => !['Rejected','Cancelled'].includes(q.status)).reduce((s, q) => s + num(q.total), 0);
+  const pendingQuotes = quotes.filter(q => ['Draft','Pending Approval','Sent'].includes(q.status));
+  const expectedSales = activeOpps.reduce((s, o) => s + num(o.estimatedValue), 0);
+  const closedSales = wonOpps.reduce((s, o) => s + num(o.estimatedValue), 0);
+
+  const totalInvoiced = invs.filter(i => i.status !== 'Cancelled').reduce((s, i) => s + num(i.total), 0);
+  const totalCollected = pays.reduce((s, p) => s + num(p.amount), 0);
+  const outstanding = invs.filter(i => i.status !== 'Cancelled').reduce((s, i) => s + Math.max(0, invoiceBalance(i)), 0);
+  const overdue = invs.filter(i => i.status !== 'Cancelled' && i.dueDate && isOverdue(i.dueDate) && invoiceBalance(i) > 0.01)
+    .reduce((s, i) => s + Math.max(0, invoiceBalance(i)), 0);
+
+  const thisMonth = today.slice(0, 7);
+  const salesThisMonth = invs.filter(i => (i.date || '').slice(0, 7) === thisMonth).reduce((s, i) => s + num(i.total), 0);
+  const collectedThisMonth = pays.filter(p => (p.date || '').slice(0, 7) === thisMonth).reduce((s, p) => s + num(p.amount), 0);
+
+  const estProfit = wonOpps.reduce((s, o) => s + num(o.expectedProfit), 0);
+  const activeProjects = projs.filter(p => !['Completed','Cancelled','Warranty'].includes(p.status));
+  const completedProjects = projs.filter(p => p.status === 'Completed').length;
+  const openTickets = tickets.filter(t => !['Resolved','Closed'].includes(t.status));
+
+  /* ---- Pipeline breakdown ---- */
+  const pipelineRows = PIPE_STAGES.map(st => {
+    const items = opps.filter(o => o.stage === st);
+    return { stage: st, count: items.length, value: items.reduce((s, o) => s + num(o.estimatedValue), 0) };
+  }).filter(r => r.count > 0);
+  const maxPipe = Math.max(1, ...pipelineRows.map(r => r.value));
+
+  /* ---- Follow-ups due ---- */
+  const dueFollowups = list('followups')
+    .filter(f => f.status === 'Pending' && f.dueDate)
+    .sort((a, b) => (a.dueDate || '').localeCompare(b.dueDate || ''))
+    .slice(0, 6);
+
+  /* ---- Overdue invoices ---- */
+  const overdueInvoices = invs
+    .filter(i => i.status !== 'Cancelled' && i.dueDate && isOverdue(i.dueDate) && invoiceBalance(i) > 0.01)
+    .sort((a, b) => (a.dueDate || '').localeCompare(b.dueDate || ''))
+    .slice(0, 6);
+
+  /* ---- Top customers by revenue ---- */
+  const topCustomers = custs.map(c => ({
+    c, rev: customerRevenue(c._key), out: customerOutstanding(c._key)
+  })).sort((a, b) => b.rev - a.rev).slice(0, 6);
+
+  /* ---- Lead source ROI ---- */
+  const sourceStats = {};
+  leads.forEach(l => {
+    const s = l.source || 'Unknown';
+    if (!sourceStats[s]) sourceStats[s] = { leads: 0, value: 0 };
+    sourceStats[s].leads++;
+    sourceStats[s].value += num(l.estimatedValue);
+  });
+
+  /* ---- Hire purchase summary ---- */
+  const hpActive = hp.filter(h => h.status === 'Active');
+  const hpBalance = hpActive.reduce((s, h) => s + Math.max(0, num(h.cashPrice) - num(h.amountPaid)), 0);
+
+  let h = '';
+
+  /* Page head */
+  h += '<div class="page-head">' +
+    '<div><h2><i class="fa-solid fa-gauge-high"></i> CRM Dashboard</h2>' +
+    '<p>Customer-to-cash overview · ' + fmtDate(today) + '</p></div>' +
+    '<div class="page-actions">' +
+      '<button class="btn btn-ghost btn-sm" onclick="render()"><i class="fa-solid fa-rotate"></i> Refresh</button>' +
+      '<button class="btn btn-outline btn-sm" onclick="openForm(\'leads\')"><i class="fa-solid fa-user-plus"></i> New Lead</button>' +
+      '<button class="btn btn-primary btn-sm" onclick="openForm(\'quotations\')"><i class="fa-solid fa-file-circle-plus"></i> New Quotation</button>' +
+    '</div></div>';
+
+  /* ---------- KPI ROW 1 : SALES ---------- */
+  h += '<div class="kpi-grid">' +
+    kpi('Total Leads', leads.length, 'All time', 'fa-bullseye', '') +
+    kpi('New Leads Today', newLeadsToday, 'Captured today', 'fa-bolt', 'a') +
+    kpi('Active Opportunities', activeOpps.length, money(expectedSales) + ' pipeline', 'fa-filter-circle-dollar', 'p') +
+    kpi('Won Opportunities', wonOpps.length, money(closedSales), 'fa-trophy', 'g') +
+    kpi('Lost Opportunities', lostOpps.length, 'Review loss reasons', 'fa-circle-xmark', 'r') +
+    kpi('Conversion Rate', convRate + '%', wonOpps.length + ' of ' + closedOpps + ' closed', 'fa-percent', '') +
+  '</div>';
+
+  /* ---------- KPI ROW 2 : MONEY ---------- */
+  h += '<div class="kpi-grid">' +
+    kpi('Total Invoiced', money(totalInvoiced), invs.length + ' invoices', 'fa-file-invoice', '') +
+    kpi('Total Collected', money(totalCollected), pays.length + ' payments', 'fa-money-bill-transfer', 'g') +
+    kpi('Outstanding', money(outstanding), 'Customer balances', 'fa-hourglass-half', 'a') +
+    kpi('Overdue', money(overdue), 'Requires collection', 'fa-triangle-exclamation', 'r') +
+    kpi('Sales This Month', money(salesThisMonth), 'Collected: ' + money(collectedThisMonth), 'fa-calendar-day', '') +
+    kpi('Est. Gross Profit', money(estProfit), 'From won opportunities', 'fa-chart-line', 'g') +
+  '</div>';
+
+  /* ---------- KPI ROW 3 : OPERATIONS ---------- */
+  h += '<div class="kpi-grid">' +
+    kpi('Customers', custs.length, custs.filter(c => c.status === 'Active').length + ' active', 'fa-users', '') +
+    kpi('Active Projects', activeProjects.length, completedProjects + ' completed', 'fa-diagram-project', 'p') +
+    kpi('Pending Quotations', pendingQuotes.length, money(quoteValue) + ' total value', 'fa-file-invoice-dollar', 'a') +
+    kpi('Open Tickets', openTickets.length, 'Support & complaints', 'fa-headset', openTickets.length ? 'r' : 'g') +
+    kpi('Active Warranties', warrant.filter(w => w.status === 'Active').length, warrant.length + ' registered', 'fa-shield-halved', '') +
+    kpi('Hire Purchase Bal.', money(hpBalance), hpActive.length + ' active agreements', 'fa-handshake-angle', 'p') +
+  '</div>';
+
+  /* ---------- PIPELINE ---------- */
+  h += '<div class="section"><div class="section-head">' +
+    '<h3><i class="fa-solid fa-filter-circle-dollar"></i> Sales Pipeline</h3>' +
+    '<span class="spacer"></span>' +
+    '<button class="btn btn-ghost btn-xs" onclick="setView(\'opportunities\')">View All <i class="fa-solid fa-arrow-right"></i></button>' +
+    '</div>';
+
+  h += '<div class="table-wrap"><div class="table-scroll"><table class="tbl"><thead><tr>' +
+    '<th>Stage</th><th>Opportunities</th><th>Value</th><th style="width:34%">Distribution</th>' +
+    '</tr></thead><tbody>';
+
+  if (!pipelineRows.length) {
+    h += '<tr><td colspan="4"><div class="empty-state"><i class="fa-solid fa-filter-circle-dollar"></i><p>No opportunities yet. Create your first opportunity to start building the pipeline.</p></div></td></tr>';
+  } else {
+    pipelineRows.forEach(r => {
+      const pct = Math.round((r.value / maxPipe) * 100);
+      h += '<tr onclick="setView(\'opportunities\')">' +
+        '<td>' + badge(r.stage) + '</td>' +
+        '<td style="font-weight:700">' + r.count + '</td>' +
+        '<td class="money">' + money(r.value) + '</td>' +
+        '<td><div class="progress"><span class="bar" data-w="' + pct + '" style="width:0"></span></div></td>' +
+        '</tr>';
+    });
+    const totCount = pipelineRows.reduce((s, r) => s + r.count, 0);
+    const totVal = pipelineRows.reduce((s, r) => s + r.value, 0);
+    h += '<tr style="background:#0d1723"><td style="font-weight:700;color:#7dd3fc">TOTAL</td>' +
+      '<td style="font-weight:700;color:#7dd3fc">' + totCount + '</td>' +
+      '<td class="money" style="color:#7dd3fc">' + money(totVal) + '</td><td></td></tr>';
+  }
+  h += '</tbody></table></div></div></div>';
+
+  /* ---------- TWO-COLUMN: FOLLOW-UPS + OVERDUE ---------- */
+  h += '<div class="grid2">';
+
+  /* Follow-ups */
+  h += '<div class="section"><div class="section-head"><h3><i class="fa-solid fa-bell-concierge"></i> Follow-Ups Due</h3>' +
+    '<span class="spacer"></span><button class="btn btn-ghost btn-xs" onclick="setView(\'followups\')">All</button></div>' +
+    '<div class="table-wrap"><div class="table-scroll"><table class="tbl" style="min-width:auto"><tbody>';
+  if (!dueFollowups.length) {
+    h += '<tr><td><div class="empty-state" style="padding:1.6rem"><i class="fa-solid fa-check-double"></i><p>No pending follow-ups.</p></div></td></tr>';
+  } else {
+    dueFollowups.forEach(f => {
+      const late = isOverdue(f.dueDate);
+      h += '<tr onclick="openDetail(\'followups\',\'' + f._key + '\')">' +
+        '<td style="width:60%"><div style="font-weight:600;color:#dbeafe">' + esc(f.subject || '—') + '</div>' +
+        '<div class="small dim">' + esc(refName('customers', f.customer)) + '</div></td>' +
+        '<td>' + badge(f.priority || 'Medium') + '</td>' +
+        '<td class="text-right"><span class="small ' + (late ? '' : 'muted') + '" style="' + (late ? 'color:#fca5a5;font-weight:700' : '') + '">' + fmtDate(f.dueDate) + '</span></td>' +
+        '</tr>';
+    });
+  }
+  h += '</tbody></table></div></div></div>';
+
+  /* Overdue invoices */
+  h += '<div class="section"><div class="section-head"><h3><i class="fa-solid fa-triangle-exclamation"></i> Overdue Invoices</h3>' +
+    '<span class="spacer"></span><button class="btn btn-ghost btn-xs" onclick="setView(\'invoices\')">All</button></div>' +
+    '<div class="table-wrap"><div class="table-scroll"><table class="tbl" style="min-width:auto"><tbody>';
+  if (!overdueInvoices.length) {
+    h += '<tr><td><div class="empty-state" style="padding:1.6rem"><i class="fa-solid fa-thumbs-up"></i><p>No overdue invoices. Excellent.</p></div></td></tr>';
+  } else {
+    overdueInvoices.forEach(i => {
+      h += '<tr onclick="openDetail(\'invoices\',\'' + i._key + '\')">' +
+        '<td style="width:52%"><div style="font-weight:600;color:#dbeafe">' + esc(refName('customers', i.customer)) + '</div>' +
+        '<div class="small dim mono">' + esc(i.id || '') + ' · Due ' + fmtDate(i.dueDate) + '</div></td>' +
+        '<td class="money" style="color:#fca5a5">' + money(invoiceBalance(i)) + '</td>' +
+        '<td class="text-right"><span class="badge red">' + Math.abs(daysBetween(today, i.dueDate)) + 'd late</span></td>' +
+        '</tr>';
+    });
+  }
+  h += '</tbody></table></div></div></div>';
+
+  h += '</div>'; /* end grid2 */
+
+  /* ---------- TOP CUSTOMERS ---------- */
+  h += '<div class="section"><div class="section-head"><h3><i class="fa-solid fa-crown"></i> Top Customers by Revenue</h3>' +
+    '<span class="spacer"></span><button class="btn btn-ghost btn-xs" onclick="setView(\'customers\')">All Customers</button></div>';
+  h += '<div class="table-wrap"><div class="table-scroll"><table class="tbl"><thead><tr>' +
+    '<th>Customer</th><th>Category</th><th>Revenue</th><th>Outstanding</th><th>Profit</th><th></th></tr></thead><tbody>';
+  if (!topCustomers.length) {
+    h += '<tr><td colspan="6"><div class="empty-state"><i class="fa-solid fa-users"></i><p>No customers yet.</p></div></td></tr>';
+  } else {
+    topCustomers.forEach(({ c, rev, out }) => {
+      const profit = customerProfit(c._key);
+      h += '<tr onclick="openCustomer360(\'' + c._key + '\')">' +
+        '<td><div style="font-weight:600;color:#dbeafe">' + esc(c.name || '—') + '</div>' +
+        '<div class="small dim mono">' + esc(c.id || '') + '</div></td>' +
+        '<td>' + esc(c.category || '—') + '</td>' +
+        '<td class="money">' + money(rev) + '</td>' +
+        '<td class="money" style="color:' + (out > 0 ? '#fcd34d' : '#6ee7a8') + '">' + money(out) + '</td>' +
+        '<td class="money" style="color:' + (profit >= 0 ? '#6ee7a8' : '#fca5a5') + '">' + money(profit) + '</td>' +
+        '<td class="text-right"><i class="fa-solid fa-chevron-right dim"></i></td>' +
+        '</tr>';
+    });
+  }
+  h += '</tbody></table></div></div></div>';
+
+  /* ---------- LEAD SOURCE PERFORMANCE ---------- */
+  h += '<div class="section"><div class="section-head"><h3><i class="fa-solid fa-bullhorn"></i> Lead Source Performance</h3>' +
+    '<span class="spacer"></span><button class="btn btn-ghost btn-xs" onclick="setView(\'reports\')">Full Report</button></div>';
+  h += '<div class="table-wrap"><div class="table-scroll"><table class="tbl"><thead><tr>' +
+    '<th>Source</th><th>Leads</th><th>Est. Pipeline Value</th><th style="width:30%">Share</th></tr></thead><tbody>';
+  const srcArr = Object.keys(sourceStats).map(k => ({ k, ...sourceStats[k] })).sort((a, b) => b.leads - a.leads);
+  const maxSrc = Math.max(1, ...srcArr.map(s => s.leads));
+  if (!srcArr.length) {
+    h += '<tr><td colspan="4"><div class="empty-state"><i class="fa-solid fa-bullhorn"></i><p>No lead data yet.</p></div></td></tr>';
+  } else {
+    srcArr.forEach(s => {
+      h += '<tr onclick="setView(\'leads\')">' +
+        '<td style="font-weight:600">' + esc(s.k) + '</td>' +
+        '<td>' + s.leads + '</td>' +
+        '<td class="money">' + money(s.value) + '</td>' +
+        '<td><div class="progress"><span class="bar" data-w="' + Math.round((s.leads / maxSrc) * 100) + '" style="width:0"></span></div></td>' +
+        '</tr>';
+    });
+  }
+  h += '</tbody></table></div></div></div>';
+
+  return h;
+}
+
+function kpi(label, value, sub, icon, cls) {
+  const display = typeof value === 'number' ? value.toLocaleString('en-KE') : value;
+  return '<div class="kpi ' + (cls || '') + '">' +
+    '<div class="k-top"><div class="k-ico"><i class="fa-solid ' + icon + '"></i></div>' +
+    '<div class="k-lbl">' + esc(label) + '</div></div>' +
+    '<div class="k-val">' + esc(display) + '</div>' +
+    '<div class="k-sub">' + esc(sub || '') + '</div>' +
+    '</div>';
+}
+
+function animateBars() {
+  setTimeout(() => {
+    document.querySelectorAll('.bar').forEach(b => {
+      const w = b.getAttribute('data-w') || 0;
+      b.style.transition = 'width .9s cubic-bezier(.2,.8,.3,1)';
+      b.style.width = w + '%';
+    });
+  }, 60);
+}
+
+/* ============================================================
+   10. GENERIC COLLECTION VIEW
+   ============================================================ */
+function viewCollection(col) {
+  const s = SCHEMAS[col];
+  const rows = list(col).sort((a, b) => {
+    const da = a.createdAt || a.date || a.id || '';
+    const db_ = b.createdAt || b.date || b.id || '';
+    return String(db_).localeCompare(String(da));
+  });
+
+  let h = '';
+  h += '<div class="page-head">' +
+    '<div><h2><i class="fa-solid ' + s.icon + '"></i> ' + esc(s.label) + '</h2>' +
+    '<p>' + esc(s.subtitle || '') + '</p></div>' +
+    '<div class="page-actions">' +
+      '<button class="btn btn-ghost btn-sm" onclick="exportCSV(\'' + col + '\')"><i class="fa-solid fa-file-csv"></i> Export</button>' +
+      '<button class="btn btn-primary btn-sm" onclick="openForm(\'' + col + '\')"><i class="fa-solid fa-plus"></i> New ' + esc(s.label.replace(/s$/, '')) + '</button>' +
+    '</div></div>';
+
+  h += '<div class="table-wrap">';
+
+  /* Toolbar */
+  h += '<div class="toolbar">' +
+    '<input type="text" id="tblSearch" placeholder="Filter ' + esc(s.label.toLowerCase()) + '…" oninput="filterTable(this.value)" value="' + esc(state.q[col] || '') + '">' +
+    '<select id="tblStatus" onchange="filterTable()"><option value="">All Statuses</option>' +
+      statusOptionsFor(col).map(o => '<option value="' + esc(o) + '">' + esc(o) + '</option>').join('') +
+    '</select>' +
+    '<span class="count-pill" id="rowCount">' + rows.length + ' records</span>' +
+  '</div>';
+
+  /* Table */
+  h += '<div class="table-scroll"><table class="tbl" id="dataTable"><thead><tr>';
+  s.columns.forEach(c => { h += '<th>' + esc(c.t) + '</th>'; });
+  h += '<th style="text-align:right">Actions</th></tr></thead><tbody>';
+
+  if (!rows.length) {
+    h += '<tr class="no-rows"><td colspan="' + (s.columns.length + 1) + '">' +
+      '<div class="empty-state"><i class="fa-solid ' + s.icon + '"></i>' +
+      '<p>No ' + esc(s.label.toLowerCase()) + ' recorded yet.</p>' +
+      '<button class="btn btn-primary btn-sm mt2" onclick="openForm(\'' + col + '\')"><i class="fa-solid fa-plus"></i> Create First Record</button>' +
+      '</div></td></tr>';
+  } else {
+    rows.forEach(r => {
+      const searchStr = s.columns.map(c => {
+        let v = r[c.k];
+        if (c.type === 'ref') v = refName(c.ref, v);
+        return String(v === undefined || v === null ? '' : v).toLowerCase();
+      }).join(' ') + ' ' + String(r.id || '').toLowerCase();
+
+      h += '<tr data-search="' + esc(searchStr) + '" data-status="' + esc(r.status || r.stage || '') + '" onclick="rowClick(\'' + col + '\',\'' + r._key + '\')">';
+      s.columns.forEach(c => {
+        h += '<td class="' + (c.cls || '') + '">' + renderCell(r, c) + '</td>';
+      });
+      h += '<td class="actions" onclick="event.stopPropagation()">' +
+        '<div class="row-actions">' +
+          '<button class="btn btn-ghost btn-xs" title="View" onclick="openDetail(\'' + col + '\',\'' + r._key + '\')"><i class="fa-solid fa-eye"></i></button>' +
+          '<button class="btn btn-ghost btn-xs" title="Edit" onclick="openForm(\'' + col + '\',\'' + r._key + '\')"><i class="fa-solid fa-pen"></i></button>' +
+          '<button class="btn btn-danger btn-xs" title="Delete" onclick="deleteRecord(\'' + col + '\',\'' + r._key + '\')"><i class="fa-solid fa-trash"></i></button>' +
+        '</div></td></tr>';
+    });
+  }
+  h += '</tbody></table></div></div>';
+
+  return h;
+}
+
+function statusOptionsFor(col) {
+  if (col === 'leads') return ['New','Contacted','Qualified','Converted','Lost','Dormant'];
+  if (col === 'customers') return ['Prospect','Active','Dormant','Lost','Blacklisted'];
+  if (col === 'opportunities') return PIPE_STAGES;
+  if (col === 'quotations') return QUOTE_STATUS;
+  if (col === 'invoices') return INVOICE_STATUS;
+  if (col === 'projects') return PROJECT_STATUS;
+  if (col === 'tickets') return TICKET_STATUS;
+  if (col === 'requests') return REQUEST_STATUS;
+  if (col === 'hirepurchase') return HP_STATUS;
+  if (col === 'followups') return ['Pending','In Progress','Completed','Cancelled'];
+  if (col === 'salesorders') return ['Pending','Confirmed','In Progress','Delivered','Completed','Cancelled'];
+  if (col === 'warranties') return ['Active','Expiring Soon','Expired','Claimed','Void'];
+  if (col === 'agents') return ['Active','Inactive','Suspended'];
+  if (col === 'assessments') return ['Scheduled','In Progress','Completed','Cancelled'];
+  return [];
+}
+
+function renderCell(r, c) {
+  let v = r[c.k];
+
+  if (c.k === 'paidCalc') { v = invoicePaid(r._key); return '<span class="money">' + money(v) + '</span>'; }
+  if (c.k === 'balanceCalc') {
+    const bal = invoiceBalance(r);
+    return '<span class="money" style="color:' + (bal > 0.01 ? '#fcd34d' : '#6ee7a8') + '">' + money(bal) + '</span>';
+  }
+  if (c.type === 'money') return '<span class="money">' + money(v) + '</span>';
+  if (c.type === 'date') return '<span class="small muted">' + fmtDate(v) + '</span>';
+  if (c.type === 'badge') return badge(v);
+  if (c.type === 'pct') return '<span class="small">' + (v || 0) + '%</span>';
+  if (c.type === 'num') return '<span class="small">' + (v === undefined || v === '' ? '—' : v) + '</span>';
+  if (c.type === 'ref') return esc(refName(c.ref, v));
+  if (c.k === 'id') return esc(v || '—');
+
+  return esc(v === undefined || v === null || v === '' ? '—' : v);
+}
+
+/* Row click → open detail (customers go to 360) */
+function rowClick(col, key) {
+  if (col === 'customers') { openCustomer360(key); return; }
+  openDetail(col, key);
+}
+
+/* Client-side table filtering (no re-render, preserves focus) */
+function filterTable(q) {
+  const col = state.view;
+  const search = (q !== undefined ? q : (document.getElementById('tblSearch') || {}).value || '').toLowerCase().trim();
+  const status = (document.getElementById('tblStatus') || {}).value || '';
+  state.q[col] = search;
+
+  const tbody = document.querySelector('#dataTable tbody');
+  if (!tbody) return;
+  let visible = 0;
+  Array.from(tbody.querySelectorAll('tr')).forEach(tr => {
+    if (tr.classList.contains('no-rows')) return;
+    const s = tr.getAttribute('data-search') || '';
+    const st = tr.getAttribute('data-status') || '';
+    const okSearch = !search || s.includes(search);
+    const okStatus = !status || st === status;
+    if (okSearch && okStatus) { tr.style.display = ''; visible++; }
+    else tr.style.display = 'none';
+  });
+  const pill = document.getElementById('rowCount');
+  if (pill) pill.textContent = visible + ' records';
+}
+
+/* ============================================================
+   11. RECORD DETAIL MODAL
+   ============================================================ */
+function openDetail(col, key) {
+  const s = SCHEMAS[col];
+  const r = findRec(col, key);
+  if (!r) { toast('Record not found', 'error'); return; }
+
+  let body = '';
+  body += '<div class="dl">';
+  s.fields.forEach(f => {
+    if (f.t === 'items') {
+      body += '</div>';
+      body += '<div class="mt2"><div class="fld"><label>' + esc(f.l) + '</label>' + renderItemsReadonly(r.items) + '</div></div>';
+      if (r.taxRate) {
+        body += '<div class="items-foot mt1"><div class="tot">Subtotal <b>' + money(itemsSubtotal(r.items)) + '</b></div>' +
+          '<div class="tot">VAT ' + r.taxRate + '% <b>' + money(itemsSubtotal(r.items) * num(r.taxRate) / 100) + '</b></div>' +
+          '<div class="tot grand">TOTAL <b>' + money(itemsTotal(r)) + '</b></div></div>';
+      } else {
+        body += '<div class="items-foot mt1"><div class="tot grand">TOTAL <b>' + money(itemsTotal(r)) + '</b></div></div>';
+      }
+      body += '<div class="dl mt2">';
+      return;
+    }
+    let v = r[f.k];
+    if (f.t === 'ref') v = refName(f.ref, v);
+    if (f.t === 'date') v = fmtDate(v);
+    if (f.t === 'number' && (f.l || '').includes('KES')) v = money(v);
+    if (f.t === 'number' && (f.k === 'probability' || f.k === 'progress' || f.k === 'commissionRate')) v = (v || 0) + '%';
+    if (v === undefined || v === null || v === '') v = '—';
+
+    body += '<div class="dl-item"><div class="k">' + esc(f.l) + '</div>' +
+      '<div class="v">' + esc(v) + '</div></div>';
+  });
+  body += '</div>';
+
+  /* Meta */
+  body += '<div class="divider"></div><div class="flex flex-wrap" style="gap:1.2rem;font-size:.7rem;color:var(--dim)">' +
+    '<span><i class="fa-solid fa-hashtag"></i> Key: <span class="mono">' + esc(key) + '</span></span>' +
+    (r.createdAt ? '<span><i class="fa-regular fa-clock"></i> Created: ' + fmtDateTime(r.createdAt) + '</span>' : '') +
+    (r.updatedAt ? '<span><i class="fa-solid fa-pen"></i> Updated: ' + fmtDateTime(r.updatedAt) + '</span>' : '') +
+    '</div>';
+
+  /* Related records */
+  const related = relatedRecords(col, r);
+  if (related.length) {
+    body += '<div class="divider"></div><div class="section-head"><h3><i class="fa-solid fa-link"></i> Related Records</h3></div>';
+    body += '<div class="table-wrap"><table class="tbl" style="min-width:auto"><tbody>';
+    related.forEach(rel => {
+      body += '<tr onclick="closeModal();openDetail(\'' + rel.col + '\',\'' + rel.key + '\')">' +
+        '<td style="width:40%"><span class="badge blue">' + esc(SCHEMAS[rel.col].label) + '</span></td>' +
+        '<td>' + esc(rel.label) + '</td>' +
+        '<td class="text-right small dim">' + esc(rel.sub || '') + '</td>' +
+        '<td class="text-right"><i class="fa-solid fa-chevron-right dim"></i></td></tr>';
+    });
+    body += '</tbody></table></div>';
+  }
+
+  /* Workflow actions */
+  const actions = workflowActions(col, r);
+
+  let foot = '<button class="btn btn-ghost btn-sm" onclick="closeModal()">Close</button>';
+  actions.forEach(a => {
+    foot += '<button class="btn ' + a.cls + ' btn-sm" onclick="' + a.fn + '">' +
+      '<i class="fa-solid ' + a.icon + '"></i> ' + a.label + '</button>';
+  });
+  foot += '<button class="btn btn-outline btn-sm" onclick="closeModal();openForm(\'' + col + '\',\'' + key + '\')"><i class="fa-solid fa-pen"></i> Edit</button>';
+
+  openModal(s.label + ' — Detail', body, foot, 'wide');
+}
+
+function itemsSubtotal(items) {
+  if (!Array.isArray(items)) return 0;
+  return items.reduce((s, it) => s + (num(it.qty) * num(it.unitPrice) - num(it.discount)), 0);
+}
+function itemsTotal(r) {
+  const sub = itemsSubtotal(r.items);
+  return sub + (sub * num(r.taxRate) / 100);
+}
+
+function renderItemsReadonly(items) {
+  if (!Array.isArray(items) || !items.length) return '<div class="dim small">No line items.</div>';
+  let h = '<div class="items-editor"><table><thead><tr>' +
+    '<th>Description</th><th style="width:70px;text-align:right">Qty</th>' +
+    '<th style="width:110px;text-align:right">Unit Price</th>' +
+    '<th style="width:100px;text-align:right">Discount</th>' +
+    '<th style="width:110px;text-align:right">Total</th></tr></thead><tbody>';
+  items.forEach(it => {
+    const line = num(it.qty) * num(it.unitPrice) - num(it.discount);
+    h += '<tr><td style="padding:.4rem .55rem">' + esc(it.desc || '—') + '</td>' +
+      '<td style="text-align:right;padding-right:.55rem">' + num(it.qty) + '</td>' +
+      '<td style="text-align:right;padding-right:.55rem">' + money(it.unitPrice) + '</td>' +
+      '<td style="text-align:right;padding-right:.55rem">' + money(it.discount) + '</td>' +
+      '<td class="line-total">' + money(line) + '</td></tr>';
+  });
+  h += '</tbody></table></div>';
+  return h;
+}
+
+function relatedRecords(col, r) {
+  const out = [];
+  const key = r._key;
+  const push = (c, label, sub, k) => out.push({ col: c, key: k, label, sub });
+
+  if (col === 'customers') {
+    list('opportunities').filter(x => x.customer === key).forEach(x => push('opportunities', x.title || x.id, money(x.estimatedValue), x._key));
+    list('quotations').filter(x => x.customer === key).forEach(x => push('quotations', x.id, money(itemsTotal(x)), x._key));
+    list('invoices').filter(x => x.customer === key).forEach(x => push('invoices', x.id, money(x.total), x._key));
+    list('projects').filter(x => x.customer === key).forEach(x => push('projects', x.name, x.status, x._key));
+    list('tickets').filter(x => x.customer === key).forEach(x => push('tickets', x.issue, x.status, x._key));
+    list('warranties').filter(x => x.customer === key).forEach(x => push('warranties', x.product, x.status, x._key));
+  }
+  if (col === 'opportunities') {
+    list('quotations').filter(x => x.opportunity === key).forEach(x => push('quotations', x.id, money(itemsTotal(x)), x._key));
+  }
+  if (col === 'quotations') {
+    list('salesorders').filter(x => x.quotation === key).forEach(x => push('salesorders', x.id, money(itemsTotal(x)), x._key));
+  }
+  if (col === 'salesorders') {
+    list('invoices').filter(x => x.salesOrder === key).forEach(x => push('invoices', x.id, money(x.total), x._key));
+    list('projects').filter(x => x.salesOrder === key).forEach(x => push('projects', x.name, x.status, x._key));
+  }
+  if (col === 'invoices') {
+    list('payments').filter(x => x.invoice === key).forEach(x => push('payments', x.id, money(x.amount), x._key));
+  }
+  return out;
+}
+
+function workflowActions(col, r) {
+  const a = [];
+  if (col === 'leads') {
+    a.push({ label: 'Convert to Customer', icon: 'fa-user-check', cls: 'btn-success', fn: 'convertLead(\'' + r._key + '\')' });
+  }
+  if (col === 'quotations') {
+    if (['Sent','Accepted','Draft','Pending Approval'].includes(r.status)) {
+      a.push({ label: 'Create Sales Order', icon: 'fa-file-contract', cls: 'btn-primary', fn: 'quoteToOrder(\'' + r._key + '\')' });
+    }
+    a.push({ label: 'Mark Accepted', icon: 'fa-check', cls: 'btn-success', fn: 'setStatus(\'quotations\',\'' + r._key + '\',\'Accepted\')' });
+  }
+  if (col === 'salesorders') {
+    a.push({ label: 'Create Invoice', icon: 'fa-file-invoice', cls: 'btn-primary', fn: 'orderToInvoice(\'' + r._key + '\')' });
+  }
+  if (col === 'invoices') {
+    a.push({ label: 'Record Payment', icon: 'fa-money-bill', cls: 'btn-success', fn: 'quickPayment(\'' + r._key + '\')' });
+  }
+  if (col === 'tickets') {
+    if (r.status !== 'Resolved') a.push({ label: 'Mark Resolved', icon: 'fa-check', cls: 'btn-success', fn: 'setStatus(\'tickets\',\'' + r._key + '\',\'Resolved\')' });
+  }
+  return a;
+}
+
+/* ============================================================
+   12. FORM MODAL (create / edit)
+   ============================================================ */
+let currentItems = [];
+
+function openForm(col, key) {
+  const s = SCHEMAS[col];
+  const rec = key ? Object.assign({}, findRec(col, key)) : {};
+  const isEdit = !!key;
+
+  /* Defaults */
+  if (!isEdit) {
+    s.fields.forEach(f => { if (f.def !== undefined) rec[f.k] = f.def; });
+    if (s.fields.some(f => f.k === 'date')) rec.date = todayISO();
+    if (s.fields.some(f => f.k === 'openedDate')) rec.openedDate = todayISO();
+    if (s.fields.some(f => f.k === 'dateRequested')) rec.dateRequested = todayISO();
+    if (s.fields.some(f => f.k === 'startDate')) rec.startDate = todayISO();
+  }
+
+  currentItems = Array.isArray(rec.items) ? rec.items.map(x => Object.assign({}, x)) : [];
+
+  let body = '<div class="form-grid">';
+  s.fields.forEach(f => {
+    body += fieldHTML(f, rec);
+  });
+  body += '</div>';
+
+  let foot = '<button class="btn btn-ghost btn-sm" onclick="closeModal()">Cancel</button>' +
+    '<button class="btn btn-primary btn-sm" onclick="saveForm(\'' + col + '\'' + (isEdit ? ',\'' + key + '\'' : '') + ')">' +
+    '<i class="fa-solid fa-floppy-disk"></i> ' + (isEdit ? 'Update' : 'Create') + ' Record</button>';
+
+  openModal((isEdit ? 'Edit ' : 'New ') + s.label.replace(/s$/, ''), body, foot, 'wide');
+
+  if (currentItems.length === 0 && s.fields.some(f => f.t === 'items')) {
+    addItemRow();
+  } else if (s.fields.some(f => f.t === 'items')) {
+    renderItemRows();
+  }
+}
+
+function fieldHTML(f, rec) {
+  const v = rec[f.k] !== undefined && rec[f.k] !== null ? rec[f.k] : '';
+  const full = f.full ? ' full' : '';
+  const req = f.req ? ' <span class="req">*</span>' : '';
+  let h = '<div class="fld' + full + '"><label>' + esc(f.l) + req + '</label>';
+
+  if (f.t === 'textarea') {
+    h += '<textarea name="' + f.k + '" rows="3">' + esc(v) + '</textarea>';
+  } else if (f.t === 'select') {
+    h += '<select name="' + f.k + '"><option value="">— Select —</option>';
+    (f.o || []).forEach(o => {
+      h += '<option value="' + esc(o) + '"' + (String(v) === String(o) ? ' selected' : '') + '>' + esc(o) + '</option>';
+    });
+    h += '</select>';
+  } else if (f.t === 'ref') {
+    const opts = list(f.ref).sort((a, b) => String(a[SCHEMAS[f.ref].titleField] || '').localeCompare(String(b[SCHEMAS[f.ref].titleField] || '')));
+    h += '<select name="' + f.k + '"><option value="">— Select —</option>';
+    opts.forEach(o => {
+      const lbl = (o[SCHEMAS[f.ref].titleField] || o.id || o._key);
+      const extra = o.id && o.id !== lbl ? ' (' + o.id + ')' : '';
+      h += '<option value="' + o._key + '"' + (String(v) === String(o._key) ? ' selected' : '') + '>' + esc(lbl + extra) + '</option>';
+    });
+    h += '</select>';
+    if (!opts.length) h += '<span class="hint">No ' + esc(SCHEMAS[f.ref].label.toLowerCase()) + ' available yet.</span>';
+  } else if (f.t === 'items') {
+    h += '<div class="items-editor" id="itemsEditor">' +
+      '<table><thead><tr>' +
+      '<th>Description</th><th style="width:70px">Qty</th><th style="width:110px">Unit Price</th>' +
+      '<th style="width:100px">Discount</th><th style="width:105px;text-align:right">Line Total</th><th style="width:34px"></th>' +
+      '</tr></thead><tbody id="itemsBody"></tbody></table>' +
+      '<div style="padding:.45rem .55rem;border-top:1px solid #16222f">' +
+      '<button type="button" class="btn btn-ghost btn-xs" onclick="addItemRow()"><i class="fa-solid fa-plus"></i> Add Line Item</button>' +
+      '</div>' +
+      '<div class="items-foot">' +
+      '<div class="tot">Subtotal <b id="itSub">KES 0</b></div>' +
+      '<div class="tot">VAT (<span id="itRate">' + num(rec.taxRate) + '</span>%) <b id="itTax">KES 0</b></div>' +
+      '<div class="tot grand">Total <b id="itTot">KES 0</b></div>' +
+      '</div></div>';
+  } else {
+    h += '<input type="' + f.t + '" name="' + f.k + '" value="' + esc(v) + '"' +
+      (f.t === 'number' ? ' step="any"' : '') + '>';
+  }
+  h += '</div>';
+  return h;
+}
+
+/* ---- Line item editor ---- */
+function addItemRow(item) {
+  const body = document.getElementById('itemsBody');
+  if (!body) return;
+  const it = item || { desc: '', qty: 1, unitPrice: 0, discount: 0 };
+  currentItems.push(it);
+  renderItemRows();
+}
+
+function renderItemRows() {
+  const body = document.getElementById('itemsBody');
+  if (!body) return;
+  body.innerHTML = '';
+  currentItems.forEach((it, i) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td><input type="text" value="' + esc(it.desc) + '" placeholder="Item / service description" oninput="updItem(' + i + ',\'desc\',this.value)"></td>' +
+      '<td><input type="number" class="num" value="' + num(it.qty) + '" step="any" oninput="updItem(' + i + ',\'qty\',this.value)"></td>' +
+      '<td><input type="number" class="num" value="' + num(it.unitPrice) + '" step="any" oninput="updItem(' + i + ',\'unitPrice\',this.value)"></td>' +
+      '<td><input type="number" class="num" value="' + num(it.discount) + '" step="any" oninput="updItem(' + i + ',\'discount\',this.value)"></td>' +
+      '<td class="line-total">' + money(num(it.qty) * num(it.unitPrice) - num(it.discount)) + '</td>' +
+      '<td><button type="button" class="btn btn-danger btn-xs" onclick="removeItem(' + i + ')"><i class="fa-solid fa-xmark"></i></button></td>';
+    body.appendChild(tr);
+  });
+  recomputeItems();
+}
+
+function updItem(i, prop, val) {
+  if (!currentItems[i]) return;
+  currentItems[i][prop] = prop === 'desc' ? val : Number(val || 0);
+  renderItemRows();
+}
+function removeItem(i) {
+  currentItems.splice(i, 1);
+  renderItemRows();
+}
+function recomputeItems() {
+  const sub = itemsSubtotal(currentItems);
+  const rateEl = document.querySelector('[name="taxRate"]');
+  const rate = rateEl ? num(rateEl.value) : 0;
+  const tax = sub * rate / 100;
+  const s = document.getElementById('itSub'); if (s) s.textContent = money(sub);
+  const t = document.getElementById('itTax'); if (t) t.textContent = money(tax);
+  const g = document.getElementById('itTot'); if (g) g.textContent = money(sub + tax);
+  const r = document.getElementById('itRate'); if (r) r.textContent = rate;
+}
+
+/* ---- Save form ---- */
+async function saveForm(col, key) {
+  const s = SCHEMAS[col];
+  const data = {};
+  let valid = true;
+
+  s.fields.forEach(f => {
+    if (f.t === 'items') return;
+    const el = document.querySelector('[name="' + f.k + '"]');
+    if (!el) return;
+    let v = el.value;
+    if (f.t === 'number') v = v === '' ? 0 : Number(v);
+    if (f.req && (v === '' || v === null || v === undefined)) {
+      valid = false;
+      el.style.borderColor = '#ef4444';
+    } else {
+      el.style.borderColor = '';
+    }
+    data[f.k] = v;
+  });
+
+  if (!valid) { toast('Please fill in all required fields.', 'error'); return; }
+
+  if (s.fields.some(f => f.t === 'items')) {
+    data.items = currentItems.filter(it => (it.desc || '').trim() !== '' || num(it.qty) || num(it.unitPrice));
+    const sub = itemsSubtotal(data.items);
+    data.subtotal = sub;
+    data.tax = sub * num(data.taxRate) / 100;
+    data.total = sub + data.tax;
+  }
+
+  try {
+    if (key) {
+      data.updatedAt = new Date().toISOString();
+      await DB.ref(col + '/' + key).update(data);
+      logAudit('Updated', col, key, 'Record modified');
+      toast('Record updated successfully.', 'success');
+    } else {
+      data.createdAt = new Date().toISOString();
+      const newKey = DB.ref(col).push().key;
+      if (s.prefix) data.id = await genId(s.prefix);
+      await DB.ref(col + '/' + newKey).set(data);
+      logAudit('Created', col, data.id || newKey, 'New record created');
+      toast((s.label.replace(/s$/, '')) + ' created — ' + (data.id || ''), 'success');
+    }
+    closeModal();
+  } catch (e) {
+    console.error(e);
+    toast('Save failed: ' + e.message, 'error');
+  }
+}
+
+/* ---- Delete ---- */
+function deleteRecord(col, key) {
+  const s = SCHEMAS[col];
+  const r = findRec(col, key);
+  const lbl = r ? (r[s.titleField] || r.id || key) : key;
+  openModal('Confirm Deletion',
+    '<div style="text-align:center;padding:.8rem 0">' +
+    '<i class="fa-solid fa-triangle-exclamation" style="font-size:2.2rem;color:#f59e0b;margin-bottom:.8rem"></i>' +
+    '<p style="font-size:.9rem;color:#dbeafe">Delete <b>' + esc(lbl) + '</b> from <b>' + esc(s.label) + '</b>?</p>' +
+    '<p class="small muted mt1">This action cannot be undone. Related records will not be deleted automatically.</p>' +
+    '</div>',
+    '<button class="btn btn-ghost btn-sm" onclick="closeModal()">Cancel</button>' +
+    '<button class="btn btn-danger btn-sm" onclick="confirmDelete(\'' + col + '\',\'' + key + '\')"><i class="fa-solid fa-trash"></i> Delete Permanently</button>',
+    'narrow');
+}
+
+async function confirmDelete(col, key) {
+  try {
+    const r = findRec(col, key);
+    await DB.ref(col + '/' + key).remove();
+    logAudit('Deleted', col, r ? r.id : key, 'Record deleted');
+    toast('Record deleted.', 'success');
+    closeModal();
+  } catch (e) {
+    toast('Delete failed: ' + e.message, 'error');
+  }
+}
+
+/* ---- Quick status setter ---- */
+async function setStatus(col, key, status) {
+  try {
+    await DB.ref(col + '/' + key).update({ status: status, updatedAt: new Date().toISOString() });
+    logAudit('Status Changed', col, key, 'Status → ' + status);
+    toast('Status updated to ' + status, 'success');
+    closeModal();
+  } catch (e) { toast('Failed: ' + e.message, 'error'); }
+}
+
+/* ============================================================
+   13. WORKFLOW CONVERSIONS
+   ============================================================ */
+
+/* Lead → Customer + Opportunity */
+async function convertLead(key) {
+  const lead = findRec('leads', key);
+  if (!lead) return;
+  try {
+    const custKey = DB.ref('customers').push().key;
+    const custId = await genId('NGT-CU');
+    const custData = {
+      id: custId,
+      type: 'Individual',
+      name: lead.name || '',
+      company: lead.company || '',
+      contactPerson: lead.name || '',
+      phone: lead.phone || '',
+      whatsapp: lead.phone || '',
+      email: lead.email || '',
+      county: lead.county || '',
+      town: lead.town || '',
+      category: 'Individual',
+      status: 'Prospect',
+      leadSource: lead.source || '',
+      notes: 'Converted from lead ' + (lead.id || key) + ' on ' + fmtDate(todayISO()) + '. Original enquiry: ' + (lead.service || ''),
+      createdAt: new Date().toISOString(),
+      convertedFromLead: lead.id || key
+    };
+    await DB.ref('customers/' + custKey).set(custData);
+
+    const oppKey = DB.ref('opportunities').push().key;
+    const oppId = await genId('NGT-OP');
+    await DB.ref('opportunities/' + oppKey).set({
+      id: oppId,
+      title: (lead.service || 'New Opportunity') + ' — ' + (lead.company || lead.name || ''),
+      customer: custKey,
+      service: lead.service || '',
+      estimatedValue: num(lead.estimatedValue),
+      stage: 'New',
+      probability: 10,
+      assignedTo: lead.assignedTo || '',
+      priority: lead.priority || 'Medium',
+      requirement: lead.notes || '',
+      notes: 'Auto-created from lead ' + (lead.id || key),
+      createdAt: new Date().toISOString()
+    });
+
+    await DB.ref('leads/' + key).update({
+      status: 'Converted',
+      convertedAt: new Date().toISOString(),
+      convertedToCustomer: custId,
+      updatedAt: new Date().toISOString()
+    });
+
+    logAudit('Converted', 'leads', lead.id || key, 'Lead → Customer ' + custId + ' + Opportunity ' + oppId);
+    toast('Lead converted to customer ' + custId, 'success');
+    closeModal();
+    setTimeout(() => openCustomer360(custKey), 350);
+  } catch (e) {
+    console.error(e);
+    toast('Conversion failed: ' + e.message, 'error');
+  }
+}
+
+/* Quotation → Sales Order */
+async function quoteToOrder(key) {
+  const q = findRec('quotations', key);
+  if (!q) return;
+  try {
+    const oKey = DB.ref('salesorders').push().key;
+    const oId = await genId('NGT-SO');
+    await DB.ref('salesorders/' + oKey).set({
+      id: oId,
+      customer: q.customer || '',
+      quotation: key,
+      date: todayISO(),
+      items: q.items || [],
+      subtotal: num(q.subtotal),
+      taxRate: num(q.taxRate),
+      tax: num(q.tax),
+      total: num(q.total),
+      deliveryTerms: '',
+      paymentTerms: q.terms || '',
+      assignedTo: q.preparedBy || '',
+      status: 'Confirmed',
+      createdAt: new Date().toISOString()
+    });
+    await DB.ref('quotations/' + key).update({ status: 'Accepted', updatedAt: new Date().toISOString() });
+    logAudit('Converted', 'quotations', q.id || key, 'Quotation → Sales Order ' + oId);
+    toast('Sales Order ' + oId + ' created.', 'success');
+    closeModal();
+  } catch (e) { toast('Failed: ' + e.message, 'error'); }
+}
+
+/* Sales Order → Invoice */
+async function orderToInvoice(key) {
+  const o = findRec('salesorders', key);
+  if (!o) return;
+  try {
+    const iKey = DB.ref('invoices').push().key;
+    const iId = await genId('NGT-INV');
+    const due = new Date(); due.setDate(due.getDate() + 30);
+    await DB.ref('invoices/' + iKey).set({
+      id: iId,
+      customer: o.customer || '',
+      salesOrder: key,
+      date: todayISO(),
+      dueDate: due.toISOString().slice(0, 10),
+      items: o.items || [],
+      subtotal: num(o.subtotal),
+      taxRate: num(o.taxRate),
+      tax: num(o.tax),
+      total: num(o.total),
+      status: 'Issued',
+      notes: 'Generated from Sales Order ' + (o.id || key),
+      createdAt: new Date().toISOString()
+    });
+    logAudit('Converted', 'salesorders', o.id || key, 'Sales Order → Invoice ' + iId);
+    toast('Invoice ' + iId + ' created.', 'success');
+    closeModal();
+  } catch (e) { toast('Failed: ' + e.message, 'error'); }
+}
+
+/* Quick payment from invoice */
+function quickPayment(invoiceKey) {
+  const inv = findRec('invoices', invoiceKey);
+  if (!inv) return;
+  const bal = invoiceBalance(inv);
+  closeModal();
+  setTimeout(() => {
+    openForm('payments');
+    setTimeout(() => {
+      const c = document.querySelector('[name="customer"]');
+      const i = document.querySelector('[name="invoice"]');
+      const a = document.querySelector('[name="amount"]');
+      if (c) c.value = inv.customer || '';
+      if (i) i.value = invoiceKey;
+      if (a) a.value = bal > 0 ? bal : 0;
+    }, 60);
+  }, 120);
+}
+
+/* ============================================================
+   14. CUSTOMER 360°
+   ============================================================ */
+function openCustomer360(key) {
+  setView('customer360', { id: key });
+}
+
+function viewCustomer360(key) {
+  const c = findRec('customers', key);
+  if (!c) return '<div class="empty-state"><i class="fa-solid fa-user-slash"></i><p>Customer not found.</p>' +
+    '<button class="btn btn-primary btn-sm mt2" onclick="setView(\'customers\')">Back to Customers</button></div>';
+
+  const revenue = customerRevenue(key);
+  const paid = customerPaid(key);
+  const outstanding = customerOutstanding(key);
+  const overdue = customerOverdue(key);
+  const profit = customerProfit(key);
+
+  const opps = list('opportunities').filter(x => x.customer === key);
+  const quotes = list('quotations').filter(x => x.customer === key);
+  const invs = list('invoices').filter(x => x.customer === key);
+  const pays = list('payments').filter(x => x.customer === key);
+  const projs = list('projects').filter(x => x.customer === key);
+  const tickets = list('tickets').filter(x => x.customer === key);
+  const warrant = list('warranties').filter(x => x.customer === key);
+  const comms = list('communications').filter(x => x.customer === key);
+  const reqs = list('requests').filter(x => x.customer === key);
+  const assessments = list('assessments').filter(x => x.customer === key);
+  const hps = list('hirepurchase').filter(x => x.customer === key);
+  const fus = list('followups').filter(x => x.customer === key);
+
+  const initials = String(c.name || 'C').split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase();
+
+  let h = '';
+
+  h += '<div style="margin-bottom:.9rem"><button class="btn btn-ghost btn-xs" onclick="setView(\'customers\')"><i class="fa-solid fa-arrow-left"></i> Back to Customers</button></div>';
+
+  /* Hero */
+  h += '<div class="c360-hero"><div class="c360-top">' +
+    '<div class="c360-avatar">' + esc(initials) + '</div>' +
+    '<div style="flex:1;min-width:200px">' +
+      '<div class="c360-name">' + esc(c.name || '—') + '</div>' +
+      '<div class="c360-meta">' +
+        (c.id ? '<span><i class="fa-solid fa-hashtag"></i> ' + esc(c.id) + '</span>' : '') +
+        (c.category ? '<span><i class="fa-solid fa-tag"></i> ' + esc(c.category) + '</span>' : '') +
+        (c.industry ? '<span><i class="fa-solid fa-building"></i> ' + esc(c.industry) + '</span>' : '') +
+        (c.town ? '<span><i class="fa-solid fa-location-dot"></i> ' + esc(c.town) + (c.county ? ', ' + esc(c.county) : '') + '</span>' : '') +
+        (c.phone ? '<span><i class="fa-solid fa-phone"></i> ' + esc(c.phone) + '</span>' : '') +
+        (c.email ? '<span><i class="fa-solid fa-envelope"></i> ' + esc(c.email) + '</span>' : '') +
+      '</div>' +
+    '</div>' +
+    '<div style="display:flex;gap:.4rem;flex-wrap:wrap">' +
+      badge(c.status || 'Active') + badge(c.segment || 'Medium-Value') +
+    '</div>' +
+  '</div>';
+
+  h += '<div class="c360-stats">' +
+    c360stat('Total Revenue', money(revenue), '') +
+    c360stat('Total Paid', money(paid), 'green') +
+    c360stat('Outstanding', money(outstanding), outstanding > 0 ? 'amber' : 'green') +
+    c360stat('Overdue', money(overdue), overdue > 0 ? 'red' : 'green') +
+    c360stat('Gross Profit', money(profit), profit >= 0 ? 'green' : 'red') +
+    c360stat('Opportunities', opps.length, '') +
+    c360stat('Quotations', quotes.length, '') +
+    c360stat('Projects', projs.length, '') +
+    c360stat('Invoices', invs.length, '') +
+    c360stat('Payments', pays.length, '') +
+    c360stat('Tickets', tickets.length, '') +
+    c360stat('Warranties', warrant.length, '') +
+  '</div></div>';
+
+  /* Tabs */
+  const tabs = [
+    ['overview', 'Overview'],
+    ['timeline', 'Timeline'],
+    ['opportunities', 'Opportunities (' + opps.length + ')'],
+    ['quotations', 'Quotations (' + quotes.length + ')'],
+    ['invoices', 'Invoices (' + invs.length + ')'],
+    ['payments', 'Payments (' + pays.length + ')'],
+    ['projects', 'Projects (' + projs.length + ')'],
+    ['requests', 'Requests (' + reqs.length + ')'],
+    ['support', 'Support & Warranty (' + (tickets.length + warrant.length) + ')'],
+    ['statement', 'Statement']
+  ];
+
+  h += '<div class="tabs">';
+  tabs.forEach(t => {
+    h += '<div class="tab' + (state.c360tab === t[0] ? ' active' : '') + '" onclick="switchC360(\'' + t[0] + '\')">' + esc(t[1]) + '</div>';
+  });
+  h += '</div>';
+
+  h += '<div id="c360Body">' + c360Tab(key, state.c360tab) + '</div>';
+
+  return h;
+}
+
+function c360stat(l, v, cls) {
+  return '<div class="c360-stat"><div class="l">' + esc(l) + '</div><div class="v ' + (cls || '') + '">' + esc(v) + '</div></div>';
+}
+
+function switchC360(tab) {
+  state.c360tab = tab;
+  const key = state.params.id;
+  document.querySelectorAll('.tab').forEach((el, i) => el.classList.remove('active'));
+  render();
+}
+
+function c360Tab(key, tab) {
+  const c = findRec('customers', key);
+  if (tab === 'overview') return c360Overview(key, c);
+  if (tab === 'timeline') return c360Timeline(key);
+  if (tab === 'opportunities') return miniTable('opportunities', list('opportunities').filter(x => x.customer === key));
+  if (tab === 'quotations') return miniTable('quotations', list('quotations').filter(x => x.customer === key));
+  if (tab === 'invoices') return miniTable('invoices', list('invoices').filter(x => x.customer === key));
+  if (tab === 'payments') return miniTable('payments', list('payments').filter(x => x.customer === key));
+  if (tab === 'projects') return miniTable('projects', list('projects').filter(x => x.customer === key));
+  if (tab === 'requests') return miniTable('requests', list('requests').filter(x => x.customer === key));
+  if (tab === 'support') return miniTable('tickets', list('tickets').filter(x => x.customer === key)) +
+    '<div class="mt2">' + miniTable('warranties', list('warranties').filter(x => x.customer === key)) + '</div>';
+  if (tab === 'statement') return c360Statement(key);
+  return '';
+}
+
+function c360Overview(key, c) {
+  const assessments = list('assessments').filter(x => x.customer === key);
+  const comms = list('communications').filter(x => x.customer === key);
+  const fus = list('followups').filter(x => x.customer === key && x.status === 'Pending');
+  const hps = list('hirepurchase').filter(x => x.customer === key);
+
+  let h = '<div class="grid2">';
+
+  h += '<div class="card"><div class="section-head"><h3><i class="fa-solid fa-id-card"></i> Profile Details</h3></div><div class="dl">' +
+    dli('Customer Type', c.type) +
+    dli('Contact Person', c.contactPerson) +
+    dli('Company', c.company) +
+    dli('Phone', c.phone) +
+    dli('WhatsApp', c.whatsapp) +
+    dli('Email', c.email) +
+    dli('County', c.county) +
+    dli('Town', c.town) +
+    dli('Location', c.location) +
+    dli('KRA PIN', c.kraPin) +
+    dli('Lead Source', c.leadSource) +
+    dli('Preferred Channel', c.preferredChannel) +
+    '</div>' +
+    (c.notes ? '<div class="divider"></div><div class="dl-item"><div class="k">Notes</div><div class="v">' + esc(c.notes) + '</div></div>' : '') +
+    '</div>';
+
+  h += '<div class="card"><div class="section-head"><h3><i class="fa-solid fa-chart-simple"></i> Activity Summary</h3></div>' +
+    '<div class="dl">' +
+      dli('Site Assessments', assessments.length) +
+      dli('Communications', comms.length) +
+      dli('Pending Follow-ups', fus.length) +
+      dli('Hire Purchase Agreements', hps.length) +
+      dli('Created', c.createdAt ? fmtDateTime(c.createdAt) : '—') +
+      dli('Last Updated', c.updatedAt ? fmtDateTime(c.updatedAt) : '—') +
+    '</div>' +
+    '<div class="divider"></div>' +
+    '<div class="flex flex-wrap" style="gap:.4rem">' +
+      '<button class="btn btn-primary btn-xs" onclick="openForm(\'opportunities\')"><i class="fa-solid fa-plus"></i> New Opportunity</button>' +
+      '<button class="btn btn-outline btn-xs" onclick="openForm(\'quotations\')"><i class="fa-solid fa-plus"></i> New Quotation</button>' +
+      '<button class="btn btn-outline btn-xs" onclick="openForm(\'invoices\')"><i class="fa-solid fa-plus"></i> New Invoice</button>' +
+      '<button class="btn btn-ghost btn-xs" onclick="openForm(\'followups\')"><i class="fa-solid fa-plus"></i> Follow-up</button>' +
+      '<button class="btn btn-ghost btn-xs" onclick="openForm(\'communications\')"><i class="fa-solid fa-plus"></i> Log Communication</button>' +
+      '<button class="btn btn-ghost btn-xs" onclick="openForm(\'tickets\')"><i class="fa-solid fa-plus"></i> Support Ticket</button>' +
+    '</div></div>';
+
+  h += '</div>';
+  return h;
+}
+
+function dli(k, v) {
+  return '<div class="dl-item"><div class="k">' + esc(k) + '</div><div class="v">' +
+    esc(v === undefined || v === null || v === '' ? '—' : v) + '</div></div>';
+}
+
+function c360Timeline(key) {
+  const events = [];
+
+  const c = findRec('customers', key);
+  if (c && c.createdAt) events.push({ d: c.createdAt, t: 'Customer record created', s: c.name || '', cls: 'green' });
+
+  list('leads').filter(x => x.convertedToCustomer === (c ? c.id : '')).forEach(l => {
+    if (l.createdAt) events.push({ d: l.createdAt, t: 'Lead created — ' + (l.service || ''), s: 'Source: ' + (l.source || '—'), cls: 'amber' });
+  });
+
+  list('opportunities').filter(x => x.customer === key).forEach(o => {
+    if (o.createdAt) events.push({ d: o.createdAt, t: 'Opportunity: ' + (o.title || ''), s: money(o.estimatedValue) + ' · ' + (o.stage || ''), cls: '' });
+  });
+  list('assessments').filter(x => x.customer === key).forEach(a => {
+    if (a.assessmentDate) events.push({ d: a.assessmentDate, t: 'Site assessment — ' + (a.serviceType || ''), s: a.site || '', cls: 'amber' });
+  });
+  list('quotations').filter(x => x.customer === key).forEach(q => {
+    if (q.date) events.push({ d: q.date, t: 'Quotation ' + (q.id || '') + ' issued', s: money(itemsTotal(q)) + ' · ' + (q.status || ''), cls: '' });
+  });
+  list('salesorders').filter(x => x.customer === key).forEach(s => {
+    if (s.date) events.push({ d: s.date, t: 'Sales Order ' + (s.id || ''), s: money(itemsTotal(s)) + ' · ' + (s.status || ''), cls: 'green' });
+  });
+  list('invoices').filter(x => x.customer === key).forEach(i => {
+    if (i.date) events.push({ d: i.date, t: 'Invoice ' + (i.id || '') + ' issued', s: money(i.total) + ' · ' + invoiceStatus(i), cls: '' });
+  });
+  list('payments').filter(x => x.customer === key).forEach(p => {
+    if (p.date) events.push({ d: p.date, t: 'Payment received — ' + (p.method || ''), s: money(p.amount) + (p.reference ? ' · Ref ' + p.reference : ''), cls: 'green' });
+  });
+  list('projects').filter(x => x.customer === key).forEach(p => {
+    if (p.startDate) events.push({ d: p.startDate, t: 'Project started: ' + (p.name || ''), s: p.status || '', cls: '' });
+    if (p.endDate && p.status === 'Completed') events.push({ d: p.endDate, t: 'Project completed: ' + (p.name || ''), s: '', cls: 'green' });
+  });
+  list('tickets').filter(x => x.customer === key).forEach(t => {
+    if (t.openedDate) events.push({ d: t.openedDate, t: 'Support ticket: ' + (t.issue || ''), s: t.status || '', cls: 'amber' });
+  });
+  list('communications').filter(x => x.customer === key).forEach(m => {
+    if (m.date) events.push({ d: m.date, t: (m.direction || '') + ' ' + (m.channel || '') + ' — ' + (m.subject || ''), s: m.message || '', cls: 'amber' });
+  });
+
+  events.sort((a, b) => String(b.d).localeCompare(String(a.d)));
+
+  if (!events.length) return '<div class="empty-state"><i class="fa-solid fa-timeline"></i><p>No activity recorded for this customer yet.</p></div>';
+
+  let h = '<div class="card"><div class="timeline">';
+  events.slice(0, 60).forEach(e => {
+    h += '<div class="tl-item ' + (e.cls || '') + '">' +
+      '<div class="tl-date">' + fmtDate(e.d) + '</div>' +
+      '<div class="tl-title">' + esc(e.t) + '</div>' +
+      (e.s ? '<div class="tl-sub">' + esc(e.s) + '</div>' : '') +
+      '</div>';
+  });
+  h += '</div></div>';
+  return h;
+}
+
+function miniTable(col, rows) {
+  const s = SCHEMAS[col];
+  if (!rows.length) {
+    return '<div class="table-wrap"><div class="empty-state"><i class="fa-solid ' + s.icon + '"></i>' +
+      '<p>No ' + esc(s.label.toLowerCase()) + ' for this customer.</p>' +
+      '<button class="btn btn-primary btn-sm mt2" onclick="openForm(\'' + col + '\')"><i class="fa-solid fa-plus"></i> Add</button></div></div>';
+  }
+  let h = '<div class="table-wrap"><div class="table-scroll"><table class="tbl"><thead><tr>';
+  s.columns.forEach(c => { h += '<th>' + esc(c.t) + '</th>'; });
+  h += '<th></th></tr></thead><tbody>';
+  rows.forEach(r => {
+    h += '<tr onclick="openDetail(\'' + col + '\',\'' + r._key + '\')">';
+    s.columns.forEach(c => { h += '<td>' + renderCell(r, c) + '</td>'; });
+    h += '<td class="text-right"><i class="fa-solid fa-chevron-right dim"></i></td></tr>';
+  });
+  h += '</tbody></table></div></div>';
+  return h;
+}
+
+function c360Statement(key) {
+  const invs = list('invoices').filter(i => i.customer === key && i.status !== 'Cancelled');
+  const pays = list('payments').filter(p => p.customer === key);
+
+  const txns = [];
+  invs.forEach(i => txns.push({ d: i.date || '', desc: 'Invoice ' + (i.id || '') + (i.notes ? ' — ' + i.notes : ''), debit: num(i.total), credit: 0 }));
+  pays.forEach(p => txns.push({ d: p.date || '', desc: 'Payment — ' + (p.method || '') + (p.reference ? ' Ref: ' + p.reference : ''), debit: 0, credit: num(p.amount) }));
+  txns.sort((a, b) => String(a.d).localeCompare(String(b.d)));
+
+  let bal = 0;
+  let h = '<div class="card" style="padding:0;overflow:hidden"><div class="table-scroll"><table class="tbl">';
+  h += '<thead><tr><th>Date</th><th>Transaction</th><th style="text-align:right">Debit (KES)</th>' +
+    '<th style="text-align:right">Credit (KES)</th><th style="text-align:right">Balance (KES)</th></tr></thead><tbody>';
+
+  if (!txns.length) {
+    h += '<tr><td colspan="5"><div class="empty-state"><i class="fa-solid fa-receipt"></i><p>No financial transactions recorded.</p></div></td></tr>';
+  } else {
+    txns.forEach(t => {
+      bal += t.debit - t.credit;
+      h += '<tr><td class="small muted">' + fmtDate(t.d) + '</td>' +
+        '<td>' + esc(t.desc) + '</td>' +
+        '<td class="money text-right">' + (t.debit ? money(t.debit) : '—') + '</td>' +
+        '<td class="money text-right" style="color:#6ee7a8">' + (t.credit ? money(t.credit) : '—') + '</td>' +
+        '<td class="money text-right" style="color:' + (bal > 0.01 ? '#fcd34d' : '#6ee7a8') + '">' + money(bal) + '</td></tr>';
+    });
+  }
+  h += '</tbody></table></div>';
+  h += '<div class="items-foot"><div class="tot">Total Invoiced <b>' + money(invs.reduce((s, i) => s + num(i.total), 0)) + '</b></div>' +
+    '<div class="tot">Total Paid <b style="color:#6ee7a8">' + money(pays.reduce((s, p) => s + num(p.amount), 0)) + '</b></div>' +
+    '<div class="tot grand">Balance <b>' + money(bal) + '</b></div></div></div>';
+  return h;
+}
+
+/* ============================================================
+   15. REPORTS & ANALYTICS
+   ============================================================ */
+function viewReports() {
+  const opps = list('opportunities');
+  const invs = list('invoices');
+  const pays = list('payments');
+  const custs = list('customers');
+  const projs = list('projects');
+  const quotes = list('quotations');
+  const leads = list('leads');
+
+  let h = '<div class="page-head"><div><h2><i class="fa-solid fa-chart-pie"></i> Reports & Analytics</h2>' +
+    '<p>Sales, pipeline, financial and operational intelligence</p></div>' +
+    '<div class="page-actions"><button class="btn btn-primary btn-sm" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button></div></div>';
+
+  /* ---- Sales by Service ---- */
+  const byService = {};
+  invs.filter(i => i.status !== 'Cancelled').forEach(i => {
+    const cust = findRec('customers', i.customer);
+    const svc = (cust && cust.category) || 'Unclassified';
+    byService[svc] = (byService[svc] || 0) + num(i.total);
+  });
+
+  /* ---- Sales by Month ---- */
+  const byMonth = {};
+  invs.filter(i => i.status !== 'Cancelled').forEach(i => {
+    const m = (i.date || '').slice(0, 7);
+    if (!m) return;
+    byMonth[m] = (byMonth[m] || 0) + num(i.total);
+  });
+  const months = Object.keys(byMonth).sort().slice(-8);
+  const maxMonth = Math.max(1, ...months.map(m => byMonth[m]));
+
+  /* ---- Pipeline by stage ---- */
+  const byStage = {};
+  PIPE_STAGES.forEach(s => byStage[s] = { c: 0, v: 0 });
+  opps.forEach(o => {
+    if (!byStage[o.stage]) byStage[o.stage] = { c: 0, v: 0 };
+    byStage[o.stage].c++;
+    byStage[o.stage].v += num(o.estimatedValue);
+  });
+
+  /* ---- Agent performance ---- */
+  const agentRows = list('agents').map(a => ({
+    a,
+    leads: leads.filter(l => l.assignedTo === a.name).length,
+    opps: opps.filter(o => o.assignedTo === a.name).length,
+    won: opps.filter(o => o.assignedTo === a.name && o.stage === 'Won').length,
+    value: opps.filter(o => o.assignedTo === a.name && o.stage === 'Won').reduce((s, o) => s + num(o.estimatedValue), 0)
+  }));
+
+  /* ---- Sales by customer ---- */
+  const byCust = custs.map(c => ({ c, v: customerRevenue(c._key) })).sort((a, b) => b.v - a.v).slice(0, 10);
+
+  /* ---- Profitability ---- */
+  const profRows = custs.map(c => {
+    const rev = customerRevenue(c._key);
+    const cost = list('projects').filter(p => p.customer === c._key).reduce((s, p) => s + num(p.expenses), 0);
+    return { c, rev, cost, profit: rev - cost, margin: rev ? ((rev - cost) / rev * 100) : 0 };
+  }).filter(r => r.rev > 0).sort((a, b) => b.profit - a.profit).slice(0, 12);
+
+  /* ---- Service type breakdown ---- */
+  const byType = {};
+  projs.forEach(p => {
+    const t = p.serviceType || 'Other';
+    if (!byType[t]) byType[t] = { c: 0, v: 0 };
+    byType[t].c++;
+    byType[t].v += num(p.budget);
+  });
+
+  /* ---------- Render ---------- */
+  h += '<div class="grid2">';
+
+  /* Monthly sales */
+  h += '<div class="card"><div class="section-head"><h3><i class="fa-solid fa-chart-column"></i> Monthly Invoiced Sales</h3></div>';
+  if (!months.length) h += '<div class="empty-state" style="padding:1.5rem"><i class="fa-solid fa-chart-column"></i><p>No invoice data.</p></div>';
+  else {
+    h += '<div style="display:flex;align-items:flex-end;gap:.6rem;height:170px;padding:.5rem 0">';
+    months.forEach(m => {
+      const pct = Math.round((byMonth[m] / maxMonth) * 100);
+      h += '<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.35rem;height:100%;justify-content:flex-end">' +
+        '<div class="small" style="color:#7dd3fc;font-weight:700;font-size:.62rem">' + money(byMonth[m]).replace('KES ', '') + '</div>' +
+        '<div style="width:100%;background:linear-gradient(180deg,#38bdf8,#0ea5e9);border-radius:6px 6px 0 0;height:' + Math.max(4, pct) + '%;min-height:6px;box-shadow:0 0 14px rgba(56,189,248,.3)"></div>' +
+        '<div class="small dim" style="font-size:.6rem">' + m.slice(2) + '</div>' +
+        '</div>';
+    });
+    h += '</div>';
+  }
+  h += '</div>';
+
+  /* Pipeline by stage */
+  h += '<div class="card"><div class="section-head"><h3><i class="fa-solid fa-filter-circle-dollar"></i> Pipeline by Stage</h3></div>';
+  h += '<div class="table-wrap" style="background:transparent;border:none"><table class="tbl" style="min-width:auto">' +
+    '<thead><tr><th>Stage</th><th>Count</th><th style="text-align:right">Value</th></tr></thead><tbody>';
+  PIPE_STAGES.forEach(st => {
+    if (!byStage[st] || (byStage[st].c === 0 && byStage[st].v === 0)) return;
+    h += '<tr><td>' + badge(st) + '</td><td>' + byStage[st].c + '</td>' +
+      '<td class="money text-right">' + money(byStage[st].v) + '</td></tr>';
+  });
+  h += '</tbody></table></div></div>';
+
+  h += '</div>';
+
+  /* ---- Customer Profitability ---- */
+  h += '<div class="section mt2"><div class="section-head"><h3><i class="fa-solid fa-sack-dollar"></i> Customer Profitability</h3></div>';
+  h += '<div class="table-wrap"><div class="table-scroll"><table class="tbl"><thead><tr>' +
+    '<th>Customer</th><th>Category</th><th style="text-align:right">Revenue</th>' +
+    '<th style="text-align:right">Direct Costs</th><th style="text-align:right">Gross Profit</th>' +
+    '<th style="text-align:right">Margin</th></tr></thead><tbody>';
+  if (!profRows.length) {
+    h += '<tr><td colspan="6"><div class="empty-state"><i class="fa-solid fa-sack-dollar"></i><p>No revenue data yet.</p></div></td></tr>';
+  } else {
+    profRows.forEach(r => {
+      h += '<tr onclick="openCustomer360(\'' + r.c._key + '\')">' +
+        '<td style="font-weight:600">' + esc(r.c.name || '—') + '</td>' +
+        '<td>' + esc(r.c.category || '—') + '</td>' +
+        '<td class="money text-right">' + money(r.rev) + '</td>' +
+        '<td class="money text-right" style="color:#fca5a5">' + money(r.cost) + '</td>' +
+        '<td class="money text-right" style="color:' + (r.profit >= 0 ? '#6ee7a8' : '#fca5a5') + '">' + money(r.profit) + '</td>' +
+        '<td class="text-right"><span class="badge ' + (r.margin >= 30 ? 'green' : r.margin >= 15 ? 'amber' : 'red') + '">' + r.margin.toFixed(1) + '%</span></td>' +
+        '</tr>';
+    });
+  }
+  h += '</tbody></table></div></div></div>';
+
+  /* ---- Service Type Performance ---- */
+  h += '<div class="section mt2"><div class="section-head"><h3><i class="fa-solid fa-screwdriver-wrench"></i> Project Performance by Service Line</h3></div>';
+  h += '<div class="table-wrap"><div class="table-scroll"><table class="tbl"><thead><tr>' +
+    '<th>Service Line</th><th>Projects</th><th style="text-align:right">Contract Value</th><th style="width:26%">Share</th></tr></thead><tbody>';
+  const typeArr = Object.keys(byType).map(k => ({ k, ...byType[k] })).sort((a, b) => b.v - a.v);
+  const maxType = Math.max(1, ...typeArr.map(t => t.v));
+  if (!typeArr.length) {
+    h += '<tr><td colspan="4"><div class="empty-state"><i class="fa-solid fa-screwdriver-wrench"></i><p>No project data yet.</p></div></td></tr>';
+  } else {
+    typeArr.forEach(t => {
+      h += '<tr><td style="font-weight:600">' + esc(t.k) + '</td><td>' + t.c + '</td>' +
+        '<td class="money text-right">' + money(t.v) + '</td>' +
+        '<td><div class="progress"><span style="width:' + Math.round((t.v / maxType) * 100) + '%"></span></div></td></tr>';
+    });
+  }
+  h += '</tbody></table></div></div></div>';
+
+  /* ---- Agent Performance ---- */
+  h += '<div class="section mt2"><div class="section-head"><h3><i class="fa-solid fa-user-tie"></i> Agent Performance & Commission</h3></div>';
+  h += '<div class="table-wrap"><div class="table-scroll"><table class="tbl"><thead><tr>' +
+    '<th>Agent</th><th>Leads</th><th>Opportunities</th><th>Won</th>' +
+    '<th style="text-align:right">Sales Value</th><th style="text-align:right">Commission Due</th><th>Status</th></tr></thead><tbody>';
+  if (!agentRows.length) {
+    h += '<tr><td colspan="7"><div class="empty-state"><i class="fa-solid fa-user-tie"></i><p>No agents registered.</p>' +
+      '<button class="btn btn-primary btn-sm mt2" onclick="setView(\'agents\')">Register an Agent</button></div></td></tr>';
+  } else {
+    agentRows.forEach(r => {
+      const comm = r.value * num(r.a.commissionRate) / 100;
+      h += '<tr onclick="openDetail(\'agents\',\'' + r.a._key + '\')">' +
+        '<td style="font-weight:600">' + esc(r.a.name || '—') + '</td>' +
+        '<td>' + r.leads + '</td><td>' + r.opps + '</td><td>' + r.won + '</td>' +
+        '<td class="money text-right">' + money(r.value) + '</td>' +
+        '<td class="money text-right" style="color:#fcd34d">' + money(comm) + '</td>' +
+        '<td>' + badge(r.a.status) + '</td></tr>';
+    });
+  }
+  h += '</tbody></table></div></div></div>';
+
+  /* ---- Top customers ---- */
+  h += '<div class="section mt2"><div class="section-head"><h3><i class="fa-solid fa-ranking-star"></i> Top 10 Customers by Revenue</h3></div>';
+  h += '<div class="table-wrap"><div class="table-scroll"><table class="tbl"><thead><tr>' +
+    '<th>#</th><th>Customer</th><th>Category</th><th style="text-align:right">Revenue</th><th style="text-align:right">Outstanding</th></tr></thead><tbody>';
+  if (!byCust.length) {
+    h += '<tr><td colspan="5"><div class="empty-state"><i class="fa-solid fa-ranking-star"></i><p>No customer revenue data.</p></div></td></tr>';
+  } else {
+    byCust.forEach((r, i) => {
+      h += '<tr onclick="openCustomer360(\'' + r.c._key + '\')">' +
+        '<td><span class="badge ' + (i < 3 ? 'purple' : 'gray') + '">' + (i + 1) + '</span></td>' +
+        '<td style="font-weight:600">' + esc(r.c.name || '—') + '</td>' +
+        '<td>' + esc(r.c.category || '—') + '</td>' +
+        '<td class="money text-right">' + money(r.v) + '</td>' +
+        '<td class="money text-right" style="color:#fcd34d">' + money(customerOutstanding(r.c._key)) + '</td></tr>';
+    });
+  }
+  h += '</tbody></table></div></div></div>';
+
+  return h;
+}
+
+/* ============================================================
+   16. SETTINGS
+   ============================================================ */
+function viewSettings() {
+  let h = '<div class="page-head"><div><h2><i class="fa-solid fa-gear"></i> System Settings</h2>' +
+    '<p>Configuration, data and system information</p></div></div>';
+
+  const counts = COLLECTIONS.map(c => ({ c, n: list(c).length }));
+
+  h += '<div class="grid2">';
+  h += '<div class="card"><div class="section-head"><h3><i class="fa-solid fa-database"></i> Database Connection</h3></div>' +
+    '<div class="dl">' +
+      dli('Provider', 'Firebase Realtime Database') +
+      dli('Database URL', 'ngt-crm-system-default-rtdb.firebaseio.com') +
+      dli('Region', 'us-central1 (default)') +
+      dli('Security', 'Open (no rules) — configure rules for production') +
+      dli('Status', 'Connected') +
+    '</div></div>';
+
+  h += '<div class="card"><div class="section-head"><h3><i class="fa-solid fa-building"></i> Company Profile</h3></div>' +
+    '<div class="dl">' +
+      dli('Company', 'Ngure Gacheru Technologies (NGT)') +
+      dli('System', 'NGT CRM — Customer-to-Cash Management') +
+      dli('Services', 'IT · Design · Electrical · CCTV · Fencing · Solar · Biometrics · Procurement') +
+      dli('Currency', 'KES (Kenyan Shilling)') +
+      dli('Version', '1.0.0') +
+    '</div></div>';
+  h += '</div>';
+
+  h += '<div class="section mt2"><div class="section-head"><h3><i class="fa-solid fa-table-list"></i> Record Counts</h3></div>';
+  h += '<div class="table-wrap"><div class="table-scroll"><table class="tbl"><thead><tr>' +
+    '<th>Module</th><th>Collection Key</th><th style="text-align:right">Records</th><th></th></tr></thead><tbody>';
+  counts.forEach(({ c, n }) => {
+    h += '<tr onclick="setView(\'' + c + '\')">' +
+      '<td><span class="badge blue">' + esc(SCHEMAS[c].label) + '</span></td>' +
+      '<td class="mono small dim">' + esc(c) + '</td>' +
+      '<td class="text-right" style="font-weight:700">' + n + '</td>' +
+      '<td class="text-right"><i class="fa-solid fa-chevron-right dim"></i></td></tr>';
+  });
+  h += '</tbody></table></div></div></div>';
+
+  h += '<div class="section mt2"><div class="card" style="border-color:#5b2323">' +
+    '<div class="section-head"><h3 style="color:#fca5a5"><i class="fa-solid fa-triangle-exclamation"></i> Danger Zone</h3></div>' +
+    '<p class="small muted mb2">These operations are irreversible and affect the live production database.</p>' +
+    '<div class="flex flex-wrap">' +
+      '<button class="btn btn-danger btn-sm" onclick="exportAll()"><i class="fa-solid fa-download"></i> Export Full Backup (JSON)</button>' +
+    '</div></div></div>';
+
+  return h;
+}
+
+/* ============================================================
+   17. NOTIFICATIONS
+   ============================================================ */
+function computeNotifications() {
+  const n = [];
+  const today = todayISO();
+
+  list('invoices').forEach(i => {
+    if (i.status === 'Cancelled') return;
+    const bal = invoiceBalance(i);
+    if (i.dueDate && isOverdue(i.dueDate) && bal > 0.01) {
+      n.push({ icon: 'fa-triangle-exclamation', cls: 'red', t: 'Invoice ' + (i.id || '') + ' is overdue',
+        s: refName('customers', i.customer) + ' · ' + money(bal) + ' outstanding · Due ' + fmtDate(i.dueDate),
+        view: 'invoices' });
+    }
+  });
+
+  list('followups').forEach(f => {
+    if (f.status === 'Pending' && f.dueDate && isOverdue(f.dueDate)) {
+      n.push({ icon: 'fa-bell', cls: 'amber', t: 'Follow-up overdue: ' + (f.subject || ''),
+        s: refName('customers', f.customer) + ' · Due ' + fmtDate(f.dueDate), view: 'followups' });
+    }
+  });
+
+  list('quotations').forEach(q => {
+    if (q.validity && isOverdue(q.validity) && ['Sent','Draft','Pending Approval'].includes(q.status)) {
+      n.push({ icon: 'fa-file-circle-xmark', cls: 'amber', t: 'Quotation ' + (q.id || '') + ' has expired',
+        s: refName('customers', q.customer) + ' · ' + money(itemsTotal(q)), view: 'quotations' });
+    }
+  });
+
+  list('tickets').forEach(t => {
+    if (!['Resolved','Closed'].includes(t.status)) {
+      n.push({ icon: 'fa-headset', cls: 'blue', t: 'Open ticket: ' + (t.issue || ''),
+        s: refName('customers', t.customer) + ' · ' + (t.priority || '') + ' priority', view: 'tickets' });
+    }
+  });
+
+  list('warranties').forEach(w => {
+    if (w.warrantyEnd && !isOverdue(w.warrantyEnd)) {
+      const days = daysBetween(today, w.warrantyEnd);
+      if (days <= 30) {
+        n.push({ icon: 'fa-shield-halved', cls: 'amber', t: 'Warranty expiring in ' + days + ' days',
+          s: (w.product || '') + ' · ' + refName('customers', w.customer), view: 'warranties' });
+      }
+    }
+  });
+
+  list('leads').forEach(l => {
+    if (l.status === 'New' && l.createdAt && daysBetween(l.createdAt.slice(0, 10), today) <= 1) {
+      n.push({ icon: 'fa-bullseye', cls: 'blue', t: 'New lead: ' + (l.name || ''),
+        s: (l.service || '') + ' · ' + money(l.estimatedValue), view: 'leads' });
+    }
+  });
+
+  list('projects').forEach(p => {
+    if (['Awaiting Deposit','Pending Site Assessment'].includes(p.status)) {
+      n.push({ icon: 'fa-diagram-project', cls: 'blue', t: 'Project awaiting action: ' + (p.name || ''),
+        s: refName('customers', p.customer) + ' · ' + p.status, view: 'projects' });
+    }
+  });
+
+  return n;
+}
+
+function updateNotifCount() {
+  const n = computeNotifications();
+  const el = document.getElementById('notifCount');
+  if (!el) return;
+  if (n.length) { el.classList.add('show'); el.textContent = n.length > 99 ? '99+' : n.length; }
+  else el.classList.remove('show');
+}
+
+function openNotifications() {
+  const n = computeNotifications();
+  let body;
+  if (!n.length) {
+    body = '<div class="empty-state"><i class="fa-solid fa-bell-slash"></i><p>You are all caught up. No notifications.</p></div>';
+  } else {
+    body = '<div style="display:flex;flex-direction:column;gap:.5rem">';
+    n.forEach(x => {
+      body += '<div class="card" style="padding:.65rem .8rem;cursor:pointer" onclick="closeModal();setView(\'' + x.view + '\')">' +
+        '<div class="flex" style="align-items:flex-start">' +
+        '<div class="k-ico" style="width:30px;height:30px;border-radius:9px;background:#1a2c42;display:grid;place-items:center;color:var(--accent);flex-shrink:0">' +
+        '<i class="fa-solid ' + x.icon + '"></i></div>' +
+        '<div><div style="font-size:.79rem;font-weight:600;color:#dbeafe">' + esc(x.t) + '</div>' +
+        '<div class="small dim">' + esc(x.s) + '</div></div></div></div>';
+    });
+    body += '</div>';
+  }
+  openModal('Notifications (' + n.length + ')', body, '<button class="btn btn-ghost btn-sm" onclick="closeModal()">Close</button>');
+}
+
+/* ============================================================
+   18. GLOBAL SEARCH
+   ============================================================ */
+function initSearch() {
+  const inp = document.getElementById('globalSearch');
+  const res = document.getElementById('searchResults');
+
+  inp.addEventListener('input', () => {
+    const q = inp.value.trim().toLowerCase();
+    if (q.length < 2) { res.classList.remove('show'); return; }
+    const results = [];
+
+    COLLECTIONS.forEach(col => {
+      const s = SCHEMAS[col];
+      list(col).forEach(r => {
+        const hay = [r.id, r.name, r.title, r.subject, r.company, r.phone, r.email, r.product, r.serial]
+          .filter(Boolean).join(' ').toLowerCase();
+        if (hay.includes(q)) {
+          results.push({
+            col: col,
+            key: r._key,
+            label: r[s.titleField] || r.id || r._key,
+            sub: s.label + (r.id ? ' · ' + r.id : ''),
+            icon: s.icon
+          });
+        }
+      });
+    });
+
+    if (!results.length) {
+      res.innerHTML = '<div class="sr-empty">No results found for "' + esc(q) + '"</div>';
+    } else {
+      res.innerHTML = results.slice(0, 40).map(r =>
+        '<div class="sr-item" onclick="closeSearch();openSearchResult(\'' + r.col + '\',\'' + r.key + '\')">' +
+        '<div class="sr-ico"><i class="fa-solid ' + r.icon + '"></i></div>' +
+        '<div><div class="sr-t">' + esc(r.label) + '</div><div class="sr-s">' + esc(r.sub) + '</div></div>' +
+        '</div>'
+      ).join('');
+    }
+    res.classList.add('show');
+  });
+
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.search-wrap')) res.classList.remove('show');
+  });
+}
+
+function closeSearch() {
+  document.getElementById('searchResults').classList.remove('show');
+  document.getElementById('globalSearch').value = '';
+}
+
+function openSearchResult(col, key) {
+  if (col === 'customers') openCustomer360(key);
+  else openDetail(col, key);
+}
+
+/* ============================================================
+   19. EXPORT
+   ============================================================ */
+function exportCSV(col) {
+  const s = SCHEMAS[col];
+  const rows = list(col);
+  if (!rows.length) { toast('No data to export.', 'error'); return; }
+
+  const headers = s.columns.map(c => c.t);
+  const lines = [headers.join(',')];
+
+  rows.forEach(r => {
+    const cells = s.columns.map(c => {
+      let v = r[c.k];
+      if (c.type === 'ref') v = refName(c.ref, v);
+      if (c.k === 'paidCalc') v = invoicePaid(r._key);
+      if (c.k === 'balanceCalc') v = invoiceBalance(r);
+      if (v === undefined || v === null) v = '';
+      return '"' + String(v).replace(/"/g, '""') + '"';
+    });
+    lines.push(cells.join(','));
+  });
+
+  download(lines.join('\n'), 'NGT-' + col + '-' + todayISO() + '.csv', 'text/csv');
+  toast('Exported ' + rows.length + ' records.', 'success');
+}
+
+function exportAll() {
+  const data = {};
+  COLLECTIONS.forEach(c => { data[c] = state.data[c] || {}; });
+  data._exportedAt = new Date().toISOString();
+  download(JSON.stringify(data, null, 2), 'NGT-CRM-Backup-' + todayISO() + '.json', 'application/json');
+  toast('Full backup exported.', 'success');
+}
+
+function download(content, filename, mime) {
+  const blob = new Blob([content], { type: mime });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+/* ============================================================
+   20. MODAL SYSTEM
+   ============================================================ */
+function openModal(title, bodyHTML, footerHTML, size) {
+  const root = document.getElementById('modalRoot');
+  root.innerHTML =
+    '<div class="modal-backdrop" onclick="if(event.target===this)closeModal()">' +
+      '<div class="modal ' + (size || '') + '">' +
+        '<div class="modal-head">' +
+          '<h3><i class="fa-solid fa-circle-nodes"></i> ' + title + '</h3>' +
+          '<button class="icon-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>' +
+        '</div>' +
+        '<div class="modal-body">' + bodyHTML + '</div>' +
+        '<div class="modal-foot">' + (footerHTML || '') + '</div>' +
+      '</div>' +
+    '</div>';
+
+  /* Recompute items when tax rate changes */
+  const taxEl = document.querySelector('[name="taxRate"]');
+  if (taxEl) taxEl.addEventListener('input', recomputeItems);
+
+  document.addEventListener('keydown', escHandler);
+}
+
+function escHandler(e) {
+  if (e.key === 'Escape') { closeModal(); document.removeEventListener('keydown', escHandler); }
+}
+
+function closeModal() {
+  document.getElementById('modalRoot').innerHTML = '';
+  document.removeEventListener('keydown', escHandler);
+}
+
+/* ============================================================
+   21. BOOT
+   ============================================================ */
+(function boot() {
+  buildNav();
+  initSearch();
+  initListeners();
+  setView('dashboard');
+
+  /* Fallback: if no data arrives within 6s, still render */
+  setTimeout(() => {
+    if (!state.ready) {
+      state.ready = true;
+      render();
+      setConn(false);
+    }
+  }, 6000);
+
+  console.log('%c NGT CRM ', 'background:#38bdf8;color:#04141f;font-weight:800;padding:2px 8px;border-radius:4px',
+    'Ngure Gacheru Technologies — Customer-to-Cash Management System v1.0.0');
+  console.log('Firebase DB:', firebaseConfig.databaseURL);
+})();
+</script>
+</body>
+</html>

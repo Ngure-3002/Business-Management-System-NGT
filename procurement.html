@@ -1,0 +1,3925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NGT Procurement Management System — Ngure Gacheru Technologies</title>
+<style>
+/* ============================================================
+   NGT PROCUREMENT MANAGEMENT SYSTEM
+   style.css — modern tech theme with animations
+   (base theme as supplied + extended application UI layer)
+   ============================================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-color: #0b1117;
+  color: #e0e7ff;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: #0f172a;
+  border-bottom: 2px solid #1e2c3a;
+  box-shadow: 0 4px 20px rgba(0, 180, 255, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(6px);
+  background-color: rgba(15, 23, 42, 0.95);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.company-name {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #a5f3fc, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+
+.motto {
+  font-size: 1rem;
+  color: #9ab3d8;
+  font-style: italic;
+  border-left: 3px solid #38bdf8;
+  padding-left: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.header-accent {
+  display: flex;
+  gap: 8px;
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: #38bdf8;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: pulse 2s infinite;
+}
+.dot:nth-child(2) { animation-delay: 0.4s; }
+.dot:nth-child(3) { animation-delay: 0.8s; }
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.3); opacity: 1; }
+}
+
+/* ===== HERO ===== */
+.hero {
+  background: linear-gradient(145deg, #0b1a2a 0%, #102a3c 100%);
+  padding: 4rem 0;
+  overflow: hidden;
+  position: relative;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #2563eb20 0%, transparent 70%);
+  top: -100px;
+  right: -100px;
+  border-radius: 50%;
+}
+
+.hero-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero-text .vision-title {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #38bdf8;
+  margin-bottom: 0.5rem;
+}
+.vision-statement {
+  font-size: 1.7rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 1.5rem 0;
+  color: #f0f9ff;
+}
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-block;
+  padding: 0.9rem 2.2rem;
+  border-radius: 40px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+.btn-primary {
+  background: #38bdf8;
+  color: #0b1117;
+  box-shadow: 0 8px 16px #38bdf830;
+}
+.btn-primary:hover {
+  background: #7dd3fc;
+  transform: translateY(-4px);
+  box-shadow: 0 16px 24px #38bdf860;
+}
+.btn-outline {
+  border: 2px solid #38bdf8;
+  color: #e0f2fe;
+}
+.btn-outline:hover {
+  background: #38bdf8;
+  color: #0b1117;
+  transform: translateY(-4px);
+}
+
+.hero-graphic {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  font-size: 5rem;
+  color: #38bdf860;
+}
+.hero-graphic i {
+  animation: float 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 15px #38bdf8);
+}
+.hero-graphic i:nth-child(2) { animation-delay: 0.6s; }
+.hero-graphic i:nth-child(3) { animation-delay: 1.2s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* ===== SERVICES ===== */
+.services {
+  padding: 5rem 0;
+  background: #0e1623;
+}
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #bae6fd, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.section-subtitle {
+  text-align: center;
+  color: #9ca3af;
+  margin-bottom: 4rem;
+  font-size: 1.1rem;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.service-card {
+  background: #1a2536;
+  padding: 2rem 1.5rem;
+  border-radius: 28px;
+  border: 1px solid #2d3a4f;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top right, #2563eb20, transparent 70%);
+  z-index: -1;
+}
+.service-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: #38bdf8;
+  box-shadow: 0 25px 35px -10px #0f172a, 0 0 0 2px #38bdf840;
+}
+.service-card i {
+  font-size: 2.8rem;
+  color: #38bdf8;
+  margin-bottom: 1.5rem;
+}
+.service-card h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #e2e8f0;
+}
+.service-card p {
+  color: #b0c4de;
+  font-size: 0.95rem;
+}
+
+/* ===== CONTACT ===== */
+.contact {
+  padding: 5rem 0;
+  background: #0b121c;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.contact-group {
+  background: #1a2637;
+  border-radius: 24px;
+  padding: 1.8rem 1.8rem;
+  border: 1px solid #2a374b;
+  transition: 0.2s;
+  box-shadow: 0 8px 18px #00000040;
+}
+.contact-group:hover {
+  border-color: #38bdf8;
+  box-shadow: 0 12px 28px #38bdf820;
+}
+.contact-group h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  color: #bbd7fb;
+  border-bottom: 2px solid #2e405b;
+  padding-bottom: 0.5rem;
+}
+.contact-group h3 i {
+  color: #38bdf8;
+  margin-right: 0.5rem;
+}
+.contact-group ul {
+  list-style: none;
+}
+.contact-group li {
+  margin-bottom: 0.8rem;
+}
+.contact-group a {
+  color: #cfdfee;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  transition: all 0.2s;
+  font-size: 0.98rem;
+}
+.contact-group a i {
+  width: 1.5rem;
+  color: #38bdf8;
+  font-size: 1.2rem;
+}
+.contact-group a:hover {
+  color: #38bdf8;
+  transform: translateX(6px);
+}
+
+.contact-footer-note {
+  margin-top: 3rem;
+  background: #1e2c40;
+  padding: 1.5rem;
+  border-radius: 60px;
+  text-align: center;
+  border: 1px dashed #38bdf8;
+}
+.contact-footer-note p {
+  font-size: 1.2rem;
+}
+.contact-footer-note a {
+  color: #38bdf8;
+  font-weight: 700;
+  text-decoration: none;
+}
+.contact-footer-note a:hover {
+  text-decoration: underline;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: #0a111a;
+  padding: 2rem 0;
+  border-top: 1px solid #1e2c3c;
+  text-align: center;
+  color: #8ba0bc;
+}
+
+/* ===== ANIMATION ON VIEW (intersection observer) ===== */
+.animate-on-view {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.animate-on-view.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hero-cta {
+    justify-content: center;
+  }
+  .hero-graphic {
+    font-size: 4rem;
+    order: -1;
+  }
+  .company-name {
+    font-size: 1.4rem;
+  }
+  .header-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  .motto {
+    border-left: none;
+    border-top: 2px solid #38bdf8;
+    padding-top: 0.3rem;
+  }
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   APPLICATION LAYER — NGT PROCUREMENT MANAGEMENT SYSTEM
+   ============================================================ */
+
+:root {
+  --bg: #0b1117;
+  --bg-2: #0e1623;
+  --bg-3: #0f172a;
+  --panel: #1a2536;
+  --panel-2: #16202f;
+  --line: #2d3a4f;
+  --line-2: #1e2c3a;
+  --txt: #e0e7ff;
+  --txt-2: #b0c4de;
+  --txt-3: #8ba0bc;
+  --accent: #38bdf8;
+  --accent-2: #7dd3fc;
+  --ok: #34d399;
+  --warn: #fbbf24;
+  --bad: #f87171;
+  --info: #818cf8;
+  --purple: #c084fc;
+  --radius: 18px;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #0b1117; }
+::-webkit-scrollbar-thumb { background: #253247; border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: #38bdf860; }
+
+/* ---------- SHELL ---------- */
+.app-shell {
+  display: grid;
+  grid-template-columns: 274px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: linear-gradient(180deg, #0d1521 0%, #0a1017 100%);
+  border-right: 1px solid var(--line-2);
+  padding: 0 0 3rem 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 90;
+}
+.sidebar-brand {
+  padding: 1.4rem 1.3rem 1.1rem;
+  border-bottom: 1px solid var(--line-2);
+  position: sticky;
+  top: 0;
+  background: #0d1521;
+  z-index: 2;
+}
+.sidebar-brand .logo-row {
+  display: flex; align-items: center; gap: .7rem;
+}
+.logo-mark {
+  width: 42px; height: 42px; border-radius: 12px;
+  background: linear-gradient(135deg, #38bdf8, #2563eb);
+  display: grid; place-items: center;
+  font-weight: 800; color: #06121d; font-size: 1rem;
+  box-shadow: 0 0 18px #38bdf855;
+  flex: 0 0 auto;
+}
+.sidebar-brand .brand-name {
+  font-size: 1.05rem; font-weight: 700; letter-spacing: -.3px;
+  background: linear-gradient(135deg, #a5f3fc, #38bdf8);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.sidebar-brand .brand-sub { font-size: .72rem; color: var(--txt-3); letter-spacing: .12em; text-transform: uppercase; }
+
+.nav-group { margin-top: 1.1rem; }
+.nav-group-title {
+  font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+  color: #56708f; padding: .3rem 1.3rem .35rem; font-weight: 700;
+}
+.nav-item {
+  display: flex; align-items: center; gap: .7rem;
+  padding: .58rem 1.3rem; margin: 1px .55rem;
+  border-radius: 11px; cursor: pointer;
+  color: #a9bed7; font-size: .89rem; font-weight: 500;
+  border: 1px solid transparent; transition: .16s;
+  user-select: none;
+}
+.nav-item:hover { background: #16202f; color: #e0f2fe; transform: translateX(3px); }
+.nav-item.active {
+  background: linear-gradient(90deg, #38bdf822, #38bdf806);
+  border-color: #38bdf855; color: #e0f2fe;
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+.nav-item .ni { width: 20px; text-align: center; font-size: .95rem; opacity: .95; }
+.nav-item .nbadge {
+  margin-left: auto; background: #f8717122; color: #fca5a5;
+  border: 1px solid #f8717155; font-size: .68rem; font-weight: 700;
+  border-radius: 20px; padding: .05rem .45rem;
+}
+.nav-item .nbadge.ok { background: #34d39922; color: #6ee7b7; border-color: #34d39955; }
+
+/* ---------- MAIN ---------- */
+.main { min-width: 0; display: flex; flex-direction: column; }
+
+.topbar {
+  display: flex; align-items: center; gap: 1rem;
+  padding: .8rem 1.6rem;
+  background: rgba(15, 23, 42, .93);
+  border-bottom: 1px solid var(--line-2);
+  position: sticky; top: 0; z-index: 80;
+  backdrop-filter: blur(8px);
+}
+.topbar h1 { font-size: 1.06rem; font-weight: 650; letter-spacing: -.2px; }
+.topbar .crumb { font-size: .74rem; color: var(--txt-3); letter-spacing: .08em; text-transform: uppercase; }
+.topbar-spacer { flex: 1; }
+.sync-pill {
+  display: inline-flex; align-items: center; gap: .45rem;
+  font-size: .74rem; color: var(--txt-3);
+  border: 1px solid var(--line); border-radius: 30px; padding: .28rem .7rem;
+  background: #101a26; white-space: nowrap;
+}
+.sync-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 8px var(--ok); }
+.sync-dot.off { background: var(--bad); box-shadow: 0 0 8px var(--bad); }
+.sync-dot.busy { background: var(--warn); box-shadow: 0 0 8px var(--warn); animation: pulse 1s infinite; }
+
+.role-select {
+  background: #101a26; color: #cfe4fb; border: 1px solid var(--line);
+  border-radius: 30px; padding: .35rem .8rem; font-size: .78rem; font-family: inherit; cursor: pointer;
+}
+.role-select:focus { outline: none; border-color: var(--accent); }
+
+.content { padding: 1.5rem 1.6rem 3rem; flex: 1; }
+
+/* ---------- PAGE ---------- */
+.page-head { display: flex; align-items: flex-end; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+.page-head h2 { font-size: 1.55rem; font-weight: 700; letter-spacing: -.4px; }
+.page-head p { color: var(--txt-3); font-size: .87rem; margin-top: .15rem; }
+.page-head .spacer { flex: 1; }
+
+/* ---------- BUTTONS ---------- */
+.btn-sm { padding: .48rem 1.05rem; font-size: .82rem; border-radius: 30px; }
+.btn-xs { padding: .3rem .7rem; font-size: .73rem; border-radius: 20px; }
+.btn-danger { background: #f87171; color: #2a0b0b; box-shadow: 0 6px 14px #f8717130; }
+.btn-danger:hover { background: #fca5a5; transform: translateY(-2px); }
+.btn-ghost { background: #16202f; color: #cfe4fb; border: 1px solid var(--line); }
+.btn-ghost:hover { border-color: var(--accent); color: #e0f2fe; transform: translateY(-2px); }
+.btn-warn { background: #fbbf24; color: #2a1e02; }
+.btn-warn:hover { background: #fcd34d; transform: translateY(-2px); }
+.btn-ok { background: #34d399; color: #04231a; }
+.btn-ok:hover { background: #6ee7b7; transform: translateY(-2px); }
+button { font-family: inherit; cursor: pointer; border: none; }
+.btn:disabled, button:disabled { opacity: .45; cursor: not-allowed; transform: none !important; }
+.btn-icon {
+  background: #16202f; border: 1px solid var(--line); color: #9fb6d1;
+  width: 30px; height: 30px; border-radius: 9px; display: inline-grid; place-items: center;
+  font-size: .8rem; transition: .15s;
+}
+.btn-icon:hover { color: #e0f2fe; border-color: var(--accent); background: #1c2a3d; }
+
+/* ---------- KPI ---------- */
+.kpi-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem; margin-bottom: 1.4rem;
+}
+.kpi-card {
+  background: linear-gradient(160deg, #1a2536 0%, #151f2e 100%);
+  border: 1px solid var(--line); border-radius: 20px;
+  padding: 1.05rem 1.15rem; position: relative; overflow: hidden;
+  transition: .25s cubic-bezier(.25,.46,.45,.94);
+}
+.kpi-card::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at top right, #38bdf818, transparent 65%);
+  pointer-events: none;
+}
+.kpi-card:hover { transform: translateY(-5px); border-color: #38bdf870; box-shadow: 0 18px 30px -14px #000; }
+.kpi-card .k-label { font-size: .72rem; text-transform: uppercase; letter-spacing: .11em; color: #7d93ad; font-weight: 600; }
+.kpi-card .k-value { font-size: 1.5rem; font-weight: 700; margin-top: .35rem; color: #eaf4ff; letter-spacing: -.6px; }
+.kpi-card .k-sub { font-size: .74rem; color: var(--txt-3); margin-top: .2rem; }
+.kpi-card .k-icon { position: absolute; top: .85rem; right: .95rem; font-size: 1.15rem; opacity: .5; }
+.kpi-card.accent .k-value { color: var(--accent-2); }
+.kpi-card.ok .k-value { color: #6ee7b7; }
+.kpi-card.warn .k-value { color: #fcd34d; }
+.kpi-card.bad .k-value { color: #fca5a5; }
+
+/* ---------- PANELS ---------- */
+.panel {
+  background: linear-gradient(160deg, #16202f 0%, #131c29 100%);
+  border: 1px solid var(--line); border-radius: 22px;
+  padding: 1.2rem 1.3rem; margin-bottom: 1.3rem;
+  box-shadow: 0 8px 22px #00000038;
+}
+.panel-head {
+  display: flex; align-items: center; gap: .7rem; flex-wrap: wrap;
+  margin-bottom: 1rem; padding-bottom: .7rem; border-bottom: 1px solid #223046;
+}
+.panel-head h3 { font-size: 1rem; font-weight: 650; color: #cfe4fb; letter-spacing: -.2px; }
+.panel-head .spacer { flex: 1; }
+.panel-head .hint { font-size: .74rem; color: var(--txt-3); }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.3rem; }
+@media (max-width: 1100px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+/* ---------- TABLES ---------- */
+.table-wrap { overflow-x: auto; border-radius: 14px; border: 1px solid #223046; }
+table.data { width: 100%; border-collapse: collapse; font-size: .84rem; min-width: 620px; }
+table.data thead th {
+  background: #131d2b; text-align: left; padding: .68rem .8rem;
+  font-size: .7rem; letter-spacing: .1em; text-transform: uppercase;
+  color: #7d93ad; font-weight: 700; white-space: nowrap;
+  border-bottom: 1px solid #223046; position: sticky; top: 0;
+}
+table.data tbody td { padding: .62rem .8rem; border-bottom: 1px solid #1b2537; color: #c6d7ea; vertical-align: top; }
+table.data tbody tr:hover { background: #18222f; }
+table.data tbody tr:last-child td { border-bottom: none; }
+table.data td.num, table.data th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+table.data td.actions { white-space: nowrap; text-align: right; }
+table.data .muted { color: var(--txt-3); font-size: .78rem; }
+table.data tfoot td { padding: .6rem .8rem; font-weight: 700; color: #eaf4ff; background: #131d2b; border-top: 1px solid #223046; }
+
+/* ---------- BADGES ---------- */
+.badge {
+  display: inline-block; padding: .16rem .58rem; border-radius: 20px;
+  font-size: .7rem; font-weight: 700; letter-spacing: .03em;
+  border: 1px solid #3b4d66; background: #1c2738; color: #a9bed7; white-space: nowrap;
+}
+.badge.ok { background: #34d3991c; color: #6ee7b7; border-color: #34d39955; }
+.badge.warn { background: #fbbf241c; color: #fcd34d; border-color: #fbbf2455; }
+.badge.bad { background: #f871711c; color: #fca5a5; border-color: #f8717155; }
+.badge.info { background: #818cf81c; color: #a5b4fc; border-color: #818cf855; }
+.badge.accent { background: #38bdf81c; color: #7dd3fc; border-color: #38bdf855; }
+.badge.purple { background: #c084fc1c; color: #d8b4fe; border-color: #c084fc55; }
+
+/* ---------- TOOLBAR / FILTERS ---------- */
+.toolbar {
+  display: flex; gap: .6rem; flex-wrap: wrap; align-items: center;
+  margin-bottom: 1rem; padding: .8rem .9rem;
+  background: #131c29; border: 1px solid #223046; border-radius: 16px;
+}
+.toolbar .spacer { flex: 1; }
+input, select, textarea {
+  font-family: inherit; font-size: .85rem;
+  background: #0f1824; color: #dbeafe;
+  border: 1px solid #2b3a51; border-radius: 10px;
+  padding: .48rem .7rem; width: 100%; transition: .15s;
+}
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px #38bdf822; }
+input[readonly] { background: #131c29; color: #7d93ad; cursor: not-allowed; }
+textarea { resize: vertical; min-height: 62px; }
+input::placeholder, textarea::placeholder { color: #4f6480; }
+.toolbar input, .toolbar select { width: auto; min-width: 130px; }
+.toolbar input[type="search"] { min-width: 230px; }
+label.f-label {
+  display: block; font-size: .72rem; font-weight: 700; letter-spacing: .07em;
+  text-transform: uppercase; color: #7d93ad; margin-bottom: .3rem;
+}
+label.f-label .req { color: var(--bad); margin-left: 2px; }
+
+/* ---------- FORM ---------- */
+.form-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: .85rem 1rem; }
+.field { min-width: 0; }
+.field.c3 { grid-column: span 3; } .field.c4 { grid-column: span 4; }
+.field.c6 { grid-column: span 6; } .field.c8 { grid-column: span 8; }
+.field.c12 { grid-column: span 12; } .field.c2 { grid-column: span 2; }
+@media (max-width: 900px) { .field { grid-column: span 12 !important; } }
+
+.form-section-title {
+  grid-column: span 12; font-size: .74rem; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--accent); margin-top: .5rem;
+  padding-bottom: .35rem; border-bottom: 1px dashed #2b3a51;
+}
+.form-section-title:first-child { margin-top: 0; }
+
+/* ---------- ITEMS EDITOR ---------- */
+.items-editor { border: 1px solid #223046; border-radius: 14px; overflow: hidden; }
+.items-editor .ie-scroll { overflow-x: auto; }
+table.items-table { width: 100%; border-collapse: collapse; font-size: .8rem; min-width: 720px; }
+table.items-table th {
+  background: #131d2b; text-align: left; padding: .5rem .5rem;
+  font-size: .66rem; letter-spacing: .08em; text-transform: uppercase; color: #7d93ad; font-weight: 700;
+}
+table.items-table td { padding: .28rem .3rem; border-top: 1px solid #1b2537; vertical-align: middle; }
+table.items-table input, table.items-table select, table.items-table textarea {
+  padding: .34rem .45rem; font-size: .79rem; border-radius: 8px; min-width: 62px;
+}
+table.items-table textarea { min-height: 34px; }
+table.items-table .ie-total { font-variant-numeric: tabular-nums; color: #7dd3fc; font-weight: 700; padding-right: .5rem; white-space: nowrap; }
+.items-foot { display: flex; justify-content: flex-end; padding: .6rem .8rem; background: #131d2b; border-top: 1px solid #223046; }
+
+/* ---------- MODAL ---------- */
+.modal-backdrop {
+  position: fixed; inset: 0; background: #04080de0; backdrop-filter: blur(4px);
+  z-index: 900; display: flex; align-items: flex-start; justify-content: center;
+  padding: 2.2rem 1rem; overflow-y: auto;
+  animation: fadeIn .18s ease;
+}
+@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+.modal-card {
+  background: linear-gradient(165deg, #16202f 0%, #121a26 100%);
+  border: 1px solid #2b3a51; border-radius: 24px; width: 100%; max-width: 1040px;
+  box-shadow: 0 40px 90px -20px #000, 0 0 0 1px #38bdf822;
+  animation: slideUp .24s cubic-bezier(.2,.8,.3,1);
+  display: flex; flex-direction: column; max-height: calc(100vh - 4.4rem);
+}
+.modal-card.sm { max-width: 620px; }
+@keyframes slideUp { from { opacity: 0; transform: translateY(22px) scale(.985) } to { opacity: 1; transform: none } }
+.modal-head {
+  display: flex; align-items: center; gap: .8rem;
+  padding: 1.05rem 1.35rem; border-bottom: 1px solid #223046;
+}
+.modal-head h3 { font-size: 1.05rem; font-weight: 700; }
+.modal-head .mh-sub { font-size: .75rem; color: var(--txt-3); }
+.modal-head .spacer { flex: 1; }
+.modal-body { padding: 1.15rem 1.35rem; overflow-y: auto; }
+.modal-foot {
+  padding: .9rem 1.35rem; border-top: 1px solid #223046;
+  display: flex; gap: .6rem; justify-content: flex-end; flex-wrap: wrap; background: #121a26;
+  border-radius: 0 0 24px 24px;
+}
+.modal-foot .spacer { flex: 1; }
+
+/* ---------- TOAST ---------- */
+#toastRoot { position: fixed; right: 1.2rem; bottom: 1.2rem; z-index: 1200; display: flex; flex-direction: column; gap: .55rem; }
+.toast {
+  background: #16202f; border: 1px solid #2b3a51; border-left: 4px solid var(--accent);
+  border-radius: 12px; padding: .7rem 1rem; font-size: .84rem; color: #dbeafe;
+  box-shadow: 0 14px 34px -10px #000; min-width: 240px; max-width: 380px;
+  animation: toastIn .22s ease;
+}
+.toast.ok { border-left-color: var(--ok); }
+.toast.bad { border-left-color: var(--bad); }
+.toast.warn { border-left-color: var(--warn); }
+@keyframes toastIn { from { opacity: 0; transform: translateX(30px) } to { opacity: 1; transform: none } }
+
+/* ---------- ALERTS ---------- */
+.alert-list { display: flex; flex-direction: column; gap: .5rem; }
+.alert-row {
+  display: flex; align-items: center; gap: .7rem;
+  padding: .58rem .8rem; border-radius: 12px;
+  background: #131c29; border: 1px solid #223046; font-size: .84rem;
+}
+.alert-row .a-ico { font-size: .95rem; }
+.alert-row.warn { border-left: 3px solid var(--warn); }
+.alert-row.bad { border-left: 3px solid var(--bad); }
+.alert-row.info { border-left: 3px solid var(--accent); }
+.alert-row .a-time { margin-left: auto; font-size: .72rem; color: var(--txt-3); white-space: nowrap; }
+
+/* ---------- CHART ---------- */
+.chart-box { position: relative; width: 100%; height: 250px; }
+.chart-box canvas { width: 100%; height: 100%; display: block; }
+.hbar-row { display: flex; align-items: center; gap: .7rem; margin-bottom: .55rem; font-size: .82rem; }
+.hbar-row .h-label { width: 34%; color: #b6c9de; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hbar-row .h-track { flex: 1; height: 9px; background: #101a26; border-radius: 20px; overflow: hidden; }
+.hbar-row .h-fill { height: 100%; background: linear-gradient(90deg, #2563eb, #38bdf8); border-radius: 20px; transition: width .6s ease; }
+.hbar-row .h-val { width: 108px; text-align: right; color: #7dd3fc; font-variant-numeric: tabular-nums; font-size: .78rem; }
+
+/* ---------- EMPTY ---------- */
+.empty {
+  text-align: center; padding: 3rem 1rem; color: var(--txt-3);
+}
+.empty .e-ico { font-size: 2.6rem; opacity: .35; display: block; margin-bottom: .6rem; }
+.empty h4 { color: #b6c9de; font-weight: 600; margin-bottom: .3rem; font-size: 1rem; }
+.empty p { font-size: .84rem; max-width: 460px; margin: 0 auto; }
+
+/* ---------- MISC ---------- */
+.hero-banner {
+  background: linear-gradient(145deg, #0b1a2a 0%, #102a3c 100%);
+  border: 1px solid #1e3a52; border-radius: 24px;
+  padding: 1.6rem 1.7rem; margin-bottom: 1.4rem;
+  position: relative; overflow: hidden;
+}
+.hero-banner::before {
+  content: ''; position: absolute; width: 320px; height: 320px;
+  background: radial-gradient(circle, #2563eb22 0%, transparent 70%);
+  top: -140px; right: -90px; border-radius: 50%;
+}
+.hero-banner .vision-title { font-size: .74rem; text-transform: uppercase; letter-spacing: 3px; color: #38bdf8; font-weight: 700; }
+.hero-banner h2 { font-size: 1.5rem; font-weight: 700; margin: .35rem 0 .25rem; color: #f0f9ff; letter-spacing: -.4px; }
+.hero-banner p { color: #9ab3d8; font-size: .87rem; max-width: 720px; }
+
+.mini-stats { display: flex; gap: 1.6rem; flex-wrap: wrap; margin-top: 1rem; }
+.mini-stats div span { display: block; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: #7d93ad; font-weight: 700; }
+.mini-stats div strong { font-size: 1.05rem; color: #eaf4ff; }
+
+.tabs { display: flex; gap: .35rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.tab {
+  padding: .42rem .95rem; border-radius: 30px; font-size: .8rem; font-weight: 600;
+  background: #131c29; border: 1px solid #223046; color: #9fb6d1; transition: .15s;
+}
+.tab:hover { border-color: #38bdf870; color: #e0f2fe; }
+.tab.active { background: #38bdf81f; border-color: #38bdf8; color: #7dd3fc; }
+
+.kv { display: grid; grid-template-columns: 190px 1fr; gap: .35rem 1rem; font-size: .85rem; }
+.kv dt { color: #7d93ad; font-weight: 600; }
+.kv dd { color: #dbeafe; }
+
+.legend { display: flex; gap: 1rem; flex-wrap: wrap; font-size: .76rem; color: var(--txt-3); margin-top: .6rem; }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: .35rem; }
+
+.match-ok { color: #6ee7b7; font-weight: 700; }
+.match-bad { color: #fca5a5; font-weight: 700; }
+.match-warn { color: #fcd34d; font-weight: 700; }
+
+.section-divider { height: 1px; background: #223046; margin: 1.1rem 0; }
+
+.chip-row { display: flex; flex-wrap: wrap; gap: .35rem; }
+.chip {
+  background: #131c29; border: 1px solid #223046; border-radius: 20px;
+  padding: .2rem .65rem; font-size: .74rem; color: #a9bed7;
+}
+.chip b { color: #7dd3fc; }
+
+@media (max-width: 980px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .sidebar { position: relative; height: auto; max-height: 320px; }
+  .content { padding: 1.1rem 1rem 3rem; }
+  .topbar { padding: .7rem 1rem; }
+}
+
+/* ---------- PRINT ---------- */
+@media print {
+  body { background: #fff; color: #000; }
+  .sidebar, .topbar, .toolbar, .modal-foot, .btn, .btn-icon, #toastRoot { display: none !important; }
+  .app-shell { grid-template-columns: 1fr; }
+  .content { padding: 0; }
+  .panel, .kpi-card { background: #fff; border: 1px solid #ccc; box-shadow: none; color: #000; }
+  table.data thead th { background: #eee; color: #000; }
+  table.data tbody td { color: #000; }
+  .badge { border-color: #999; color: #000; background: #f3f3f3; }
+}
+</style>
+</head>
+<body>
+
+<div class="app-shell">
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-row">
+        <div class="logo-mark">NGT</div>
+        <div>
+          <div class="brand-name" id="brandName">Ngure Gacheru Technologies</div>
+          <div class="brand-sub">Procurement System</div>
+        </div>
+      </div>
+    </div>
+    <nav id="nav"></nav>
+  </aside>
+
+  <!-- ================= MAIN ================= -->
+  <div class="main">
+    <header class="topbar">
+      <div>
+        <div class="crumb" id="crumb">NGT Procurement</div>
+        <h1 id="pageTitle">Dashboard</h1>
+      </div>
+      <div class="topbar-spacer"></div>
+
+      <span class="sync-pill"><span class="sync-dot" id="syncDot"></span><span id="syncText">Connecting…</span></span>
+
+      <select class="role-select" id="roleSelect" title="Active user role">
+        <option>Administrator</option>
+        <option>Procurement Officer</option>
+        <option>Finance Officer</option>
+        <option>Store/Warehouse</option>
+        <option>Project Manager</option>
+        <option>Technician</option>
+        <option>Sales/CRM</option>
+        <option>Director</option>
+      </select>
+      <input class="role-select" id="userName" style="width:150px" placeholder="Your name" title="Active user name" />
+
+      <button class="btn-icon" id="btnRefresh" title="Refresh from Firebase">⟳</button>
+    </header>
+
+    <main class="content" id="view"></main>
+
+    <footer class="footer">
+      <div class="container">
+        <p><strong id="footBrand">Ngure Gacheru Technologies (NGT)</strong> — Procurement Management System</p>
+        <p style="font-size:.78rem;margin-top:.25rem">Request → Approval → Sourcing → RFQ → Quotations → Comparison → PO → GRN → Inspection → Invoice → Payment → Accounting</p>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<div id="modalRoot"></div>
+<div id="toastRoot"></div>
+
+<script>
+/* ============================================================================
+   NGT PROCUREMENT MANAGEMENT SYSTEM
+   Single-file application. Firebase Realtime Database (REST).
+   NO seed / demo / AI-generated data is inserted anywhere. The database starts
+   empty and is populated only by real user input.
+   ============================================================================ */
+
+/* ---------------------------------------------------------------------------
+   1. FIREBASE REALTIME DATABASE (REST) LAYER
+   --------------------------------------------------------------------------- */
+const DB_URL = 'https://ngt-manage-inventory-system-default-rtdb.firebaseio.com';
+const ROOT   = 'procurement';   // namespaced so the shared inventory DB is never clobbered
+
+function fbUrl(path) {
+  return DB_URL + '/' + ROOT + (path ? '/' + path : '') + '.json';
+}
+
+async function fbGet(path = '') {
+  const r = await fetch(fbUrl(path), { cache: 'no-store' });
+  if (!r.ok) throw new Error('Firebase GET ' + r.status);
+  return r.json();
+}
+async function fbPut(path, data) {
+  const r = await fetch(fbUrl(path), {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
+  if (!r.ok) throw new Error('Firebase PUT ' + r.status);
+  return r.json();
+}
+async function fbPatch(path, data) {
+  const r = await fetch(fbUrl(path), {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
+  if (!r.ok) throw new Error('Firebase PATCH ' + r.status);
+  return r.json();
+}
+async function fbDelete(path) {
+  const r = await fetch(fbUrl(path), { method: 'DELETE' });
+  if (!r.ok) throw new Error('Firebase DELETE ' + r.status);
+  return true;
+}
+
+/* ---------------------------------------------------------------------------
+   2. UTILITIES
+   --------------------------------------------------------------------------- */
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+
+const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g,
+  c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+const num = v => { const n = parseFloat(v); return isNaN(n) ? 0 : n; };
+const fmt = n => num(n).toLocaleString('en-KE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const money = n => 'KES ' + fmt(n);
+const money0 = n => 'KES ' + num(n).toLocaleString('en-KE', { maximumFractionDigits: 0 });
+
+const today = () => new Date().toISOString().slice(0, 10);
+const nowISO = () => new Date().toISOString();
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+const pad = (n, w = 6) => String(n).padStart(w, '0');
+
+function daysBetween(a, b) {
+  if (!a || !b) return null;
+  const d = (new Date(b) - new Date(a)) / 86400000;
+  return isNaN(d) ? null : Math.round(d);
+}
+function addDays(dateStr, n) {
+  const d = new Date(dateStr || today());
+  d.setDate(d.getDate() + n);
+  return d.toISOString().slice(0, 10);
+}
+function monthKey(d) { return (d || '').slice(0, 7); }
+function monthLabel(k) {
+  if (!k) return '';
+  const [y, m] = k.split('-');
+  const names = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return (names[parseInt(m, 10) - 1] || m) + ' ' + y;
+}
+function sum(arr, fn) { return arr.reduce((t, x) => t + num(fn ? fn(x) : x), 0); }
+function groupSum(arr, keyFn, valFn) {
+  const m = {};
+  arr.forEach(x => {
+    const k = keyFn(x) || 'Unspecified';
+    m[k] = (m[k] || 0) + num(valFn ? valFn(x) : x);
+  });
+  return m;
+}
+function sortBy(arr, key, dir = -1) {
+  return arr.slice().sort((a, b) => {
+    const av = a[key] || '', bv = b[key] || '';
+    if (av < bv) return -1 * dir;
+    if (av > bv) return 1 * dir;
+    return 0;
+  });
+}
+function toast(msg, kind = 'info', ms = 3600) {
+  const el = document.createElement('div');
+  el.className = 'toast ' + kind;
+  el.textContent = msg;
+  $('#toastRoot').appendChild(el);
+  setTimeout(() => { el.style.opacity = '0'; el.style.transition = 'opacity .3s'; }, ms - 350);
+  setTimeout(() => el.remove(), ms);
+}
+
+/* ---------------------------------------------------------------------------
+   3. STATE
+   --------------------------------------------------------------------------- */
+const store = {
+  data: {},          // resourceKey -> { firebaseId: record }
+  settings: {},      // settings node
+  online: true,
+  lastSync: null,
+  route: 'dashboard',
+  user: { name: 'Administrator', role: 'Administrator' }
+};
+
+const ui = {};       // per-route filter state
+
+function rows(key) {
+  const obj = store.data[key] || {};
+  return Object.keys(obj).map(id => Object.assign({ _id: id }, obj[id]));
+}
+function nextNumber(key, prefix) {
+  let max = 0;
+  rows(key).forEach(r => { if (num(r._seq) > max) max = num(r._seq); });
+  const seq = max + 1;
+  return { seq, number: prefix + '-' + pad(seq) };
+}
+function findById(key, id) { return (store.data[key] || {})[id] || null; }
+function findByNumber(key, field, value) {
+  if (!value) return null;
+  return rows(key).find(r => String(r[field] || '').toLowerCase() === String(value).toLowerCase()) || null;
+}
+
+/* ---------------------------------------------------------------------------
+   4. SYSTEM ENUMERATIONS (structural definitions — not business data)
+   --------------------------------------------------------------------------- */
+const ENUM = {
+  prStatus: ['Draft','Submitted','Under Review','Approved','Rejected','Cancelled'],
+  priority: ['Low','Medium','High','Urgent'],
+  purpose: ['Project','Customer Order','Inventory','Brokerage','Hire Purchase','Asset','Office/Administration','Direct Expense','Procurement Service'],
+  requestTypes: [
+    'IT equipment','Computer accessories','Networking equipment','CCTV equipment',
+    'Electrical materials','Solar equipment','Biometric equipment','Graphic design materials',
+    'Office supplies','Software/services','Spare parts','Procurement for customer',
+    'Stock replenishment','Hire-purchase product','Project-specific procurement'
+  ],
+  rfqStatus: ['Draft','Sent','Responses Received','Closed','Cancelled'],
+  rfqChannel: ['Email','WhatsApp','Phone','Supplier Portal','In Person'],
+  sqStatus: ['Received','Under Review','Selected','Not Selected','Expired','Rejected'],
+  qcStatus: ['Draft','Under Review','Supplier Selected','Approved','Rejected'],
+  poStatus: ['Draft','Pending Approval','Approved','Sent','Acknowledged','Partially Received','Fully Received','Closed','Cancelled'],
+  grnStatus: ['Draft','Received','Partially Received','Completed','Cancelled'],
+  inspStatus: ['Pending Inspection','Passed','Partially Passed','Failed','Returned to Supplier'],
+  returnStatus: ['Draft','Requested','Approved','Returned','Replaced','Credited','Refunded','Rejected'],
+  invoiceStatus: ['Unpaid','Partially Paid','Fully Paid','Overdue','Disputed','Cancelled'],
+  paymentMethods: ['M-Pesa','Bank Transfer','Cheque','Cash','Card','Other'],
+  supplierStatus: ['Active','Inactive','Suspended','Blacklisted'],
+  docTypes: ['Supplier Agreement','Price List','Quotation','Invoice','Delivery Note','Tax Document','Warranty Document','Contract','Certificate','Product Catalogue','Other'],
+  allocationTargets: ['Project','Department','Cost Centre','Customer','Expense Account','Inventory Account','Asset Account'],
+  psStatus: ['Draft','Sourcing','Quoted','Customer Approved','Purchased','Delivered','Completed','Cancelled'],
+  budgetPeriod: ['Monthly','Quarterly','Annual','Project-based'],
+  currencies: ['KES','USD','EUR','GBP','ZAR','AED','CNY']
+};
+
+function statusBadge(s) {
+  const v = String(s || '');
+  let cls = '';
+  if (/Approved|Passed|Fully Paid|Fully Received|Completed|Closed|Active|Selected|Received|Credited|Refunded|Replaced|Delivered|Paid/i.test(v)) cls = 'ok';
+  else if (/Pending|Submitted|Under Review|Partially|Awaiting|Draft|Sourcing|Quoted|Requested|Sent|Acknowledged/i.test(v)) cls = 'warn';
+  else if (/Rejected|Cancelled|Failed|Overdue|Blacklisted|Suspended|Disputed|Returned|Expired/i.test(v)) cls = 'bad';
+  else if (/Not Selected/i.test(v)) cls = 'info';
+  return '<span class="badge ' + cls + '">' + esc(v || '—') + '</span>';
+}
+
+/* ---------------------------------------------------------------------------
+   5. RESOURCE DEFINITIONS  (the whole data model)
+   --------------------------------------------------------------------------- */
+const RES = {
+
+  /* ---------------- SUPPLIERS ---------------- */
+  suppliers: {
+    title: 'Supplier', plural: 'Suppliers', icon: '🏭', prefix: 'NGT-SUP',
+    numberKey: 'supplierCode', statusKey: 'status', statuses: ENUM.supplierStatus,
+    fields: [
+      { k: 'supplierCode', l: 'Supplier Code', t: 'text', ro: true, c: 3 },
+      { k: 'name', l: 'Supplier Name', t: 'text', req: true, c: 5 },
+      { k: 'status', l: 'Status', t: 'select', o: ENUM.supplierStatus, c: 4 },
+      { k: 'category', l: 'Category / Specialisation', t: 'datalist', src: 'categories', c: 4 },
+      { k: 'contactPerson', l: 'Contact Person', t: 'text', c: 4 },
+      { k: 'phone', l: 'Phone', t: 'tel', c: 4 },
+      { k: 'email', l: 'Email', t: 'email', c: 4 },
+      { k: 'location', l: 'Location / Town', t: 'text', c: 4 },
+      { k: 'address', l: 'Physical Address', t: 'text', c: 8 },
+      { k: 'paymentTerms', l: 'Payment Terms', t: 'text', c: 4, ph: 'e.g. 30 days' },
+      { k: 'taxPIN', l: 'Supplier Tax PIN', t: 'text', c: 4 },
+      { k: 'bankDetails', l: 'Bank / Payment Details', t: 'text', c: 4 },
+      { k: 'rating', l: 'Internal Rating (1-5)', t: 'number', c: 4, step: '0.1' },
+      { k: 'notes', l: 'Notes', t: 'textarea', c: 12 }
+    ],
+    columns: [
+      { k: 'supplierCode', l: 'Code' },
+      { k: 'name', l: 'Supplier' },
+      { k: 'category', l: 'Category' },
+      { k: 'contactPerson', l: 'Contact' },
+      { k: 'phone', l: 'Phone' },
+      { k: 'paymentTerms', l: 'Terms' },
+      { k: 'status', l: 'Status', badge: true }
+    ],
+    search: ['supplierCode', 'name', 'category', 'contactPerson', 'phone', 'email', 'location']
+  },
+
+  /* ---------------- PURCHASE REQUISITIONS ---------------- */
+  purchaseRequests: {
+    title: 'Purchase Requisition', plural: 'Purchase Requests', icon: '📋', prefix: 'NGT-PR',
+    numberKey: 'prNumber', statusKey: 'status', statuses: ENUM.prStatus,
+    fields: [
+      { sec: 'Request Information' },
+      { k: 'prNumber', l: 'PR Number', t: 'text', ro: true, c: 4 },
+      { k: 'requestDate', l: 'Request Date', t: 'date', c: 4, def: today },
+      { k: 'requestedBy', l: 'Requested By', t: 'text', c: 4, req: true },
+      { k: 'staffId', l: 'Staff ID', t: 'text', c: 3 },
+      { k: 'department', l: 'Department', t: 'datalist', src: 'departments', c: 3 },
+      { k: 'requestType', l: 'Request Type', t: 'select', o: ENUM.requestTypes, c: 3 },
+      { k: 'priority', l: 'Priority', t: 'select', o: ENUM.priority, c: 3, def: () => 'Medium' },
+      { k: 'requiredByDate', l: 'Required By', t: 'date', c: 3 },
+      { k: 'purpose', l: 'Procurement Purpose', t: 'select', o: ENUM.purpose, c: 3, req: true },
+      { k: 'status', l: 'Status', t: 'select', o: ENUM.prStatus, c: 3, def: () => 'Draft' },
+      { k: 'estimatedTotal', l: 'Estimated Total (KES)', t: 'number', ro: true, c: 3 },
+
+      { sec: 'Allocation & Justification' },
+      { k: 'customer', l: 'Customer', t: 'datalist', src: 'customers', c: 4 },
+      { k: 'project', l: 'Project / Job', t: 'datalist', src: 'projects', c: 4 },
+      { k: 'budgetCode', l: 'Budget Code', t: 'datalist', src: 'budgetCodes', c: 4 },
+      { k: 'reason', l: 'Reason for Purchase', t: 'textarea', c: 12, req: true },
+      { k: 'notes', l: 'Notes', t: 'textarea', c: 8 },
+      { k: 'attachments', l: 'Attachment URL(s)', t: 'text', c: 4, ph: 'https://…' },
+
+      { sec: 'Approval' },
+      { k: 'approver', l: 'Approver', t: 'text', c: 4 },
+      { k: 'approvalDate', l: 'Approval Date', t: 'date', c: 4 },
+      { k: 'approvedAmount', l: 'Approved Amount (KES)', t: 'number', c: 4 },
+      { k: 'approvalComments', l: 'Approval Comments', t: 'textarea', c: 6 },
+      { k: 'rejectionReason', l: 'Rejection Reason', t: 'textarea', c: 6 }
+    ],
+    items: {
+      label: 'Requested Items / Services',
+      columns: [
+        { k: 'item', l: 'Item / Service', w: '20%', req: true },
+        { k: 'description', l: 'Description / Specification', w: '26%', type: 'textarea' },
+        { k: 'quantity', l: 'Qty', w: '7%', type: 'number', req: true },
+        { k: 'unit', l: 'Unit', w: '8%', type: 'text' },
+        { k: 'estUnitCost', l: 'Est. Unit Cost', w: '11%', type: 'number' },
+        { k: 'estTotal', l: 'Est. Total', w: '12%', calc: true },
+        { k: 'brand', l: 'Preferred Brand', w: '10%', type: 'text' },
+        { k: 'requiredDate', l: 'Required', w: '11%', type: 'date' },
+        { k: 'projectAllocation', l: 'Project Allocation', w: '14%', type: 'text' }
+      ],
+      row: r => { r.estTotal = num(r.quantity) * num(r.estUnitCost); return r; },
+      totals: rs => ({ estimatedTotal: sum(rs, r => r.estTotal) })
+    },
+    columns: [
+      { k: 'prNumber', l: 'PR No.' },
+      { k: 'requestDate', l: 'Date', date: true },
+      { k: 'requestedBy', l: 'Requested By' },
+      { k: 'department', l: 'Department' },
+      { k: 'purpose', l: 'Purpose' },
+      { k: 'priority', l: 'Priority' },
+      { k: 'requiredByDate', l: 'Required By', date: true },
+      { k: 'estimatedTotal', l: 'Est. Total', money: true, num: true },
+      { k: 'status', l: 'Status', badge: true }
+    ],
+    search: ['prNumber', 'requestedBy', 'department', 'purpose', 'customer', 'project', 'reason', 'status']
+  },
+
+  /* ---------------- RFQ ---------------- */
+  rfqs: {
+    title: 'Request for Quotation', plural: 'RFQs', icon: '📨', prefix: 'NGT-RFQ',
+    numberKey: 'rfqNumber', statusKey: 'status', statuses: ENUM.rfqStatus,
+    fields: [
+      { sec: 'RFQ Details' },
+      { k: 'rfqNumber', l: 'RFQ Number', t: 'text', ro: true, c: 3 },
+      { k: 'date', l: 'Date', t: 'date', c: 3, def: today },
+      { k: 'prReference', l: 'PR Reference', t: 'datalist', src: 'prNumbers', c: 3 },
+      { k: 'status', l: 'Status', t: 'select', o: ENUM.rfqStatus, c: 3, def: () => 'Draft' },
+      { k: 'supplier', l: 'Supplier', t: 'datalist', src: 'supplierNames', c: 4 },
+      { k: 'supplierContact', l: 'Supplier Contact', t: 'text', c: 4 },
+      { k: 'sentVia', l: 'Sent Via', t: 'select', o: ENUM.rfqChannel, c: 4 },
+      { k: 'requiredDeliveryDate', l: 'Required Delivery Date', t: 'date', c: 4 },
+      { k: 'quoteDeadline', l: 'Quotation Deadline', t: 'date', c: 4 },
+      { k: 'currency', l: 'Currency', t: 'select', o: ENUM.currencies, c: 4, def: () => 'KES' },
+      { k: 'terms', l: 'Terms & Conditions', t: 'textarea', c: 12 },
+      { k: 'notes', l: 'Notes', t: 'textarea', c: 12 }
+    ],
+    items: {
+      label: 'Items Requested for Quotation',
+      columns: [
+        { k: 'item', l: 'Item / Service', w: '22%' },
+        { k: 'description', l: 'Specification', w: '34%', type: 'textarea' },
+        { k: 'quantity', l: 'Qty', w: '10%', type: 'number' },
+        { k: 'unit', l: 'Unit', w: '10%' },
+        { k: 'requiredDate', l: 'Required Date', w: '14%', type: 'date' },
+        { k: 'notes', l: 'Notes', w: '20%' }
+      ],
+      row: r => r,
+      totals: () => ({})
+    },
+    columns: [
+      { k: 'rfqNumber', l: 'RFQ No.' },
+      { k: 'date', l: 'Date', date: true },
+      { k: 'prReference', l: 'PR Ref.' },
+      { k: 'supplier', l: 'Supplier' },
+      { k: 'sentVia', l: 'Sent Via' },
+      { k: 'quoteDeadline', l: 'Quote Deadline', date: true },
+      { k: 'status', l: 'Status', badge: true }
+    ],
+    search: ['rfqNumber', 'prReference', 'supplier', 'status', 'sentVia']
+  },
+
+  /* ---------------- SUPPLIER QUOTATIONS ---------------- */
+  quotations: {
+    title: 'Supplier Quotation', plural: 'Supplier Quotations', icon: '💬', prefix: 'NGT-SQ',
+    numberKey: 'sqNumber', statusKey: 'status', statuses: ENUM.sqStatus,
+    fields: [
+      { sec: 'Quotation Header' },
+      { k: 'sqNumber', l: 'NGT Quotation Ref.', t: 'text', ro: true, c: 3 },
+      { k: 'supplierQuoteNumber', l: 'Supplier Quotation No.', t: 'text', c: 3 },
+      { k: 'supplier', l: 'Supplier', t: 'datalist', src: 'supplierNames', c: 3, req: true },
+      { k: 'quoteDate', l: 'Quote Date', t: 'date', c: 3, def: today },
+      { k: 'validUntil', l: 'Valid Until', t: 'date', c: 3 },
+      { k: 'prReference', l: 'PR Reference', t: 'datalist', src: 'prNumbers', c: 3 },
+      { k: 'rfqReference', l: 'RFQ Reference', t: 'datalist', src: 'rfqNumbers', c: 3 },
+      { k: 'status', l: 'Status', t: 'select', o: ENUM.sqStatus, c: 3, def: () => 'Received' },
+      { k: 'currency', l: 'Currency', t: 'select', o: ENUM.currencies, c: 3, def: () => 'KES' },
+
+      { sec: 'Commercial Terms' },
+      { k: 'discount', l: 'Discount (KES)', t: 'number', c: 3 },
+      { k: 'vat', l: 'VAT (KES)', t: 'number', c: 3 },
+      { k: 'otherCharges', l: 'Other Charges (KES)', t: 'number', c: 3 },
+      { k: 'deliveryCost', l: 'Delivery Cost (KES)', t: 'number', c: 3 },
+      { k: 'subtotal', l: 'Subtotal (KES)', t: 'number', ro: true, c: 3 },
+      { k: 'total', l: 'Quotation Total (KES)', t: 'number', ro: true, c: 3 },
+      { k: 'paymentTerms', l: 'Payment Terms', t: 'text', c: 3 },
+      { k: 'deliveryTerms', l: 'Delivery Terms', t: 'text', c: 3 },
+      { k: 'warranty', l: 'Warranty', t: 'text', c: 3 },
+      { k: 'leadTime', l: 'Lead Time (days)', t: 'number', c: 3 },
+      { k: 'notes', l: 'Notes', t: 'textarea', c: 8 },
+      { k: 'attachment', l: 'Attachment URL', t: 'text', c: 4 }
+    ],
+    items: {
+      label: 'Quoted Items',
+      columns: [
+        { k: 'item', l: 'Item / Service', w: '22%' },
+        { k: 'description', l: 'Description', w: '28%', type: 'textarea' },
+        { k: 'quantity', l: 'Qty', w: '8%', type: 'number' },
+        { k: 'unit', l: 'Unit', w: '8%' },
+        { k: 'unitPrice', l: 'Unit Price', w: '12%', type: 'number' },
+        { k: 'discount', l: 'Discount', w: '10%', type: 'number' },
+        { k: 'tax', l: 'Tax', w: '10%', type: 'number' },
+        { k: 'total', l: 'Line Total', w: '12%', calc: true }
+      ],
+      row: r => {
+        r.total = num(r.quantity) * num(r.unitPrice) - num(r.discount) + num(r.tax);
+        return r;
+      },
+      totals: rs => {
+        const sub = sum(rs, r => num(r.quantity) * num(r.unitPrice));
+        return { subtotal: sub };
+      }
+    },
+    columns: [
+      { k: 'sqNumber', l: 'Ref.' },
+      { k: 'supplier', l: 'Supplier' },
+      { k: 'supplierQuoteNumber', l: 'Supplier Quote No.' },
+      { k: 'quoteDate', l: 'Quote Date', date: true },
+      { k: 'validUntil', l: 'Valid Until', date: true },
+      { k: 'prReference', l: 'PR Ref.' },
+      { k: 'total', l: 'Total', money: true, num: true },
+      { k: 'status', l: 'Status', badge: true }
+    ],
+    search: ['sqNumber', 'supplier', 'supplierQuoteNumber', 'prReference', 'rfqReference', 'status']
+  },
+
+  /* ---------------- QUOTATION COMPARISON ---------------- */
+  comparisons: {
+    title: 'Quotation Comparison', plural: 'Quotation Comparisons', icon: '⚖️', prefix: 'NGT-QC',
+    numberKey: 'qcNumber', statusKey: 'status', statuses: ENUM.qcStatus,
+    fields: [
+      { sec: 'Comparison Record' },
+      { k: 'qcNumber', l: 'Comparison No.', t: 'text', ro: true, c: 3 },
+      { k: 'date', l: 'Date', t: 'date', c: 3, def: today },
+      { k: 'prReference', l: 'PR Reference', t: 'text', c: 3 },
+      { k: 'rfqReference', l: 'RFQ Reference', t: 'text', c: 3 },
+      { k: 'quotationRefs', l: 'Quotations Compared', t: 'text', c: 12, ro: true },
+      { k: 'selectedSupplier', l: 'Selected Supplier', t: 'datalist', src: 'supplierNames', c: 4 },
+      { k: 'selectedAmount', l: 'Selected Amount (KES)', t: 'number', c: 4 },
+      { k: 'status', l: 'Status', t: 'select', o: ENUM.qcStatus, c: 4, def: () => 'Draft' },
+      { k: 'selectionRationale', l: 'Selection Rationale (audit note)', t: 'textarea', c: 12, req: true },
+      { k: 'approvedBy', l: 'Approved By', t: 'text', c: 4 },
+      { k: 'approvalDate', l: 'Approval Date', t: 'date', c: 4 },
+      { k: 'notes', l: 'Notes', t: 'textarea', c: 4 }
+    ],
+    items: {
+      label: 'Comparison Matrix',
+      columns: [
+        { k: 'item', l: 'Item', w: '28%' },
+        { k: 'supplier', l: 'Supplier', w: '22%' },
+        { k: 'quantity', l: 'Qty', w: '10%', type: 'number' },
+        { k: 'unitPrice', l: 'Unit Price', w: '14%', type: 'number' },
+        { k: 'deliveryCost', l: 'Delivery', w: '12%', type: 'number' },
+        { k: 'total', l: 'Total', w: '14%', calc: true }
+      ],
+      row: r => { r.total = num(r.quantity) * num(r.unitPrice) + num(r.deliveryCost); return r; },
+      totals: () => ({})
+    },
+    columns: [
+      { k: 'qcNumber', l: 'Comparison No.' },
+      { k: 'date', l: 'Date', date: true },
+      { k: 'prReference', l: 'PR Ref.' },
+      { k: 'rfqReference', l: 'RFQ Ref.' },
+      { k: 'selectedSupplier', l: 'Selected Supplier' },
+      { k: 'selectedAmount', l: 'Amount', money: true, num: true },
+      { k: 'status', l: 'Status', badge: true }
+    ],
+    search: ['qcNumber', 'prReference', 'rfqReference', 'selectedSupplier', 'status']
+  },
+
+  /* ---------------- PURCHASE ORDERS ---------------- */
+  purchaseOrders: {
+    title: 'Purchase Order', plural: 'Purchase Orders', icon: '🧾', prefix: 'NGT-PO',
+    numberKey: 'poNumber', statusKey: 'status', statuses: ENUM.poStatus,
+    fields: [
+      { sec: 'Order Header' },
+      { k: 'poNumber', l: 'PO Number', t: 'text', ro: true, c: 3 },
+      { k: 'poDate', l: 'PO Date', t: 'date', c: 3, def: today },
+      { k: 'supplier', l: 'Supplier', t: 'datalist', src: 'supplierNames', c: 3, req: true },
+      { k: 'supplierContact', l: 'Supplier Contact', t: 'text', c: 3 },
+      { k: 'prReference', l: 'PR Reference', t: 'datalist', src: 'prNumbers', c: 3 },
+      { k: 'rfqReference', l: 'RFQ Reference', t: 'datalist', src: 'rfqNumbers', c: 3 },
+      { k: 'quotationReference', l: 'Quotation Reference', t: 'datalist', src: 'sqNumbers', c: 3 },
+      { k: 'comparisonReference', l: 'Comparison Reference', t: 'datalist', src: 'qcNumbers', c: 3 },
+
+      { sec: 'Delivery & Allocation' },
+      { k: 'expectedDeliveryDate', l: 'Expected Delivery Date', t: 'date', c: 3 },
+      { k: 'deliveryLocation', l: 'Delivery Location', t: 'text', c: 3 },
+      { k: 'purpose', l: 'Procurement Purpose', t: 'select', o: ENUM.purpose, c: 3, req: true },
+      { k: 'project', l: 'Project / Job', t: 'datalist', src: 'projects', c: 3 },
+      { k: 'customer', l: 'Customer', t: 'datalist', src: 'customers', c: 3 },
+      { k: 'department', l: 'Department', t: 'datalist', src: 'departments', c: 3 },
+      { k: 'currency', l: 'Currency', t: 'select', o: ENUM.currencies, c: 3, def: () => 'KES' },
+      { k: 'paymentTerms', l: 'Payment Terms', t: 'text', c: 3 },
+
+      { sec: 'Commercials & Status' },
+      { k: 'discount', l: 'Discount (KES)', t: 'number', c: 3 },
+      { k: 'tax', l: 'Tax / VAT (KES)', t: 'number', c: 3 },
+      { k: 'subtotal', l: 'Subtotal (KES)', t: 'number', ro: true, c: 3 },
+      { k: 'total', l: 'PO Total (KES)', t: 'number', ro: true, c: 3 },
+      { k: 'status', l: 'PO Status', t: 'select', o: ENUM.poStatus, c: 3, def: () => 'Draft' },
+      { k: 'approvedBy', l: 'Approved By', t: 'text', c: 3 },
+      { k: 'approvalDate', l: 'Approval Date', t: 'date', c: 3 },
+      { k: 'acknowledgedDate', l: 'Acknowledged Date', t: 'date', c: 3 },
+      { k: 'notes', l: 'Notes / Terms', t: 'textarea', c: 12 }
+    ],
+    items: {
+      label: 'Purchase Order Line Items',
+      columns: [
+        { k: 'item', l: 'Item / Service', w: '20%' },
+        { k: 'description', l: 'Description / Specification', w: '26%', type: 'textarea' },
+        { k: 'quantity', l: 'Qty', w: '8%', type: 'number' },
+        { k: 'unit', l: 'Unit', w: '7%' },
+        { k: 'unitPrice', l: 'Unit Price', w: '12%', type: 'number' },
+        { k: 'discount', l: 'Discount', w: '9%', type: 'number' },
+        { k: 'tax', l: 'Tax', w: '9%', type: 'number' },
+        { k: 'total', l: 'Line Total', w: '12%', calc: true }
+      ],
+      row: r => {
+        r.total = num(r.quantity) * num(r.unitPrice) - num(r.discount) + num(r.tax);
+        return r;
+      },
+      totals: rs => {
+        const sub = sum(rs, r => num(r.quantity) * num(r.unitPrice));
+        return { subtotal: sub, total: sub };
+      }
+    },
+    columns: [
+      { k: 'poNumber', l: 'PO No.' },
+      { k: 'poDate', l: 'Date', date: true },
+      { k: 'supplier', l: 'Supplier' },
+      { k: 'purpose', l: 'Purpose' },
+      { k: 'project', l: 'Project' },
+      { k: 'expectedDeliveryDate', l: 'Expected', date: true },
+      { k: 'total', l: 'Total', money: true, num: true },
+      { k: 'status', l: 'Status', badge: true }
+    ],
+    search: ['poNumber', 'supplier', 'prReference', 'project', 'customer', 'purpose', 'status']
+  },
+
+  /* ---------------- GOODS RECEIVED NOTE ---------------- */
+  goodsReceived: {
+    title: 'Goods Received Note', plural: 'Goods Received Notes', icon: '📦', prefix: 'NGT-GRN',
+    numberKey: 'grnNumber', statusKey: 'status', statuses: ENUM.grnStatus,
+    fields: [
+      { sec: 'Receipt Header' },
+      { k: 'grnNumber', l: 'GRN Number', t: 'text', ro: true, c: 3 },
+      { k: 'deliveryDate', l: 'Delivery Date', t: 'date', c: 3, def: today },
+      { k: 'poNumber', l: 'PO Number', t: 'datalist', src: 'poNumbers', c: 3, req: true },
+      { k: 'supplier', l: 'Supplier', t: 'datalist', src: 'supplierNames', c: 3 },
+      { k: 'deliveryNoteNumber', l: 'Supplier Delivery Note No.', t: 'text', c: 3 },
+      { k: 'receivedBy', l: 'Received By', t: 'text', c: 3 },
+      { k: 'location', l: 'Warehouse / Location', t: 'datalist', src: 'locations', c: 3 },
+      { k: 'status', l: 'Status', t: 'select', o: ENUM.grnStatus, c: 3, def: () => 'Received' },
+      { k: 'remarks', l: 'Remarks', t: 'textarea', c: 12 }
+    ],
+    items: {
+      label: 'Items Received',
+      columns: [
+        { k: 'item', l: 'Item', w: '18%' },
+        { k: 'orderedQty', l: 'Ordered', w: '9%', type: 'number' },
+        { k: 'receivedQty', l: 'Received', w: '9%', type: 'number' },
+        { k: 'damagedQty', l: 'Damaged', w: '9%', type: 'number' },
+        { k: 'rejectedQty', l: 'Rejected', w: '9%', type: 'number' },
+        { k: 'acceptedQty', l: 'Accepted', w: '9%', type: 'number' },
+        { k: 'serialNumbers', l: 'Serial / IMEI / MAC Numbers', w: '20%' },
+        { k: 'batchNumbers', l: 'Batch No.', w: '9%' },
+        { k: 'remarks', l: 'Remarks', w: '12%' }
+      ],
+      row: r => {
+        if (r.acceptedQty === '' || r.acceptedQty === undefined || r.acceptedQty === null) {
+          r.acceptedQty = num(r.receivedQty) - num(r.damagedQty) - num(r.rejectedQty);
+        }
+        return r;
+      },
+      totals: rs => ({
+        totalOrdered: sum(rs, r => r.orderedQty),
+        totalReceived: sum(rs, r => r.receivedQty),
+        totalAccepted: sum(rs, r => r.acceptedQty)
+      })
+    },
+    columns: [
+      { k: 'grnNumber', l: 'GRN No.' },
+      { k: 'deliveryDate', l: 'Delivery Date', date: true },
+      { k: 'poNumber', l: 'PO No.' },
+      { k: 'supplier', l: 'Supplier' },
+      { k: 'deliveryNoteNumber', l: 'Delivery Note' },
+      { k: 'location', l: 'Location' },
+      { k: 'status', l: 'Status', badge: true }
+    ],
+    search: ['grnNumber', 'poNumber', 'supplier', 'deliveryNoteNumber', 'receivedBy', 'location', 'status']
+  },
+
+  /* ---------------- QUALITY INSPECTION ---------------- */
+  inspections: {
+    title: 'Quality Inspection', plural: 'Quality Inspections', icon: '🔍', prefix: 'NGT-INSP',
+    numberKey: 'inspNumber', statusKey: 'status', statuses: ENUM.inspStatus,
+    fields: [
+      { sec: 'Inspection Header' },
+      { k: 'inspNumber', l: 'Inspection No.', t: 'text', ro: true, c: 3 },
+      { k: 'inspectionDate', l: 'Inspection Date', t: 'date', c: 3, def: today },
+      { k: 'grnNumber', l: 'GRN Number', t: 'datalist', src: 'grnNumbers', c: 3 },
+      { k: 'poNumber', l: 'PO Number', t: 'datalist', src: 'poNumbers', c: 3 },
+      { k: 'supplier', l: 'Supplier', t: 'datalist', src: 'supplierNames', c: 4 },
+      { k: 'inspector', l: 'Inspector', t: 'text', c: 4 },
+      { k: 'status', l: 'Inspection Status', t: 'select', o: ENUM.inspStatus, c: 4, def: () => 'Pending Inspection' },
+      { k: 'photos', l: 'Photo URL(s)', t: 'text', c: 6 },
+      { k: 'remarks', l: 'Remarks', t: 'textarea', c: 6 }
+    ],
+    items: {
+      label: 'Inspection Lines',
+      columns: [
+        { k: 'item', l: 'Item', w: '26%' },
+        { k: 'qtyInspected', l: 'Inspected', w: '14%', type: 'number' },
+        { k: 'qtyAccepted', l: 'Accepted', w: '14%', type: 'number' },
+        { k: 'qtyRejected', l: 'Rejected', w: '14%', type: 'number' },
+        { k: 'defectDescription', l: 'Defect Description', w: '32%', type: 'textarea' }
+      ],
+      row: r => r,
+      totals: rs => ({
+        totalInspected: sum(rs, r => r.qtyInspected),
+        totalAccepted: sum(rs, r => r.qtyAccepted),
+        totalRejected: sum(rs, r => r.qtyRejected)
+      })
+    },
+    columns: [
+      { k: 'inspNumber', l: 'Inspection No.' },
+      { k: 'inspectionDate', l: 'Date', date: true },
+      { k: 'grnNumber', l: 'GRN' },
+      { k: 'poNumber', l: 'PO' },
+      { k: 'supplier', l: 'Supplier' },
+      { k: 'inspector', l: 'Inspector' },
+      { k: 'status', l: 'Status', badge: true }
+    ],
+    search: ['inspNumber', 'grnNumber', 'poNumber', 'supplier', 'inspector', 'status']
+  },
+
+  /* ---------------- PURCHASE RETURNS ---------------- */
+  purchaseReturns: {
+    title: 'Purchase Return', plural: 'Purchase Returns', icon: '↩️', prefix: 'NGT-PRTN',
+    numberKey: 'returnNumber', statusKey: 'status', statuses: ENUM.returnStatus,
+    fields: [
+      { sec: 'Return Header' },
+      { k: 'returnNumber', l: 'Return No.', t: 'text', ro: true, c: 3 },
+      { k: 'returnDate', l: 'Return Date', t: 'date', c: 3, def: today },
+      { k: 'supplier', l: 'Supplier', t: 'datalist', src: 'supplierNames', c: 3, req: true },
+      { k: 'status', l: 'Status', t: 'select', o: ENUM.returnStatus, c: 3, def: () => 'Draft' },
+      { k: 'originalPO', l: 'Original PO', t: 'datalist', src: 'poNumbers', c: 4 },
+      { k: 'originalGRN', l: 'Original GRN', t: 'datalist', src: 'grnNumbers', c: 4 },
+      { k: 'originalInvoice', l: 'Supplier Invoice', t: 'text', c: 4 },
+      { k: 'replacementRequested', l: 'Replacement Requested', t: 'select', o: ['Yes','No'], c: 3 },
+      { k: 'creditNoteRequested', l: 'Credit Note Requested', t: 'select', o: ['Yes','No'], c: 3 },
+      { k: 'refundRequested', l: 'Refund Requested', t: 'select', o: ['Yes','No'], c: 3 },
+      { k: 'reason', l: 'Overall Reason', t: 'textarea', c: 3 },
+      { k: 'remarks', l: 'Remarks', t: 'textarea', c: 12 }
+    ],
+    items: {
+      label: 'Returned Items',
+      columns: [
+        { k: 'item', l: 'Item', w: '24%' },
+        { k: 'quantity', l: 'Qty Returned', w: '12%', type: 'number' },
+        { k: 'unit', l: 'Unit', w: '9%' },
+        { k: 'unitPrice', l: 'Unit Price', w: '13%', type: 'number' },
+        { k: 'value', l: 'Value', w: '13%', calc: true },
+        { k: 'reason', l: 'Reason', w: '29%', type: 'textarea' }
+      ],
+      row: r => { r.value = num(r.quantity) * num(r.unitPrice); return r; },
+      totals: rs => ({ totalValue: sum(rs, r => r.value) })
+    },
+    columns: [
+      { k: 'returnNumber', l: 'Return No.' },
+      { k: 'returnDate', l: 'Date', date: true },
+      { k: 'supplier', l: 'Supplier' },
+      { k: 'originalPO', l: 'Original PO' },
+      { k: 'originalGRN', l: 'Original GRN' },
+      { k: 'totalValue', l: 'Value', money: true, num: true },
+      { k: 'status', l: 'Status', badge: true }
+    ],
+    search: ['returnNumber', 'supplier', 'originalPO', 'originalGRN', 'status']
+  },
+
+  /* ---------------- SUPPLIER INVOICES ---------------- */
+  supplierInvoices: {
+    title: 'Supplier Invoice', plural: 'Supplier Invoices', icon: '📑', prefix: 'NGT-SINV',
+    numberKey: 'invoiceRef', statusKey: 'paymentStatus', statuses: ENUM.invoiceStatus,
+    fields: [
+      { sec: 'Invoice Header' },
+      { k: 'invoiceRef', l: 'NGT Invoice Ref.', t: 'text', ro: true, c: 3 },
+      { k: 'invoiceNumber', l: 'Supplier Invoice Number', t: 'text', c: 3, req: true },
+      { k: 'supplier', l: 'Supplier', t: 'datalist', src: 'supplierNames', c: 3, req: true },
+      { k: 'supplierTaxPIN', l: 'Supplier Tax PIN', t: 'text', c: 3 },
+      { k: 'poNumber', l: 'PO Number', t: 'datalist', src: 'poNumbers', c: 3 },
+      { k: 'grnNumber', l: 'GRN Number', t: 'datalist', src: 'grnNumbers', c: 3 },
+      { k: 'invoiceDate', l: 'Invoice Date', t: 'date', c: 3, def: today },
+      { k: 'dueDate', l: 'Due Date', t: 'date', c: 3 },
+
+      { sec: 'Amounts & Tax' },
+      { k: 'subtotal', l: 'Subtotal (KES)', t: 'number', c: 3 },
+      { k: 'vatRate', l: 'VAT Rate (%)', t: 'number', c: 3 },
+      { k: 'vat', l: 'VAT Amount (KES)', t: 'number', c: 3 },
+      { k: 'otherTaxes', l: 'Other Taxes (KES)', t: 'number', c: 3 },
+      { k: 'total', l: 'Invoice Total (KES)', t: 'number', c: 3 },
+      { k: 'amountPaid', l: 'Amount Paid (KES)', t: 'number', ro: true, c: 3 },
+      { k: 'balance', l: 'Balance (KES)', t: 'number', ro: true, c: 3 },
+      { k: 'paymentStatus', l: 'Payment Status', t: 'select', o: ENUM.invoiceStatus, c: 3, def: () => 'Unpaid' },
+      { k: 'taxInvoiceStatus', l: 'Tax Invoice Status', t: 'select', o: ['Valid Tax Invoice','Proforma','Not Provided','Disputed'], c: 3 },
+      { k: 'attachment', l: 'Attachment URL', t: 'text', c: 6 },
+      { k: 'notes', l: 'Notes', t: 'textarea', c: 6 }
+    ],
+    items: {
+      label: 'Invoice Lines (used for three-way matching)',
+      columns: [
+        { k: 'item', l: 'Item / Service', w: '28%' },
+        { k: 'quantity', l: 'Qty', w: '10%', type: 'number' },
+        { k: 'unit', l: 'Unit', w: '9%' },
+        { k: 'unitPrice', l: 'Unit Price', w: '15%', type: 'number' },
+        { k: 'total', l: 'Line Total', w: '15%', calc: true },
+        { k: 'notes', l: 'Notes', w: '23%' }
+      ],
+      row: r => { r.total = num(r.quantity) * num(r.unitPrice); return r; },
+      totals: rs => ({ subtotal: sum(rs, r => r.total) })
+    },
+    columns: [
+      { k: 'invoiceRef', l: 'Ref.' },
+      { k: 'invoiceNumber', l: 'Supplier Invoice No.' },
+      { k: 'supplier', l: 'Supplier' },
+      { k: 'poNumber', l: 'PO' },
+      { k: 'invoiceDate', l: 'Invoice Date', date: true },
+      { k: 'dueDate', l: 'Due Date', date: true },
+      { k: 'total', l: 'Total', money: true, num: true },
+      { k: 'balance', l: 'Balance', money: true, num: true },
+      { k: 'paymentStatus', l: 'Payment', badge: true }
+    ],
+    search: ['invoiceRef', 'invoiceNumber', 'supplier', 'poNumber', 'grnNumber', 'paymentStatus']
+  },
+
+  /* ---------------- SUPPLIER PAYMENTS ---------------- */
+  supplierPayments: {
+    title: 'Supplier Payment', plural: 'Supplier Payments', icon: '💰', prefix: 'NGT-SPAY',
+    numberKey: 'paymentId', statusKey: 'status', statuses: ['Recorded','Reconciled','Reversed'],
+    fields: [
+      { sec: 'Payment Details' },
+      { k: 'paymentId', l: 'Payment ID', t: 'text', ro: true, c: 3 },
+      { k: 'paymentDate', l: 'Payment Date', t: 'date', c: 3, def: today },
+      { k: 'supplier', l: 'Supplier', t: 'datalist', src: 'supplierNames', c: 3, req: true },
+      { k: 'status', l: 'Status', t: 'select', o: ['Recorded','Reconciled','Reversed'], c: 3, def: () => 'Recorded' },
+      { k: 'invoiceNumber', l: 'Supplier Invoice No.', t: 'datalist', src: 'invoiceNumbers', c: 4 },
+      { k: 'poNumber', l: 'PO Number', t: 'datalist', src: 'poNumbers', c: 4 },
+      { k: 'amount', l: 'Amount Paid (KES)', t: 'number', c: 4, req: true },
+
+      { sec: 'Payment Channel' },
+      { k: 'paymentMethod', l: 'Payment Method', t: 'select', o: ENUM.paymentMethods, c: 4 },
+      { k: 'transactionReference', l: 'Transaction Reference', t: 'text', c: 4 },
+      { k: 'account', l: 'Account / Bank', t: 'text', c: 4 },
+      { k: 'mpesaCode', l: 'M-Pesa Transaction Code', t: 'text', c: 3 },
+      { k: 'tillPaybill', l: 'Till / Paybill', t: 'text', c: 3 },
+      { k: 'phoneNumber', l: 'Phone Number', t: 'tel', c: 3 },
+      { k: 'paidBy', l: 'Paid By', t: 'text', c: 3 },
+      { k: 'notes', l: 'Notes', t: 'textarea', c: 12 }
+    ],
+    columns: [
+      { k: 'paymentId', l: 'Payment ID' },
+      { k: 'paymentDate', l: 'Date', date: true },
+      { k: 'supplier', l: 'Supplier' },
+      { k: 'invoiceNumber', l: 'Invoice' },
+      { k: 'poNumber', l: 'PO' },
+      { k: 'amount', l: 'Amount', money: true, num: true },
+      { k: 'paymentMethod', l: 'Method' },
+      { k: 'transactionReference', l: 'Reference' },
+      { k: 'status', l: 'Status', badge: true }
+    ],
+    search: ['paymentId', 'supplier', 'invoiceNumber', 'poNumber', 'paymentMethod', 'transactionReference', 'mpesaCode']
+  },
+
+  /* ---------------- BUDGETS ---------------- */
+  budgets: {
+    title: 'Procurement Budget', plural: 'Procurement Budgets', icon: '🎯', prefix: 'NGT-BUD',
+    numberKey: 'budgetCode', statusKey: 'status', statuses: ['Active','Closed','Exceeded','On Hold'],
+    fields: [
+      { sec: 'Budget Header' },
+      { k: 'budgetCode', l: 'Budget Code', t: 'text', ro: true, c: 3 },
+      { k: 'name', l: 'Budget Name', t: 'text', c: 5, req: true },
+      { k: 'status', l: 'Status', t: 'select', o: ['Active','Closed','Exceeded','On Hold'], c: 4, def: () => 'Active' },
+      { k: 'project', l: 'Project / Job', t: 'datalist', src: 'projects', c: 4 },
+      { k: 'customer', l: 'Customer', t: 'datalist', src: 'customers', c: 4 },
+      { k: 'department', l: 'Department', t: 'datalist', src: 'departments', c: 4 },
+      { k: 'period', l: 'Budget Period', t: 'select', o: ENUM.budgetPeriod, c: 3 },
+      { k: 'startDate', l: 'Start Date', t: 'date', c: 3 },
+      { k: 'endDate', l: 'End Date', t: 'date', c: 3 },
+      { k: 'totalBudget', l: 'Total Budget (KES)', t: 'number', ro: true, c: 3 },
+      { k: 'totalActual', l: 'Total Actual (KES)', t: 'number', ro: true, c: 3 },
+      { k: 'variance', l: 'Variance (KES)', t: 'number', ro: true, c: 3 },
+      { k: 'notes', l: 'Notes', t: 'textarea', c: 3 }
+    ],
+    items: {
+      label: 'Budget Categories',
+      columns: [
+        { k: 'category', l: 'Category', w: '34%' },
+        { k: 'budgetAmount', l: 'Budget (KES)', w: '20%', type: 'number' },
+        { k: 'actualAmount', l: 'Actual (KES)', w: '20%', type: 'number' },
+        { k: 'variance', l: 'Variance', w: '16%', calc: true },
+        { k: 'notes', l: 'Notes', w: '10%' }
+      ],
+      row: r => { r.variance = num(r.budgetAmount) - num(r.actualAmount); return r; },
+      totals: rs => ({
+        totalBudget: sum(rs, r => r.budgetAmount),
+        totalActual: sum(rs, r => r.actualAmount)
+      })
+    },
+    compute: rec => {
+      rec.variance = num(rec.totalBudget) - num(rec.totalActual);
+      return rec;
+    },
+    columns: [
+      { k: 'budgetCode', l: 'Code' },
+      { k: 'name', l: 'Budget' },
+      { k: 'project', l: 'Project' },
+      { k: 'department', l: 'Department' },
+      { k: 'period', l: 'Period' },
+      { k: 'totalBudget', l: 'Budget', money: true, num: true },
+      { k: 'totalActual', l: 'Actual', money: true, num: true },
+      { k: 'variance', l: 'Variance', money: true, num: true },
+      { k: 'status', l: 'Status', badge: true }
+    ],
+    search: ['budgetCode', 'name', 'project', 'customer', 'department', 'status']
+  },
+
+  /* ---------------- COST ALLOCATION ---------------- */
+  allocations: {
+    title: 'Cost Allocation', plural: 'Cost Allocations', icon: '🧮', prefix: 'NGT-ALLOC',
+    numberKey: 'allocationNumber', statusKey: 'status', statuses: ['Draft','Posted','Reversed'],
+    fields: [
+      { sec: 'Allocation Header' },
+      { k: 'allocationNumber', l: 'Allocation No.', t: 'text', ro: true, c: 3 },
+      { k: 'date', l: 'Date', t: 'date', c: 3, def: today },
+      { k: 'poReference', l: 'PO / Invoice Reference', t: 'text', c: 3 },
+      { k: 'status', l: 'Status', t: 'select', o: ['Draft','Posted','Reversed'], c: 3, def: () => 'Draft' },
+      { k: 'totalAmount', l: 'Total Amount to Allocate (KES)', t: 'number', c: 4 },
+      { k: 'allocatedAmount', l: 'Allocated (KES)', t: 'number', ro: true, c: 4 },
+      { k: 'unallocated', l: 'Unallocated (KES)', t: 'number', ro: true, c: 4 },
+      { k: 'notes', l: 'Notes', t: 'textarea', c: 12 }
+    ],
+    items: {
+      label: 'Allocation Lines',
+      columns: [
+        { k: 'targetType', l: 'Allocation Target', w: '24%', type: 'select', options: ENUM.allocationTargets },
+        { k: 'target', l: 'Project / Department / Customer', w: '30%' },
+        { k: 'account', l: 'Account / Cost Centre', w: '22%' },
+        { k: 'amount', l: 'Amount (KES)', w: '24%', type: 'number' }
+      ],
+      row: r => r,
+      totals: rs => ({ allocatedAmount: sum(rs, r => r.amount) })
+    },
+    compute: rec => {
+      rec.unallocated = num(rec.totalAmount) - num(rec.allocatedAmount);
+      return rec;
+    },
+    columns: [
+      { k: 'allocationNumber', l: 'Allocation No.' },
+      { k: 'date', l: 'Date', date: true },
+      { k: 'poReference', l: 'Reference' },
+      { k: 'totalAmount', l: 'Total', money: true, num: true },
+      { k: 'allocatedAmount', l: 'Allocated', money: true, num: true },
+      { k: 'unallocated', l: 'Unallocated', money: true, num: true },
+      { k: 'status', l: 'Status', badge: true }
+    ],
+    search: ['allocationNumber', 'poReference', 'status']
+  },
+
+  /* ---------------- PROCUREMENT SERVICES (customer-facing) ---------------- */
+  procurementServices: {
+    title: 'Procurement Service Request', plural: 'Procurement Services', icon: '🤝', prefix: 'NGT-PS',
+    numberKey: 'psNumber', statusKey: 'status', statuses: ENUM.psStatus,
+    fields: [
+      { sec: 'Customer Request' },
+      { k: 'psNumber', l: 'Request No.', t: 'text', ro: true, c: 3 },
+      { k: 'requestDate', l: 'Request Date', t: 'date', c: 3, def: today },
+      { k: 'customer', l: 'Customer', t: 'datalist', src: 'customers', c: 3, req: true },
+      { k: 'customerOrderRef', l: 'Customer Order Ref.', t: 'text', c: 3 },
+      { k: 'status', l: 'Status', t: 'select', o: ENUM.psStatus, c: 3, def: () => 'Draft' },
+      { k: 'prReference', l: 'Linked PR', t: 'datalist', src: 'prNumbers', c: 3 },
+      { k: 'poReference', l: 'Linked PO', t: 'datalist', src: 'poNumbers', c: 3 },
+      { k: 'currency', l: 'Currency', t: 'select', o: ENUM.currencies, c: 3, def: () => 'KES' },
+
+      { sec: 'Profitability' },
+      { k: 'totalSupplierCost', l: 'Total Supplier Cost (KES)', t: 'number', ro: true, c: 3 },
+      { k: 'totalCustomerPrice', l: 'Total Customer Price (KES)', t: 'number', ro: true, c: 3 },
+      { k: 'deliveryCost', l: 'Delivery Cost (KES)', t: 'number', c: 2 },
+      { k: 'otherDirectCosts', l: 'Other Direct Costs (KES)', t: 'number', c: 2 },
+      { k: 'grossProfit', l: 'Gross Procurement Profit (KES)', t: 'number', ro: true, c: 3 },
+      { k: 'marginPercent', l: 'Margin (%)', t: 'number', ro: true, c: 2 },
+      { k: 'notes', l: 'Notes', t: 'textarea', c: 12 }
+    ],
+    items: {
+      label: 'Service Request Lines',
+      columns: [
+        { k: 'item', l: 'Item / Service', w: '20%' },
+        { k: 'description', l: 'Description / Specification', w: '24%', type: 'textarea' },
+        { k: 'quantity', l: 'Qty', w: '7%', type: 'number' },
+        { k: 'supplierCost', l: 'Supplier Unit Cost', w: '13%', type: 'number' },
+        { k: 'serviceMargin', l: 'NGT Margin / Unit', w: '13%', type: 'number' },
+        { k: 'customerPrice', l: 'Customer Unit Price', w: '13%', type: 'number' },
+        { k: 'total', l: 'Line Total', w: '12%', calc: true }
+      ],
+      row: r => {
+        if (!num(r.customerPrice)) r.customerPrice = num(r.supplierCost) + num(r.serviceMargin);
+        r.total = num(r.quantity) * num(r.customerPrice);
+        return r;
+      },
+      totals: rs => ({
+        totalSupplierCost: sum(rs, r => num(r.quantity) * num(r.supplierCost)),
+        totalCustomerPrice: sum(rs, r => r.total)
+      })
+    },
+    compute: rec => {
+      rec.grossProfit = num(rec.totalCustomerPrice) - num(rec.totalSupplierCost)
+                      - num(rec.deliveryCost) - num(rec.otherDirectCosts);
+      rec.marginPercent = num(rec.totalCustomerPrice)
+        ? (rec.grossProfit / num(rec.totalCustomerPrice)) * 100 : 0;
+      return rec;
+    },
+    columns: [
+      { k: 'psNumber', l: 'Request No.' },
+      { k: 'requestDate', l: 'Date', date: true },
+      { k: 'customer', l: 'Customer' },
+      { k: 'customerOrderRef', l: 'Customer Order' },
+      { k: 'totalSupplierCost', l: 'Supplier Cost', money: true, num: true },
+      { k: 'totalCustomerPrice', l: 'Customer Price', money: true, num: true },
+      { k: 'grossProfit', l: 'Gross Profit', money: true, num: true },
+      { k: 'marginPercent', l: 'Margin %', num: true },
+      { k: 'status', l: 'Status', badge: true }
+    ],
+    search: ['psNumber', 'customer', 'customerOrderRef', 'status']
+  },
+
+  /* ---------------- PRICE HISTORY ---------------- */
+  priceHistory: {
+    title: 'Price History Entry', plural: 'Purchase Price History', icon: '📈', prefix: 'NGT-PH',
+    numberKey: 'phNumber', statusKey: 'status', statuses: ['Active','Archived'],
+    fields: [
+      { k: 'phNumber', l: 'Ref.', t: 'text', ro: true, c: 3 },
+      { k: 'date', l: 'Date', t: 'date', c: 3, def: today },
+      { k: 'item', l: 'Item / Service', t: 'text', c: 3, req: true },
+      { k: 'category', l: 'Category', t: 'datalist', src: 'categories', c: 3 },
+      { k: 'supplier', l: 'Supplier', t: 'datalist', src: 'supplierNames', c: 4 },
+      { k: 'unitPrice', l: 'Unit Price', t: 'number', c: 3 },
+      { k: 'currency', l: 'Currency', t: 'select', o: ENUM.currencies, c: 2, def: () => 'KES' },
+      { k: 'poReference', l: 'PO Reference', t: 'datalist', src: 'poNumbers', c: 3 },
+      { k: 'status', l: 'Status', t: 'select', o: ['Active','Archived'], c: 3, def: () => 'Active' },
+      { k: 'notes', l: 'Notes', t: 'textarea', c: 12 }
+    ],
+    columns: [
+      { k: 'phNumber', l: 'Ref.' },
+      { k: 'date', l: 'Date', date: true },
+      { k: 'item', l: 'Item' },
+      { k: 'category', l: 'Category' },
+      { k: 'supplier', l: 'Supplier' },
+      { k: 'unitPrice', l: 'Unit Price', money: true, num: true },
+      { k: 'currency', l: 'Ccy' },
+      { k: 'poReference', l: 'PO' }
+    ],
+    search: ['phNumber', 'item', 'category', 'supplier', 'poReference']
+  },
+
+  /* ---------------- DOCUMENTS ---------------- */
+  documents: {
+    title: 'Document', plural: 'Documents', icon: '📁', prefix: 'NGT-DOC',
+    numberKey: 'docNumber', statusKey: 'status', statuses: ['Active','Expired','Superseded','Archived'],
+    fields: [
+      { k: 'docNumber', l: 'Document No.', t: 'text', ro: true, c: 3 },
+      { k: 'title', l: 'Document Title', t: 'text', c: 5, req: true },
+      { k: 'type', l: 'Document Type', t: 'select', o: ENUM.docTypes, c: 4 },
+      { k: 'supplier', l: 'Related Supplier', t: 'datalist', src: 'supplierNames', c: 4 },
+      { k: 'reference', l: 'Related Reference (PO/GRN/Invoice)', t: 'text', c: 4 },
+      { k: 'date', l: 'Document Date', t: 'date', c: 4 },
+      { k: 'expiryDate', l: 'Expiry / Review Date', t: 'date', c: 4 },
+      { k: 'status', l: 'Status', t: 'select', o: ['Active','Expired','Superseded','Archived'], c: 4, def: () => 'Active' },
+      { k: 'fileUrl', l: 'File URL', t: 'text', c: 12 },
+      { k: 'notes', l: 'Notes', t: 'textarea', c: 12 }
+    ],
+    columns: [
+      { k: 'docNumber', l: 'Doc No.' },
+      { k: 'title', l: 'Title' },
+      { k: 'type', l: 'Type' },
+      { k: 'supplier', l: 'Supplier' },
+      { k: 'date', l: 'Date', date: true },
+      { k: 'expiryDate', l: 'Expiry', date: true },
+      { k: 'status', l: 'Status', badge: true }
+    ],
+    search: ['docNumber', 'title', 'type', 'supplier', 'reference', 'status']
+  }
+};
+
+/* ---------------------------------------------------------------------------
+   6. NAVIGATION
+   --------------------------------------------------------------------------- */
+const NAV = [
+  { group: 'Overview', items: [ { k: 'dashboard', l: 'Dashboard', i: '📊' } ] },
+  { group: 'Requisition', items: [
+    { k: 'purchaseRequests', l: 'Purchase Requests', i: '📋' },
+    { k: 'approvals', l: 'Pending Approvals', i: '✅' }
+  ]},
+  { group: 'Supplier Sourcing', items: [
+    { k: 'rfqs', l: 'RFQs', i: '📨' },
+    { k: 'quotations', l: 'Supplier Quotations', i: '💬' },
+    { k: 'comparison', l: 'Quote Comparison', i: '⚖️' }
+  ]},
+  { group: 'Ordering', items: [ { k: 'purchaseOrders', l: 'Purchase Orders', i: '🧾' } ] },
+  { group: 'Receiving', items: [
+    { k: 'goodsReceived', l: 'Goods Received', i: '📦' },
+    { k: 'inspections', l: 'Quality Inspection', i: '🔍' },
+    { k: 'purchaseReturns', l: 'Purchase Returns', i: '↩️' }
+  ]},
+  { group: 'Finance', items: [
+    { k: 'supplierInvoices', l: 'Supplier Invoices', i: '📑' },
+    { k: 'supplierPayments', l: 'Supplier Payments', i: '💰' },
+    { k: 'threeWayMatch', l: 'Three-Way Matching', i: '🔗' },
+    { k: 'budgets', l: 'Procurement Budgets', i: '🎯' },
+    { k: 'allocations', l: 'Cost Allocation', i: '🧮' }
+  ]},
+  { group: 'Business', items: [ { k: 'procurementServices', l: 'Procurement Services', i: '🤝' } ] },
+  { group: 'Insights', items: [
+    { k: 'priceHistory', l: 'Price History', i: '📈' },
+    { k: 'supplierPerformance', l: 'Supplier Performance', i: '⭐' },
+    { k: 'reports', l: 'Reports', i: '🖨️' }
+  ]},
+  { group: 'Master Data', items: [
+    { k: 'suppliers', l: 'Suppliers', i: '🏭' },
+    { k: 'documents', l: 'Documents', i: '📁' },
+    { k: 'audit', l: 'Audit Trail', i: '🕵️' },
+    { k: 'settings', l: 'Settings', i: '⚙️' }
+  ]}
+];
+
+/* ---------------------------------------------------------------------------
+   7. DERIVED DATA HELPERS
+   --------------------------------------------------------------------------- */
+function optionSource(src) {
+  const s = store.settings || {};
+  const lists = {
+    departments: (s.departments || []),
+    categories: (s.categories || []),
+    projects: (s.projects || []),
+    customers: (s.customers || []),
+    locations: (s.locations || []),
+    supplierNames: rows('suppliers').map(r => r.name),
+    prNumbers: rows('purchaseRequests').map(r => r.prNumber),
+    rfqNumbers: rows('rfqs').map(r => r.rfqNumber),
+    sqNumbers: rows('quotations').map(r => r.sqNumber),
+    qcNumbers: rows('comparisons').map(r => r.qcNumber),
+    poNumbers: rows('purchaseOrders').map(r => r.poNumber),
+    grnNumbers: rows('goodsReceived').map(r => r.grnNumber),
+    invoiceNumbers: rows('supplierInvoices').map(r => r.invoiceNumber),
+    budgetCodes: rows('budgets').map(r => r.budgetCode)
+  };
+  return (lists[src] || []).filter(Boolean).filter((v, i, a) => a.indexOf(v) === i).sort();
+}
+
+/* Alerts derived live from the current data — nothing is fabricated */
+function computeAlerts() {
+  const out = [];
+  const t = today();
+
+  rows('purchaseRequests').forEach(r => {
+    if (['Submitted', 'Under Review'].includes(r.status)) {
+      out.push({ level: 'warn', icon: '🔔', text: `Purchase Request ${r.prNumber} requires approval (${r.requestedBy || '—'}).`, ref: r.prNumber });
+    }
+  });
+
+  rows('purchaseOrders').forEach(po => {
+    if (po.status === 'Sent' || po.status === 'Approved') {
+      out.push({ level: 'info', icon: '🔔', text: `PO ${po.poNumber} has not been acknowledged by ${po.supplier || 'supplier'}.`, ref: po.poNumber });
+    }
+    if (po.expectedDeliveryDate && po.expectedDeliveryDate < t &&
+        ['Approved', 'Sent', 'Acknowledged', 'Partially Received'].includes(po.status)) {
+      out.push({ level: 'bad', icon: '⚠', text: `Delivery for PO ${po.poNumber} is overdue (expected ${po.expectedDeliveryDate}).`, ref: po.poNumber });
+    }
+  });
+
+  rows('supplierInvoices').forEach(inv => {
+    const bal = num(inv.balance) || (num(inv.total) - num(inv.amountPaid));
+    if (bal <= 0) return;
+    if (inv.dueDate) {
+      const d = daysBetween(t, inv.dueDate);
+      if (d !== null && d < 0) {
+        out.push({ level: 'bad', icon: '⚠', text: `Supplier invoice ${inv.invoiceNumber} (${inv.supplier}) is overdue by ${Math.abs(d)} day(s).`, ref: inv.invoiceRef });
+      } else if (d !== null && d <= 3) {
+        out.push({ level: 'warn', icon: '⏰', text: `Supplier invoice ${inv.invoiceNumber} (${inv.supplier}) is due in ${d} day(s).`, ref: inv.invoiceRef });
+      }
+    }
+  });
+
+  rows('quotations').forEach(q => {
+    if (!q.validUntil || ['Selected', 'Not Selected', 'Expired'].includes(q.status)) return;
+    const d = daysBetween(t, q.validUntil);
+    if (d !== null && d >= 0 && d <= 3) {
+      out.push({ level: 'warn', icon: '⏳', text: `Quotation ${q.sqNumber} from ${q.supplier} expires in ${d} day(s).`, ref: q.sqNumber });
+    } else if (d !== null && d < 0) {
+      out.push({ level: 'bad', icon: '⚠', text: `Quotation ${q.sqNumber} from ${q.supplier} has expired.`, ref: q.sqNumber });
+    }
+  });
+
+  rows('documents').forEach(d => {
+    if (!d.expiryDate) return;
+    const dd = daysBetween(t, d.expiryDate);
+    if (dd !== null && dd >= 0 && dd <= 30) {
+      out.push({ level: 'info', icon: '📄', text: `Document "${d.title}" expires in ${dd} day(s).`, ref: d.docNumber });
+    } else if (dd !== null && dd < 0) {
+      out.push({ level: 'warn', icon: '📄', text: `Document "${d.title}" expired on ${d.expiryDate}.`, ref: d.docNumber });
+    }
+  });
+
+  return out;
+}
+
+function navBadges() {
+  const b = {};
+  b.purchaseRequests = rows('purchaseRequests').filter(r => ['Submitted', 'Under Review'].includes(r.status)).length;
+  b.approvals = b.purchaseRequests +
+    rows('purchaseOrders').filter(r => r.status === 'Pending Approval').length;
+  b.purchaseOrders = rows('purchaseOrders').filter(r =>
+    ['Approved', 'Sent', 'Acknowledged', 'Partially Received'].includes(r.status)).length;
+  b.supplierInvoices = rows('supplierInvoices').filter(r => {
+    const bal = num(r.balance) || (num(r.total) - num(r.amountPaid));
+    return bal > 0;
+  }).length;
+  return b;
+}
+
+/* ---------------------------------------------------------------------------
+   8. AUDIT LOG
+   --------------------------------------------------------------------------- */
+async function audit(action, resource, recordId, refLabel, prevVal, newVal, comments) {
+  const entry = {
+    ts: nowISO(),
+    user: store.user.name || 'Unknown',
+    role: store.user.role || '—',
+    action: action,
+    resource: resource || '',
+    recordId: recordId || '',
+    reference: refLabel || '',
+    previousValue: prevVal == null ? '' : JSON.stringify(prevVal),
+    newValue: newVal == null ? '' : JSON.stringify(newVal),
+    comments: comments || '',
+    device: navigator.userAgent.slice(0, 120)
+  };
+  try {
+    const id = 'AUD-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    await fbPut('audit/' + id, entry);
+    store.data.audit = store.data.audit || {};
+    store.data.audit[id] = entry;
+  } catch (e) { console.warn('Audit write failed', e); }
+}
+
+/* ---------------------------------------------------------------------------
+   9. SYNC
+   --------------------------------------------------------------------------- */
+let syncTimer = null;
+
+function setSync(state, msg) {
+  const dot = $('#syncDot'), txt = $('#syncText');
+  dot.className = 'sync-dot' + (state === 'off' ? ' off' : state === 'busy' ? ' busy' : '');
+  txt.textContent = msg;
+}
+
+async function syncAll(showMsg) {
+  setSync('busy', 'Syncing…');
+  try {
+    const raw = await fbGet('');
+    store.data = raw || {};
+    store.settings = store.data.settings || {};
+    store.online = true;
+    store.lastSync = new Date();
+    setSync('on', 'Live · ' + store.lastSync.toLocaleTimeString());
+    if (showMsg) toast('Synced with Firebase Realtime Database.', 'ok', 2000);
+    render();
+  } catch (e) {
+    store.online = false;
+    setSync('off', 'Offline — ' + e.message);
+    if (showMsg) toast('Firebase connection failed: ' + e.message, 'bad', 5000);
+    render();
+  }
+}
+
+function startPolling() {
+  if (syncTimer) clearInterval(syncTimer);
+  syncTimer = setInterval(() => {
+    if (document.querySelector('.modal-backdrop')) return; // don't disturb open forms
+    if (document.hidden) return;
+    syncAll(false);
+  }, 15000);
+}
+
+/* ---------------------------------------------------------------------------
+   10. SHELL RENDERING
+   --------------------------------------------------------------------------- */
+function renderNav() {
+  const badges = navBadges();
+  let html = '';
+  NAV.forEach(g => {
+    html += '<div class="nav-group"><div class="nav-group-title">' + esc(g.group) + '</div>';
+    g.items.forEach(it => {
+      const b = badges[it.k];
+      html += '<div class="nav-item' + (store.route === it.k ? ' active' : '') + '" data-route="' + it.k + '">' +
+        '<span class="ni">' + it.i + '</span><span>' + esc(it.l) + '</span>' +
+        (b ? '<span class="nbadge">' + b + '</span>' : '') +
+        '</div>';
+    });
+    html += '</div>';
+  });
+  $('#nav').innerHTML = html;
+  $$('#nav .nav-item').forEach(el => {
+    el.onclick = () => { store.route = el.dataset.route; render(); window.scrollTo(0, 0); };
+  });
+}
+
+function setPageTitle(title, crumb) {
+  $('#pageTitle').textContent = title;
+  $('#crumb').textContent = crumb || 'NGT Procurement';
+  document.title = title + ' — NGT Procurement Management System';
+}
+
+function render() {
+  renderNav();
+  const v = $('#view');
+  const r = store.route;
+
+  if (r === 'dashboard') return renderDashboard(v);
+  if (r === 'approvals') return renderApprovals(v);
+  if (r === 'comparison') return renderComparison(v);
+  if (r === 'threeWayMatch') return renderThreeWay(v);
+  if (r === 'supplierPerformance') return renderSupplierPerformance(v);
+  if (r === 'reports') return renderReports(v);
+  if (r === 'audit') return renderAudit(v);
+  if (r === 'settings') return renderSettings(v);
+  if (RES[r]) return renderResourceList(r, v);
+}
+
+/* ---------------------------------------------------------------------------
+   11. GENERIC RESOURCE LIST VIEW
+   --------------------------------------------------------------------------- */
+function getFilter(route) {
+  if (!ui[route]) ui[route] = { q: '', status: '', from: '', to: '', supplier: '', extra: '' };
+  return ui[route];
+}
+
+function applyFilters(key, list) {
+  const R = RES[key];
+  const f = getFilter(key);
+  let out = list;
+  if (f.q) {
+    const q = f.q.toLowerCase();
+    out = out.filter(r => (R.search || []).some(k => String(r[k] || '').toLowerCase().includes(q)));
+  }
+  if (f.status && R.statusKey) out = out.filter(r => r[R.statusKey] === f.status);
+  if (f.supplier) out = out.filter(r => String(r.supplier || '') === f.supplier);
+  if (f.from) {
+    const dk = R.fields.find(x => x.t === 'date' && !x.ro) ? R.fields.find(x => x.t === 'date' && !x.ro).k : null;
+    if (dk) out = out.filter(r => (r[dk] || '') >= f.from);
+  }
+  if (f.to) {
+    const dk = R.fields.find(x => x.t === 'date' && !x.ro) ? R.fields.find(x => x.t === 'date' && !x.ro).k : null;
+    if (dk) out = out.filter(r => (r[dk] || '') <= f.to);
+  }
+  return out;
+}
+
+function renderResourceList(key, host) {
+  const R = RES[key];
+  setPageTitle(R.plural, 'NGT Procurement');
+
+  const all = rows(key);
+  const f = getFilter(key);
+  const list = applyFilters(key, sortBy(all, R.statusKey ? '_seq' : 'supplierCode', -1));
+
+  const statusKey = R.statusKey;
+  const supplierList = optionSource('supplierNames');
+
+  host.innerHTML = `
+    <div class="page-head">
+      <div>
+        <h2>${esc(R.plural)}</h2>
+        <p>${all.length} record${all.length === 1 ? '' : 's'} in the database${list.length !== all.length ? ' · ' + list.length + ' shown after filters' : ''}</p>
+      </div>
+      <div class="spacer"></div>
+      <button class="btn btn-ghost btn-sm" id="btnExport">⬇ Export CSV</button>
+      <button class="btn btn-ghost btn-sm" id="btnPrint">🖨 Print</button>
+      <button class="btn btn-primary btn-sm" id="btnNew">＋ New ${esc(R.title)}</button>
+    </div>
+
+    <div class="toolbar">
+      <input type="search" id="fltQ" placeholder="Search…" value="${esc(f.q)}" />
+      ${statusKey ? `<select id="fltStatus">
+        <option value="">All statuses</option>
+        ${(R.statuses || []).map(s => `<option ${f.status === s ? 'selected' : ''}>${esc(s)}</option>`).join('')}
+      </select>` : ''}
+      ${optionSource('supplierNames').length && R.fields.some(x => x.k === 'supplier') ? `<select id="fltSupplier">
+        <option value="">All suppliers</option>
+        ${supplierList.map(s => `<option ${f.supplier === s ? 'selected' : ''}>${esc(s)}</option>`).join('')}
+      </select>` : ''}
+      <input type="date" id="fltFrom" value="${esc(f.from)}" title="From date" />
+      <input type="date" id="fltTo" value="${esc(f.to)}" title="To date" />
+      <div class="spacer"></div>
+      <button class="btn btn-ghost btn-xs" id="btnClear">Clear filters</button>
+    </div>
+
+    <div class="panel" style="padding:.8rem">
+      ${list.length ? renderTable(key, list) : emptyState(R)}
+    </div>
+  `;
+
+  const rerun = () => { render(); };
+
+  $('#fltQ').oninput = e => { f.q = e.target.value; const p = e.target.selectionStart; rerun(); setTimeout(() => { const n = $('#fltQ'); n.focus(); n.setSelectionRange(p, p); }, 0); };
+  if ($('#fltStatus')) $('#fltStatus').onchange = e => { f.status = e.target.value; rerun(); };
+  if ($('#fltSupplier')) $('#fltSupplier').onchange = e => { f.supplier = e.target.value; rerun(); };
+  $('#fltFrom').onchange = e => { f.from = e.target.value; rerun(); };
+  $('#fltTo').onchange = e => { f.to = e.target.value; rerun(); };
+  $('#btnClear').onclick = () => { ui[key] = { q: '', status: '', from: '', to: '', supplier: '' }; rerun(); };
+  $('#btnNew').onclick = () => openForm(key, null);
+  $('#btnExport').onclick = () => exportCSV(key, list);
+  $('#btnPrint').onclick = () => window.print();
+
+  $$('[data-edit]').forEach(b => b.onclick = () => openForm(key, b.dataset.edit));
+  $$('[data-view]').forEach(b => b.onclick = () => viewRecord(key, b.dataset.view));
+  $$('[data-del]').forEach(b => b.onclick = () => deleteRecord(key, b.dataset.del));
+}
+
+function emptyState(R) {
+  return `<div class="empty">
+    <span class="e-ico">${R.icon}</span>
+    <h4>No ${esc(R.plural.toLowerCase())} found</h4>
+    <p>Nothing has been recorded here yet. Use <strong>New ${esc(R.title)}</strong> to create the first record — data is written directly to the Firebase Realtime Database.</p>
+  </div>`;
+}
+
+function renderTable(key, list) {
+  const R = RES[key];
+  let h = '<div class="table-wrap"><table class="data"><thead><tr>';
+  R.columns.forEach(c => {
+    h += '<th' + (c.num || c.money ? ' class="num"' : '') + '>' + esc(c.l) + '</th>';
+  });
+  h += '<th style="text-align:right">Actions</th></tr></thead><tbody>';
+
+  list.forEach(r => {
+    h += '<tr>';
+    R.columns.forEach(c => {
+      let v = r[c.k];
+      if (c.date) v = v ? esc(v) : '<span class="muted">—</span>';
+      else if (c.money) v = money(v);
+      else if (c.badge) v = statusBadge(v);
+      else if (c.num) v = esc(v == null || v === '' ? '—' : num(v).toLocaleString('en-KE'));
+      else v = esc(v == null || v === '' ? '—' : v);
+      h += '<td' + (c.num || c.money ? ' class="num"' : '') + '>' + v + '</td>';
+    });
+    h += `<td class="actions">
+      <button class="btn-icon" data-view="${r._id}" title="View">👁</button>
+      <button class="btn-icon" data-edit="${r._id}" title="Edit">✎</button>
+      <button class="btn-icon" data-del="${r._id}" title="Delete">🗑</button>
+    </td></tr>`;
+  });
+  h += '</tbody></table></div>';
+  return h;
+}
+
+function exportCSV(key, list) {
+  const R = RES[key];
+  const cols = R.columns;
+  const head = cols.map(c => '"' + c.l.replace(/"/g, '""') + '"').join(',');
+  const body = list.map(r => cols.map(c => {
+    let v = r[c.k];
+    if (c.badge) v = String(v || '');
+    return '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+  }).join(',')).join('\n');
+  const blob = new Blob([head + '\n' + body], { type: 'text/csv;charset=utf-8;' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'NGT-' + key + '-' + today() + '.csv';
+  a.click();
+  toast('CSV exported.', 'ok', 2000);
+}
+
+/* ---------------------------------------------------------------------------
+   12. RECORD VIEWER
+   --------------------------------------------------------------------------- */
+function viewRecord(key, id) {
+  const R = RES[key];
+  const rec = findById(key, id);
+  if (!rec) return;
+  setPageTitle(R.title, 'NGT Procurement');
+
+  let h = '<div class="modal-backdrop"><div class="modal-card"><div class="modal-head">' +
+    '<div><h3>' + esc(rec[R.numberKey] || R.title) + '</h3>' +
+    '<div class="mh-sub">' + esc(R.title) + '</div></div><div class="spacer"></div>' +
+    '<button class="btn-icon" data-close>✕</button></div><div class="modal-body">';
+
+  h += '<div class="grid-2">';
+  h += '<div><div class="panel-head"><h3>Details</h3></div><dl class="kv">';
+  R.fields.filter(f => !f.sec && f.t !== 'textarea').forEach(f => {
+    let v = rec[f.k];
+    if (f.t === 'number') v = v === '' || v == null ? '—' : num(v).toLocaleString('en-KE');
+    h += '<dt>' + esc(f.l) + '</dt><dd>' + (v ? esc(v) : '<span class="muted">—</span>') + '</dd>';
+  });
+  h += '</dl></div>';
+
+  h += '<div><div class="panel-head"><h3>Narrative / Notes</h3></div><dl class="kv">';
+  R.fields.filter(f => f.t === 'textarea').forEach(f => {
+    h += '<dt>' + esc(f.l) + '</dt><dd>' + (rec[f.k] ? esc(rec[f.k]).replace(/\n/g, '<br>') : '<span class="muted">—</span>') + '</dd>';
+  });
+  h += '</dl></div></div>';
+
+  if (R.items && Array.isArray(rec.items) && rec.items.length) {
+    h += '<div class="section-divider"></div><div class="panel-head"><h3>' + esc(R.items.label) + '</h3></div>';
+    h += '<div class="table-wrap"><table class="data"><thead><tr>' +
+      R.items.columns.map(c => '<th' + (c.type === 'number' || c.calc ? ' class="num"' : '') + '>' + esc(c.l) + '</th>').join('') +
+      '</tr></thead><tbody>';
+    rec.items.forEach(r => {
+      h += '<tr>' + R.items.columns.map(c => {
+        let v = r[c.k];
+        if (c.calc || c.type === 'number') v = v == null || v === '' ? '—' : num(v).toLocaleString('en-KE', { maximumFractionDigits: 2 });
+        return '<td' + (c.calc || c.type === 'number' ? ' class="num"' : '') + '>' + (v === '' || v == null ? '—' : esc(v)) + '</td>';
+      }).join('') + '</tr>';
+    });
+    h += '</tbody></table></div>';
+  }
+
+  h += '</div><div class="modal-foot"><div class="spacer"></div>' +
+    '<button class="btn btn-ghost btn-sm" data-close>Close</button>' +
+    '<button class="btn btn-primary btn-sm" data-print>🖨 Print</button>' +
+    '</div></div></div>';
+
+  $('#modalRoot').innerHTML = h;
+  $$('[data-close]').forEach(b => b.onclick = closeModal);
+  $('[data-print]').onclick = () => window.print();
+  $('.modal-backdrop').onclick = e => { if (e.target.classList.contains('modal-backdrop')) closeModal(); };
+}
+
+function closeModal() {
+  $('#modalRoot').innerHTML = '';
+  document.body.style.overflow = '';
+}
+
+/* ---------------------------------------------------------------------------
+   13. GENERIC FORM (create / edit)
+   --------------------------------------------------------------------------- */
+let formState = null;
+
+function openForm(key, id) {
+  const R = RES[key];
+  const rec = id ? Object.assign({}, findById(key, id)) : {};
+  if (!id) {
+    R.fields.forEach(f => { if (f.def) rec[f.k] = typeof f.def === 'function' ? f.def() : f.def; });
+    if (R.numberKey) rec[R.numberKey] = '(auto-generated on save)';
+    if (R.statusKey && !rec[R.statusKey]) rec[R.statusKey] = (R.statuses || [])[0] || '';
+    rec.items = [];
+  } else {
+    rec.items = Array.isArray(rec.items) ? rec.items.map(x => Object.assign({}, x)) : [];
+  }
+
+  formState = { key: key, id: id, rec: rec };
+
+  let h = '<div class="modal-backdrop"><div class="modal-card"><div class="modal-head">' +
+    '<div><h3>' + (id ? 'Edit ' : 'New ') + esc(R.title) + '</h3>' +
+    '<div class="mh-sub">' + (id ? esc(rec[R.numberKey] || '') : 'A reference number will be generated automatically') + '</div></div>' +
+    '<div class="spacer"></div><button class="btn-icon" data-close>✕</button></div>';
+
+  h += '<div class="modal-body"><div class="form-grid" id="formGrid">';
+
+  R.fields.forEach((f, i) => {
+    if (f.sec) { h += '<div class="form-section-title">' + esc(f.sec) + '</div>'; return; }
+    h += '<div class="field c' + (f.c || 6) + '">';
+    h += '<label class="f-label">' + esc(f.l) + (f.req ? '<span class="req">*</span>' : '') + '</label>';
+    h += fieldInput(f, rec[f.k]);
+    h += '</div>';
+  });
+
+  h += '</div>';
+
+  if (R.items) {
+    h += '<div class="section-divider"></div>';
+    h += '<div class="panel-head"><h3>' + esc(R.items.label) + '</h3><div class="spacer"></div>' +
+      '<button class="btn btn-ghost btn-xs" id="btnAddRow">＋ Add Line</button></div>';
+    h += '<div class="items-editor"><div class="ie-scroll" id="ieWrap">' + itemsTableHTML(key, rec.items) + '</div>' +
+      '<div class="items-foot" id="ieFoot">' + itemsFootHTML(key, rec.items) + '</div></div>';
+  }
+
+  h += '</div><div class="modal-foot">';
+  h += '<span class="hint" style="font-size:.75rem;color:var(--txt-3);align-self:center" id="formHint"></span>';
+  h += '<div class="spacer"></div>';
+  h += '<button class="btn btn-ghost btn-sm" data-close>Cancel</button>';
+  if (id) h += '<button class="btn btn-danger btn-sm" id="btnDelete">🗑 Delete</button>';
+  h += '<button class="btn btn-primary btn-sm" id="btnSave">💾 Save to Firebase</button>';
+  h += '</div></div></div>';
+
+  $('#modalRoot').innerHTML = h;
+  document.body.style.overflow = 'hidden';
+
+  $$('[data-close]').forEach(b => b.onclick = closeModal);
+  $('.modal-backdrop').onclick = e => { if (e.target.classList.contains('modal-backdrop')) closeModal(); };
+
+  if (R.items) {
+    bindItemsEditor(key);
+    $('#btnAddRow').onclick = () => {
+      formState.rec.items.push({});
+      refreshItemsUI(key);
+    };
+  }
+
+  $('#btnSave').onclick = () => saveForm(key, id);
+  if (id && $('#btnDelete')) $('#btnDelete').onclick = () => deleteRecord(key, id, true);
+}
+
+function fieldInput(f, val) {
+  const v = val == null ? '' : val;
+  const common = 'data-fk="' + f.k + '"' + (f.ro ? ' readonly' : '') + (f.req ? ' data-req="1"' : '');
+  if (f.t === 'textarea') return '<textarea ' + common + ' rows="3" placeholder="' + esc(f.ph || '') + '">' + esc(v) + '</textarea>';
+  if (f.t === 'select') {
+    return '<select ' + common + '>' +
+      (f.req ? '' : '<option value=""></option>') +
+      (f.o || []).map(o => '<option' + (String(v) === String(o) ? ' selected' : '') + '>' + esc(o) + '</option>').join('') +
+      '</select>';
+  }
+  if (f.t === 'datalist') {
+    const id = 'dl_' + f.k;
+    const opts = optionSource(f.src);
+    return '<input list="' + id + '" ' + common + ' value="' + esc(v) + '" placeholder="' + esc(f.ph || 'Type or select…') + '">' +
+      '<datalist id="' + id + '">' + opts.map(o => '<option value="' + esc(o) + '"></option>').join('') + '</datalist>';
+  }
+  const type = f.t === 'number' ? 'number' : (f.t || 'text');
+  return '<input type="' + type + '" ' + common + ' value="' + esc(v) + '"' +
+    (f.step ? ' step="' + f.step + '"' : (f.t === 'number' ? ' step="0.01"' : '')) +
+    ' placeholder="' + esc(f.ph || '') + '">';
+}
+
+/* ---------------- Items editor ---------------- */
+function itemsTableHTML(key, list) {
+  const R = RES[key];
+  let h = '<table class="items-table"><thead><tr>';
+  R.items.columns.forEach(c => { h += '<th style="width:' + (c.w || 'auto') + '">' + esc(c.l) + '</th>'; });
+  h += '<th style="width:40px"></th></tr></thead><tbody id="ieBody">';
+  if (!list.length) {
+    h += '<tr><td colspan="' + (R.items.columns.length + 1) + '" style="text-align:center;color:var(--txt-3);padding:1rem">No lines yet — click “Add Line”.</td></tr>';
+  } else {
+    list.forEach((r, i) => {
+      h += '<tr data-row="' + i + '">';
+      R.items.columns.forEach(c => {
+        if (c.calc) {
+          h += '<td class="ie-total" data-total="' + i + '">' + (num(r[c.k]) ? num(r[c.k]).toLocaleString('en-KE', { maximumFractionDigits: 2 }) : '0.00') + '</td>';
+        } else if (c.type === 'textarea') {
+          h += '<td><textarea data-i="' + i + '" data-k="' + c.k + '">' + esc(r[c.k] || '') + '</textarea></td>';
+        } else if (c.type === 'select') {
+          h += '<td><select data-i="' + i + '" data-k="' + c.k + '">' +
+            '<option value=""></option>' +
+            (c.options || []).map(o => '<option' + (String(r[c.k]) === String(o) ? ' selected' : '') + '>' + esc(o) + '</option>').join('') +
+            '</select></td>';
+        } else {
+          h += '<td><input type="' + (c.type || 'text') + '"' + (c.type === 'number' ? ' step="0.01"' : '') +
+            ' data-i="' + i + '" data-k="' + c.k + '" value="' + esc(r[c.k] == null ? '' : r[c.k]) + '"></td>';
+        }
+      });
+      h += '<td><button type="button" class="btn-icon" data-delrow="' + i + '" title="Remove line">✕</button></td></tr>';
+    });
+  }
+  h += '</tbody></table>';
+  return h;
+}
+
+function itemsFootHTML(key, list) {
+  const R = RES[key];
+  if (!R.items.totals) return '';
+  const t = R.items.totals(list.map(r => R.items.row(Object.assign({}, r)))) || {};
+  const keys = Object.keys(t);
+  if (!keys.length) return '<span style="color:var(--txt-3);font-size:.78rem">' + list.length + ' line(s)</span>';
+  return '<div class="chip-row">' + keys.map(k => {
+    const label = (R.fields.find(f => f.k === k) || {}).l || k;
+    return '<span class="chip">' + esc(label) + ': <b>' + money(t[k]) + '</b></span>';
+  }).join('') + '</div>';
+}
+
+function refreshItemsUI(key) {
+  const R = RES[key];
+  // recompute all rows first
+  formState.rec.items = formState.rec.items.map(r => R.items.row(Object.assign({}, r)));
+  $('#ieWrap').innerHTML = itemsTableHTML(key, formState.rec.items);
+  $('#ieFoot').innerHTML = itemsFootHTML(key, formState.rec.items);
+  bindItemsEditor(key);
+  // push computed doc-level totals into read-only fields
+  applyComputedTotals(key);
+}
+
+function applyComputedTotals(key) {
+  const R = RES[key];
+  if (!R.items || !R.items.totals) return;
+  const t = R.items.totals(formState.rec.items) || {};
+  Object.keys(t).forEach(k => {
+    const el = $('[data-fk="' + k + '"]');
+    if (el) el.value = num(t[k]).toFixed(2);
+    formState.rec[k] = t[k];
+  });
+  if (R.compute) formState.rec = R.compute(formState.rec);
+  R.fields.forEach(f => {
+    if (f.ro) {
+      const el = $('[data-fk="' + f.k + '"]');
+      if (el && formState.rec[f.k] != null && document.activeElement !== el) {
+        el.value = typeof formState.rec[f.k] === 'number' ? num(formState.rec[f.k]).toFixed(2) : formState.rec[f.k];
+      }
+    }
+  });
+}
+
+function bindItemsEditor(key) {
+  const R = RES[key];
+  const wrap = $('#ieWrap');
+  if (!wrap) return;
+
+  wrap.querySelectorAll('input,select,textarea').forEach(el => {
+    el.oninput = el.onchange = () => {
+      const i = parseInt(el.dataset.i, 10);
+      const k = el.dataset.k;
+      if (!formState.rec.items[i]) formState.rec.items[i] = {};
+      formState.rec.items[i][k] = el.value;
+      // recompute row
+      formState.rec.items[i] = R.items.row(formState.rec.items[i]);
+      // update computed cells in that row only
+      R.items.columns.forEach(c => {
+        if (c.calc) {
+          const cell = wrap.querySelector('[data-total="' + i + '"]');
+          if (cell) cell.textContent = num(formState.rec.items[i][c.k]).toLocaleString('en-KE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+      });
+      $('#ieFoot').innerHTML = itemsFootHTML(key, formState.rec.items);
+      applyComputedTotals(key);
+    };
+  });
+
+  wrap.querySelectorAll('[data-delrow]').forEach(b => {
+    b.onclick = () => {
+      formState.rec.items.splice(parseInt(b.dataset.delrow, 10), 1);
+      refreshItemsUI(key);
+    };
+  });
+}
+
+/* ---------------- Save / Delete ---------------- */
+function collectForm(key) {
+  const R = RES[key];
+  const out = Object.assign({}, formState.rec);
+  let missing = [];
+  R.fields.forEach(f => {
+    if (f.sec) return;
+    if (f.ro) return;
+    const el = $('[data-fk="' + f.k + '"]');
+    if (!el) return;
+    let v = el.value;
+    if (f.t === 'number') v = v === '' ? '' : num(v);
+    out[f.k] = v;
+    if (f.req && (v === '' || v == null)) missing.push(f.l);
+  });
+  return { rec: out, missing: missing };
+}
+
+async function saveForm(key, id) {
+  const R = RES[key];
+  const { rec, missing } = collectForm(key);
+
+  if (missing.length) {
+    $('#formHint').innerHTML = '<span style="color:var(--bad)">Required: ' + esc(missing.join(', ')) + '</span>';
+    toast('Please complete required fields: ' + missing.join(', '), 'bad');
+    return;
+  }
+
+  if (R.compute) {
+    const c = R.compute(Object.assign({}, rec));
+    Object.keys(c).forEach(k => { rec[k] = c[k]; });
+  }
+
+  const btn = $('#btnSave');
+  btn.disabled = true; btn.textContent = 'Saving…';
+
+  try {
+    let firebaseId = id;
+    if (!id) {
+      const nn = nextNumber(key, R.prefix);
+      rec._seq = nn.seq;
+      if (R.numberKey) rec[R.numberKey] = nn.number;
+      rec._createdAt = nowISO();
+      rec._createdBy = store.user.name;
+      firebaseId = key + '_' + nn.seq + '_' + uid().slice(0, 5);
+    }
+    rec._updatedAt = nowISO();
+    rec._updatedBy = store.user.name;
+
+    await fbPut(key + '/' + firebaseId, rec);
+    store.data[key] = store.data[key] || {};
+    store.data[key][firebaseId] = rec;
+
+    await audit(id ? 'UPDATE' : 'CREATE', key, firebaseId, rec[R.numberKey] || '', id ? findById(key, id) : null, rec, '');
+
+    toast((id ? 'Updated ' : 'Created ') + (rec[R.numberKey] || R.title) + ' — saved to Firebase.', 'ok');
+    closeModal();
+    render();
+  } catch (e) {
+    toast('Save failed: ' + e.message, 'bad', 6000);
+    btn.disabled = false; btn.textContent = '💾 Save to Firebase';
+  }
+}
+
+async function deleteRecord(key, id, closeAfter) {
+  const R = RES[key];
+  const rec = findById(key, id);
+  if (!rec) return;
+  if (!confirm('Permanently delete ' + (rec[R.numberKey] || R.title) + '?\n\nThis writes to Firebase and cannot be undone.')) return;
+  try {
+    await fbDelete(key + '/' + id);
+    await audit('DELETE', key, id, rec[R.numberKey] || '', rec, null, 'Record deleted');
+    if (store.data[key]) delete store.data[key][id];
+    toast('Deleted ' + (rec[R.numberKey] || R.title) + '.', 'ok');
+    if (closeAfter) closeModal();
+    render();
+  } catch (e) {
+    toast('Delete failed: ' + e.message, 'bad', 5000);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   14. DASHBOARD
+   --------------------------------------------------------------------------- */
+function renderDashboard(host) {
+  setPageTitle('Dashboard', 'NGT Procurement');
+
+  const prs    = rows('purchaseRequests');
+  const pos    = rows('purchaseOrders');
+  const rfqs   = rows('rfqs');
+  const sqs    = rows('quotations');
+  const grns   = rows('goodsReceived');
+  const invs   = rows('supplierInvoices');
+  const pays   = rows('supplierPayments');
+  const insp   = rows('inspections');
+  const rets   = rows('purchaseReturns');
+  const bdgs   = rows('budgets');
+  const svcs   = rows('procurementServices');
+  const sups   = rows('suppliers');
+
+  const t = today();
+  const ym = monthKey(t);
+  const y  = t.slice(0, 4);
+
+  const poValue   = sum(pos, p => p.total);
+  const paidTotal = sum(pays, p => p.amount);
+  const payable   = sum(invs, i => (i.balance === '' || i.balance == null) ? (num(i.total) - num(i.amountPaid)) : num(i.balance));
+  const unpaidCount = invs.filter(i => {
+    const b = (i.balance === '' || i.balance == null) ? (num(i.total) - num(i.amountPaid)) : num(i.balance);
+    return b > 0;
+  }).length;
+
+  const thisMonth  = sum(pos.filter(p => monthKey(p.poDate) === ym), p => p.total);
+  const thisYear   = sum(pos.filter(p => (p.poDate || '').slice(0, 4) === y), p => p.total);
+
+  const pendingPRs = prs.filter(p => ['Submitted', 'Under Review'].includes(p.status)).length;
+  const pendingApprovals = pendingPRs + pos.filter(p => p.status === 'Pending Approval').length;
+  const activeRFQs = rfqs.filter(r => ['Draft', 'Sent', 'Responses Received'].includes(r.status)).length;
+  const awaitingDelivery = pos.filter(p => ['Approved', 'Sent', 'Acknowledged', 'Partially Received'].includes(p.status)).length;
+
+  // average supplier delivery time (PO date -> GRN delivery date)
+  const leadTimes = [];
+  grns.forEach(g => {
+    const po = pos.find(p => p.poNumber === g.poNumber);
+    if (po && po.poDate && g.deliveryDate) {
+      const d = daysBetween(po.poDate, g.deliveryDate);
+      if (d !== null && d >= 0) leadTimes.push(d);
+    }
+  });
+  const avgLead = leadTimes.length ? (leadTimes.reduce((a, b) => a + b, 0) / leadTimes.length).toFixed(1) : null;
+
+  const alerts = computeAlerts();
+
+  const byPurpose = groupSum(pos, p => p.purpose, p => p.total);
+  const projectCost = byPurpose['Project'] || 0;
+  const inventoryCost = byPurpose['Inventory'] || 0;
+  const officeCost = (byPurpose['Office/Administration'] || 0) + (byPurpose['Direct Expense'] || 0);
+
+  const kpi = [
+    { l: 'Total Procurement Value', v: money0(poValue), s: pos.length + ' purchase order(s)', cls: 'accent', i: '💼' },
+    { l: 'Pending Purchase Requests', v: pendingPRs, s: prs.length + ' total PR(s)', cls: pendingPRs ? 'warn' : '', i: '📋' },
+    { l: 'Pending Approvals', v: pendingApprovals, s: 'PR + PO awaiting approval', cls: pendingApprovals ? 'warn' : '', i: '✅' },
+    { l: 'Active RFQs', v: activeRFQs, s: rfqs.length + ' RFQ(s) recorded', cls: '', i: '📨' },
+    { l: 'Quotations Received', v: sqs.length, s: sqs.filter(q => q.status === 'Selected').length + ' selected', cls: '', i: '💬' },
+    { l: 'Purchase Orders', v: pos.length, s: awaitingDelivery + ' awaiting delivery', cls: '', i: '🧾' },
+    { l: 'Orders Awaiting Delivery', v: awaitingDelivery, s: 'Approved / Sent / Acknowledged', cls: awaitingDelivery ? 'warn' : '', i: '🚚' },
+    { l: 'Goods Received Notes', v: grns.length, s: insp.length + ' inspection(s)', cls: 'ok', i: '📦' },
+    { l: 'Supplier Invoices', v: invs.length, s: unpaidCount + ' unpaid', cls: '', i: '📑' },
+    { l: 'Unpaid Supplier Invoices', v: unpaidCount, s: money0(payable) + ' outstanding', cls: unpaidCount ? 'bad' : 'ok', i: '⚠' },
+    { l: 'Payments Made', v: pays.length, s: money0(paidTotal), cls: 'ok', i: '💰' },
+    { l: 'Outstanding Payables', v: money0(payable), s: 'Accounts payable', cls: payable ? 'bad' : 'ok', i: '📉' },
+    { l: 'Procurement This Month', v: money0(thisMonth), s: monthLabel(ym), cls: 'accent', i: '📅' },
+    { l: 'Procurement This Year', v: money0(thisYear), s: y, cls: 'accent', i: '🗓' },
+    { l: 'Avg. Supplier Delivery Time', v: avgLead === null ? '—' : avgLead + ' days', s: leadTimes.length + ' delivery sample(s)', cls: '', i: '⏱' },
+    { l: 'Suppliers Registered', v: sups.length, s: sups.filter(s => s.status === 'Active').length + ' active', cls: '', i: '🏭' }
+  ];
+
+  // monthly series (last 12 months)
+  const months = [];
+  const d0 = new Date(); d0.setDate(1);
+  for (let i = 11; i >= 0; i--) {
+    const d = new Date(d0.getFullYear(), d0.getMonth() - i, 1);
+    months.push(d.toISOString().slice(0, 7));
+  }
+  const monthlySeries = months.map(m => sum(pos.filter(p => monthKey(p.poDate) === m), p => p.total));
+
+  // budget vs actual
+  const totalBudget = sum(bdgs, b => b.totalBudget);
+  const totalActual = sum(bdgs, b => b.totalActual);
+
+  host.innerHTML = `
+    <div class="hero-banner animate-on-view">
+      <div class="vision-title">NGT Procurement Control Centre</div>
+      <h2>Request → Approval → Sourcing → Order → Receipt → Payment</h2>
+      <p>Every procurement transaction carries a <strong>Procurement Purpose</strong> (Project, Customer Order, Inventory, Brokerage, Hire Purchase, Asset, Office, Direct Expense or Procurement Service) so costs flow correctly into Finance, Inventory, CRM and Jobs/Projects.</p>
+      <div class="mini-stats">
+        <div><span>Suppliers</span><strong>${sups.length}</strong></div>
+        <div><span>Purchase Orders</span><strong>${pos.length}</strong></div>
+        <div><span>Goods Received</span><strong>${grns.length}</strong></div>
+        <div><span>Invoices</span><strong>${invs.length}</strong></div>
+        <div><span>Returns</span><strong>${rets.length}</strong></div>
+        <div><span>Service Requests</span><strong>${svcs.length}</strong></div>
+      </div>
+    </div>
+
+    <div class="kpi-grid">
+      ${kpi.map(k => `<div class="kpi-card ${k.cls}">
+        <span class="k-icon">${k.i}</span>
+        <div class="k-label">${esc(k.l)}</div>
+        <div class="k-value">${esc(String(k.v))}</div>
+        <div class="k-sub">${esc(k.s)}</div>
+      </div>`).join('')}
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-head"><h3>Procurement Spending — Last 12 Months</h3><div class="spacer"></div>
+          <span class="hint">Based on Purchase Order value</span></div>
+        <div class="chart-box"><canvas id="chMonthly"></canvas></div>
+        <div class="legend"><span><i style="background:#38bdf8"></i>Procurement value (KES)</span></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><h3>Financial Summary</h3></div>
+        <div class="table-wrap">
+          <table class="data" style="min-width:auto">
+            <tbody>
+              <tr><td>Procurement this month</td><td class="num">${money(thisMonth)}</td></tr>
+              <tr><td>Procurement this year</td><td class="num">${money(thisYear)}</td></tr>
+              <tr><td>Total procurement value (all POs)</td><td class="num">${money(poValue)}</td></tr>
+              <tr><td>Paid to suppliers</td><td class="num" style="color:#6ee7b7">${money(paidTotal)}</td></tr>
+              <tr><td>Unpaid supplier invoices</td><td class="num" style="color:#fca5a5">${money(payable)}</td></tr>
+              <tr><td>Pending POs (not yet received)</td><td class="num">${money(sum(pos.filter(p => ['Approved','Sent','Acknowledged','Partially Received'].includes(p.status)), p => p.total))}</td></tr>
+              <tr><td>Project procurement costs</td><td class="num">${money(projectCost)}</td></tr>
+              <tr><td>Inventory purchases</td><td class="num">${money(inventoryCost)}</td></tr>
+              <tr><td>Office / operating purchases</td><td class="num">${money(officeCost)}</td></tr>
+              <tr><td>Budget allocated</td><td class="num">${money(totalBudget)}</td></tr>
+              <tr><td>Budget actual</td><td class="num">${money(totalActual)}</td></tr>
+              <tr><td><strong>Budget variance</strong></td><td class="num"><strong>${money(totalBudget - totalActual)}</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      ${hbarPanel('Procurement by Category', groupSum(pos, p => p.category || (findById('purchaseRequests', '') || {}).requestType || 'Unspecified', p => p.total))}
+      ${hbarPanel('Procurement by Supplier', groupSum(pos, p => p.supplier, p => p.total))}
+      ${hbarPanel('Procurement by Purpose', byPurpose)}
+    </div>
+
+    <div class="grid-3">
+      ${hbarPanel('Procurement by Project', groupSum(pos.filter(p => p.project), p => p.project, p => p.total))}
+      ${hbarPanel('Procurement by Department', groupSum(pos.filter(p => p.department), p => p.department, p => p.total))}
+      ${hbarPanel('Procurement by Payment Method', groupSum(pays, p => p.paymentMethod, p => p.amount))}
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-head"><h3>Procurement vs Customer Revenue</h3><div class="spacer"></div>
+          <span class="hint">Procurement Services module</span></div>
+        <div class="table-wrap">
+          <table class="data" style="min-width:auto">
+            <thead><tr><th>Metric</th><th class="num">Amount</th></tr></thead>
+            <tbody>
+              <tr><td>Customer revenue (quoted)</td><td class="num">${money(sum(svcs, s => s.totalCustomerPrice))}</td></tr>
+              <tr><td>Supplier cost</td><td class="num">${money(sum(svcs, s => s.totalSupplierCost))}</td></tr>
+              <tr><td>Delivery + other direct costs</td><td class="num">${money(sum(svcs, s => num(s.deliveryCost) + num(s.otherDirectCosts)))}</td></tr>
+              <tr><td><strong>Gross procurement profit</strong></td><td class="num"><strong style="color:#6ee7b7">${money(sum(svcs, s => s.grossProfit))}</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        ${svcs.length ? '' : '<p class="hint" style="margin-top:.7rem;font-size:.78rem;color:var(--txt-3)">No procurement service requests recorded yet.</p>'}
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><h3>Alerts & Notifications</h3><div class="spacer"></div>
+          <span class="badge ${alerts.length ? 'warn' : 'ok'}">${alerts.length} active</span></div>
+        ${alerts.length ? '<div class="alert-list">' + alerts.slice(0, 12).map(a =>
+          '<div class="alert-row ' + a.level + '"><span class="a-ico">' + a.icon + '</span><span>' + esc(a.text) + '</span>' +
+          '<span class="a-time">' + esc(a.ref || '') + '</span></div>').join('') + '</div>'
+          : '<div class="empty" style="padding:1.5rem"><span class="e-ico">✅</span><h4>No outstanding alerts</h4><p>Approvals, deliveries, invoices and expiries are all up to date.</p></div>'}
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><h3>Procurement Pipeline</h3><div class="spacer"></div>
+        <span class="hint">Live counts across the procurement-to-payment cycle</span></div>
+      <div class="kpi-grid" style="margin-bottom:0">
+        ${pipelineCard('Purchase Requests', prs.length, prs.filter(p => p.status === 'Draft').length + ' draft')}
+        ${pipelineCard('Approved PRs', prs.filter(p => p.status === 'Approved').length, 'ready to source')}
+        ${pipelineCard('RFQs Issued', rfqs.length, rfqs.filter(r => r.status === 'Sent').length + ' awaiting response')}
+        ${pipelineCard('Quotations', sqs.length, sqs.filter(q => q.status === 'Received').length + ' new')}
+        ${pipelineCard('Purchase Orders', pos.length, pos.filter(p => p.status === 'Closed').length + ' closed')}
+        ${pipelineCard('Partial Receipts', grns.filter(g => g.status === 'Partially Received').length, 'POs partially received')}
+        ${pipelineCard('Inspections Pending', insp.filter(i => i.status === 'Pending Inspection').length, 'quality checks')}
+        ${pipelineCard('Returns Open', rets.filter(r => !['Rejected','Credited','Refunded','Replaced'].includes(r.status)).length, 'with suppliers')}
+      </div>
+    </div>
+  `;
+
+  drawLineChart($('#chMonthly'), months.map(monthLabel), monthlySeries);
+  observeAnimations();
+}
+
+function pipelineCard(label, value, sub) {
+  return '<div class="kpi-card"><div class="k-label">' + esc(label) + '</div>' +
+    '<div class="k-value">' + value + '</div><div class="k-sub">' + esc(sub) + '</div></div>';
+}
+
+function hbarPanel(title, map) {
+  const entries = Object.keys(map).map(k => ({ k: k, v: map[k] })).filter(e => e.v > 0).sort((a, b) => b.v - a.v).slice(0, 8);
+  const max = entries.length ? Math.max.apply(null, entries.map(e => e.v)) : 1;
+  return '<div class="panel"><div class="panel-head"><h3>' + esc(title) + '</h3></div>' +
+    (entries.length
+      ? entries.map(e => '<div class="hbar-row"><span class="h-label" title="' + esc(e.k) + '">' + esc(e.k) + '</span>' +
+          '<span class="h-track"><span class="h-fill" style="width:' + Math.max(2, (e.v / max) * 100) + '%"></span></span>' +
+          '<span class="h-val">' + money0(e.v) + '</span></div>').join('')
+      : '<div class="empty" style="padding:1.4rem"><span class="e-ico">—</span><p>No data recorded yet.</p></div>') +
+    '</div>';
+}
+
+/* ---------------------------------------------------------------------------
+   15. CANVAS CHARTS (no external libraries)
+   --------------------------------------------------------------------------- */
+function prepCanvas(cv) {
+  const dpr = window.devicePixelRatio || 1;
+  const w = cv.clientWidth || 600, h = cv.clientHeight || 250;
+  cv.width = w * dpr; cv.height = h * dpr;
+  const ctx = cv.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, w, h);
+  return { ctx: ctx, w: w, h: h };
+}
+
+function drawLineChart(cv, labels, values) {
+  if (!cv) return;
+  const { ctx, w, h } = prepCanvas(cv);
+  const padL = 62, padR = 14, padT = 16, padB = 34;
+  const iw = w - padL - padR, ih = h - padT - padB;
+  const max = Math.max.apply(null, values.concat([1]));
+  const step = values.length > 1 ? iw / (values.length - 1) : iw;
+
+  ctx.strokeStyle = '#1e2c3a'; ctx.lineWidth = 1;
+  ctx.font = '10px Inter, sans-serif'; ctx.fillStyle = '#7d93ad';
+  for (let i = 0; i <= 4; i++) {
+    const y = padT + (ih / 4) * i;
+    ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(w - padR, y); ctx.stroke();
+    const val = max - (max / 4) * i;
+    ctx.fillText(val >= 1000 ? (val / 1000).toFixed(0) + 'k' : val.toFixed(0), 6, y + 3);
+  }
+
+  const pts = values.map((v, i) => ({ x: padL + step * i, y: padT + ih - (v / max) * ih }));
+
+  const grad = ctx.createLinearGradient(0, padT, 0, padT + ih);
+  grad.addColorStop(0, 'rgba(56,189,248,.35)');
+  grad.addColorStop(1, 'rgba(56,189,248,0)');
+  ctx.beginPath();
+  ctx.moveTo(pts[0].x, padT + ih);
+  pts.forEach(p => ctx.lineTo(p.x, p.y));
+  ctx.lineTo(pts[pts.length - 1].x, padT + ih);
+  ctx.closePath(); ctx.fillStyle = grad; ctx.fill();
+
+  ctx.beginPath();
+  pts.forEach((p, i) => i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y));
+  ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2.4; ctx.lineJoin = 'round'; ctx.stroke();
+
+  pts.forEach(p => {
+    ctx.beginPath(); ctx.arc(p.x, p.y, 3.2, 0, Math.PI * 2);
+    ctx.fillStyle = '#0b1117'; ctx.fill();
+    ctx.strokeStyle = '#7dd3fc'; ctx.lineWidth = 2; ctx.stroke();
+  });
+
+  ctx.fillStyle = '#7d93ad'; ctx.font = '9.5px Inter, sans-serif'; ctx.textAlign = 'center';
+  labels.forEach((l, i) => {
+    if (labels.length > 8 && i % 2 !== 0) return;
+    ctx.fillText(l, padL + step * i, h - 12);
+  });
+  ctx.textAlign = 'left';
+}
+
+/* ---------------------------------------------------------------------------
+   16. APPROVALS VIEW
+   --------------------------------------------------------------------------- */
+function renderApprovals(host) {
+  setPageTitle('Pending Approvals', 'NGT Procurement');
+
+  const prs = rows('purchaseRequests').filter(r => ['Submitted', 'Under Review'].includes(r.status));
+  const pos = rows('purchaseOrders').filter(r => r.status === 'Pending Approval');
+
+  host.innerHTML = `
+    <div class="page-head">
+      <div><h2>Pending Approvals</h2>
+      <p>Purchase requisitions and purchase orders awaiting authorisation.</p></div>
+      <div class="spacer"></div>
+      <button class="btn btn-ghost btn-sm" id="btnPrint">🖨 Print</button>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><h3>Purchase Requisitions Awaiting Approval</h3><div class="spacer"></div>
+        <span class="badge ${prs.length ? 'warn' : 'ok'}">${prs.length}</span></div>
+      ${prs.length ? `<div class="table-wrap"><table class="data">
+        <thead><tr><th>PR No.</th><th>Date</th><th>Requested By</th><th>Department</th><th>Purpose</th><th>Priority</th><th class="num">Est. Total</th><th>Status</th><th style="text-align:right">Action</th></tr></thead>
+        <tbody>${prs.map(r => `<tr>
+          <td>${esc(r.prNumber)}</td><td>${esc(r.requestDate || '')}</td><td>${esc(r.requestedBy || '')}</td>
+          <td>${esc(r.department || '—')}</td><td>${esc(r.purpose || '—')}</td><td>${statusBadge(r.priority)}</td>
+          <td class="num">${money(r.estimatedTotal)}</td><td>${statusBadge(r.status)}</td>
+          <td class="actions">
+            <button class="btn btn-ok btn-xs" data-approve-pr="${r._id}">Approve</button>
+            <button class="btn btn-danger btn-xs" data-reject-pr="${r._id}">Reject</button>
+            <button class="btn-icon" data-view-pr="${r._id}">👁</button>
+          </td></tr>`).join('')}</tbody></table></div>`
+        : '<div class="empty"><span class="e-ico">✅</span><h4>No purchase requisitions awaiting approval</h4><p>Submitted requisitions will appear here for review.</p></div>'}
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><h3>Purchase Orders Awaiting Approval</h3><div class="spacer"></div>
+        <span class="badge ${pos.length ? 'warn' : 'ok'}">${pos.length}</span></div>
+      ${pos.length ? `<div class="table-wrap"><table class="data">
+        <thead><tr><th>PO No.</th><th>Date</th><th>Supplier</th><th>Purpose</th><th class="num">Total</th><th>Status</th><th style="text-align:right">Action</th></tr></thead>
+        <tbody>${pos.map(r => `<tr>
+          <td>${esc(r.poNumber)}</td><td>${esc(r.poDate || '')}</td><td>${esc(r.supplier || '')}</td>
+          <td>${esc(r.purpose || '—')}</td><td class="num">${money(r.total)}</td><td>${statusBadge(r.status)}</td>
+          <td class="actions">
+            <button class="btn btn-ok btn-xs" data-approve-po="${r._id}">Approve</button>
+            <button class="btn btn-danger btn-xs" data-reject-po="${r._id}">Reject</button>
+            <button class="btn-icon" data-view-po="${r._id}">👁</button>
+          </td></tr>`).join('')}</tbody></table></div>`
+        : '<div class="empty"><span class="e-ico">✅</span><h4>No purchase orders awaiting approval</h4><p>Draft purchase orders sent for approval will appear here.</p></div>'}
+    </div>
+  `;
+
+  $('#btnPrint').onclick = () => window.print();
+
+  $$('[data-view-pr]').forEach(b => b.onclick = () => viewRecord('purchaseRequests', b.dataset.viewPr));
+  $$('[data-view-po]').forEach(b => b.onclick = () => viewRecord('purchaseOrders', b.dataset.viewPo));
+  $$('[data-approve-pr]').forEach(b => b.onclick = () => approvePR(b.dataset.approvePr, true));
+  $$('[data-reject-pr]').forEach(b => b.onclick = () => approvePR(b.dataset.rejectPr, false));
+  $$('[data-approve-po]').forEach(b => b.onclick = () => approvePO(b.dataset.approvePo, true));
+  $$('[data-reject-po]').forEach(b => b.onclick = () => approvePO(b.dataset.rejectPo, false));
+}
+
+async function approvePR(id, approve) {
+  const rec = findById('purchaseRequests', id);
+  if (!rec) return;
+  const comment = prompt(approve ? 'Approval comments (optional):' : 'Reason for rejection (required):', '');
+  if (!approve && !comment) { toast('A rejection reason is required.', 'bad'); return; }
+  const prev = Object.assign({}, rec);
+  rec.status = approve ? 'Approved' : 'Rejected';
+  rec.approver = store.user.name;
+  rec.approvalDate = today();
+  if (approve) { rec.approvalComments = comment || ''; rec.approvedAmount = rec.estimatedTotal || 0; }
+  else { rec.rejectionReason = comment; }
+  rec._updatedAt = nowISO(); rec._updatedBy = store.user.name;
+
+  try {
+    await fbPut('purchaseRequests/' + id, rec);
+    store.data.purchaseRequests[id] = rec;
+    await audit(approve ? 'APPROVE' : 'REJECT', 'purchaseRequests', id, rec.prNumber, prev, rec, comment);
+    toast('PR ' + rec.prNumber + (approve ? ' approved.' : ' rejected.'), approve ? 'ok' : 'warn');
+    render();
+  } catch (e) { toast('Failed: ' + e.message, 'bad'); }
+}
+
+async function approvePO(id, approve) {
+  const rec = findById('purchaseOrders', id);
+  if (!rec) return;
+  const comment = prompt(approve ? 'Approval comments (optional):' : 'Reason for rejection (required):', '');
+  if (!approve && !comment) { toast('A reason is required.', 'bad'); return; }
+  const prev = Object.assign({}, rec);
+  rec.status = approve ? 'Approved' : 'Cancelled';
+  rec.approvedBy = store.user.name;
+  rec.approvalDate = today();
+  rec._updatedAt = nowISO(); rec._updatedBy = store.user.name;
+  try {
+    await fbPut('purchaseOrders/' + id, rec);
+    store.data.purchaseOrders[id] = rec;
+    await audit(approve ? 'APPROVE' : 'REJECT', 'purchaseOrders', id, rec.poNumber, prev, rec, comment);
+    toast('PO ' + rec.poNumber + (approve ? ' approved.' : ' cancelled.'), approve ? 'ok' : 'warn');
+    render();
+  } catch (e) { toast('Failed: ' + e.message, 'bad'); }
+}
+
+/* ---------------------------------------------------------------------------
+   17. QUOTATION COMPARISON VIEW
+   --------------------------------------------------------------------------- */
+function renderComparison(host) {
+  setPageTitle('Supplier Quotation Comparison', 'NGT Procurement');
+
+  const sqs = rows('quotations');
+  const prs = rows('purchaseRequests');
+
+  // group quotations by PR reference
+  const groups = {};
+  sqs.forEach(q => {
+    const k = q.prReference || q.rfqReference || '(unlinked)';
+    groups[k] = groups[k] || [];
+    groups[k].push(q);
+  });
+  const ready = Object.keys(groups).filter(k => groups[k].length >= 2);
+
+  const selected = ui.comparisonGroup || (ready[0] || '');
+  const sel = groups[selected] || [];
+
+  // build matrix
+  const itemNames = [];
+  sel.forEach(q => (q.items || []).forEach(it => {
+    const n = it.item || '(unnamed)';
+    if (itemNames.indexOf(n) === -1) itemNames.push(n);
+  }));
+
+  let html = `
+    <div class="page-head">
+      <div><h2>Supplier Quotation Comparison</h2>
+      <p>Compare multiple supplier quotations side by side. The system does <strong>not</strong> auto-select a winner — the authorised procurement user records the selection rationale for audit purposes.</p></div>
+      <div class="spacer"></div>
+      <button class="btn btn-primary btn-sm" id="btnSaveComparison" ${sel.length < 2 ? 'disabled' : ''}>💾 Save Comparison Record</button>
+    </div>
+
+    <div class="toolbar">
+      <label class="f-label" style="margin:0">Comparison Group</label>
+      <select id="cmbGroup">
+        ${ready.length ? ready.map(k => `<option value="${esc(k)}" ${selected === k ? 'selected' : ''}>${esc(k)} — ${groups[k].length} quotations</option>`).join('')
+          : '<option value="">No group has 2 or more quotations</option>'}
+      </select>
+      <div class="spacer"></div>
+      <span class="hint" style="font-size:.78rem;color:var(--txt-3)">Grouped by PR Reference / RFQ Reference</span>
+    </div>
+  `;
+
+  if (sel.length < 2) {
+    html += `<div class="panel"><div class="empty">
+      <span class="e-ico">⚖️</span>
+      <h4>Not enough quotations to compare</h4>
+      <p>Record at least two supplier quotations against the same PR or RFQ reference and they will appear here as a comparison matrix.</p>
+    </div></div>`;
+    host.innerHTML = html;
+    $('#cmbGroup').onchange = e => { ui.comparisonGroup = e.target.value; render(); };
+    return;
+  }
+
+  // Header row: suppliers
+  html += '<div class="panel"><div class="panel-head"><h3>Comparison Matrix</h3><div class="spacer"></div>' +
+    '<span class="hint">' + esc(selected) + '</span></div>';
+  html += '<div class="table-wrap"><table class="data"><thead><tr><th>Item</th>';
+  sel.forEach(q => { html += '<th class="num">' + esc(q.supplier || q.sqNumber) + '<br><span style="font-weight:400;text-transform:none;letter-spacing:0">' + esc(q.sqNumber) + '</span></th>'; });
+  html += '</tr></thead><tbody>';
+
+  itemNames.forEach(name => {
+    html += '<tr><td>' + esc(name) + '</td>';
+    sel.forEach(q => {
+      const it = (q.items || []).find(x => (x.item || '(unnamed)') === name);
+      const qty = it ? num(it.quantity) : 0;
+      const unit = it ? num(it.unitPrice) : 0;
+      html += '<td class="num">' + (it
+        ? qty.toLocaleString('en-KE') + ' × ' + money(unit) + ' = <strong>' + money(qty * unit) + '</strong>'
+        : '<span class="muted">not quoted</span>') + '</td>';
+    });
+    html += '</tr>';
+  });
+
+  // Totals rows
+  const rowsDef = [
+    ['Subtotal', q => num(q.subtotal) || sum(q.items || [], i => num(i.quantity) * num(i.unitPrice))],
+    ['Discount', q => num(q.discount)],
+    ['VAT / Tax', q => num(q.vat)],
+    ['Delivery Cost', q => num(q.deliveryCost)],
+    ['Other Charges', q => num(q.otherCharges)],
+    ['Currency', q => q.currency || 'KES', true],
+    ['Lead Time (days)', q => q.leadTime || '—', true],
+    ['Payment Terms', q => q.paymentTerms || '—', true],
+    ['Delivery Terms', q => q.deliveryTerms || '—', true],
+    ['Warranty', q => q.warranty || '—', true],
+    ['Valid Until', q => q.validUntil || '—', true]
+  ];
+
+  rowsDef.forEach(rd => {
+    html += '<tr><td><strong>' + esc(rd[0]) + '</strong></td>';
+    sel.forEach(q => {
+      const v = rd[1](q);
+      html += '<td class="num">' + (rd[2] ? esc(String(v)) : money(v)) + '</td>';
+    });
+    html += '</tr>';
+  });
+
+  html += '<tr style="background:#131d2b"><td><strong>QUOTATION TOTAL</strong></td>';
+  const totals = sel.map(q => {
+    const sub = num(q.subtotal) || sum(q.items || [], i => num(i.quantity) * num(i.unitPrice));
+    return sub - num(q.discount) + num(q.vat) + num(q.deliveryCost) + num(q.otherCharges);
+  });
+  const min = Math.min.apply(null, totals);
+  sel.forEach((q, i) => {
+    html += '<td class="num"><strong style="' + (totals[i] === min ? 'color:#6ee7b7' : 'color:#fca5a5') + ';font-size:.95rem">' + money(totals[i]) + '</strong></td>';
+  });
+  html += '</tr></tbody></table></div>';
+  html += '<p class="hint" style="margin-top:.7rem;font-size:.78rem;color:var(--txt-3)">Lowest total is highlighted green for reference only. Selection must be justified by the procurement officer.</p>';
+  html += '</div>';
+
+  // Selection panel
+  html += `
+    <div class="panel">
+      <div class="panel-head"><h3>Supplier Selection & Rationale</h3></div>
+      <div class="form-grid">
+        <div class="field c4">
+          <label class="f-label">Selected Supplier <span class="req">*</span></label>
+          <select id="selSupplier">
+            <option value="">— Select —</option>
+            ${sel.map(q => `<option value="${esc(q.supplier)}" data-amt="${totals[sel.indexOf(q)]}" data-ref="${esc(q.sqNumber)}">${esc(q.supplier)} (${esc(q.sqNumber)}) — ${money(totals[sel.indexOf(q)])}</option>`).join('')}
+          </select>
+        </div>
+        <div class="field c4">
+          <label class="f-label">Selected Amount (KES)</label>
+          <input type="number" id="selAmount" readonly>
+        </div>
+        <div class="field c4">
+          <label class="f-label">Status</label>
+          <select id="selStatus">${ENUM.qcStatus.map(s => '<option>' + s + '</option>').join('')}</select>
+        </div>
+        <div class="field c12">
+          <label class="f-label">Selection Rationale <span class="req">*</span></label>
+          <textarea id="selRationale" rows="3" placeholder="e.g. Selected due to availability, warranty and delivery time."></textarea>
+        </div>
+      </div>
+    </div>
+  `;
+
+  host.innerHTML = html;
+
+  $('#cmbGroup').onchange = e => { ui.comparisonGroup = e.target.value; render(); };
+  $('#selSupplier').onchange = e => {
+    const o = e.target.selectedOptions[0];
+    $('#selAmount').value = o && o.dataset.amt ? num(o.dataset.amt).toFixed(2) : '';
+  };
+  $('#btnSaveComparison').onclick = async () => {
+    const supplier = $('#selSupplier').value;
+    const rationale = $('#selRationale').value.trim();
+    if (!supplier) { toast('Select the supplier you are awarding to.', 'bad'); return; }
+    if (!rationale) { toast('A selection rationale is required for the audit trail.', 'bad'); return; }
+
+    const nn = nextNumber('comparisons', RES.comparisons.prefix);
+    const matrix = [];
+    itemNames.forEach(name => {
+      sel.forEach(q => {
+        const it = (q.items || []).find(x => (x.item || '(unnamed)') === name);
+        if (!it) return;
+        matrix.push({
+          item: name, supplier: q.supplier, quantity: num(it.quantity),
+          unitPrice: num(it.unitPrice), deliveryCost: 0,
+          total: num(it.quantity) * num(it.unitPrice)
+        });
+      });
+    });
+
+    const rec = {
+      _seq: nn.seq,
+      qcNumber: nn.number,
+      date: today(),
+      prReference: sel[0].prReference || '',
+      rfqReference: sel[0].rfqReference || '',
+      quotationRefs: sel.map(q => q.sqNumber + ' / ' + (q.supplier || '')).join(' | '),
+      selectedSupplier: supplier,
+      selectedAmount: num($('#selAmount').value),
+      status: $('#selStatus').value,
+      selectionRationale: rationale,
+      approvedBy: store.user.name,
+      approvalDate: today(),
+      items: matrix,
+      _createdAt: nowISO(), _createdBy: store.user.name,
+      _updatedAt: nowISO(), _updatedBy: store.user.name
+    };
+
+    try {
+      const fbId = 'comparisons_' + nn.seq + '_' + uid().slice(0, 5);
+      await fbPut('comparisons/' + fbId, rec);
+      store.data.comparisons = store.data.comparisons || {};
+      store.data.comparisons[fbId] = rec;
+      await audit('CREATE', 'comparisons', fbId, rec.qcNumber, null, rec, rationale);
+      toast('Comparison ' + rec.qcNumber + ' saved.', 'ok');
+      render();
+    } catch (e) { toast('Save failed: ' + e.message, 'bad'); }
+  };
+}
+
+/* ---------------------------------------------------------------------------
+   18. THREE-WAY MATCHING VIEW
+   --------------------------------------------------------------------------- */
+function renderThreeWay(host) {
+  setPageTitle('Three-Way Matching', 'NGT Procurement');
+
+  const pos = rows('purchaseOrders');
+  const selected = ui.twmPo || (pos.length ? pos[0].poNumber : '');
+  const po = pos.find(p => p.poNumber === selected) || null;
+
+  host.innerHTML = `
+    <div class="page-head">
+      <div><h2>Three-Way Matching</h2>
+      <p>Purchase Order ↔ Goods Received Note ↔ Supplier Invoice. The system checks what was ordered, what was received and what is being billed.</p></div>
+      <div class="spacer"></div>
+      <button class="btn btn-ghost btn-sm" id="btnPrint">🖨 Print</button>
+    </div>
+
+    <div class="toolbar">
+      <label class="f-label" style="margin:0">Purchase Order</label>
+      <select id="cmbPo">
+        ${pos.length ? pos.map(p => `<option value="${esc(p.poNumber)}" ${p.poNumber === selected ? 'selected' : ''}>${esc(p.poNumber)} — ${esc(p.supplier || '')} — ${money(p.total)}</option>`).join('')
+          : '<option value="">No purchase orders recorded</option>'}
+      </select>
+      <div class="spacer"></div>
+      <span class="hint" style="font-size:.78rem;color:var(--txt-3)">Exceptions are flagged automatically</span>
+    </div>
+    <div id="twmBody"></div>
+  `;
+
+  if ($('#cmbPo')) $('#cmbPo').onchange = e => { ui.twmPo = e.target.value; render(); };
+  $('#btnPrint').onclick = () => window.print();
+
+  const body = $('#twmBody');
+  if (!po) {
+    body.innerHTML = '<div class="panel"><div class="empty"><span class="e-ico">🔗</span><h4>No purchase order selected</h4><p>Create purchase orders, receive goods and record supplier invoices to run three-way matching.</p></div></div>';
+    return;
+  }
+
+  const grns = rows('goodsReceived').filter(g => g.poNumber === po.poNumber);
+  const invs = rows('supplierInvoices').filter(i => i.poNumber === po.poNumber);
+
+  const receivedByItem = {};
+  grns.forEach(g => (g.items || []).forEach(it => {
+    const k = (it.item || '').toLowerCase().trim();
+    if (!k) return;
+    receivedByItem[k] = receivedByItem[k] || { item: it.item, qty: 0, accepted: 0 };
+    receivedByItem[k].qty += num(it.receivedQty);
+    receivedByItem[k].accepted += num(it.acceptedQty);
+  }));
+
+  const invoicedByItem = {};
+  invs.forEach(iv => (iv.items || []).forEach(it => {
+    const k = (it.item || '').toLowerCase().trim();
+    if (!k) return;
+    invoicedByItem[k] = invoicedByItem[k] || { item: it.item, qty: 0, value: 0 };
+    invoicedByItem[k].qty += num(it.quantity);
+    invoicedByItem[k].value += num(it.total);
+  }));
+
+  const poItems = po.items || [];
+  const poTotal = num(po.total);
+  const grnValue = sum(grns, g => sum(g.items || [], i => num(i.acceptedQty) * 0));
+  const invTotal = sum(invs, i => i.total);
+  const receivedQtyTotal = sum(grns, g => sum(g.items || [], i => i.receivedQty));
+  const orderedQtyTotal = sum(poItems, i => i.quantity);
+
+  let overall = 'ok';
+  const flags = [];
+
+  if (!grns.length) { flags.push({ t: 'warn', m: 'No Goods Received Note recorded against this PO.' }); overall = 'warn'; }
+  if (!invs.length) { flags.push({ t: 'warn', m: 'No supplier invoice recorded against this PO.' }); overall = 'warn'; }
+  if (grns.length && receivedQtyTotal < orderedQtyTotal) {
+    flags.push({ t: 'warn', m: 'Received quantity (' + receivedQtyTotal + ') is less than ordered quantity (' + orderedQtyTotal + '). PO should remain Partially Received.' });
+    if (overall === 'ok') overall = 'warn';
+  }
+  if (invs.length && Math.abs(invTotal - poTotal) > 1) {
+    flags.push({ t: 'bad', m: 'Invoice total (' + money(invTotal) + ') does not equal PO total (' + money(poTotal) + '). Exception requiring review.' });
+    overall = 'bad';
+  }
+
+  body.innerHTML = `
+    <div class="panel">
+      <div class="panel-head"><h3>Match Summary — ${esc(po.poNumber)}</h3><div class="spacer"></div>
+        <span class="badge ${overall === 'ok' ? 'ok' : overall === 'warn' ? 'warn' : 'bad'}">
+          ${overall === 'ok' ? '✅ Matched' : overall === 'warn' ? '⚠ Partial / Pending' : '⛔ Exception'}
+        </span>
+      </div>
+      <div class="kpi-grid" style="margin-bottom:0">
+        <div class="kpi-card"><div class="k-label">Ordered Value</div><div class="k-value">${money0(poTotal)}</div><div class="k-sub">${poItems.length} line(s)</div></div>
+        <div class="kpi-card"><div class="k-label">Goods Received</div><div class="k-value">${grns.length}</div><div class="k-sub">${receivedQtyTotal} unit(s) received</div></div>
+        <div class="kpi-card"><div class="k-label">Invoiced Value</div><div class="k-value">${money0(invTotal)}</div><div class="k-sub">${invs.length} invoice(s)</div></div>
+        <div class="kpi-card ${Math.abs(invTotal - poTotal) <= 1 ? 'ok' : 'bad'}"><div class="k-label">Variance</div>
+          <div class="k-value">${money0(invTotal - poTotal)}</div><div class="k-sub">Invoice vs PO</div></div>
+      </div>
+    </div>
+
+    ${flags.length ? '<div class="panel"><div class="panel-head"><h3>Exceptions</h3></div><div class="alert-list">' +
+      flags.map(f => '<div class="alert-row ' + f.t + '"><span class="a-ico">' + (f.t === 'bad' ? '⛔' : '⚠') + '</span><span>' + esc(f.m) + '</span></div>').join('') +
+      '</div></div>' : ''}
+
+    <div class="panel">
+      <div class="panel-head"><h3>Line-by-Line Match</h3></div>
+      <div class="table-wrap"><table class="data">
+        <thead><tr><th>Item</th>
+          <th class="num">PO Qty</th><th class="num">PO Unit</th>
+          <th class="num">GRN Received</th><th class="num">GRN Accepted</th>
+          <th class="num">Invoice Qty</th><th class="num">Invoice Value</th>
+          <th>Result</th></tr></thead>
+        <tbody>
+        ${poItems.length ? poItems.map(it => {
+          const k = (it.item || '').toLowerCase().trim();
+          const g = receivedByItem[k] || { qty: 0, accepted: 0 };
+          const iv = invoicedByItem[k] || { qty: 0, value: 0 };
+          const qtyOk = Math.abs(iv.qty - num(it.quantity)) < 0.001;
+          const recOk = g.qty >= num(it.quantity);
+          let res, cls;
+          if (!g.qty && !iv.qty) { res = 'Not received / not invoiced'; cls = 'match-warn'; }
+          else if (qtyOk && recOk) { res = '✅ Match'; cls = 'match-ok'; }
+          else if (!recOk) { res = '⚠ Short receipt'; cls = 'match-warn'; }
+          else { res = '⛔ Quantity exception'; cls = 'match-bad'; }
+          return `<tr>
+            <td>${esc(it.item || '')}<br><span class="muted">${esc((it.description || '').slice(0, 60))}</span></td>
+            <td class="num">${num(it.quantity).toLocaleString('en-KE')}</td>
+            <td class="num">${money(it.unitPrice)}</td>
+            <td class="num">${g.qty.toLocaleString('en-KE')}</td>
+            <td class="num">${g.accepted.toLocaleString('en-KE')}</td>
+            <td class="num">${iv.qty.toLocaleString('en-KE')}</td>
+            <td class="num">${money(iv.value)}</td>
+            <td class="${cls}">${res}</td>
+          </tr>`;
+        }).join('') : '<tr><td colspan="8" class="muted">This purchase order has no line items.</td></tr>'}
+        </tbody>
+        <tfoot><tr>
+          <td>Totals</td>
+          <td class="num">${orderedQtyTotal}</td><td></td>
+          <td class="num">${receivedQtyTotal}</td><td></td>
+          <td class="num">${sum(Object.values(invoicedByItem), x => x.qty)}</td>
+          <td class="num">${money(invTotal)}</td><td></td>
+        </tr></tfoot>
+      </table></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-head"><h3>Goods Received Notes</h3></div>
+        ${grns.length ? '<div class="table-wrap"><table class="data" style="min-width:auto"><thead><tr><th>GRN</th><th>Date</th><th>Location</th><th>Status</th></tr></thead><tbody>' +
+          grns.map(g => '<tr><td>' + esc(g.grnNumber) + '</td><td>' + esc(g.deliveryDate || '') + '</td><td>' + esc(g.location || '—') + '</td><td>' + statusBadge(g.status) + '</td></tr>').join('') +
+          '</tbody></table></div>' : '<div class="empty" style="padding:1.2rem"><p>No GRN recorded.</p></div>'}
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h3>Supplier Invoices</h3></div>
+        ${invs.length ? '<div class="table-wrap"><table class="data" style="min-width:auto"><thead><tr><th>Invoice</th><th>Date</th><th class="num">Total</th><th>Status</th></tr></thead><tbody>' +
+          invs.map(i => '<tr><td>' + esc(i.invoiceNumber) + '</td><td>' + esc(i.invoiceDate || '') + '</td><td class="num">' + money(i.total) + '</td><td>' + statusBadge(i.paymentStatus) + '</td></tr>').join('') +
+          '</tbody></table></div>' : '<div class="empty" style="padding:1.2rem"><p>No invoice recorded.</p></div>'}
+      </div>
+    </div>
+  `;
+}
+
+/* ---------------------------------------------------------------------------
+   19. SUPPLIER PERFORMANCE VIEW
+   --------------------------------------------------------------------------- */
+function renderSupplierPerformance(host) {
+  setPageTitle('Supplier Performance', 'NGT Procurement');
+
+  const sups = rows('suppliers');
+  const pos = rows('purchaseOrders');
+  const grns = rows('goodsReceived');
+  const invs = rows('supplierInvoices');
+  const rets = rows('purchaseReturns');
+  const insp = rows('inspections');
+  const sqs = rows('quotations');
+
+  const names = sups.map(s => s.name).filter(Boolean);
+  pos.forEach(p => { if (p.supplier && names.indexOf(p.supplier) === -1) names.push(p.supplier); });
+
+  const data = names.map(n => {
+    const sp = pos.filter(p => p.supplier === n);
+    const sg = grns.filter(g => g.supplier === n);
+    const si = invs.filter(i => i.supplier === n);
+    const sr = rets.filter(r => r.supplier === n);
+    const sq = sqs.filter(q => q.supplier === n);
+
+    const lead = [];
+    sg.forEach(g => {
+      const p = pos.find(x => x.poNumber === g.poNumber);
+      if (p && p.poDate && g.deliveryDate) {
+        const d = daysBetween(p.poDate, g.deliveryDate);
+        if (d !== null && d >= 0) lead.push(d);
+      }
+    });
+
+    const late = sp.filter(p => {
+      const g = grns.filter(x => x.poNumber === p.poNumber).sort((a, b) => (a.deliveryDate || '').localeCompare(b.deliveryDate || ''))[0];
+      if (!g || !p.expectedDeliveryDate) return false;
+      return g.deliveryDate > p.expectedDeliveryDate;
+    }).length;
+
+    const rejected = sum(grns.filter(g => g.supplier === n), g => sum(g.items || [], i => num(i.rejectedQty) + num(i.damagedQty)));
+
+    const invoiced = sum(si, i => i.total);
+    const paid = sum(si, i => i.amountPaid);
+    const disputed = si.filter(i => i.taxInvoiceStatus === 'Disputed' || i.paymentStatus === 'Disputed').length;
+
+    return {
+      name: n,
+      orders: sp.length,
+      value: sum(sp, p => p.total),
+      avgLead: lead.length ? (lead.reduce((a, b) => a + b, 0) / lead.length) : null,
+      leadSamples: lead.length,
+      late: late,
+      rejected: rejected,
+      returns: sr.length,
+      quotations: sq.length,
+      invoiced: invoiced,
+      paid: paid,
+      outstanding: sum(si, i => (i.balance === '' || i.balance == null) ? (num(i.total) - num(i.amountPaid)) : num(i.balance)),
+      disputed: disputed,
+      terms: (sups.find(s => s.name === n) || {}).paymentTerms || '—',
+      status: (sups.find(s => s.name === n) || {}).status || '—'
+    };
+  }).filter(d => d.orders || d.quotations || d.invoiced);
+
+  // price movement per supplier
+  const priceRows = [];
+  sqs.forEach(q => (q.items || []).forEach(it => {
+    if (!it.item) return;
+    priceRows.push({ supplier: q.supplier, item: it.item, price: num(it.unitPrice), date: q.quoteDate || '' });
+  }));
+
+  host.innerHTML = `
+    <div class="page-head">
+      <div><h2>Supplier Performance</h2>
+      <p>Objective supplier history built from actual orders, deliveries, invoices, returns and quotations.</p></div>
+      <div class="spacer"></div>
+      <button class="btn btn-ghost btn-sm" id="btnExportSP">⬇ Export CSV</button>
+      <button class="btn btn-ghost btn-sm" id="btnPrint">🖨 Print</button>
+    </div>
+
+    ${data.length ? `
+    <div class="panel">
+      <div class="panel-head"><h3>Supplier Scorecard</h3></div>
+      <div class="table-wrap"><table class="data">
+        <thead><tr>
+          <th>Supplier</th><th>Status</th><th class="num">Orders</th><th class="num">Purchase Value</th>
+          <th class="num">Quotations</th><th class="num">Avg Lead (days)</th><th class="num">Late</th>
+          <th class="num">Rejected/Damaged</th><th class="num">Returns</th>
+          <th class="num">Invoiced</th><th class="num">Outstanding</th><th class="num">Invoice Disputes</th><th>Terms</th>
+        </tr></thead>
+        <tbody>
+        ${data.sort((a, b) => b.value - a.value).map(d => `<tr>
+          <td><strong>${esc(d.name)}</strong></td>
+          <td>${statusBadge(d.status)}</td>
+          <td class="num">${d.orders}</td>
+          <td class="num">${money(d.value)}</td>
+          <td class="num">${d.quotations}</td>
+          <td class="num">${d.avgLead === null ? '—' : d.avgLead.toFixed(1)}</td>
+          <td class="num" style="color:${d.late ? '#fca5a5' : '#6ee7b7'}">${d.late}</td>
+          <td class="num" style="color:${d.rejected ? '#fcd34d' : '#6ee7b7'}">${d.rejected}</td>
+          <td class="num">${d.returns}</td>
+          <td class="num">${money(d.invoiced)}</td>
+          <td class="num" style="color:${d.outstanding > 0 ? '#fca5a5' : '#6ee7b7'}">${money(d.outstanding)}</td>
+          <td class="num">${d.disputed}</td>
+          <td>${esc(d.terms)}</td>
+        </tr>`).join('')}
+        </tbody>
+      </table></div>
+    </div>` : '<div class="panel"><div class="empty"><span class="e-ico">⭐</span><h4>No supplier history yet</h4><p>Supplier performance is calculated automatically from purchase orders, goods received notes, invoices, returns and quotations.</p></div></div>'}
+
+    ${priceRows.length ? `
+    <div class="panel">
+      <div class="panel-head"><h3>Observed Quoted Unit Prices</h3><div class="spacer"></div>
+        <span class="hint">Price movement across suppliers</span></div>
+      <div class="table-wrap"><table class="data">
+        <thead><tr><th>Item</th><th>Supplier</th><th>Quote Date</th><th class="num">Unit Price</th></tr></thead>
+        <tbody>${sortBy(priceRows, 'date', -1).slice(0, 100).map(p =>
+          `<tr><td>${esc(p.item)}</td><td>${esc(p.supplier || '—')}</td><td>${esc(p.date || '—')}</td><td class="num">${money(p.price)}</td></tr>`).join('')}
+        </tbody></table></div>
+    </div>` : ''}
+  `;
+
+  $('#btnPrint').onclick = () => window.print();
+  $('#btnExportSP').onclick = () => {
+    const head = ['Supplier','Status','Orders','Purchase Value','Quotations','Avg Lead','Late','Rejected','Returns','Invoiced','Outstanding','Disputes','Terms'];
+    const csv = [head.join(',')].concat(data.map(d => [
+      '"' + d.name + '"', d.status, d.orders, d.value.toFixed(2), d.quotations,
+      d.avgLead === null ? '' : d.avgLead.toFixed(1), d.late, d.rejected, d.returns,
+      d.invoiced.toFixed(2), d.outstanding.toFixed(2), d.disputed, '"' + d.terms + '"'
+    ].join(','))).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'NGT-supplier-performance-' + today() + '.csv';
+    a.click();
+  };
+}
+
+/* ---------------------------------------------------------------------------
+   20. REPORTS
+   --------------------------------------------------------------------------- */
+const REPORTS = [
+  { k: 'summary', l: 'Procurement Summary' },
+  { k: 'byMonth', l: 'Procurement by Month' },
+  { k: 'bySupplier', l: 'Procurement by Supplier' },
+  { k: 'byCategory', l: 'Procurement by Category' },
+  { k: 'byProject', l: 'Procurement by Project' },
+  { k: 'byCustomer', l: 'Procurement by Customer' },
+  { k: 'byDepartment', l: 'Procurement by Department' },
+  { k: 'byStaff', l: 'Procurement by Staff Member' },
+  { k: 'budgetVsActual', l: 'Procurement Budget vs Actual' },
+  { k: 'savings', l: 'Procurement Savings' },
+  { k: 'supplierHistory', l: 'Supplier Purchase History' },
+  { k: 'supplierOutstanding', l: 'Supplier Outstanding Invoices' },
+  { k: 'supplierPayments', l: 'Supplier Payment History' },
+  { k: 'supplierReturns', l: 'Supplier Returns' },
+  { k: 'priceHistory', l: 'Supplier Price History' },
+  { k: 'totalPurchases', l: 'Total Purchases' },
+  { k: 'outstandingPayables', l: 'Outstanding Payables' },
+  { k: 'paidUnpaid', l: 'Paid vs Unpaid Purchases' },
+  { k: 'taxSummary', l: 'Purchase Tax Summary' },
+  { k: 'projectCost', l: 'Procurement Cost by Project' },
+  { k: 'customerCost', l: 'Procurement Cost by Customer' },
+  { k: 'profitability', l: 'Procurement Profitability' }
+];
+
+function buildReport(k) {
+  const pos = rows('purchaseOrders');
+  const prs = rows('purchaseRequests');
+  const invs = rows('supplierInvoices');
+  const pays = rows('supplierPayments');
+  const rets = rows('purchaseReturns');
+  const bdgs = rows('budgets');
+  const svcs = rows('procurementServices');
+  const sqs = rows('quotations');
+  const phs = rows('priceHistory');
+
+  switch (k) {
+    case 'summary': {
+      const byPurpose = groupSum(pos, p => p.purpose, p => p.total);
+      const byStatus = groupSum(pos, p => p.status, p => p.total);
+      return {
+        title: 'Procurement Summary', cols: ['Measure', 'Value'],
+        rows: [
+          ['Purchase requisitions', prs.length],
+          ['Purchase orders', pos.length],
+          ['Total procurement value', money(sum(pos, p => p.total))],
+          ['Goods received notes', rows('goodsReceived').length],
+          ['Supplier invoices', invs.length],
+          ['Total invoiced', money(sum(invs, i => i.total))],
+          ['Total paid to suppliers', money(sum(pays, p => p.amount))],
+          ['Outstanding payables', money(sum(invs, i => (i.balance === '' || i.balance == null) ? (num(i.total) - num(i.amountPaid)) : num(i.balance)))],
+          ['Purchase returns', rets.length],
+          ['Procurement service requests', svcs.length],
+          ['Gross procurement profit (services)', money(sum(svcs, s => s.grossProfit))]
+        ].concat(Object.keys(byPurpose).map(p => ['  Purpose — ' + p, money(byPurpose[p])]))
+         .concat(Object.keys(byStatus).map(s => ['  Status — ' + s, money(byStatus[s])]))
+      };
+    }
+    case 'byMonth': {
+      const g = {};
+      pos.forEach(p => { const m = monthKey(p.poDate) || 'Unknown'; g[m] = (g[m] || 0) + num(p.total); });
+      const keys = Object.keys(g).sort();
+      return { title: 'Procurement by Month', cols: ['Month', 'Procurement Value'], rows: keys.map(k => [monthLabel(k), money(g[k])]) };
+    }
+    case 'bySupplier': {
+      const g = groupSum(pos, p => p.supplier, p => p.total);
+      return { title: 'Procurement by Supplier', cols: ['Supplier', 'Procurement Value', 'Orders'],
+        rows: Object.keys(g).sort((a, b) => g[b] - g[a]).map(k => [k, money(g[k]), pos.filter(p => p.supplier === k).length]) };
+    }
+    case 'byCategory': {
+      const g = groupSum(pos, p => p.department || 'Unspecified', p => p.total);
+      const prG = groupSum(prs, p => p.requestType, p => p.estimatedTotal);
+      return { title: 'Procurement by Category', cols: ['Category / Request Type', 'Estimated Value'],
+        rows: Object.keys(prG).sort((a, b) => prG[b] - prG[a]).map(k => [k, money(prG[k])]) };
+    }
+    case 'byProject': {
+      const g = groupSum(pos.filter(p => p.project), p => p.project, p => p.total);
+      return { title: 'Procurement by Project', cols: ['Project / Job', 'Procurement Value', 'Orders'],
+        rows: Object.keys(g).sort((a, b) => g[b] - g[a]).map(k => [k, money(g[k]), pos.filter(p => p.project === k).length]) };
+    }
+    case 'byCustomer': {
+      const g = groupSum(pos.filter(p => p.customer), p => p.customer, p => p.total);
+      return { title: 'Procurement by Customer', cols: ['Customer', 'Procurement Value', 'Orders'],
+        rows: Object.keys(g).sort((a, b) => g[b] - g[a]).map(k => [k, money(g[k]), pos.filter(p => p.customer === k).length]) };
+    }
+    case 'byDepartment': {
+      const g = groupSum(prs, p => p.department || 'Unspecified', p => p.estimatedTotal);
+      return { title: 'Procurement by Department', cols: ['Department', 'Estimated Value', 'Requests'],
+        rows: Object.keys(g).sort((a, b) => g[b] - g[a]).map(k => [k, money(g[k]), prs.filter(p => (p.department || 'Unspecified') === k).length]) };
+    }
+    case 'byStaff': {
+      const g = groupSum(prs, p => p.requestedBy || 'Unspecified', p => p.estimatedTotal);
+      return { title: 'Procurement by Staff Member', cols: ['Staff Member', 'Requested Value', 'Requests'],
+        rows: Object.keys(g).sort((a, b) => g[b] - g[a]).map(k => [k, money(g[k]), prs.filter(p => (p.requestedBy || 'Unspecified') === k).length]) };
+    }
+    case 'budgetVsActual': {
+      return { title: 'Procurement Budget vs Actual', cols: ['Budget', 'Project', 'Budget', 'Actual', 'Variance', 'Utilisation %'],
+        rows: bdgs.map(b => {
+          const util = num(b.totalBudget) ? (num(b.totalActual) / num(b.totalBudget) * 100).toFixed(1) + '%' : '—';
+          return [b.name || b.budgetCode, b.project || '—', money(b.totalBudget), money(b.totalActual), money(b.variance), util];
+        }) };
+    }
+    case 'savings': {
+      const rws = [];
+      prs.forEach(pr => {
+        const cmp = rows('comparisons').find(c => c.prReference === pr.prNumber);
+        if (!cmp) return;
+        const est = num(pr.estimatedTotal), act = num(cmp.selectedAmount);
+        rws.push([pr.prNumber, pr.reason ? pr.reason.slice(0, 40) : '', money(est), money(act), money(est - act), cmp.selectedSupplier || '—']);
+      });
+      return { title: 'Procurement Savings (Estimated vs Negotiated)', cols: ['PR No.', 'Reason', 'Estimated', 'Negotiated', 'Savings', 'Supplier'], rows: rws };
+    }
+    case 'supplierHistory': {
+      return { title: 'Supplier Purchase History', cols: ['Supplier', 'PO No.', 'PO Date', 'Purpose', 'Total', 'Status'],
+        rows: sortBy(pos, 'poDate', -1).map(p => [p.supplier || '—', p.poNumber, p.poDate || '', p.purpose || '', money(p.total), p.status || '']) };
+    }
+    case 'supplierOutstanding': {
+      const rws = invs.filter(i => {
+        const b = (i.balance === '' || i.balance == null) ? (num(i.total) - num(i.amountPaid)) : num(i.balance);
+        return b > 0;
+      }).map(i => [i.supplier || '—', i.invoiceNumber, i.invoiceDate || '', i.dueDate || '',
+        money(i.total), money(i.amountPaid),
+        money((i.balance === '' || i.balance == null) ? (num(i.total) - num(i.amountPaid)) : i.balance),
+        i.paymentStatus || '']);
+      return { title: 'Supplier Outstanding Invoices', cols: ['Supplier', 'Invoice', 'Invoice Date', 'Due Date', 'Total', 'Paid', 'Balance', 'Status'], rows: rws };
+    }
+    case 'supplierPayments': {
+      return { title: 'Supplier Payment History', cols: ['Payment ID', 'Date', 'Supplier', 'Invoice', 'Amount', 'Method', 'Reference'],
+        rows: sortBy(pays, 'paymentDate', -1).map(p => [p.paymentId, p.paymentDate || '', p.supplier || '', p.invoiceNumber || '', money(p.amount), p.paymentMethod || '', p.transactionReference || p.mpesaCode || '']) };
+    }
+    case 'supplierReturns': {
+      return { title: 'Supplier Returns', cols: ['Return No.', 'Date', 'Supplier', 'Original PO', 'Value', 'Status', 'Reason'],
+        rows: sortBy(rets, 'returnDate', -1).map(r => [r.returnNumber, r.returnDate || '', r.supplier || '', r.originalPO || '', money(r.totalValue), r.status || '', (r.reason || '').slice(0, 50)]) };
+    }
+    case 'priceHistory': {
+      const all = phs.concat(sqs.flatMap(q => (q.items || []).filter(i => i.item).map(i => ({
+        date: q.quoteDate, supplier: q.supplier, item: i.item, unitPrice: i.unitPrice, poReference: q.sqNumber
+      }))));
+      return { title: 'Supplier Price History', cols: ['Date', 'Supplier', 'Item', 'Unit Price', 'Reference'],
+        rows: sortBy(all, 'date', -1).map(p => [p.date || '', p.supplier || '', p.item || '', money(p.unitPrice), p.poReference || '']) };
+    }
+    case 'totalPurchases': {
+      return { title: 'Total Purchases', cols: ['Measure', 'Value'],
+        rows: [
+          ['Total purchase order value', money(sum(pos, p => p.total))],
+          ['Total invoiced by suppliers', money(sum(invs, i => i.total))],
+          ['Total paid', money(sum(pays, p => p.amount))],
+          ['Total outstanding', money(sum(invs, i => (i.balance === '' || i.balance == null) ? (num(i.total) - num(i.amountPaid)) : num(i.balance)))],
+          ['Purchase orders issued', pos.length],
+          ['Closed purchase orders', pos.filter(p => p.status === 'Closed').length]
+        ] };
+    }
+    case 'outstandingPayables': {
+      const g = {};
+      invs.forEach(i => {
+        const b = (i.balance === '' || i.balance == null) ? (num(i.total) - num(i.amountPaid)) : num(i.balance);
+        if (b > 0) g[i.supplier || '—'] = (g[i.supplier || '—'] || 0) + b;
+      });
+      return { title: 'Outstanding Payables by Supplier', cols: ['Supplier', 'Outstanding'],
+        rows: Object.keys(g).sort((a, b) => g[b] - g[a]).map(k => [k, money(g[k])]) };
+    }
+    case 'paidUnpaid': {
+      const paid = invs.filter(i => i.paymentStatus === 'Fully Paid' || num(i.amountPaid) >= num(i.total));
+      const partial = invs.filter(i => num(i.amountPaid) > 0 && num(i.amountPaid) < num(i.total));
+      const unpaid = invs.filter(i => num(i.amountPaid) === 0);
+      return { title: 'Paid vs Unpaid Purchases', cols: ['Category', 'Invoices', 'Value'],
+        rows: [
+          ['Fully paid', paid.length, money(sum(paid, i => i.total))],
+          ['Partially paid', partial.length, money(sum(partial, i => i.total - i.amountPaid))],
+          ['Unpaid', unpaid.length, money(sum(unpaid, i => i.total))]
+        ] };
+    }
+    case 'taxSummary': {
+      return { title: 'Purchase Tax Summary', cols: ['Supplier', 'Invoice', 'Invoice Date', 'Subtotal', 'VAT', 'Other Taxes', 'Total', 'Tax Invoice Status'],
+        rows: sortBy(invs, 'invoiceDate', -1).map(i => [i.supplier || '', i.invoiceNumber || '', i.invoiceDate || '',
+          money(i.subtotal), money(i.vat), money(i.otherTaxes), money(i.total), i.taxInvoiceStatus || '—']) };
+    }
+    case 'projectCost': {
+      const g = groupSum(pos.filter(p => p.project), p => p.project, p => p.total);
+      return { title: 'Procurement Cost by Project', cols: ['Project', 'Procurement Cost', 'Orders'],
+        rows: Object.keys(g).sort((a, b) => g[b] - g[a]).map(k => [k, money(g[k]), pos.filter(p => p.project === k).length]) };
+    }
+    case 'customerCost': {
+      const g = groupSum(pos.filter(p => p.customer), p => p.customer, p => p.total);
+      return { title: 'Procurement Cost by Customer', cols: ['Customer', 'Procurement Cost', 'Orders'],
+        rows: Object.keys(g).sort((a, b) => g[b] - g[a]).map(k => [k, money(g[k]), pos.filter(p => p.customer === k).length]) };
+    }
+    case 'profitability': {
+      return { title: 'Procurement Profitability (Customer Transactions)',
+        cols: ['Request No.', 'Customer', 'Customer Price', 'Supplier Cost', 'Delivery', 'Other Direct', 'Gross Profit', 'Margin %', 'Status'],
+        rows: svcs.map(s => [s.psNumber, s.customer || '', money(s.totalCustomerPrice), money(s.totalSupplierCost),
+          money(s.deliveryCost), money(s.otherDirectCosts), money(s.grossProfit),
+          num(s.marginPercent).toFixed(2) + '%', s.status || '']) };
+    }
+    default: return { title: 'Report', cols: [], rows: [] };
+  }
+}
+
+function renderReports(host) {
+  setPageTitle('Reports', 'NGT Procurement');
+
+  const selected = ui.report || 'summary';
+  const rep = buildReport(selected);
+
+  host.innerHTML = `
+    <div class="page-head">
+      <div><h2>Procurement Reports</h2>
+      <p>Generate management, supplier and financial reports from live Firebase data. Export to CSV or print to PDF.</p></div>
+      <div class="spacer"></div>
+      <button class="btn btn-ghost btn-sm" id="btnRepCsv">⬇ Export CSV</button>
+      <button class="btn btn-ghost btn-sm" id="btnRepPrint">🖨 Print / PDF</button>
+    </div>
+
+    <div class="panel" style="padding:1rem">
+      <div class="tabs">
+        ${REPORTS.map(r => `<button class="tab ${r.k === selected ? 'active' : ''}" data-rep="${r.k}">${esc(r.l)}</button>`).join('')}
+      </div>
+    </div>
+
+    <div class="panel" id="repOut">
+      <div class="panel-head"><h3>${esc(rep.title)}</h3><div class="spacer"></div>
+        <span class="hint">Generated ${new Date().toLocaleString()}</span></div>
+      ${rep.rows.length ? `<div class="table-wrap"><table class="data">
+        <thead><tr>${rep.cols.map(c => '<th>' + esc(c) + '</th>').join('')}</tr></thead>
+        <tbody>${rep.rows.map(r => '<tr>' + r.map((c, i) => '<td' + (typeof c === 'string' && c.indexOf('KES') === 0 ? ' class="num"' : '') + '>' + esc(c) + '</td>').join('') + '</tr>').join('')}</tbody>
+      </table></div>` : '<div class="empty"><span class="e-ico">📄</span><h4>No data available</h4><p>This report will populate automatically once records exist in the Firebase database.</p></div>'}
+    </div>
+  `;
+
+  $$('[data-rep]').forEach(b => b.onclick = () => { ui.report = b.dataset.rep; render(); });
+  $('#btnRepPrint').onclick = () => window.print();
+  $('#btnRepCsv').onclick = () => {
+    if (!rep.rows.length) { toast('Nothing to export.', 'warn'); return; }
+    const csv = [rep.cols.join(',')].concat(rep.rows.map(r => r.map(c => '"' + String(c == null ? '' : c).replace(/"/g, '""') + '"').join(','))).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'NGT-report-' + selected + '-' + today() + '.csv';
+    a.click();
+    toast('Report exported.', 'ok');
+  };
+}
+
+/* ---------------------------------------------------------------------------
+   21. AUDIT TRAIL
+   --------------------------------------------------------------------------- */
+function renderAudit(host) {
+  setPageTitle('Audit Trail', 'NGT Procurement');
+
+  const list = sortBy(rows('audit'), 'ts', -1);
+  const f = getFilter('audit');
+  const filtered = f.q
+    ? list.filter(a => JSON.stringify(a).toLowerCase().includes(f.q.toLowerCase()))
+    : list;
+
+  host.innerHTML = `
+    <div class="page-head">
+      <div><h2>Procurement Audit Trail</h2>
+      <p>Every create, update, approve, reject and delete action is logged with user, timestamp, previous value and new value.</p></div>
+      <div class="spacer"></div>
+      <button class="btn btn-ghost btn-sm" id="btnPrint">🖨 Print</button>
+    </div>
+
+    <div class="toolbar">
+      <input type="search" id="auditQ" placeholder="Search audit entries…" value="${esc(f.q)}" />
+      <div class="spacer"></div>
+      <span class="badge">${filtered.length} entries</span>
+    </div>
+
+    <div class="panel" style="padding:.8rem">
+      ${filtered.length ? `<div class="table-wrap"><table class="data">
+        <thead><tr><th>Timestamp</th><th>User</th><th>Role</th><th>Action</th><th>Module</th><th>Reference</th><th>Comments</th></tr></thead>
+        <tbody>${filtered.slice(0, 400).map(a => `<tr>
+          <td>${esc((a.ts || '').replace('T', ' ').slice(0, 19))}</td>
+          <td>${esc(a.user || '')}</td>
+          <td>${esc(a.role || '')}</td>
+          <td>${statusBadge(a.action)}</td>
+          <td>${esc((RES[a.resource] || {}).plural || a.resource || '')}</td>
+          <td>${esc(a.reference || '')}</td>
+          <td>${esc((a.comments || '').slice(0, 80))}</td>
+        </tr>`).join('')}</tbody>
+      </table></div>` : '<div class="empty"><span class="e-ico">🕵️</span><h4>No audit entries yet</h4><p>Actions will be recorded here automatically as users work in the system.</p></div>'}
+    </div>
+  `;
+
+  $('#auditQ').oninput = e => { f.q = e.target.value; const p = e.target.selectionStart; render(); setTimeout(() => { const n = $('#auditQ'); n.focus(); n.setSelectionRange(p, p); }, 0); };
+  $('#btnPrint').onclick = () => window.print();
+}
+
+/* ---------------------------------------------------------------------------
+   22. SETTINGS
+   --------------------------------------------------------------------------- */
+function renderSettings(host) {
+  setPageTitle('Settings', 'NGT Procurement');
+  const s = store.settings || {};
+
+  host.innerHTML = `
+    <div class="page-head">
+      <div><h2>System Settings</h2>
+      <p>Company profile, reference lists and integration endpoints. Saved to the Firebase Realtime Database.</p></div>
+      <div class="spacer"></div>
+      <button class="btn btn-primary btn-sm" id="btnSaveSettings">💾 Save Settings</button>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-head"><h3>Company Profile</h3></div>
+        <div class="form-grid">
+          <div class="field c12"><label class="f-label">Company Name</label>
+            <input data-s="companyName" value="${esc(s.companyName || 'Ngure Gacheru Technologies')}"></div>
+          <div class="field c12"><label class="f-label">Motto / Tagline</label>
+            <input data-s="motto" value="${esc(s.motto || '')}" placeholder="Shown in the application header"></div>
+          <div class="field c6"><label class="f-label">Physical Address</label>
+            <input data-s="address" value="${esc(s.address || '')}"></div>
+          <div class="field c6"><label class="f-label">Phone</label>
+            <input data-s="phone" value="${esc(s.phone || '')}"></div>
+          <div class="field c6"><label class="f-label">Email</label>
+            <input data-s="email" value="${esc(s.email || '')}"></div>
+          <div class="field c6"><label class="f-label">Website</label>
+            <input data-s="website" value="${esc(s.website || '')}"></div>
+          <div class="field c6"><label class="f-label">Company Tax PIN</label>
+            <input data-s="taxPIN" value="${esc(s.taxPIN || '')}"></div>
+          <div class="field c6"><label class="f-label">Default Currency</label>
+            <select data-s="currency">${ENUM.currencies.map(c => `<option ${s.currency === c ? 'selected' : ''}>${c}</option>`).join('')}</select></div>
+          <div class="field c6"><label class="f-label">Default VAT Rate (%)</label>
+            <input type="number" step="0.01" data-s="vatRate" value="${esc(s.vatRate || '')}"></div>
+          <div class="field c6"><label class="f-label">Payment Terms (default)</label>
+            <input data-s="paymentTerms" value="${esc(s.paymentTerms || '')}"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><h3>Firebase Realtime Database</h3></div>
+        <dl class="kv">
+          <dt>Database URL</dt><dd style="word-break:break-all">${esc(DB_URL)}</dd>
+          <dt>Namespace</dt><dd>/${esc(ROOT)}</dd>
+          <dt>Connection</dt><dd>${store.online ? '<span class="badge ok">Connected</span>' : '<span class="badge bad">Offline</span>'}</dd>
+          <dt>Last sync</dt><dd>${store.lastSync ? esc(store.lastSync.toLocaleString()) : '—'}</dd>
+          <dt>Auto-refresh</dt><dd>Every 15 seconds</dd>
+        </dl>
+        <div class="section-divider"></div>
+        <div class="panel-head"><h3>Data Management</h3></div>
+        <div class="chip-row">
+          <button class="btn btn-ghost btn-xs" id="btnExportAll">⬇ Export entire database (JSON)</button>
+          <button class="btn btn-ghost btn-xs" id="btnRefreshNow">⟳ Force refresh</button>
+        </div>
+        <p style="font-size:.76rem;color:var(--txt-3);margin-top:.7rem">No sample or generated data is ever inserted by this system. The database starts empty and is populated only by real user entries.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><h3>Reference Lists</h3><div class="spacer"></div>
+        <span class="hint">One value per line — these populate dropdown suggestions across the system</span></div>
+      <div class="form-grid">
+        <div class="field c4"><label class="f-label">Departments</label>
+          <textarea data-s="departments" rows="6">${esc((s.departments || []).join('\n'))}</textarea></div>
+        <div class="field c4"><label class="f-label">Categories</label>
+          <textarea data-s="categories" rows="6">${esc((s.categories || []).join('\n'))}</textarea></div>
+        <div class="field c4"><label class="f-label">Projects / Jobs</label>
+          <textarea data-s="projects" rows="6">${esc((s.projects || []).join('\n'))}</textarea></div>
+        <div class="field c4"><label class="f-label">Customers</label>
+          <textarea data-s="customers" rows="6">${esc((s.customers || []).join('\n'))}</textarea></div>
+        <div class="field c4"><label class="f-label">Warehouses / Locations</label>
+          <textarea data-s="locations" rows="6">${esc((s.locations || []).join('\n'))}</textarea></div>
+        <div class="field c4"><label class="f-label">User Roles</label>
+          <textarea data-s="roles" rows="6">${esc((s.roles || ['Administrator','Procurement Officer','Finance Officer','Store/Warehouse','Project Manager','Technician','Sales/CRM','Director']).join('\n'))}</textarea></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><h3>Document Numbering</h3></div>
+      <div class="table-wrap"><table class="data">
+        <thead><tr><th>Module</th><th>Prefix</th><th>Records</th><th>Next Number</th></tr></thead>
+        <tbody>
+          ${Object.keys(RES).map(k => {
+            const R = RES[k];
+            if (!R.prefix) return '';
+            const nn = nextNumber(k, R.prefix);
+            return `<tr><td>${esc(R.plural)}</td><td><code>${esc(R.prefix)}</code></td>
+              <td>${rows(k).length}</td><td><strong>${esc(nn.number)}</strong></td></tr>`;
+          }).join('')}
+        </tbody>
+      </table></div>
+    </div>
+  `;
+
+  $('#btnSaveSettings').onclick = saveSettings;
+  $('#btnRefreshNow').onclick = () => syncAll(true);
+  $('#btnExportAll').onclick = () => {
+    const blob = new Blob([JSON.stringify(store.data, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'NGT-procurement-database-' + today() + '.json';
+    a.click();
+    toast('Database exported.', 'ok');
+  };
+}
+
+async function saveSettings() {
+  const s = Object.assign({}, store.settings);
+  $$('[data-s]').forEach(el => {
+    const k = el.dataset.s;
+    if (el.tagName === 'TEXTAREA') {
+      s[k] = el.value.split('\n').map(x => x.trim()).filter(Boolean);
+    } else if (el.type === 'number') {
+      s[k] = el.value === '' ? '' : num(el.value);
+    } else {
+      s[k] = el.value;
+    }
+  });
+  try {
+    await fbPut('settings', s);
+    store.settings = s;
+    store.data.settings = s;
+    $('#brandName').textContent = s.companyName || 'Ngure Gacheru Technologies';
+    await audit('UPDATE', 'settings', 'settings', 'System Settings', null, s, 'Settings saved');
+    toast('Settings saved to Firebase.', 'ok');
+    render();
+  } catch (e) { toast('Save failed: ' + e.message, 'bad'); }
+}
+
+/* ---------------------------------------------------------------------------
+   23. ANIMATION OBSERVER
+   --------------------------------------------------------------------------- */
+let observer = null;
+function observeAnimations() {
+  if (observer) observer.disconnect();
+  observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  $$('.animate-on-view').forEach(el => observer.observe(el));
+}
+
+/* ---------------------------------------------------------------------------
+   24. BOOT
+   --------------------------------------------------------------------------- */
+function boot() {
+  // role / user persistence (local only — not business data)
+  const savedRole = localStorage.getItem('ngt_role');
+  const savedUser = localStorage.getItem('ngt_user');
+  if (savedRole) { $('#roleSelect').value = savedRole; store.user.role = savedRole; }
+  if (savedUser) { $('#userName').value = savedUser; store.user.name = savedUser; }
+
+  $('#roleSelect').onchange = e => {
+    store.user.role = e.target.value;
+    localStorage.setItem('ngt_role', e.target.value);
+    toast('Active role: ' + e.target.value, 'info', 1800);
+  };
+  $('#userName').onchange = e => {
+    store.user.name = e.target.value || 'Unknown';
+    localStorage.setItem('ngt_user', store.user.name);
+  };
+  $('#userName').oninput = e => { store.user.name = e.target.value || 'Unknown'; localStorage.setItem('ngt_user', store.user.name); };
+
+  $('#btnRefresh').onclick = () => syncAll(true);
+
+  window.addEventListener('resize', () => {
+    if (store.route === 'dashboard') {
+      const cv = $('#chMonthly');
+      if (cv) {
+        const t = today(), ym = monthKey(t);
+        const months = [];
+        const d0 = new Date(); d0.setDate(1);
+        for (let i = 11; i >= 0; i--) {
+          const d = new Date(d0.getFullYear(), d0.getMonth() - i, 1);
+          months.push(d.toISOString().slice(0, 7));
+        }
+        const pos = rows('purchaseOrders');
+        drawLineChart(cv, months.map(monthLabel), months.map(m => sum(pos.filter(p => monthKey(p.poDate) === m), p => p.total)));
+      }
+    }
+  });
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  syncAll(false);
+  startPolling();
+}
+
+document.addEventListener('DOMContentLoaded', boot);
+</script>
+</body>
+</html>

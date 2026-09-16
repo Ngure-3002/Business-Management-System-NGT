@@ -1,0 +1,3919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NGT Supplier Management System | Ngure Gacheru Technologies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+/* ============================================================
+   NGT SUPPLIER MANAGEMENT SYSTEM
+   Base theme (supplied) + application layer
+   ============================================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root{
+  --bg:#0b1117;
+  --panel:#111c29;
+  --panel2:#1a2536;
+  --panel3:#16223a;
+  --border:#243244;
+  --border2:#2d3a4f;
+  --text:#e0e7ff;
+  --muted:#8ba0bc;
+  --accent:#38bdf8;
+  --accent2:#a5f3fc;
+  --ok:#22c55e;
+  --warn:#f59e0b;
+  --danger:#ef4444;
+  --info:#818cf8;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(0,0,0,.45);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0b1117;
+  color: #e0e7ff;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: #0f172a;
+  border-bottom: 2px solid #1e2c3a;
+  box-shadow: 0 4px 20px rgba(0, 180, 255, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  backdrop-filter: blur(6px);
+  background-color: rgba(15, 23, 42, 0.97);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 1.5rem;
+  gap: 1rem;
+}
+
+.brand-wrap{ display:flex; align-items:center; gap:1rem; min-width:0; }
+.brand-mark{
+  width:46px;height:46px;flex:0 0 46px;border-radius:14px;
+  background:linear-gradient(135deg,#0ea5e9,#22d3ee);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:1.15rem;color:#06121c;
+  box-shadow:0 0 22px rgba(56,189,248,.45);
+}
+.company-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #a5f3fc, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+  white-space:nowrap;
+}
+.motto {
+  font-size: .78rem;
+  color: #9ab3d8;
+  font-style: italic;
+  border-left: 3px solid #38bdf8;
+  padding-left: 0.6rem;
+  margin-top: 0.15rem;
+  white-space:nowrap;
+}
+
+.header-accent { display: flex; gap: 8px; align-items:center; }
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: #38bdf8;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: pulse 2s infinite;
+}
+.dot:nth-child(2) { animation-delay: 0.4s; }
+.dot:nth-child(3) { animation-delay: 0.8s; }
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.3); opacity: 1; }
+}
+
+.header-tools{ display:flex; align-items:center; gap:.65rem; flex-wrap:wrap; justify-content:flex-end; }
+.conn-pill{
+  display:inline-flex;align-items:center;gap:.45rem;
+  font-size:.75rem;padding:.35rem .75rem;border-radius:999px;
+  border:1px solid var(--border2);background:#0d1726;color:var(--muted);
+}
+.conn-pill .led{width:8px;height:8px;border-radius:50%;background:var(--warn);box-shadow:0 0 8px currentColor;}
+.conn-pill.online .led{background:var(--ok);}
+.conn-pill.offline .led{background:var(--danger);}
+
+.role-select{
+  background:#0d1726;border:1px solid var(--border2);color:var(--text);
+  padding:.42rem .7rem;border-radius:10px;font-size:.8rem;font-family:inherit;outline:none;
+}
+.role-select:focus{border-color:var(--accent);}
+
+.icon-btn{
+  width:38px;height:38px;border-radius:11px;border:1px solid var(--border2);
+  background:#0d1726;color:var(--muted);cursor:pointer;position:relative;
+  display:inline-flex;align-items:center;justify-content:center;transition:.2s;
+}
+.icon-btn:hover{color:var(--accent);border-color:var(--accent);background:#122033;}
+.badge-count{
+  position:absolute;top:-6px;right:-6px;background:var(--danger);color:#fff;
+  font-size:.62rem;font-weight:700;min-width:18px;height:18px;border-radius:999px;
+  display:flex;align-items:center;justify-content:center;padding:0 4px;border:2px solid #0f172a;
+}
+
+/* ===== APP LAYOUT ===== */
+.app-body{ display:flex; align-items:flex-start; min-height:calc(100vh - 72px); }
+
+.sidebar{
+  width:255px; flex:0 0 255px;
+  background:#0d1622;
+  border-right:1px solid #1e2c3a;
+  height:calc(100vh - 72px);
+  position:sticky; top:72px;
+  overflow-y:auto;
+  padding:.75rem 0 2rem;
+  transition:transform .25s ease;
+}
+.sidebar::-webkit-scrollbar{width:8px;}
+.sidebar::-webkit-scrollbar-thumb{background:#1e2c3a;border-radius:8px;}
+
+.nav-group-title{
+  font-size:.66rem;text-transform:uppercase;letter-spacing:1.6px;
+  color:#4d6party;color:#516b8a;padding:1rem 1.3rem .45rem;font-weight:700;
+}
+.nav-item{
+  display:flex;align-items:center;gap:.75rem;
+  padding:.62rem 1.3rem;color:#9ab3d8;cursor:pointer;font-size:.88rem;
+  border-left:3px solid transparent;transition:.16s;user-select:none;
+}
+.nav-item i{width:18px;text-align:center;font-size:.95rem;}
+.nav-item:hover{background:#131f31;color:#e0f2fe;}
+.nav-item.active{background:#132437;color:#38bdf8;border-left-color:#38bdf8;font-weight:600;}
+.nav-item .nav-tag{
+  margin-left:auto;font-size:.65rem;background:#1e2c3a;color:#8ba0bc;
+  padding:.05rem .45rem;border-radius:999px;
+}
+
+.main{ flex:1; min-width:0; padding:1.4rem 1.6rem 5rem; }
+.main-inner{ max-width:1500px; margin:0 auto; }
+
+/* ===== PAGE HEAD ===== */
+.page-head{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;
+  flex-wrap:wrap;margin-bottom:1.4rem;
+}
+.page-title{ font-size:1.6rem; font-weight:700; color:#eaf4ff; display:flex; align-items:center; gap:.6rem;}
+.page-title i{color:var(--accent);}
+.page-sub{ color:var(--muted); font-size:.88rem; margin-top:.15rem;}
+
+/* ===== CARDS / KPI ===== */
+.kpi-grid{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:1rem; margin-bottom:1.6rem;
+}
+.kpi-card{
+  background:linear-gradient(160deg,#152233,#111b29);
+  border:1px solid var(--border);
+  border-radius:18px; padding:1.1rem 1.2rem;
+  position:relative; overflow:hidden; transition:.25s;
+}
+.kpi-card::after{
+  content:'';position:absolute;right:-30px;top:-30px;width:110px;height:110px;border-radius:50%;
+  background:radial-gradient(circle,rgba(56,189,248,.16),transparent 70%);
+}
+.kpi-card:hover{ transform:translateY(-4px); border-color:#33506f; box-shadow:0 16px 30px -14px #000; }
+.kpi-label{ font-size:.72rem; text-transform:uppercase; letter-spacing:1.1px; color:var(--muted); font-weight:600; }
+.kpi-value{ font-size:1.6rem; font-weight:700; color:#f0f9ff; margin-top:.35rem; letter-spacing:-.5px; word-break:break-word;}
+.kpi-foot{ font-size:.75rem; color:#7d93b3; margin-top:.3rem; }
+.kpi-icon{
+  position:absolute;right:1rem;top:1rem;font-size:1.5rem;color:rgba(56,189,248,.35);
+}
+.kpi-card.ok .kpi-value{color:#86efac;}
+.kpi-card.warn .kpi-value{color:#fcd34d;}
+.kpi-card.danger .kpi-value{color:#fca5a5;}
+
+.panel{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:1.2rem 1.3rem;
+  margin-bottom:1.4rem;
+}
+.panel-head{
+  display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  margin-bottom:1rem;flex-wrap:wrap;
+}
+.panel-title{ font-size:1.02rem;font-weight:700;color:#dbeafe;display:flex;align-items:center;gap:.55rem;}
+.panel-title i{color:var(--accent);}
+
+.grid-2{ display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:1.2rem; }
+
+/* ===== TABLES ===== */
+.table-wrap{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+.table-toolbar{
+  display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;
+  padding:.9rem 1rem;border-bottom:1px solid var(--border);background:#0f1a27;
+}
+.search-box{
+  display:flex;align-items:center;gap:.5rem;background:#0b1420;border:1px solid var(--border2);
+  border-radius:10px;padding:.42rem .75rem;min-width:230px;flex:1;max-width:340px;
+}
+.search-box i{color:#5b7characters;color:#5b7a9c;font-size:.85rem;}
+.search-box input{
+  background:transparent;border:none;outline:none;color:var(--text);
+  font-family:inherit;font-size:.85rem;width:100%;
+}
+.filter-select{
+  background:#0b1420;border:1px solid var(--border2);color:var(--text);
+  padding:.45rem .65rem;border-radius:10px;font-family:inherit;font-size:.82rem;outline:none;cursor:pointer;
+}
+.filter-select:focus{border-color:var(--accent);}
+
+.table-scroll{ overflow-x:auto; }
+table.data-table{ width:100%; border-collapse:collapse; font-size:.83rem; min-width:640px; }
+table.data-table thead th{
+  text-align:left;padding:.72rem .9rem;background:#0f1a27;color:#8fb2d6;
+  font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.8px;
+  border-bottom:1px solid var(--border);white-space:nowrap;cursor:pointer;user-select:none;
+}
+table.data-table thead th:hover{color:var(--accent);}
+table.data-table tbody td{
+  padding:.68rem .9rem;border-bottom:1px solid #1a2635;color:#cddbf0;vertical-align:middle;
+}
+table.data-table tbody tr:hover{background:#14202f;}
+table.data-table tbody tr:last-child td{border-bottom:none;}
+.t-right{text-align:right !important;}
+.t-center{text-align:center !important;}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.8rem;color:#7dd3fc;}
+.no-rows td{ text-align:center;padding:2.2rem 1rem;color:#5c7characters;color:#5c7a9c;font-style:italic; }
+
+/* ===== BADGES ===== */
+.badge{
+  display:inline-block;padding:.2rem .6rem;border-radius:999px;
+  font-size:.68rem;font-weight:700;letter-spacing:.4px;white-space:nowrap;
+  border:1px solid transparent;
+}
+.b-ok{background:rgba(34,197,94,.13);color:#4ade80;border-color:rgba(34,197,94,.35);}
+.b-warn{background:rgba(245,158,11,.13);color:#fbbf24;border-color:rgba(245,158,11,.35);}
+.b-danger{background:rgba(239,68,68,.13);color:#f87171;border-color:rgba(239,68,68,.35);}
+.b-info{background:rgba(56,189,248,.13);color:#38bdf8;border-color:rgba(56,189,248,.35);}
+.b-muted{background:rgba(139,160,188,.12);color:#9ab3d8;border-color:rgba(139,160,188,.3);}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex;align-items:center;gap:.5rem;justify-content:center;
+  padding: 0.68rem 1.4rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size:.85rem;
+  text-decoration: none;
+  transition: all 0.22s ease;
+  border: 1px solid transparent;
+  cursor:pointer;font-family:inherit;white-space:nowrap;
+}
+.btn-primary {
+  background: #38bdf8;
+  color: #06121c;
+  box-shadow: 0 8px 16px #38bdf830;
+}
+.btn-primary:hover {
+  background: #7dd3fc;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 22px #38bdf860;
+}
+.btn-outline {
+  border: 1px solid #38bdf8;
+  color: #bae6fd;background:transparent;
+}
+.btn-outline:hover { background: rgba(56,189,248,.14); transform: translateY(-2px); }
+.btn-ghost{
+  background:#152233;border:1px solid var(--border2);color:#a9c3e0;
+}
+.btn-ghost:hover{ background:#1b2b41;color:#e0f2fe;border-color:#3a5878;}
+.btn-danger{ background:rgba(239,68,68,.14); border:1px solid rgba(239,68,68,.45); color:#fca5a5;}
+.btn-danger:hover{background:rgba(239,68,68,.25);}
+.btn-sm{ padding:.42rem .8rem; font-size:.76rem; border-radius:9px;}
+.btn-xs{ padding:.25rem .55rem; font-size:.7rem; border-radius:7px;}
+
+/* ===== FORMS ===== */
+.form-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9rem 1rem;
+}
+.form-field{ display:flex;flex-direction:column;gap:.32rem;min-width:0; }
+.form-field.span-2{ grid-column:1 / -1; }
+.form-field label{ font-size:.76rem;font-weight:600;color:#9fb8d6;letter-spacing:.3px;}
+.form-field label .req{color:#f87171;}
+.form-field small{ font-size:.7rem;color:#6b85a6; }
+.form-field input[type=text],
+.form-field input[type=number],
+.form-field input[type=date],
+.form-field input[type=email],
+.form-field input[type=tel],
+.form-field input[type=url],
+.form-field select,
+.form-field textarea{
+  background:#0b1420;border:1px solid var(--border2);color:var(--text);
+  padding:.58rem .72rem;border-radius:10px;font-family:inherit;font-size:.85rem;
+  outline:none;transition:.18s;width:100%;
+}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{
+  border-color:var(--accent);box-shadow:0 0 0 3px rgba(56,189,248,.13);
+}
+.form-field input[readonly]{ background:#0e1826;color:#7d93b3;cursor:not-allowed; }
+.form-field textarea{ resize:vertical;min-height:70px; }
+.form-section-title{
+  grid-column:1 / -1;
+  font-size:.72rem;text-transform:uppercase;letter-spacing:1.4px;font-weight:700;
+  color:#38bdf8;border-bottom:1px solid #1e2c3a;padding-bottom:.35rem;margin-top:.5rem;
+}
+.ms-box{
+  display:flex;flex-wrap:wrap;gap:.4rem;background:#0b1420;border:1px solid var(--border2);
+  border-radius:10px;padding:.6rem;max-height:150px;overflow-y:auto;
+}
+.ms-item{
+  display:inline-flex;align-items:center;gap:.35rem;background:#152233;
+  border:1px solid #24354b;padding:.24rem .55rem;border-radius:999px;
+  font-size:.75rem;color:#b8cde6;cursor:pointer;
+}
+.ms-item input{accent-color:#38bdf8;cursor:pointer;}
+.ms-item:hover{border-color:#38bdf8;color:#e0f2fe;}
+
+/* line items editor */
+.items-editor{ margin-top:.4rem; }
+.items-editor table{ width:100%; border-collapse:collapse; font-size:.8rem; min-width:700px;}
+.items-editor th{
+  background:#0f1a27;color:#8fb2d6;font-size:.68rem;text-transform:uppercase;
+  letter-spacing:.7px;padding:.5rem .5rem;text-align:left;border-bottom:1px solid var(--border);
+}
+.items-editor td{ padding:.3rem .35rem;border-bottom:1px solid #1a2635; }
+.items-editor input, .items-editor select{
+  width:100%;background:#0b1420;border:1px solid #24354b;color:var(--text);
+  padding:.38rem .45rem;border-radius:8px;font-family:inherit;font-size:.78rem;outline:none;
+}
+.items-editor input:focus,.items-editor select:focus{border-color:var(--accent);}
+.items-total-bar{
+  display:flex;justify-content:flex-end;gap:1.6rem;flex-wrap:wrap;
+  margin-top:.8rem;padding:.8rem 1rem;background:#0f1a27;border-radius:12px;border:1px solid var(--border);
+}
+.items-total-bar div{ font-size:.82rem;color:#9fb8d6; }
+.items-total-bar strong{ color:#eaf4ff;font-size:.95rem;display:block;text-align:right;}
+.items-total-bar .grand strong{ color:#38bdf8;font-size:1.15rem; }
+
+/* ===== MODAL ===== */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(4,9,15,.78);backdrop-filter:blur(4px);
+  z-index:1200;display:flex;align-items:flex-start;justify-content:center;
+  padding:2.2rem 1rem;overflow-y:auto;
+  animation:fadeIn .18s ease;
+}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{
+  background:#111c29;border:1px solid #26374d;border-radius:20px;
+  width:100%;max-width:960px;box-shadow:0 30px 70px rgba(0,0,0,.7);
+  animation:slideUp .22s ease;overflow:hidden;
+}
+.modal.narrow{max-width:560px;}
+.modal.wide{max-width:1200px;}
+@keyframes slideUp{from{transform:translateY(24px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-head{
+  display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  padding:1rem 1.3rem;border-bottom:1px solid var(--border);background:#0f1a27;
+}
+.modal-head h3{ font-size:1.05rem;font-weight:700;color:#eaf4ff;display:flex;align-items:center;gap:.55rem;}
+.modal-head h3 i{color:var(--accent);}
+.modal-body{ padding:1.3rem;max-height:70vh;overflow-y:auto; }
+.modal-foot{
+  display:flex;justify-content:flex-end;gap:.65rem;padding:.9rem 1.3rem;
+  border-top:1px solid var(--border);background:#0f1a27;flex-wrap:wrap;
+}
+
+/* detail list */
+.detail-grid{ display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.9rem; }
+.detail-item{ background:#0f1a27;border:1px solid #1e2c3a;border-radius:12px;padding:.7rem .9rem; }
+.detail-item .dl{ font-size:.68rem;text-transform:uppercase;letter-spacing:1px;color:#6b85a6;font-weight:700;}
+.detail-item .dv{ font-size:.88rem;color:#e2edf9;margin-top:.2rem;word-break:break-word;}
+
+/* ===== CHARTS ===== */
+.chart-box{ position:relative;height:250px;width:100%; }
+.chart-box canvas{ width:100%;height:100%;display:block; }
+.chart-empty{
+  height:100%;display:flex;align-items:center;justify-content:center;
+  color:#4f6b8c;font-style:italic;font-size:.85rem;
+}
+
+/* ===== MISC ===== */
+.empty-state{
+  text-align:center;padding:3.5rem 1rem;color:#5c7a9c;
+}
+.empty-state i{ font-size:3rem;color:#22364d;margin-bottom:1rem;display:block;}
+.empty-state h4{ color:#8fb2d6;font-size:1rem;margin-bottom:.35rem;font-weight:600;}
+.empty-state p{ font-size:.85rem;max-width:420px;margin:0 auto;}
+
+.toast-wrap{ position:fixed;right:1.2rem;bottom:1.2rem;z-index:2000;display:flex;flex-direction:column;gap:.55rem;}
+.toast{
+  background:#152233;border:1px solid #2d4a6b;border-left:4px solid var(--accent);
+  color:#dbeafe;padding:.75rem 1.05rem;border-radius:12px;font-size:.84rem;
+  box-shadow:0 14px 30px rgba(0,0,0,.55);animation:slideIn .22s ease;min-width:230px;max-width:340px;
+}
+.toast.ok{border-left-color:var(--ok);}
+.toast.err{border-left-color:var(--danger);}
+@keyframes slideIn{from{transform:translateX(30px);opacity:0}to{transform:translateX(0);opacity:1}}
+
+.tabs{ display:flex;gap:.4rem;border-bottom:1px solid var(--border);margin-bottom:1.2rem;flex-wrap:wrap;}
+.tab{
+  padding:.55rem 1rem;font-size:.83rem;color:#8ba0bc;cursor:pointer;
+  border-bottom:2px solid transparent;font-weight:600;transition:.18s;
+}
+.tab:hover{color:#cfe4fa;}
+.tab.active{color:#38bdf8;border-bottom-color:#38bdf8;}
+
+.aging-bar{ display:flex;height:34px;border-radius:10px;overflow:hidden;border:1px solid var(--border);margin:.9rem 0;}
+.aging-seg{ display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:#06121c;min-width:0;overflow:hidden;white-space:nowrap;}
+
+.mini-list{ list-style:none; }
+.mini-list li{
+  display:flex;justify-content:space-between;gap:1rem;padding:.55rem 0;
+  border-bottom:1px solid #1a2635;font-size:.83rem;color:#c3d5ec;
+}
+.mini-list li:last-child{border-bottom:none;}
+.mini-list .val{color:#38bdf8;font-weight:600;white-space:nowrap;}
+
+.note-box{
+  background:#0f1a27;border:1px dashed #2d4a6b;border-radius:12px;
+  padding:.9rem 1.1rem;font-size:.82rem;color:#9fb8d6;margin-bottom:1.2rem;
+}
+.note-box i{color:#38bdf8;margin-right:.45rem;}
+
+.hero-graphic { display: flex; gap: 2rem; justify-content: center; font-size: 5rem; color: #38bdf860; }
+.hero-graphic i { animation: float 4s ease-in-out infinite; filter: drop-shadow(0 0 15px #38bdf8); }
+.hero-graphic i:nth-child(2) { animation-delay: 0.6s; }
+.hero-graphic i:nth-child(3) { animation-delay: 1.2s; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+.animate-on-view { opacity: 0; transform: translateY(35px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.animate-on-view.visible { opacity: 1; transform: translateY(0); }
+
+.footer {
+  background: #0a111a;
+  padding: 1.6rem 0;
+  border-top: 1px solid #1e2c3c;
+  text-align: center;
+  color: #8ba0bc;
+  font-size:.82rem;
+}
+
+.mobile-toggle{ display:none; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px){
+  .grid-2{ grid-template-columns:1fr; }
+}
+@media (max-width: 860px) {
+  .mobile-toggle{ display:inline-flex; }
+  .sidebar{
+    position:fixed;top:72px;left:0;z-index:800;
+    transform:translateX(-105%);
+    box-shadow:20px 0 40px rgba(0,0,0,.6);
+  }
+  .sidebar.open{ transform:translateX(0); }
+  .main{ padding:1rem 1rem 4rem; }
+  .form-grid{ grid-template-columns:1fr; }
+  .company-name { font-size: 1.05rem; }
+  .motto{ display:none; }
+  .header-container { padding:.7rem 1rem; }
+  .kpi-grid{ grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); }
+  .modal-body{ max-height:78vh; }
+}
+@media (max-width: 520px){
+  .header-tools .hide-sm{ display:none; }
+  .kpi-value{ font-size:1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+  <div class="header-container">
+    <div class="brand-wrap">
+      <button class="icon-btn mobile-toggle" data-action="toggle-sidebar"><i class="fa fa-bars"></i></button>
+      <div class="brand-mark">NGT</div>
+      <div>
+        <div class="company-name">Ngure Gacheru Technologies</div>
+        <div class="motto">Supplier &amp; Procurement Control Centre</div>
+      </div>
+    </div>
+    <div class="header-tools">
+      <div class="conn-pill" id="connPill"><span class="led"></span><span id="connText">Connecting…</span></div>
+      <select class="role-select hide-sm" id="roleSelect" title="Active role (UI access level)"></select>
+      <button class="icon-btn" data-action="goto" data-view="notifications" title="Notifications">
+        <i class="fa fa-bell"></i>
+        <span class="badge-count" id="notifCount" style="display:none">0</span>
+      </button>
+      <button class="icon-btn hide-sm" data-action="goto" data-view="settings" title="Settings"><i class="fa fa-gear"></i></button>
+    </div>
+  </div>
+</header>
+
+<!-- ================= BODY ================= -->
+<div class="app-body">
+  <aside class="sidebar" id="sidebar"></aside>
+  <main class="main" id="main"><div class="main-inner"></div></main>
+</div>
+
+<div id="modal-root"></div>
+<div class="toast-wrap" id="toastWrap"></div>
+
+<footer class="footer">
+  <div class="container">
+    Ngure Gacheru Technologies &mdash; Supplier Management System &nbsp;|&nbsp;
+    IT Services · Graphic Design · Electrical · CCTV / Electric Fence / Solar / Biometrics · Procurement · Electronics Retail
+  </div>
+</footer>
+
+<!-- ================= FIREBASE ================= -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script>
+/* ============================================================================
+   NGT SUPPLIER MANAGEMENT SYSTEM
+   Single-file application — HTML / CSS / JavaScript
+   Database : Firebase Realtime Database (no authentication)
+   ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+   1. FIREBASE INITIALISATION
+---------------------------------------------------------------------------- */
+const firebaseConfig = {
+  databaseURL: "https://ngt-supplier-manager-system-default-rtdb.firebaseio.com/"
+};
+firebase.initializeApp(firebaseConfig);
+const DB = firebase.database();
+
+/* ----------------------------------------------------------------------------
+   2. ENUMERATIONS
+---------------------------------------------------------------------------- */
+const DIVISIONS = ['General Business','IT Services','Graphic Design','Electrical','CCTV','Electric Fence','Solar','Biometrics','Procurement','Electronics Retail','Hire Purchase','Project-Specific'];
+
+const SUPPLIER_TYPES = ['Manufacturer','Distributor','Wholesaler','Retailer','Importer','Local Supplier','International Supplier','Service Provider','Contractor','Subcontractor','Freelancer','Logistics Provider','Other'];
+const SUPPLIER_STATUSES = ['Draft','Pending Verification','Pending Approval','Approved','Active','Suspended','Blacklisted','Inactive'];
+const LEGAL_ENTITY = ['Sole Proprietorship','Partnership','Limited Company','Individual','Other'];
+const PAYMENT_TERMS = ['Cash on Delivery','Prepaid','7 Days','14 Days','30 Days','60 Days','Custom'];
+const CONDITIONS = ['Brand New','Ex-UK','Ex-US','Refurbished','Used','Service'];
+const AVAILABILITY = ['Available','Out of Stock','Pre-order','Discontinued'];
+const PR_PRIORITIES = ['Low','Normal','High','Urgent'];
+const PR_STATUSES = ['Draft','Pending Approval','Approved','Rejected','Converted','Cancelled'];
+const RFQ_STATUSES = ['Draft','Sent to Supplier','Quotation Received','Expired','Converted to PO','Cancelled'];
+const PO_STATUSES = ['Draft','Pending Approval','Approved','Sent to Supplier','Partially Delivered','Fully Delivered','Invoiced','Paid','Cancelled','Closed'];
+const GRN_STATUSES = ['Draft','Inspected','Accepted','Partially Accepted','Rejected'];
+const INVOICE_STATUSES = ['Unpaid','Partially Paid','Paid','Overdue','Disputed','Cancelled'];
+const PAYMENT_METHODS = ['M-Pesa','Bank Transfer','Cash','Cheque','Other'];
+const PAYMENT_STATUSES = ['Pending','Completed','Reversed'];
+const RETURN_REASONS = ['Damaged','Wrong Product','Defective','Incorrect Quantity','Warranty'];
+const RETURN_STATUSES = ['Received','Inspection','Return Requested','Supplier Approved','Returned','Credited','Replaced','Closed'];
+const DISPUTE_REASONS = ['Incorrect Invoice','Wrong Price','Missing Items','Damaged Goods','Wrong Product','Late Delivery','Warranty Dispute','Payment Dispute'];
+const DISPUTE_STATUSES = ['Open','In Progress','Resolved','Closed'];
+const DOC_TYPES = ['Business Registration','KRA Documentation','Tax Documents','Supplier Agreement','Price List','Quotation','Invoice','Delivery Note','Warranty Document','Contract','Bank Details Confirmation','Product Catalogue','Other'];
+const COMM_METHODS = ['Phone','WhatsApp','Email','SMS','Meeting','Site Visit','Other'];
+const FOLLOWUP_TYPES = ['Awaiting Quotation','Awaiting Delivery','Payment Confirmation','Warranty Claim','Replacement','Contract Renewal','Price Update','Missing Documents','Other'];
+const FOLLOWUP_STATUSES = ['Open','In Progress','Done','Cancelled'];
+const CURRENCIES = ['KES','USD','EUR','GBP','ZAR','UGX','TZS'];
+
+/* ----------------------------------------------------------------------------
+   3. COLLECTION DEFINITIONS  (fields, columns, item lines)
+---------------------------------------------------------------------------- */
+const F = (o) => Object.assign({type:'text'}, o);
+
+const COLLECTIONS = {
+
+  /* ------------------------- SUPPLIERS ---------------------------------- */
+  suppliers: {
+    label:'Supplier', plural:'Suppliers', icon:'fa-building', idField:'supplierId',
+    search:['supplierId','name','tradingName','contactPerson','phone','email','town','county','kraPin'],
+    filters:[
+      {key:'status', label:'Status', options:SUPPLIER_STATUSES},
+      {key:'type', label:'Type', options:SUPPLIER_TYPES},
+      {key:'division', label:'Division', options:DIVISIONS}
+    ],
+    fields:[
+      {group:'Identification'},
+      F({key:'supplierId', label:'Supplier ID', readonly:true}),
+      F({key:'type', label:'Supplier Type', type:'select', options:SUPPLIER_TYPES, default:'Local Supplier'}),
+      F({key:'name', label:'Business / Company Name', required:true, span:2}),
+      F({key:'tradingName', label:'Trading Name'}),
+      F({key:'contactPerson', label:'Primary Contact Person'}),
+      F({key:'division', label:'Primary Division', type:'select', options:DIVISIONS}),
+      F({key:'status', label:'Supplier Status', type:'select', options:SUPPLIER_STATUSES, default:'Draft'}),
+      F({key:'rating', label:'Manual Rating (0 – 5)', type:'number', min:0, max:5, step:0.5}),
+      F({key:'categories', label:'Supplier Categories', type:'multiselect', optionsFrom:'categories', span:2,
+         help:'Define categories under Supplier Categories first. Suppliers may belong to several categories.'}),
+
+      {group:'Contact Information'},
+      F({key:'phone', label:'Phone Number', type:'tel'}),
+      F({key:'whatsapp', label:'WhatsApp Number', type:'tel'}),
+      F({key:'email', label:'Email Address', type:'email'}),
+      F({key:'website', label:'Website', type:'text'}),
+      F({key:'salesRep', label:'Sales Representative'}),
+      F({key:'accountsRep', label:'Accounts Representative'}),
+      F({key:'emergencyContact', label:'Emergency Contact'}),
+      F({key:'physicalAddress', label:'Physical Address', span:2}),
+      F({key:'postalAddress', label:'Postal Address'}),
+      F({key:'town', label:'Town / City'}),
+      F({key:'county', label:'County / Region'}),
+      F({key:'country', label:'Country', default:'Kenya'}),
+
+      {group:'Business & Tax Information'},
+      F({key:'legalEntityType', label:'Legal Entity Type', type:'select', options:LEGAL_ENTITY}),
+      F({key:'businessRegNo', label:'Business Registration Number'}),
+      F({key:'kraPin', label:'KRA PIN'}),
+      F({key:'vatNumber', label:'VAT Registration Number'}),
+      F({key:'taxCompliance', label:'Tax Compliance Status', type:'select', options:['Compliant','Pending','Non-Compliant','Unknown'], default:'Unknown'}),
+
+      {group:'Commercial & Credit Terms'},
+      F({key:'paymentTerms', label:'Payment Terms', type:'select', options:PAYMENT_TERMS, default:'Cash on Delivery'}),
+      F({key:'creditLimit', label:'Credit Limit', type:'number', step:0.01, default:0}),
+      F({key:'currency', label:'Currency', type:'select', options:CURRENCIES, default:'KES'}),
+      F({key:'leadTimeDays', label:'Standard Lead Time (days)', type:'number', default:0}),
+
+      {group:'Banking & Payment Details'},
+      F({key:'bankName', label:'Bank Name'}),
+      F({key:'bankBranch', label:'Bank Branch'}),
+      F({key:'accountName', label:'Account Name'}),
+      F({key:'accountNumber', label:'Account Number'}),
+      F({key:'mpesaDetails', label:'M-Pesa Payment Details'}),
+      F({key:'paymentInstructions', label:'Payment Instructions', type:'textarea', span:2}),
+
+      {group:'Notes'},
+      F({key:'notes', label:'Internal Notes', type:'textarea', span:2})
+    ],
+    columns:[
+      {key:'supplierId', label:'ID', cls:'mono'},
+      {key:'name', label:'Supplier'},
+      {key:'type', label:'Type'},
+      {key:'categories', label:'Categories', fmt:v=> Array.isArray(v)&&v.length? v.slice(0,2).join(', ')+(v.length>2?` +${v.length-2}`:'') : '—'},
+      {key:'phone', label:'Phone'},
+      {key:'paymentTerms', label:'Terms'},
+      {key:'status', label:'Status', fmt:v=>badge(v)},
+      {key:'rating', label:'Rating', fmt:v=> v? `${v} ★` : '—'}
+    ]
+  },
+
+  /* ------------------------- CATEGORIES --------------------------------- */
+  categories: {
+    label:'Category', plural:'Supplier Categories', icon:'fa-sitemap', idField:'categoryId',
+    search:['categoryId','name','parent','division'],
+    filters:[{key:'division', label:'Division', options:DIVISIONS}],
+    fields:[
+      F({key:'categoryId', label:'Category ID', readonly:true}),
+      F({key:'name', label:'Category Name', required:true}),
+      F({key:'parent', label:'Parent Category', type:'select', optionsFrom:'categories', help:'Leave blank for a top-level category.'}),
+      F({key:'division', label:'Business Division', type:'select', options:DIVISIONS}),
+      F({key:'description', label:'Description', type:'textarea', span:2})
+    ],
+    columns:[
+      {key:'categoryId', label:'ID', cls:'mono'},
+      {key:'name', label:'Category'},
+      {key:'parent', label:'Parent'},
+      {key:'division', label:'Division'},
+      {key:'description', label:'Description'}
+    ]
+  },
+
+  /* ------------------------- PRODUCTS ----------------------------------- */
+  products: {
+    label:'Product / Service', plural:'Products & Services', icon:'fa-boxes-stacked', idField:'productId',
+    search:['productId','name','brand','model','supplierSku','category','supplierName'],
+    filters:[
+      {key:'availability', label:'Availability', options:AVAILABILITY},
+      {key:'condition', label:'Condition', options:CONDITIONS},
+      {key:'division', label:'Division', options:DIVISIONS}
+    ],
+    fields:[
+      {group:'Identification'},
+      F({key:'productId', label:'Product ID', readonly:true}),
+      F({key:'name', label:'Product / Service Name', required:true, span:2}),
+      F({key:'supplierKey', label:'Supplier', type:'select', optionsFrom:'suppliers'}),
+      F({key:'supplierSku', label:'Supplier SKU'}),
+      F({key:'brand', label:'Brand'}),
+      F({key:'model', label:'Model'}),
+      F({key:'category', label:'Category', type:'select', optionsFrom:'categories'}),
+      F({key:'division', label:'Business Division', type:'select', options:DIVISIONS}),
+      F({key:'type', label:'Item Type', type:'select', options:['Product','Service']}),
+      F({key:'condition', label:'Condition', type:'select', options:CONDITIONS}),
+      F({key:'unit', label:'Unit of Measure', default:'Unit'}),
+
+      {group:'Pricing & Availability'},
+      F({key:'supplierPrice', label:'Supplier Price', type:'number', step:0.01, default:0}),
+      F({key:'wholesalePrice', label:'Wholesale / Resale Price', type:'number', step:0.01, default:0}),
+      F({key:'lastQuotedPrice', label:'Last Quoted Price', type:'number', step:0.01, default:0}),
+      F({key:'lastPurchasePrice', label:'Last Purchase Price', type:'number', step:0.01, default:0}),
+      F({key:'moq', label:'Minimum Order Quantity', type:'number', default:1}),
+      F({key:'availability', label:'Availability', type:'select', options:AVAILABILITY, default:'Available'}),
+      F({key:'leadTime', label:'Lead Time'}),
+      F({key:'warranty', label:'Warranty'}),
+      F({key:'dateUpdated', label:'Date Price Updated', type:'date'}),
+
+      {group:'Details'},
+      F({key:'description', label:'Description', type:'textarea', span:2})
+    ],
+    columns:[
+      {key:'productId', label:'ID', cls:'mono'},
+      {key:'name', label:'Product / Service'},
+      {key:'brand', label:'Brand'},
+      {key:'supplierKey', label:'Supplier', fmt:v=>supLabel(v)},
+      {key:'condition', label:'Condition'},
+      {key:'supplierPrice', label:'Supplier Price', cls:'t-right', fmt:v=>money(v)},
+      {key:'availability', label:'Availability', fmt:v=>badge(v)},
+      {key:'dateUpdated', label:'Updated', fmt:v=>fmtDate(v)}
+    ]
+  },
+
+  /* ------------------------- PRICE HISTORY ------------------------------ */
+  priceHistory: {
+    label:'Price Record', plural:'Supplier Price History', icon:'fa-chart-line', idField:'priceId',
+    search:['priceId','productName','supplierName'],
+    fields:[
+      F({key:'priceId', label:'Record ID', readonly:true}),
+      F({key:'date', label:'Date', type:'date', required:true}),
+      F({key:'productKey', label:'Product', type:'select', optionsFrom:'products'}),
+      F({key:'productName', label:'Product Name (snapshot)'}),
+      F({key:'supplierKey', label:'Supplier', type:'select', optionsFrom:'suppliers'}),
+      F({key:'price', label:'Price', type:'number', step:0.01}),
+      F({key:'condition', label:'Condition', type:'select', options:CONDITIONS}),
+      F({key:'source', label:'Source', type:'select', options:['Quotation','Purchase Order','Invoice','Verbal','Price List','Other']}),
+      F({key:'notes', label:'Notes', type:'textarea', span:2})
+    ],
+    columns:[
+      {key:'date', label:'Date', fmt:v=>fmtDate(v)},
+      {key:'productName', label:'Product'},
+      {key:'supplierKey', label:'Supplier', fmt:v=>supLabel(v)},
+      {key:'condition', label:'Condition'},
+      {key:'price', label:'Price', cls:'t-right', fmt:v=>money(v)},
+      {key:'source', label:'Source'}
+    ]
+  },
+
+  /* ------------------------- RFQ / QUOTATIONS --------------------------- */
+  rfqs: {
+    label:'RFQ / Quotation', plural:'RFQs & Supplier Quotations', icon:'fa-file-invoice-dollar', idField:'rfqNo',
+    search:['rfqNo','supplierKey','requirementRef','notes'],
+    filters:[
+      {key:'status', label:'Status', options:RFQ_STATUSES},
+      {key:'division', label:'Division', options:DIVISIONS}
+    ],
+    items:[
+      {key:'description', label:'Description', type:'text', width:'32%'},
+      {key:'qty', label:'Qty', type:'number', width:'10%'},
+      {key:'unitPrice', label:'Unit Price', type:'number', width:'14%'},
+      {key:'discount', label:'Discount', type:'number', width:'12%'},
+      {key:'taxRate', label:'Tax %', type:'number', width:'10%'}
+    ],
+    totals:{delivery:true},
+    fields:[
+      {group:'RFQ Details'},
+      F({key:'rfqNo', label:'RFQ Number', readonly:true}),
+      F({key:'requirementRef', label:'Requirement Reference', help:'Group several supplier quotes for the same requirement, e.g. NGT-REQ-0001.'}),
+      F({key:'supplierKey', label:'Supplier', type:'select', optionsFrom:'suppliers', required:true}),
+      F({key:'requestDate', label:'Request Date', type:'date', default:today}),
+      F({key:'validityDate', label:'Quotation Valid Until', type:'date'}),
+      F({key:'division', label:'Business Division', type:'select', options:DIVISIONS}),
+      F({key:'status', label:'Status', type:'select', options:RFQ_STATUSES, default:'Draft'}),
+      F({key:'expectedDelivery', label:'Expected Delivery', type:'date'}),
+      F({key:'paymentTerms', label:'Payment Terms', type:'select', options:PAYMENT_TERMS}),
+      F({key:'warranty', label:'Warranty Offered'}),
+      F({key:'attachmentUrl', label:'Attachment Link', span:2, help:'Paste a link to the uploaded quotation file.'}),
+      F({key:'notes', label:'Notes', type:'textarea', span:2})
+    ],
+    columns:[
+      {key:'rfqNo', label:'RFQ No.', cls:'mono'},
+      {key:'requirementRef', label:'Requirement'},
+      {key:'supplierKey', label:'Supplier', fmt:v=>supLabel(v)},
+      {key:'requestDate', label:'Requested', fmt:v=>fmtDate(v)},
+      {key:'validityDate', label:'Valid Until', fmt:v=>fmtDate(v)},
+      {key:'_total', label:'Total', cls:'t-right', fmt:(v,r)=>money(rfqTotal(r))},
+      {key:'status', label:'Status', fmt:v=>badge(v)}
+    ]
+  },
+
+  /* ------------------------- PURCHASE REQUESTS -------------------------- */
+  purchaseRequests: {
+    label:'Purchase Request', plural:'Purchase Requests', icon:'fa-clipboard-list', idField:'prNo',
+    search:['prNo','department','requester','project','customer','reason'],
+    filters:[
+      {key:'approvalStatus', label:'Approval', options:PR_STATUSES},
+      {key:'priority', label:'Priority', options:PR_PRIORITIES},
+      {key:'department', label:'Division', options:DIVISIONS}
+    ],
+    items:[
+      {key:'description', label:'Item / Service', type:'text', width:'38%'},
+      {key:'qty', label:'Qty', type:'number', width:'12%'},
+      {key:'estimatedUnitCost', label:'Est. Unit Cost', type:'number', width:'18%'}
+    ],
+    totals:{noTax:true},
+    fields:[
+      {group:'Request Details'},
+      F({key:'prNo', label:'PR Number', readonly:true}),
+      F({key:'department', label:'Requesting Department', type:'select', options:DIVISIONS, required:true}),
+      F({key:'requester', label:'Requested By', required:true}),
+      F({key:'date', label:'Date', type:'date', default:today}),
+      F({key:'requiredDate', label:'Required By', type:'date'}),
+      F({key:'priority', label:'Priority', type:'select', options:PR_PRIORITIES, default:'Normal'}),
+      F({key:'project', label:'Project / Job'}),
+      F({key:'customer', label:'Customer'}),
+      F({key:'approvalStatus', label:'Approval Status', type:'select', options:PR_STATUSES, default:'Draft'}),
+      F({key:'approvedBy', label:'Approved By'}),
+      F({key:'approvalDate', label:'Approval Date', type:'date'}),
+      F({key:'reason', label:'Reason / Justification', type:'textarea', span:2})
+    ],
+    columns:[
+      {key:'prNo', label:'PR No.', cls:'mono'},
+      {key:'department', label:'Department'},
+      {key:'requester', label:'Requester'},
+      {key:'project', label:'Project'},
+      {key:'requiredDate', label:'Required', fmt:v=>fmtDate(v)},
+      {key:'priority', label:'Priority', fmt:v=>badge(v)},
+      {key:'_total', label:'Est. Cost', cls:'t-right', fmt:(v,r)=>money(itemsTotal(r.items,{noTax:true}).total)},
+      {key:'approvalStatus', label:'Status', fmt:v=>badge(v)}
+    ]
+  },
+
+  /* ------------------------- PURCHASE ORDERS ---------------------------- */
+  purchaseOrders: {
+    label:'Purchase Order', plural:'Purchase Orders', icon:'fa-file-contract', idField:'poNo',
+    search:['poNo','supplierKey','project','customer','prRef','rfqRef'],
+    filters:[
+      {key:'status', label:'Status', options:PO_STATUSES},
+      {key:'division', label:'Division', options:DIVISIONS}
+    ],
+    items:[
+      {key:'description', label:'Item / Service', type:'text', width:'32%'},
+      {key:'qty', label:'Qty', type:'number', width:'10%'},
+      {key:'unitPrice', label:'Unit Price', type:'number', width:'15%'},
+      {key:'discount', label:'Discount', type:'number', width:'12%'},
+      {key:'taxRate', label:'Tax %', type:'number', width:'9%'}
+    ],
+    totals:{delivery:true},
+    fields:[
+      {group:'Order Details'},
+      F({key:'poNo', label:'PO Number', readonly:true}),
+      F({key:'supplierKey', label:'Supplier', type:'select', optionsFrom:'suppliers', required:true}),
+      F({key:'date', label:'Order Date', type:'date', default:today}),
+      F({key:'expectedDelivery', label:'Expected Delivery', type:'date'}),
+      F({key:'status', label:'PO Status', type:'select', options:PO_STATUSES, default:'Draft'}),
+      F({key:'division', label:'Business Division', type:'select', options:DIVISIONS}),
+      F({key:'project', label:'Project / Job'}),
+      F({key:'customer', label:'End Customer'}),
+      F({key:'prRef', label:'Linked Purchase Request'}),
+      F({key:'rfqRef', label:'Linked RFQ'}),
+      F({key:'paymentTerms', label:'Payment Terms', type:'select', options:PAYMENT_TERMS}),
+      F({key:'currency', label:'Currency', type:'select', options:CURRENCIES, default:'KES'}),
+      F({key:'deliveryCharge', label:'Delivery / Freight Charge', type:'number', step:0.01, default:0}),
+      F({key:'depositPaid', label:'Deposit / Prepayment Made', type:'number', step:0.01, default:0}),
+      F({key:'notes', label:'Notes / Terms', type:'textarea', span:2})
+    ],
+    columns:[
+      {key:'poNo', label:'PO No.', cls:'mono'},
+      {key:'supplierKey', label:'Supplier', fmt:v=>supLabel(v)},
+      {key:'date', label:'Date', fmt:v=>fmtDate(v)},
+      {key:'expectedDelivery', label:'Expected', fmt:v=>fmtDate(v)},
+      {key:'project', label:'Project'},
+      {key:'_total', label:'Total', cls:'t-right', fmt:(v,r)=>money(itemsTotal(r.items,{delivery:r.deliveryCharge}).total)},
+      {key:'status', label:'Status', fmt:v=>badge(v)}
+    ]
+  },
+
+  /* ------------------------- GOODS RECEIVED ----------------------------- */
+  grns: {
+    label:'Goods Received Note', plural:'Goods Received (GRN)', icon:'fa-truck-ramp-box', idField:'grnNo',
+    search:['grnNo','poRef','supplierKey','receivedBy','supplierDeliveryNote'],
+    filters:[{key:'status', label:'Status', options:GRN_STATUSES}],
+    items:[
+      {key:'description', label:'Item', type:'text', width:'26%'},
+      {key:'qtyOrdered', label:'Ordered', type:'number', width:'9%'},
+      {key:'qtyReceived', label:'Received', type:'number', width:'9%'},
+      {key:'qtyDamaged', label:'Damaged', type:'number', width:'9%'},
+      {key:'qtyRejected', label:'Rejected', type:'number', width:'9%'},
+      {key:'serialNumbers', label:'Serial / Batch Numbers', type:'text', width:'24%'}
+    ],
+    totals:{none:true},
+    fields:[
+      F({key:'grnNo', label:'GRN Number', readonly:true}),
+      F({key:'poRef', label:'Purchase Order Reference', type:'select', optionsFrom:'purchaseOrders'}),
+      F({key:'supplierKey', label:'Supplier', type:'select', optionsFrom:'suppliers', required:true}),
+      F({key:'deliveryDate', label:'Delivery Date', type:'date', default:today}),
+      F({key:'receivedBy', label:'Received By'}),
+      F({key:'supplierDeliveryNote', label:'Supplier Delivery Note No.'}),
+      F({key:'status', label:'Inspection Status', type:'select', options:GRN_STATUSES, default:'Draft'}),
+      F({key:'attachmentUrl', label:'Photos / Documents Link'}),
+      F({key:'notes', label:'Condition Notes', type:'textarea', span:2})
+    ],
+    columns:[
+      {key:'grnNo', label:'GRN No.', cls:'mono'},
+      {key:'poRef', label:'PO Ref'},
+      {key:'supplierKey', label:'Supplier', fmt:v=>supLabel(v)},
+      {key:'deliveryDate', label:'Delivered', fmt:v=>fmtDate(v)},
+      {key:'receivedBy', label:'Received By'},
+      {key:'_var', label:'Variance', cls:'t-center', fmt:(v,r)=>{
+         const it = r.items||[];
+         const ord = it.reduce((a,b)=>a+num(b.qtyOrdered),0);
+         const rec = it.reduce((a,b)=>a+num(b.qtyReceived),0);
+         const d = ord-rec;
+         return d===0 ? '<span class="badge b-ok">Complete</span>' : `<span class="badge b-warn">${d} outstanding</span>`;
+      }},
+      {key:'status', label:'Status', fmt:v=>badge(v)}
+    ]
+  },
+
+  /* ------------------------- SUPPLIER INVOICES -------------------------- */
+  invoices: {
+    label:'Supplier Invoice', plural:'Supplier Invoices', icon:'fa-file-invoice', idField:'invoiceId',
+    search:['invoiceId','supplierInvoiceNo','supplierKey','poRef','grnRef'],
+    filters:[
+      {key:'status', label:'Status', options:INVOICE_STATUSES},
+      {key:'paymentStatus', label:'Payment', options:['Unpaid','Partially Paid','Paid']}
+    ],
+    items:[
+      {key:'description', label:'Description', type:'text', width:'40%'},
+      {key:'qty', label:'Qty', type:'number', width:'12%'},
+      {key:'unitPrice', label:'Unit Price', type:'number', width:'18%'},
+      {key:'taxRate', label:'Tax %', type:'number', width:'10%'}
+    ],
+    totals:{delivery:true},
+    fields:[
+      {group:'Invoice Details'},
+      F({key:'invoiceId', label:'Internal Invoice ID', readonly:true}),
+      F({key:'supplierInvoiceNo', label:'Supplier Invoice Number', required:true}),
+      F({key:'supplierKey', label:'Supplier', type:'select', optionsFrom:'suppliers', required:true}),
+      F({key:'poRef', label:'Purchase Order', type:'select', optionsFrom:'purchaseOrders'}),
+      F({key:'grnRef', label:'Goods Received Note', type:'select', optionsFrom:'grns'}),
+      F({key:'invoiceDate', label:'Invoice Date', type:'date', default:today}),
+      F({key:'dueDate', label:'Due Date', type:'date'}),
+      F({key:'deliveryCharge', label:'Delivery / Other Charges', type:'number', step:0.01, default:0}),
+      F({key:'status', label:'Invoice Status', type:'select', options:INVOICE_STATUSES, default:'Unpaid'}),
+      F({key:'attachmentUrl', label:'Invoice Attachment Link', span:2}),
+      F({key:'notes', label:'Notes', type:'textarea', span:2})
+    ],
+    columns:[
+      {key:'invoiceId', label:'ID', cls:'mono'},
+      {key:'supplierInvoiceNo', label:'Supplier Inv. No.'},
+      {key:'supplierKey', label:'Supplier', fmt:v=>supLabel(v)},
+      {key:'invoiceDate', label:'Date', fmt:v=>fmtDate(v)},
+      {key:'dueDate', label:'Due', fmt:v=>fmtDate(v)},
+      {key:'_total', label:'Total', cls:'t-right', fmt:(v,r)=>money(invoiceTotal(r))},
+      {key:'_paid', label:'Paid', cls:'t-right', fmt:(v,r)=>money(invoicePaid(r._id))},
+      {key:'_bal', label:'Balance', cls:'t-right', fmt:(v,r)=>money(invoiceBalance(r))},
+      {key:'_st', label:'Status', fmt:(v,r)=>badge(invoiceStatus(r))}
+    ]
+  },
+
+  /* ------------------------- PAYMENTS ----------------------------------- */
+  payments: {
+    label:'Payment', plural:'Supplier Payments', icon:'fa-money-bill-transfer', idField:'paymentId',
+    search:['paymentId','supplierKey','reference','transactionRef','invoiceRef'],
+    filters:[
+      {key:'method', label:'Method', options:PAYMENT_METHODS},
+      {key:'status', label:'Status', options:PAYMENT_STATUSES}
+    ],
+    fields:[
+      F({key:'paymentId', label:'Payment ID', readonly:true}),
+      F({key:'supplierKey', label:'Supplier', type:'select', optionsFrom:'suppliers', required:true}),
+      F({key:'invoiceRef', label:'Supplier Invoice', type:'select', optionsFrom:'invoices'}),
+      F({key:'poRef', label:'Purchase Order', type:'select', optionsFrom:'purchaseOrders'}),
+      F({key:'paymentDate', label:'Payment Date', type:'date', default:today}),
+      F({key:'amount', label:'Amount Paid', type:'number', step:0.01, required:true}),
+      F({key:'method', label:'Payment Method', type:'select', options:PAYMENT_METHODS, default:'M-Pesa'}),
+      F({key:'reference', label:'Reference Number'}),
+      F({key:'transactionRef', label:'Transaction Reference'}),
+      F({key:'bankAccount', label:'Bank Account Used'}),
+      F({key:'mpesaAccount', label:'M-Pesa Account Used'}),
+      F({key:'status', label:'Payment Status', type:'select', options:PAYMENT_STATUSES, default:'Completed'}),
+      F({key:'authorizedBy', label:'Authorised By'}),
+      F({key:'notes', label:'Notes', type:'textarea', span:2})
+    ],
+    columns:[
+      {key:'paymentId', label:'Payment ID', cls:'mono'},
+      {key:'paymentDate', label:'Date', fmt:v=>fmtDate(v)},
+      {key:'supplierKey', label:'Supplier', fmt:v=>supLabel(v)},
+      {key:'invoiceRef', label:'Invoice', fmt:v=>invLabel(v)},
+      {key:'method', label:'Method'},
+      {key:'reference', label:'Reference'},
+      {key:'amount', label:'Amount', cls:'t-right', fmt:v=>money(v)},
+      {key:'status', label:'Status', fmt:v=>badge(v)}
+    ]
+  },
+
+  /* ------------------------- RETURNS ------------------------------------ */
+  returns: {
+    label:'Supplier Return', plural:'Supplier Returns', icon:'fa-rotate-left', idField:'returnNo',
+    search:['returnNo','supplierKey','poRef','grnRef'],
+    filters:[
+      {key:'status', label:'Status', options:RETURN_STATUSES},
+      {key:'reason', label:'Reason', options:RETURN_REASONS}
+    ],
+    items:[
+      {key:'description', label:'Item', type:'text', width:'38%'},
+      {key:'qty', label:'Qty', type:'number', width:'12%'},
+      {key:'unitPrice', label:'Unit Price', type:'number', width:'18%'},
+      {key:'reason', label:'Reason', type:'text', width:'22%'}
+    ],
+    totals:{noTax:true},
+    fields:[
+      F({key:'returnNo', label:'Return Number', readonly:true}),
+      F({key:'supplierKey', label:'Supplier', type:'select', optionsFrom:'suppliers', required:true}),
+      F({key:'poRef', label:'Purchase Order', type:'select', optionsFrom:'purchaseOrders'}),
+      F({key:'grnRef', label:'Goods Received Note', type:'select', optionsFrom:'grns'}),
+      F({key:'date', label:'Return Date', type:'date', default:today}),
+      F({key:'reason', label:'Primary Reason', type:'select', options:RETURN_REASONS}),
+      F({key:'status', label:'Status', type:'select', options:RETURN_STATUSES, default:'Received'}),
+      F({key:'resolution', label:'Resolution'}),
+      F({key:'notes', label:'Notes', type:'textarea', span:2})
+    ],
+    columns:[
+      {key:'returnNo', label:'Return No.', cls:'mono'},
+      {key:'date', label:'Date', fmt:v=>fmtDate(v)},
+      {key:'supplierKey', label:'Supplier', fmt:v=>supLabel(v)},
+      {key:'poRef', label:'PO Ref'},
+      {key:'reason', label:'Reason'},
+      {key:'_val', label:'Value', cls:'t-right', fmt:(v,r)=>money(itemsTotal(r.items,{noTax:true}).total)},
+      {key:'status', label:'Status', fmt:v=>badge(v)}
+    ]
+  },
+
+  /* ------------------------- CREDIT NOTES ------------------------------- */
+  creditNotes: {
+    label:'Credit Note', plural:'Supplier Credit Notes', icon:'fa-file-circle-minus', idField:'cnNo',
+    search:['cnNo','supplierKey','invoiceRef','returnRef','reason'],
+    filters:[{key:'status', label:'Status', options:['Pending','Applied','Rejected','Cancelled']}],
+    fields:[
+      F({key:'cnNo', label:'Credit Note Number', readonly:true}),
+      F({key:'supplierKey', label:'Supplier', type:'select', optionsFrom:'suppliers', required:true}),
+      F({key:'invoiceRef', label:'Original Invoice', type:'select', optionsFrom:'invoices'}),
+      F({key:'returnRef', label:'Linked Return', type:'select', optionsFrom:'returns'}),
+      F({key:'date', label:'Date', type:'date', default:today}),
+      F({key:'amount', label:'Credit Amount', type:'number', step:0.01, required:true}),
+      F({key:'status', label:'Status', type:'select', options:['Pending','Applied','Rejected','Cancelled'], default:'Pending'}),
+      F({key:'reason', label:'Reason', type:'textarea', span:2})
+    ],
+    columns:[
+      {key:'cnNo', label:'CN No.', cls:'mono'},
+      {key:'date', label:'Date', fmt:v=>fmtDate(v)},
+      {key:'supplierKey', label:'Supplier', fmt:v=>supLabel(v)},
+      {key:'invoiceRef', label:'Invoice', fmt:v=>invLabel(v)},
+      {key:'amount', label:'Amount', cls:'t-right', fmt:v=>money(v)},
+      {key:'status', label:'Status', fmt:v=>badge(v)}
+    ]
+  },
+
+  /* ------------------------- DISPUTES ----------------------------------- */
+  disputes: {
+    label:'Dispute', plural:'Supplier Disputes', icon:'fa-scale-balanced', idField:'disputeId',
+    search:['disputeId','supplierKey','poRef','invoiceRef','reason','assignedTo'],
+    filters:[
+      {key:'status', label:'Status', options:DISPUTE_STATUSES},
+      {key:'reason', label:'Reason', options:DISPUTE_REASONS}
+    ],
+    fields:[
+      F({key:'disputeId', label:'Dispute ID', readonly:true}),
+      F({key:'supplierKey', label:'Supplier', type:'select', optionsFrom:'suppliers', required:true}),
+      F({key:'poRef', label:'Purchase Order', type:'select', optionsFrom:'purchaseOrders'}),
+      F({key:'invoiceRef', label:'Supplier Invoice', type:'select', optionsFrom:'invoices'}),
+      F({key:'dateOpened', label:'Date Opened', type:'date', default:today}),
+      F({key:'reason', label:'Dispute Reason', type:'select', options:DISPUTE_REASONS, required:true}),
+      F({key:'amount', label:'Disputed Amount', type:'number', step:0.01}),
+      F({key:'assignedTo', label:'Assigned To'}),
+      F({key:'status', label:'Status', type:'select', options:DISPUTE_STATUSES, default:'Open'}),
+      F({key:'dateClosed', label:'Date Closed', type:'date'}),
+      F({key:'details', label:'Details', type:'textarea', span:2}),
+      F({key:'resolution', label:'Resolution', type:'textarea', span:2})
+    ],
+    columns:[
+      {key:'disputeId', label:'Dispute ID', cls:'mono'},
+      {key:'dateOpened', label:'Opened', fmt:v=>fmtDate(v)},
+      {key:'supplierKey', label:'Supplier', fmt:v=>supLabel(v)},
+      {key:'reason', label:'Reason'},
+      {key:'amount', label:'Amount', cls:'t-right', fmt:v=>money(v)},
+      {key:'assignedTo', label:'Assigned'},
+      {key:'status', label:'Status', fmt:v=>badge(v)}
+    ]
+  },
+
+  /* ------------------------- CONTRACTS ---------------------------------- */
+  contracts: {
+    label:'Contract', plural:'Supplier Contracts', icon:'fa-file-signature', idField:'contractNo',
+    search:['contractNo','title','supplierKey','contactPerson'],
+    filters:[{key:'status', label:'Status', options:['Active','Expiring Soon','Expired','Terminated','Draft']}],
+    fields:[
+      F({key:'contractNo', label:'Contract Number', readonly:true}),
+      F({key:'title', label:'Contract Title', required:true, span:2}),
+      F({key:'supplierKey', label:'Supplier', type:'select', optionsFrom:'suppliers', required:true}),
+      F({key:'status', label:'Status', type:'select', options:['Draft','Active','Expiring Soon','Expired','Terminated'], default:'Active'}),
+      F({key:'startDate', label:'Start Date', type:'date'}),
+      F({key:'endDate', label:'End Date', type:'date'}),
+      F({key:'renewalDate', label:'Renewal Date', type:'date'}),
+      F({key:'paymentTerms', label:'Payment Terms', type:'select', options:PAYMENT_TERMS}),
+      F({key:'contactPerson', label:'Contract Contact Person'}),
+      F({key:'pricingAgreement', label:'Pricing Agreement', type:'textarea', span:2}),
+      F({key:'warrantyTerms', label:'Warranty Terms', type:'textarea', span:2}),
+      F({key:'sla', label:'Service Level Terms', type:'textarea', span:2}),
+      F({key:'documentUrl', label:'Contract Document Link', span:2})
+    ],
+    columns:[
+      {key:'contractNo', label:'Contract No.', cls:'mono'},
+      {key:'title', label:'Title'},
+      {key:'supplierKey', label:'Supplier', fmt:v=>supLabel(v)},
+      {key:'startDate', label:'Start', fmt:v=>fmtDate(v)},
+      {key:'endDate', label:'End', fmt:v=>fmtDate(v)},
+      {key:'_exp', label:'Expiry', fmt:(v,r)=>expiryBadge(r.endDate)},
+      {key:'status', label:'Status', fmt:v=>badge(v)}
+    ]
+  },
+
+  /* ------------------------- DOCUMENTS ---------------------------------- */
+  documents: {
+    label:'Document', plural:'Supplier Documents', icon:'fa-folder-open', idField:'docId',
+    search:['docId','title','supplierKey','refNo','docType'],
+    filters:[
+      {key:'docType', label:'Type', options:DOC_TYPES},
+      {key:'status', label:'Status', options:['Valid','Expiring Soon','Expired','Missing']}
+    ],
+    fields:[
+      F({key:'docId', label:'Document ID', readonly:true}),
+      F({key:'supplierKey', label:'Supplier', type:'select', optionsFrom:'suppliers', required:true}),
+      F({key:'docType', label:'Document Type', type:'select', options:DOC_TYPES, required:true}),
+      F({key:'title', label:'Document Title', required:true}),
+      F({key:'refNo', label:'Reference / Document No.'}),
+      F({key:'issueDate', label:'Issue Date', type:'date'}),
+      F({key:'expiryDate', label:'Expiry Date', type:'date'}),
+      F({key:'status', label:'Status', type:'select', options:['Valid','Expiring Soon','Expired','Missing'], default:'Valid'}),
+      F({key:'url', label:'Document Link', span:2}),
+      F({key:'notes', label:'Notes', type:'textarea', span:2})
+    ],
+    columns:[
+      {key:'docId', label:'ID', cls:'mono'},
+      {key:'supplierKey', label:'Supplier', fmt:v=>supLabel(v)},
+      {key:'docType', label:'Type'},
+      {key:'title', label:'Title'},
+      {key:'issueDate', label:'Issued', fmt:v=>fmtDate(v)},
+      {key:'expiryDate', label:'Expires', fmt:v=>fmtDate(v)},
+      {key:'_exp', label:'Validity', fmt:(v,r)=>expiryBadge(r.expiryDate)},
+      {key:'status', label:'Status', fmt:v=>badge(v)}
+    ]
+  },
+
+  /* ------------------------- COMMUNICATIONS ----------------------------- */
+  communications: {
+    label:'Communication', plural:'Supplier Communication Log', icon:'fa-comments', idField:'commId',
+    search:['commId','supplierKey','subject','message','staff'],
+    filters:[{key:'method', label:'Method', options:COMM_METHODS}],
+    fields:[
+      F({key:'commId', label:'Log ID', readonly:true}),
+      F({key:'date', label:'Date', type:'date', default:today}),
+      F({key:'supplierKey', label:'Supplier', type:'select', optionsFrom:'suppliers', required:true}),
+      F({key:'method', label:'Communication Method', type:'select', options:COMM_METHODS, default:'WhatsApp'}),
+      F({key:'staff', label:'Staff Member'}),
+      F({key:'subject', label:'Subject', span:2}),
+      F({key:'message', label:'Message / Notes', type:'textarea', span:2}),
+      F({key:'attachmentUrl', label:'Attachment Link'}),
+      F({key:'followUpDate', label:'Follow-up Date', type:'date'})
+    ],
+    columns:[
+      {key:'commId', label:'ID', cls:'mono'},
+      {key:'date', label:'Date', fmt:v=>fmtDate(v)},
+      {key:'supplierKey', label:'Supplier', fmt:v=>supLabel(v)},
+      {key:'method', label:'Method'},
+      {key:'subject', label:'Subject'},
+      {key:'staff', label:'Staff'},
+      {key:'followUpDate', label:'Follow-up', fmt:v=>fmtDate(v)}
+    ]
+  },
+
+  /* ------------------------- FOLLOW-UPS --------------------------------- */
+  followups: {
+    label:'Follow-up', plural:'Supplier Follow-ups', icon:'fa-list-check', idField:'followupId',
+    search:['followupId','supplierKey','notes','assignedTo'],
+    filters:[
+      {key:'status', label:'Status', options:FOLLOWUP_STATUSES},
+      {key:'type', label:'Type', options:FOLLOWUP_TYPES}
+    ],
+    fields:[
+      F({key:'followupId', label:'Follow-up ID', readonly:true}),
+      F({key:'supplierKey', label:'Supplier', type:'select', optionsFrom:'suppliers', required:true}),
+      F({key:'type', label:'Follow-up Type', type:'select', options:FOLLOWUP_TYPES, required:true}),
+      F({key:'dueDate', label:'Due Date', type:'date', required:true}),
+      F({key:'priority', label:'Priority', type:'select', options:PR_PRIORITIES, default:'Normal'}),
+      F({key:'assignedTo', label:'Assigned To'}),
+      F({key:'status', label:'Status', type:'select', options:FOLLOWUP_STATUSES, default:'Open'}),
+      F({key:'refNo', label:'Related Reference'}),
+      F({key:'notes', label:'Notes', type:'textarea', span:2})
+    ],
+    columns:[
+      {key:'followupId', label:'ID', cls:'mono'},
+      {key:'dueDate', label:'Due', fmt:v=>fmtDate(v)},
+      {key:'supplierKey', label:'Supplier', fmt:v=>supLabel(v)},
+      {key:'type', label:'Type'},
+      {key:'priority', label:'Priority', fmt:v=>badge(v)},
+      {key:'assignedTo', label:'Assigned'},
+      {key:'_due', label:'Timing', fmt:(v,r)=>dueBadge(r.dueDate, r.status)},
+      {key:'status', label:'Status', fmt:v=>badge(v)}
+    ]
+  }
+};
+
+/* ----------------------------------------------------------------------------
+   4. NAVIGATION
+---------------------------------------------------------------------------- */
+const ALL = ['Administrator','Procurement Officer','Finance Officer','Inventory Officer','Project Manager','Technician','Management'];
+
+const NAV = [
+  { group:'Overview', items:[
+    {id:'dashboard', label:'Dashboard', icon:'fa-gauge-high', roles:ALL},
+    {id:'notifications', label:'Notifications', icon:'fa-bell', roles:ALL}
+  ]},
+  { group:'Supplier Management', items:[
+    {id:'suppliers', label:'Suppliers', icon:'fa-building', roles:['Administrator','Procurement Officer','Finance Officer','Project Manager','Management']},
+    {id:'categories', label:'Supplier Categories', icon:'fa-sitemap', roles:['Administrator','Procurement Officer']},
+    {id:'products', label:'Products & Services', icon:'fa-boxes-stacked', roles:['Administrator','Procurement Officer','Inventory Officer','Management']},
+    {id:'priceboard', label:'Supplier Price Board', icon:'fa-tags', roles:['Administrator','Procurement Officer','Management']},
+    {id:'priceHistory', label:'Price History', icon:'fa-chart-line', roles:['Administrator','Procurement Officer','Management']},
+    {id:'contracts', label:'Contracts', icon:'fa-file-signature', roles:['Administrator','Procurement Officer','Management']},
+    {id:'documents', label:'Documents', icon:'fa-folder-open', roles:['Administrator','Procurement Officer','Finance Officer']},
+    {id:'communications', label:'Communications', icon:'fa-comments', roles:['Administrator','Procurement Officer']},
+    {id:'followups', label:'Follow-ups', icon:'fa-list-check', roles:['Administrator','Procurement Officer','Management']}
+  ]},
+  { group:'Procurement', items:[
+    {id:'purchaseRequests', label:'Purchase Requests', icon:'fa-clipboard-list', roles:['Administrator','Procurement Officer','Project Manager','Management']},
+    {id:'rfqs', label:'RFQs & Quotations', icon:'fa-file-invoice-dollar', roles:['Administrator','Procurement Officer','Management']},
+    {id:'quotecompare', label:'Quotation Comparison', icon:'fa-code-compare', roles:['Administrator','Procurement Officer','Management']},
+    {id:'purchaseOrders', label:'Purchase Orders', icon:'fa-file-contract', roles:['Administrator','Procurement Officer','Finance Officer','Management']},
+    {id:'grns', label:'Goods Received (GRN)', icon:'fa-truck-ramp-box', roles:['Administrator','Procurement Officer','Inventory Officer','Management']}
+  ]},
+  { group:'Finance', items:[
+    {id:'invoices', label:'Supplier Invoices', icon:'fa-file-invoice', roles:['Administrator','Finance Officer','Management']},
+    {id:'payments', label:'Supplier Payments', icon:'fa-money-bill-transfer', roles:['Administrator','Finance Officer','Management']},
+    {id:'payables', label:'Accounts Payable', icon:'fa-scale-unbalanced', roles:['Administrator','Finance Officer','Management']},
+    {id:'statements', label:'Supplier Statements', icon:'fa-file-lines', roles:['Administrator','Finance Officer','Management']},
+    {id:'returns', label:'Supplier Returns', icon:'fa-rotate-left', roles:['Administrator','Procurement Officer','Inventory Officer']},
+    {id:'creditNotes', label:'Credit Notes', icon:'fa-file-circle-minus', roles:['Administrator','Finance Officer']},
+    {id:'disputes', label:'Disputes', icon:'fa-scale-balanced', roles:['Administrator','Finance Officer','Procurement Officer','Management']}
+  ]},
+  { group:'Insights & Control', items:[
+    {id:'reports', label:'Reports', icon:'fa-chart-pie', roles:ALL},
+    {id:'audit', label:'Audit Trail', icon:'fa-shield-halved', roles:['Administrator','Management','Finance Officer']},
+    {id:'settings', label:'Settings', icon:'fa-gear', roles:['Administrator']}
+  ]}
+];
+
+/* ----------------------------------------------------------------------------
+   5. APPLICATION STATE
+---------------------------------------------------------------------------- */
+const state = {
+  data: {},
+  view: 'dashboard',
+  role: 'Administrator',
+  filters: {},
+  sort: {},
+  ready: false,
+  compareSelection: [],
+  reportSelection: null,
+  tab: {}
+};
+
+const DEFAULT_SETTINGS = {
+  company:{
+    name:'Ngure Gacheru Technologies',
+    motto:'Supplier & Procurement Control Centre',
+    phone:'', email:'', address:'', website:'', pin:''
+  },
+  tax:{ currency:'KES', defaultVatRate:16, vatEnabled:true },
+  numbering:{
+    suppliers:'NGT-SUP', categories:'NGT-CAT', products:'NGT-PRD', priceHistory:'NGT-PRX',
+    purchaseRequests:'NGT-PR', rfqs:'NGT-RFQ', purchaseOrders:'NGT-PO', grns:'NGT-GRN',
+    invoices:'NGT-SINV', payments:'NGT-PAY', returns:'NGT-RET', creditNotes:'NGT-CN',
+    disputes:'NGT-DSP', contracts:'NGT-CON', documents:'NGT-DOC',
+    communications:'NGT-COM', followups:'NGT-FUP'
+  },
+  defaultCategories:[
+    {name:'IT Suppliers', division:'IT Services', children:['Laptops','Desktops','Servers','Networking','Printers','Software','Storage','Computer Accessories','Phones','Phone Accessories','Gaming Equipment']},
+    {name:'Electrical Suppliers', division:'Electrical', children:['Cables','Switches','Sockets','Distribution Boards','Breakers','Conduits','Lighting','Electrical Accessories']},
+    {name:'CCTV Suppliers', division:'CCTV', children:['CCTV Cameras','DVR','NVR','Hard Drives','Cat6 Cable','Power Supplies','Connectors','CCTV Accessories']},
+    {name:'Solar Suppliers', division:'Solar', children:['Solar Panels','Inverters','Batteries','Charge Controllers','Solar Cables','Mounting Systems','Solar Accessories']},
+    {name:'Security Suppliers', division:'Biometrics', children:['Electric Fence Equipment','Biometrics','Access Control','Locks','Sensors','Alarms']},
+    {name:'Graphic Design Suppliers', division:'Graphic Design', children:['Printing Services','Branding','Signage','Promotional Materials','Design Subcontractors']},
+    {name:'Procurement Suppliers', division:'Procurement', children:['Third Party Fulfilment','Logistics','Freight','Clearing']},
+    {name:'Electronics Suppliers', division:'Electronics Retail', children:['Laptops & Computers','Phones & Tablets','Accessories','Audio & Video','Home Electronics']},
+    {name:'Service Providers', division:'General Business', children:['Contractors','Subcontractors','Freelancers','Consultants']}
+  ]
+};
+
+/* ----------------------------------------------------------------------------
+   6. UTILITIES
+---------------------------------------------------------------------------- */
+const $  = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+
+function esc(v){
+  return String(v===undefined||v===null?'':v)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function num(v){ const n = parseFloat(v); return isNaN(n)?0:n; }
+function today(){ return new Date().toISOString().slice(0,10); }
+function nowISO(){ return new Date().toISOString(); }
+
+function settings(){
+  const s = state.data.settings || {};
+  return {
+    company: Object.assign({}, DEFAULT_SETTINGS.company, s.company||{}),
+    tax: Object.assign({}, DEFAULT_SETTINGS.tax, s.tax||{}),
+    numbering: Object.assign({}, DEFAULT_SETTINGS.numbering, s.numbering||{})
+  };
+}
+function currency(){ return settings().tax.currency || 'KES'; }
+function money(v){
+  const n = num(v);
+  return currency()+' '+n.toLocaleString('en-KE',{minimumFractionDigits:2, maximumFractionDigits:2});
+}
+function money0(v){
+  const n = num(v);
+  return currency()+' '+n.toLocaleString('en-KE',{minimumFractionDigits:0, maximumFractionDigits:0});
+}
+function fmtDate(d){
+  if(!d) return '—';
+  const dt = new Date(d);
+  if(isNaN(dt)) return esc(d);
+  return dt.toLocaleDateString('en-GB');
+}
+function daysBetween(a,b){
+  const d1 = new Date(a), d2 = new Date(b);
+  return Math.round((d1-d2)/(1000*60*60*24));
+}
+function daysFromToday(d){
+  if(!d) return null;
+  return daysBetween(d, today());
+}
+function monthKey(d){ return (d||'').slice(0,7); }
+function monthLabel(k){
+  if(!k) return '';
+  const [y,m] = k.split('-');
+  const names = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return names[parseInt(m,10)-1]+' '+y.slice(2);
+}
+function lastNMonths(n){
+  const out = [];
+  const d = new Date();
+  d.setDate(1);
+  for(let i=n-1;i>=0;i--){
+    const t = new Date(d.getFullYear(), d.getMonth()-i, 1);
+    out.push(t.toISOString().slice(0,7));
+  }
+  return out;
+}
+function uid(){ return 'k'+Date.now().toString(36)+Math.random().toString(36).slice(2,8); }
+
+/* ----------------------------------------------------------------------------
+   7. DATA ACCESS
+---------------------------------------------------------------------------- */
+function list(name){
+  const o = state.data[name];
+  if(!o || typeof o !== 'object') return [];
+  return Object.keys(o).map(k => {
+    const v = o[k];
+    if(v && typeof v === 'object') return Object.assign({}, v, {_id:k});
+    return {_id:k, value:v};
+  });
+}
+function find(name, id){
+  if(!id) return null;
+  return list(name).find(r => r._id === id) || null;
+}
+function supLabel(key){
+  const s = find('suppliers', key);
+  if(!s) return key? String(key) : '—';
+  return s.name || s.supplierId || '—';
+}
+function supCode(key){
+  const s = find('suppliers', key);
+  return s ? (s.supplierId||'') : '';
+}
+function invLabel(key){
+  const i = find('invoices', key);
+  if(!i) return key? String(key) : '—';
+  return (i.invoiceId||'') + (i.supplierInvoiceNo? ' / '+i.supplierInvoiceNo : '');
+}
+function poLabel(key){
+  const p = find('purchaseOrders', key);
+  return p ? (p.poNo||'') : (key||'—');
+}
+
+/* ----------------------------------------------------------------------------
+   8. CALCULATIONS
+---------------------------------------------------------------------------- */
+function itemsTotal(items, opts){
+  opts = opts || {};
+  const arr = Array.isArray(items)? items : [];
+  let sub = 0, disc = 0, tax = 0;
+  arr.forEach(it=>{
+    const qty = num(it.qty ?? it.qtyOrdered ?? it.qtyReceived);
+    const up  = num(it.unitPrice ?? it.estimatedUnitCost);
+    const line = qty * up;
+    const d = num(it.discount);
+    sub += line;
+    disc += d;
+    if(!opts.noTax) tax += (line - d) * (num(it.taxRate)/100);
+  });
+  const delivery = num(opts.delivery);
+  const total = sub - disc + tax + delivery;
+  return { sub, disc, tax, delivery, total };
+}
+function rfqTotal(r){
+  return itemsTotal(r.items,{delivery:r.deliveryCharge}).total;
+}
+function poTotal(r){
+  return itemsTotal(r.items,{delivery:r.deliveryCharge}).total;
+}
+function invoiceTotal(r){
+  return itemsTotal(r.items,{delivery:r.deliveryCharge}).total;
+}
+function paymentsForInvoice(invoiceId){
+  return list('payments').filter(p => p.invoiceRef === invoiceId && p.status !== 'Reversed');
+}
+function invoicePaid(invoiceId){
+  const inv = find('invoices', invoiceId);
+  const credits = list('creditNotes')
+      .filter(c => c.invoiceRef === invoiceId && (c.status === 'Applied'))
+      .reduce((a,c)=>a+num(c.amount),0);
+  const paid = paymentsForInvoice(invoiceId).reduce((a,p)=>a+num(p.amount),0);
+  return paid + credits;
+}
+function invoiceBalance(inv){
+  if(!inv) return 0;
+  return invoiceTotal(inv) - invoicePaid(inv._id);
+}
+function invoiceStatus(inv){
+  if(!inv) return 'Unpaid';
+  if(inv.status === 'Cancelled') return 'Cancelled';
+  if(inv.status === 'Disputed') return 'Disputed';
+  const bal = invoiceBalance(inv);
+  const total = invoiceTotal(inv);
+  if(bal <= 0.005) return 'Paid';
+  if(daysFromToday(inv.dueDate) !== null && daysFromToday(inv.dueDate) < 0) return 'Overdue';
+  if(invoicePaid(inv._id) > 0.005 && bal < total) return 'Partially Paid';
+  return 'Unpaid';
+}
+function supplierPayables(supplierKey){
+  return list('invoices')
+    .filter(i => i.supplierKey === supplierKey && i.status !== 'Cancelled')
+    .reduce((a,i)=> a + Math.max(0, invoiceBalance(i)), 0);
+}
+function supplierSpend(supplierKey){
+  return list('purchaseOrders')
+    .filter(p => p.supplierKey === supplierKey && p.status !== 'Cancelled')
+    .reduce((a,p)=> a + poTotal(p), 0);
+}
+
+/* ----------------------------------------------------------------------------
+   9. BADGES
+---------------------------------------------------------------------------- */
+const BADGE_MAP = {
+  'Active':'ok','Approved':'ok','Paid':'ok','Fully Delivered':'ok','Completed':'ok',
+  'Resolved':'ok','Closed':'ok','Available':'ok','Accepted':'ok','Valid':'ok',
+  'Done':'ok','Compliant':'ok','Applied':'ok','Quotation Received':'ok','Credited':'ok',
+  'Draft':'muted','Inactive':'muted','Cancelled':'muted','Discontinued':'muted',
+  'Terminated':'muted','Unknown':'muted','Missing':'muted',
+  'Pending Approval':'warn','Pending Verification':'warn','Partially Paid':'warn',
+  'Partially Delivered':'warn','Sent to Supplier':'warn','Open':'warn','In Progress':'warn',
+  'Inspection':'warn','Return Requested':'warn','Pre-order':'warn','Expiring Soon':'warn',
+  'Pending':'warn','Low':'muted','Normal':'info','High':'warn','Urgent':'danger',
+  'Overdue':'danger','Suspended':'danger','Blacklisted':'danger','Disputed':'danger',
+  'Rejected':'danger','Out of Stock':'danger','Non-Compliant':'danger','Expired':'danger',
+  'Unpaid':'info','Received':'info','Approved ':'ok','Partially Accepted':'warn',
+  'Supplier Approved':'ok','Returned':'info','Replaced':'ok','Converted to PO':'ok',
+  'Converted':'ok','Invoiced':'ok','Reversed':'danger','Pending Verification ':'warn'
+};
+function badge(text){
+  const t = String(text===undefined||text===null?'':text);
+  if(!t) return '<span class="badge b-muted">—</span>';
+  return `<span class="badge b-${BADGE_MAP[t]||'info'}">${esc(t)}</span>`;
+}
+function expiryBadge(dateStr){
+  if(!dateStr) return '<span class="badge b-muted">No date</span>';
+  const d = daysFromToday(dateStr);
+  if(d === null) return '<span class="badge b-muted">—</span>';
+  if(d < 0)  return `<span class="badge b-danger">Expired ${Math.abs(d)}d ago</span>`;
+  if(d <= 30) return `<span class="badge b-warn">${d}d left</span>`;
+  return `<span class="badge b-ok">${d}d left</span>`;
+}
+function dueBadge(dateStr, status){
+  if(status === 'Done') return '<span class="badge b-ok">Completed</span>';
+  if(status === 'Cancelled') return '<span class="badge b-muted">Cancelled</span>';
+  if(!dateStr) return '<span class="badge b-muted">No date</span>';
+  const d = daysFromToday(dateStr);
+  if(d === null) return '<span class="badge b-muted">—</span>';
+  if(d < 0) return `<span class="badge b-danger">${Math.abs(d)}d overdue</span>`;
+  if(d === 0) return '<span class="badge b-warn">Due today</span>';
+  if(d <= 3) return `<span class="badge b-warn">Due in ${d}d</span>`;
+  return `<span class="badge b-info">In ${d}d</span>`;
+}
+
+/* ----------------------------------------------------------------------------
+   10. TOASTS
+---------------------------------------------------------------------------- */
+function toast(msg, type){
+  const wrap = $('#toastWrap');
+  const el = document.createElement('div');
+  el.className = 'toast '+(type||'');
+  el.innerHTML = `<i class="fa ${type==='ok'?'fa-circle-check':type==='err'?'fa-circle-exclamation':'fa-circle-info'}" style="margin-right:.5rem"></i>${esc(msg)}`;
+  wrap.appendChild(el);
+  setTimeout(()=>{ el.style.opacity='0'; el.style.transform='translateX(30px)'; el.style.transition='.3s'; }, 3200);
+  setTimeout(()=> el.remove(), 3600);
+}
+
+/* ----------------------------------------------------------------------------
+   11. AUDIT TRAIL
+---------------------------------------------------------------------------- */
+function audit(action, collection, recordId, label, details){
+  DB.ref('audit').push({
+    ts: nowISO(),
+    user: state.role,
+    action: action,
+    collection: collection,
+    recordId: recordId || '',
+    label: label || '',
+    details: details || ''
+  }).catch(()=>{});
+}
+
+/* ----------------------------------------------------------------------------
+   12. NUMBERING
+---------------------------------------------------------------------------- */
+async function nextNumber(collectionKey){
+  const prefix = settings().numbering[collectionKey] || 'NGT-REF';
+  const snap = await DB.ref('counters/'+collectionKey).transaction(c => (c||0)+1);
+  const n = snap.snapshot.val() || 1;
+  return prefix + '-' + String(n).padStart(4,'0');
+}
+
+/* ----------------------------------------------------------------------------
+   13. CRUD
+---------------------------------------------------------------------------- */
+async function saveRecord(collection, obj, id){
+  try{
+    if(id){
+      const before = find(collection, id);
+      await DB.ref(collection+'/'+id).set(obj);
+      audit('UPDATE', collection, id, obj[COLLECTIONS[collection].idField] || '', 'Record updated');
+      if(before && (collection==='suppliers') && before.accountNumber !== obj.accountNumber){
+        audit('BANK-CHANGE', collection, id, obj.name, `Account changed from "${before.accountNumber||'—'}" to "${obj.accountNumber||'—'}"`);
+      }
+    }else{
+      const ref = DB.ref(collection).push();
+      await ref.set(obj);
+      audit('CREATE', collection, ref.key, obj[COLLECTIONS[collection].idField] || '', 'Record created');
+    }
+    return true;
+  }catch(e){
+    console.error(e);
+    toast('Save failed: '+e.message,'err');
+    return false;
+  }
+}
+async function deleteRecord(collection, id){
+  const rec = find(collection, id);
+  try{
+    await DB.ref(collection+'/'+id).remove();
+    audit('DELETE', collection, id, rec ? (rec[COLLECTIONS[collection].idField]||rec.name||'') : '', 'Record deleted');
+    toast('Record deleted','ok');
+  }catch(e){
+    toast('Delete failed: '+e.message,'err');
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   14. OPTIONS PROVIDERS
+---------------------------------------------------------------------------- */
+function getOptions(src){
+  if(src === 'categories'){
+    return list('categories')
+      .sort((a,b)=> String(a.name||'').localeCompare(String(b.name||'')))
+      .map(c => ({ value:c.name, label: (c.parent? c.parent+' → ':'')+(c.name||'') }));
+  }
+  if(src === 'suppliers'){
+    return list('suppliers')
+      .sort((a,b)=> String(a.name||'').localeCompare(String(b.name||'')))
+      .map(s => ({ value:s._id, label: (s.supplierId? s.supplierId+' — ':'')+(s.name||'Untitled') }));
+  }
+  if(src === 'products'){
+    return list('products').map(p => ({ value:p._id, label:(p.productId?p.productId+' — ':'')+(p.name||'') }));
+  }
+  if(src === 'purchaseOrders'){
+    return list('purchaseOrders').map(p => ({ value:p.poNo, label:p.poNo+' — '+supLabel(p.supplierKey) }));
+  }
+  if(src === 'grns'){
+    return list('grns').map(p => ({ value:p.grnNo, label:p.grnNo+' — '+supLabel(p.supplierKey) }));
+  }
+  if(src === 'invoices'){
+    return list('invoices').map(p => ({ value:p._id, label:(p.invoiceId||'')+' — '+(p.supplierInvoiceNo||'') }));
+  }
+  if(src === 'returns'){
+    return list('returns').map(p => ({ value:p.returnNo, label:p.returnNo }));
+  }
+  return [];
+}
+
+/* ----------------------------------------------------------------------------
+   15. FORM RENDERING
+---------------------------------------------------------------------------- */
+function fieldInput(f, value){
+  const id = 'f_'+f.key;
+  const v = (value === undefined || value === null) ? (f.default !== undefined ? f.default : '') : value;
+  const req = f.required ? 'required' : '';
+  let input = '';
+
+  switch(f.type){
+    case 'textarea':
+      input = `<textarea id="${id}" name="${esc(f.key)}" rows="3" ${req}>${esc(v)}</textarea>`;
+      break;
+    case 'select': {
+      const opts = (typeof f.options === 'function') ? f.options() : (f.options||[]);
+      input = `<select id="${id}" name="${esc(f.key)}" ${req}>
+        <option value="">— Select —</option>
+        ${opts.map(o=>{
+          const val = (typeof o === 'object') ? o.value : o;
+          const lab = (typeof o === 'object') ? o.label : o;
+          return `<option value="${esc(val)}" ${String(v)===String(val)?'selected':''}>${esc(lab)}</option>`;
+        }).join('')}
+      </select>`;
+      break;
+    }
+    case 'multiselect': {
+      const opts = getOptions(f.optionsFrom);
+      const arr = Array.isArray(v) ? v : [];
+      input = `<div class="ms-box" data-name="${esc(f.key)}">
+        ${opts.length
+          ? opts.map(o=>`<label class="ms-item"><input type="checkbox" value="${esc(o.value)}" ${arr.includes(o.value)?'checked':''}><span>${esc(o.label)}</span></label>`).join('')
+          : '<span style="font-size:.78rem;color:#6b85a6">No options available yet — create entries in the related module first.</span>'}
+      </div>`;
+      break;
+    }
+    case 'checkbox':
+      input = `<label style="display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:#c3d5ec">
+        <input type="checkbox" id="${id}" name="${esc(f.key)}" ${v?'checked':''} style="width:auto;accent-color:#38bdf8"> Yes
+      </label>`;
+      break;
+    case 'number':
+      input = `<input type="number" id="${id}" name="${esc(f.key)}" value="${esc(v)}" ${f.min!==undefined?`min="${f.min}"`:''} ${f.max!==undefined?`max="${f.max}"`:''} step="${f.step||'1'}" ${req} ${f.readonly?'readonly':''}>`;
+      break;
+    case 'date':
+      input = `<input type="date" id="${id}" name="${esc(f.key)}" value="${esc(v)}" ${req} ${f.readonly?'readonly':''}>`;
+      break;
+    default:
+      input = `<input type="${f.type||'text'}" id="${id}" name="${esc(f.key)}" value="${esc(v)}" ${req} ${f.readonly?'readonly':''} placeholder="${esc(f.placeholder||'')}">`;
+  }
+
+  const span = f.span === 2 ? ' span-2' : '';
+  return `<div class="form-field${span}">
+    <label for="${id}">${esc(f.label)}${f.required?' <span class="req">*</span>':''}</label>
+    ${input}
+    ${f.help?`<small>${esc(f.help)}</small>`:''}
+  </div>`;
+}
+
+function renderFormFields(cfg, record){
+  let html = '';
+  let lastGroup = null;
+  cfg.fields.forEach(f=>{
+    if(f.group && f.group !== lastGroup){
+      lastGroup = f.group;
+      html += `<div class="form-section-title">${esc(f.group)}</div>`;
+    }
+    html += fieldInput(f, record ? record[f.key] : undefined);
+  });
+  return html;
+}
+
+/* ----------------------------------------------------------------------------
+   16. LINE ITEM EDITOR
+---------------------------------------------------------------------------- */
+let modalItems = [];
+
+function renderItemsEditor(cfg){
+  if(!cfg.items) return '';
+  const cols = cfg.items;
+  const rows = modalItems.map((it, idx)=>{
+    const tds = cols.map(c=>{
+      const val = it[c.key] !== undefined ? it[c.key] : '';
+      if(c.type === 'number'){
+        return `<td style="width:${c.width||'auto'}"><input type="number" step="0.01" data-item-idx="${idx}" data-item-key="${esc(c.key)}" value="${esc(val)}"></td>`;
+      }
+      return `<td style="width:${c.width||'auto'}"><input type="text" data-item-idx="${idx}" data-item-key="${esc(c.key)}" value="${esc(val)}"></td>`;
+    }).join('');
+    return `<tr>${tds}<td style="width:44px" class="t-center">
+      <button type="button" class="btn btn-xs btn-danger" data-action="remove-item" data-idx="${idx}"><i class="fa fa-trash"></i></button>
+    </td></tr>`;
+  }).join('');
+
+  const totalsHtml = buildTotalsHtml(cfg);
+
+  return `
+  <div class="items-editor" style="grid-column:1/-1">
+    <div class="form-section-title">Line Items</div>
+    <div class="table-scroll" style="border:1px solid #24354b;border-radius:12px;overflow:hidden">
+      <table>
+        <thead><tr>${cols.map(c=>`<th style="width:${c.width||'auto'}">${esc(c.label)}</th>`).join('')}<th></th></tr></thead>
+        <tbody id="itemsBody">${rows || `<tr><td colspan="${cols.length+1}" style="text-align:center;padding:1.2rem;color:#5c7a9c">No line items yet — click "Add Line".</td></tr>`}</tbody>
+      </table>
+    </div>
+    <div style="margin-top:.6rem;display:flex;gap:.5rem;flex-wrap:wrap">
+      <button type="button" class="btn btn-sm btn-ghost" data-action="add-item"><i class="fa fa-plus"></i> Add Line</button>
+    </div>
+    <div id="totalsBar">${totalsHtml}</div>
+  </div>`;
+}
+
+function buildTotalsHtml(cfg){
+  if(cfg.totals && cfg.totals.none) return '';
+  const opts = {
+    delivery: cfg.totals && cfg.totals.delivery ? num($('#f_deliveryCharge') ? $('#f_deliveryCharge').value : 0) : 0,
+    noTax: cfg.totals && cfg.totals.noTax
+  };
+  const t = itemsTotal(modalItems, opts);
+  let html = '<div class="items-total-bar">';
+  html += `<div>Subtotal<strong>${money(t.sub)}</strong></div>`;
+  if(!opts.noTax){
+    html += `<div>Discount<strong>${money(t.disc)}</strong></div>`;
+    html += `<div>Tax<strong>${money(t.tax)}</strong></div>`;
+  }
+  if(opts.delivery) html += `<div>Delivery<strong>${money(t.delivery)}</strong></div>`;
+  html += `<div class="grand">TOTAL<strong>${money(t.total)}</strong></div>`;
+  html += '</div>';
+  return html;
+}
+
+/* ----------------------------------------------------------------------------
+   17. MODAL SYSTEM
+---------------------------------------------------------------------------- */
+function openModal(html, opts){
+  opts = opts || {};
+  const root = $('#modal-root');
+  root.innerHTML = `<div class="modal-overlay" data-overlay="1">
+    <div class="modal ${opts.size||''}">${html}</div>
+  </div>`;
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(){
+  $('#modal-root').innerHTML = '';
+  document.body.style.overflow = '';
+  modalItems = [];
+}
+
+/* ----------------------------------------------------------------------------
+   18. NEW / EDIT FORMS
+---------------------------------------------------------------------------- */
+async function openNewForm(collection){
+  const cfg = COLLECTIONS[collection];
+  if(!cfg){ toast('Unknown collection','err'); return; }
+  let idNo = '';
+  if(cfg.idField){
+    try{ idNo = await nextNumber(collection); }
+    catch(e){ idNo = (settings().numbering[collection]||'NGT-REF')+'-????'; }
+  }
+  openFormModal(collection, null, idNo);
+}
+
+function openEditForm(collection, id){
+  const rec = find(collection, id);
+  if(!rec){ toast('Record not found','err'); return; }
+  openFormModal(collection, rec, null);
+}
+
+function openFormModal(collection, record, newId){
+  const cfg = COLLECTIONS[collection];
+  const isNew = !record;
+  const draft = record ? Object.assign({}, record) : {};
+  if(isNew && cfg.idField) draft[cfg.idField] = newId;
+
+  modalItems = isNew ? [] : (Array.isArray(record.items) ? record.items.map(x=>Object.assign({},x)) : []);
+
+  const body = `
+    <form id="recordForm">
+      <div class="modal-head">
+        <h3><i class="fa ${cfg.icon}"></i> ${isNew?'New':'Edit'} ${esc(cfg.label)}${isNew&&newId?` <span class="mono" style="color:#38bdf8">${esc(newId)}</span>`:''}</h3>
+        <button type="button" class="icon-btn" data-action="close-modal"><i class="fa fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-grid">
+          ${renderFormFields(cfg, draft)}
+          ${renderItemsEditor(cfg)}
+        </div>
+      </div>
+      <div class="modal-foot">
+        ${!isNew?`<button type="button" class="btn btn-danger btn-sm" data-action="delete-record" data-collection="${collection}" data-id="${esc(record._id)}"><i class="fa fa-trash"></i> Delete</button>`:''}
+        <button type="button" class="btn btn-ghost" data-action="close-modal">Cancel</button>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-disk"></i> Save ${esc(cfg.label)}</button>
+      </div>
+    </form>`;
+
+  openModal(body, {size: cfg.items ? '' : 'narrow'});
+
+  const form = $('#recordForm');
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const data = serializeForm(form);
+    if(cfg.items) data.items = modalItems.filter(it => Object.values(it).some(v=> v!=='' && v!==null && v!==undefined));
+
+    /* integrity checks */
+    if(collection === 'suppliers' && !data.name){ toast('Supplier name is required','err'); return; }
+    if(collection === 'invoices' && !data.supplierInvoiceNo){ toast('Supplier invoice number is required','err'); return; }
+    if(collection === 'payments' && num(data.amount) <= 0){ toast('Payment amount must be greater than zero','err'); return; }
+
+    /* derived defaults */
+    if(collection === 'invoices' && data.status === 'Unpaid'){
+      const bal = itemsTotal(data.items,{delivery:data.deliveryCharge}).total;
+      if(bal <= 0) { toast('Invoice total must be greater than zero','err'); return; }
+    }
+    if(collection === 'products' && num(data.supplierPrice) > 0){
+      data.dateUpdated = data.dateUpdated || today();
+    }
+
+    const ok = await saveRecord(collection, data, record ? record._id : null);
+    if(ok){
+      toast(cfg.label + (isNew?' created':' updated'),'ok');
+      /* auto price history on product price change */
+      if(collection === 'products' && (!record || num(record.supplierPrice) !== num(data.supplierPrice)) && num(data.supplierPrice) > 0){
+        pushPriceHistory(data);
+      }
+      closeModal();
+    }
+  });
+
+  /* live totals when delivery charge changes */
+  if(cfg.totals && cfg.totals.delivery){
+    const dc = $('#f_deliveryCharge');
+    if(dc) dc.addEventListener('input', ()=>{
+      const bar = $('#totalsBar');
+      if(bar) bar.innerHTML = buildTotalsHtml(cfg);
+    });
+  }
+}
+
+function pushPriceHistory(product){
+  DB.ref('priceHistory').push({
+    priceId:'',
+    date: today(),
+    productKey: product._id || '',
+    productName: product.name || '',
+    supplierKey: product.supplierKey || '',
+    price: num(product.supplierPrice),
+    condition: product.condition || '',
+    source:'Product Record',
+    notes:'Auto-recorded when supplier price changed'
+  }).then(()=>{}).catch(()=>{});
+}
+
+function serializeForm(formEl){
+  const data = {};
+  formEl.querySelectorAll('input[name],select[name],textarea[name]').forEach(el=>{
+    if(el.type === 'checkbox'){ data[el.name] = el.checked; }
+    else if(el.type === 'number'){ data[el.name] = el.value === '' ? '' : Number(el.value); }
+    else data[el.name] = el.value;
+  });
+  formEl.querySelectorAll('.ms-box').forEach(box=>{
+    data[box.dataset.name] = Array.from(box.querySelectorAll('input:checked')).map(i=>i.value);
+  });
+  return data;
+}
+
+/* ----------------------------------------------------------------------------
+   19. DETAIL VIEW
+---------------------------------------------------------------------------- */
+function openDetail(collection, id){
+  const cfg = COLLECTIONS[collection];
+  const rec = find(collection, id);
+  if(!rec){ toast('Record not found','err'); return; }
+
+  let html = '';
+  let lastGroup = null;
+  cfg.fields.forEach(f=>{
+    if(f.readonly === false) return;
+    if(f.group && f.group !== lastGroup){
+      lastGroup = f.group;
+      html += `<div class="form-section-title" style="grid-column:1/-1">${esc(f.group)}</div>`;
+    }
+    let v = rec[f.key];
+    if(f.type === 'multiselect') v = Array.isArray(v) && v.length ? v.join(', ') : '—';
+    else if(f.type === 'select' && (f.key==='supplierKey')) v = supLabel(v);
+    else if(f.type === 'date') v = fmtDate(v);
+    else if(f.type === 'number' && (f.key||'').toLowerCase().includes('price')) v = money(v);
+    else if(v === undefined || v === '') v = '—';
+    html += `<div class="detail-item"><div class="dl">${esc(f.label)}</div><div class="dv">${esc(v)}</div></div>`;
+  });
+
+  /* related records */
+  const related = relatedRecords(collection, rec);
+
+  const body = `
+    <div class="modal-head">
+      <h3><i class="fa ${cfg.icon}"></i> ${esc(rec[cfg.idField]||cfg.label)}</h3>
+      <button class="icon-btn" data-action="close-modal"><i class="fa fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="detail-grid">${html}</div>
+      ${related}
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" data-action="print-record" data-collection="${collection}" data-id="${esc(id)}"><i class="fa fa-print"></i> Print</button>
+      <button class="btn btn-ghost" data-action="close-modal">Close</button>
+      <button class="btn btn-primary" data-action="edit-record" data-collection="${collection}" data-id="${esc(id)}"><i class="fa fa-pen"></i> Edit</button>
+    </div>`;
+
+  openModal(body, {size:'wide'});
+}
+
+function relatedRecords(collection, rec){
+  let out = '';
+  const section = (title, rows, headers)=>{
+    if(!rows.length) return '';
+    return `<div class="form-section-title" style="margin-top:1.4rem;grid-column:1/-1">${esc(title)}</div>
+      <div class="table-scroll" style="grid-column:1/-1;border:1px solid #24354b;border-radius:12px;overflow:hidden">
+        <table class="data-table" style="min-width:auto">
+          <thead><tr>${headers.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead>
+          <tbody>${rows.join('')}</tbody>
+        </table>
+      </div>`;
+  };
+
+  if(collection === 'suppliers'){
+    const pos = list('purchaseOrders').filter(p=>p.supplierKey===rec._id);
+    out += section('Purchase Orders', pos.slice(0,15).map(p=>`<tr>
+      <td class="mono">${esc(p.poNo)}</td><td>${fmtDate(p.date)}</td>
+      <td class="t-right">${money(poTotal(p))}</td><td>${badge(p.status)}</td></tr>`),
+      ['PO No.','Date','Total','Status']);
+
+    const inv = list('invoices').filter(p=>p.supplierKey===rec._id);
+    out += section('Invoices', inv.slice(0,15).map(p=>`<tr>
+      <td class="mono">${esc(p.supplierInvoiceNo)}</td><td>${fmtDate(p.invoiceDate)}</td>
+      <td class="t-right">${money(invoiceTotal(p))}</td>
+      <td class="t-right">${money(invoiceBalance(p))}</td>
+      <td>${badge(invoiceStatus(p))}</td></tr>`),
+      ['Invoice No.','Date','Total','Balance','Status']);
+
+    const pays = list('payments').filter(p=>p.supplierKey===rec._id);
+    out += section('Payments', pays.slice(0,15).map(p=>`<tr>
+      <td class="mono">${esc(p.paymentId)}</td><td>${fmtDate(p.paymentDate)}</td>
+      <td>${esc(p.method)}</td><td class="t-right">${money(p.amount)}</td></tr>`),
+      ['Payment ID','Date','Method','Amount']);
+
+    const prod = list('products').filter(p=>p.supplierKey===rec._id);
+    out += section('Catalogue Items', prod.slice(0,20).map(p=>`<tr>
+      <td>${esc(p.name)}</td><td>${esc(p.condition||'—')}</td>
+      <td class="t-right">${money(p.supplierPrice)}</td><td>${badge(p.availability)}</td></tr>`),
+      ['Product / Service','Condition','Supplier Price','Availability']);
+  }
+
+  if(collection === 'purchaseOrders'){
+    const grns = list('grns').filter(g=>g.poRef === rec.poNo);
+    out += section('Goods Received', grns.map(g=>`<tr>
+      <td class="mono">${esc(g.grnNo)}</td><td>${fmtDate(g.deliveryDate)}</td>
+      <td>${esc(g.receivedBy||'—')}</td><td>${badge(g.status)}</td></tr>`),
+      ['GRN No.','Delivery Date','Received By','Status']);
+
+    const inv = list('invoices').filter(i=>i.poRef === rec.poNo);
+    out += section('Invoices', inv.map(i=>`<tr>
+      <td class="mono">${esc(i.supplierInvoiceNo)}</td><td>${fmtDate(i.invoiceDate)}</td>
+      <td class="t-right">${money(invoiceTotal(i))}</td><td>${badge(invoiceStatus(i))}</td></tr>`),
+      ['Invoice No.','Date','Total','Status']);
+  }
+
+  if(collection === 'invoices'){
+    const pays = list('payments').filter(p=>p.invoiceRef === rec._id);
+    out += section('Payments Against Invoice', pays.map(p=>`<tr>
+      <td class="mono">${esc(p.paymentId)}</td><td>${fmtDate(p.paymentDate)}</td>
+      <td>${esc(p.method)}</td><td>${esc(p.reference||'—')}</td>
+      <td class="t-right">${money(p.amount)}</td></tr>`),
+      ['Payment ID','Date','Method','Reference','Amount']);
+  }
+
+  if(collection === 'rfqs'){
+    out += `<div class="form-section-title" style="margin-top:1.4rem;grid-column:1/-1">Quotation Lines</div>`;
+    out += itemsTable(rec.items, COLLECTIONS.rfqs.items, rec.deliveryCharge);
+  }
+
+  if(collection === 'purchaseOrders' || collection === 'purchaseRequests' || collection === 'returns'){
+    out += `<div class="form-section-title" style="margin-top:1.4rem;grid-column:1/-1">Line Items</div>`;
+    out += itemsTable(rec.items, COLLECTIONS[collection].items, rec.deliveryCharge);
+  }
+
+  if(collection === 'grns'){
+    out += `<div class="form-section-title" style="margin-top:1.4rem;grid-column:1/-1">Received Lines</div>`;
+    out += itemsTable(rec.items, COLLECTIONS.grns.items, 0);
+  }
+
+  return out;
+}
+
+function itemsTable(items, cols, delivery){
+  const arr = Array.isArray(items)? items : [];
+  if(!arr.length) return '<div style="grid-column:1/-1;color:#5c7a9c;font-size:.83rem;font-style:italic">No line items recorded.</div>';
+  const rows = arr.map(it=>`<tr>${cols.map(c=>{
+    let v = it[c.key];
+    if(c.type === 'number' && (c.key||'').toLowerCase().includes('price')) v = money(v);
+    return `<td class="${c.type==='number'?'t-right':''}">${esc(v===undefined||v===''?'—':v)}</td>`;
+  }).join('')}</tr>`).join('');
+  return `<div class="table-scroll" style="grid-column:1/-1;border:1px solid #24354b;border-radius:12px;overflow:hidden">
+    <table class="data-table" style="min-width:auto">
+      <thead><tr>${cols.map(c=>`<th class="${c.type==='number'?'t-right':''}">${esc(c.label)}</th>`).join('')}</tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+  </div>`;
+}
+
+/* ----------------------------------------------------------------------------
+   20. GENERIC TABLE
+---------------------------------------------------------------------------- */
+function genericTable(collection, opts){
+  opts = opts || {};
+  const cfg = COLLECTIONS[collection];
+  let rows = list(collection);
+
+  if(opts.filter) rows = rows.filter(opts.filter);
+
+  /* collection-level filters */
+  const fstate = state.filters[collection] || {};
+  Object.keys(fstate).forEach(k=>{
+    if(fstate[k]) rows = rows.filter(r => String(r[k]||'') === fstate[k]);
+  });
+
+  /* sorting */
+  const sk = state.sort[collection];
+  if(sk && sk.key){
+    rows.sort((a,b)=>{
+      let av = a[sk.key], bv = b[sk.key];
+      if(typeof av === 'number' || typeof bv === 'number'){ av = num(av); bv = num(bv); }
+      else { av = String(av||'').toLowerCase(); bv = String(bv||'').toLowerCase(); }
+      if(av < bv) return sk.dir === 'asc' ? -1 : 1;
+      if(av > bv) return sk.dir === 'asc' ? 1 : -1;
+      return 0;
+    });
+  } else {
+    rows.sort((a,b)=> String(b._id||'').localeCompare(String(a._id||'')));
+  }
+
+  const head = cfg.columns.map(c=>{
+    const arrow = (sk && sk.key === c.key) ? (sk.dir==='asc'?' ▲':' ▼') : '';
+    return `<th data-action="sort" data-collection="${collection}" data-key="${esc(c.key)}" class="${c.cls||''}">${esc(c.label)}${arrow}</th>`;
+  }).join('');
+
+  const body = rows.length ? rows.map(r=>{
+    const tds = cfg.columns.map(c=>{
+      let val;
+      if(c.fmt) val = c.fmt(r[c.key], r);
+      else val = esc(r[c.key] === undefined || r[c.key] === '' ? '—' : r[c.key]);
+      return `<td class="${c.cls||''}">${val}</td>`;
+    }).join('');
+    return `<tr data-id="${esc(r._id)}">${tds}
+      <td class="t-center" style="white-space:nowrap">
+        <button class="btn btn-xs btn-ghost" data-action="view-record" data-collection="${collection}" data-id="${esc(r._id)}" title="View"><i class="fa fa-eye"></i></button>
+        <button class="btn btn-xs btn-ghost" data-action="edit-record" data-collection="${collection}" data-id="${esc(r._id)}" title="Edit"><i class="fa fa-pen"></i></button>
+        <button class="btn btn-xs btn-danger" data-action="delete-record" data-collection="${collection}" data-id="${esc(r._id)}" title="Delete"><i class="fa fa-trash"></i></button>
+      </td></tr>`;
+  }).join('') : `<tr class="no-rows"><td colspan="${cfg.columns.length+1}">No ${esc(cfg.plural.toLowerCase())} recorded yet. Click “New ${esc(cfg.label)}” to begin.</td></tr>`;
+
+  const filters = (cfg.filters||[]).map(f=>`
+    <select class="filter-select" data-filter-collection="${collection}" data-filter-key="${esc(f.key)}">
+      <option value="">${esc(f.label)}: All</option>
+      ${f.options.map(o=>`<option value="${esc(o)}" ${fstate[f.key]===o?'selected':''}>${esc(o)}</option>`).join('')}
+    </select>`).join('');
+
+  return `
+  <div class="table-wrap">
+    <div class="table-toolbar">
+      <div class="search-box">
+        <i class="fa fa-search"></i>
+        <input type="text" placeholder="Search ${esc(cfg.plural.toLowerCase())}…" data-table-search="${collection}" oninput="filterTable('${collection}')">
+      </div>
+      ${filters}
+      <div style="flex:1"></div>
+      <button class="btn btn-sm btn-ghost" data-action="export-csv" data-collection="${collection}"><i class="fa fa-file-csv"></i> CSV</button>
+      <button class="btn btn-sm btn-primary" data-action="new-record" data-collection="${collection}"><i class="fa fa-plus"></i> New ${esc(cfg.label)}</button>
+    </div>
+    <div class="table-scroll">
+      <table class="data-table" id="tbl_${collection}">
+        <thead><tr>${head}<th class="t-center" style="width:110px">Actions</th></tr></thead>
+        <tbody>${body}</tbody>
+      </table>
+    </div>
+  </div>`;
+}
+
+function filterTable(collection){
+  const input = document.querySelector(`[data-table-search="${collection}"]`);
+  const q = (input ? input.value : '').toLowerCase().trim();
+  const tbl = document.getElementById('tbl_'+collection);
+  if(!tbl) return;
+  let shown = 0;
+  tbl.querySelectorAll('tbody tr[data-id]').forEach(tr=>{
+    const match = !q || tr.textContent.toLowerCase().includes(q);
+    tr.style.display = match ? '' : 'none';
+    if(match) shown++;
+  });
+  const empty = tbl.querySelector('.no-rows');
+  if(empty) empty.style.display = (shown === 0 && q) ? '' : (empty.dataset.orig || '');
+}
+
+/* ----------------------------------------------------------------------------
+   21. VIEWS
+---------------------------------------------------------------------------- */
+
+/* ---------- DASHBOARD ---------- */
+function viewDashboard(){
+  const suppliers = list('suppliers');
+  const pos = list('purchaseOrders');
+  const invs = list('invoices');
+  const pays = list('payments');
+  const rfqs = list('rfqs');
+  const grns = list('grns');
+
+  const thisMonth = today().slice(0,7);
+  const thisYear = today().slice(0,4);
+
+  const totalPurchases = pos.filter(p=>p.status!=='Cancelled').reduce((a,p)=>a+poTotal(p),0);
+  const totalPaid = pays.filter(p=>p.status!=='Reversed').reduce((a,p)=>a+num(p.amount),0);
+  const totalOwed = invs.filter(i=>i.status!=='Cancelled').reduce((a,i)=>a+Math.max(0,invoiceBalance(i)),0);
+  const overdueInvoices = invs.filter(i=>invoiceStatus(i)==='Overdue');
+  const overdueAmount = overdueInvoices.reduce((a,i)=>a+invoiceBalance(i),0);
+  const monthPurchases = pos.filter(p=> monthKey(p.date)===thisMonth && p.status!=='Cancelled').reduce((a,p)=>a+poTotal(p),0);
+  const yearPurchases = pos.filter(p=> (p.date||'').slice(0,4)===thisYear && p.status!=='Cancelled').reduce((a,p)=>a+poTotal(p),0);
+
+  const openPOs = pos.filter(p=>['Draft','Pending Approval','Approved','Sent to Supplier','Partially Delivered'].includes(p.status));
+  const pendingDelivery = pos.filter(p=>['Approved','Sent to Supplier','Partially Delivered'].includes(p.status));
+  const completedPOs = pos.filter(p=>['Fully Delivered','Invoiced','Paid','Closed'].includes(p.status));
+  const cancelledPOs = pos.filter(p=>p.status==='Cancelled');
+  const pendingQuotes = rfqs.filter(r=>['Draft','Sent to Supplier'].includes(r.status));
+
+  const newSuppliersThisMonth = suppliers.filter(s=> monthKey(s.dateAdded||s._created)===thisMonth).length;
+
+  const kpi = (label, value, foot, cls, icon)=>`
+    <div class="kpi-card ${cls||''}">
+      <div class="kpi-icon"><i class="fa ${icon}"></i></div>
+      <div class="kpi-label">${esc(label)}</div>
+      <div class="kpi-value">${value}</div>
+      <div class="kpi-foot">${esc(foot||'')}</div>
+    </div>`;
+
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title"><i class="fa fa-gauge-high"></i> Dashboard</div>
+      <div class="page-sub">Live procurement, supplier and payables overview for ${esc(settings().company.name)}</div>
+    </div>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+      <button class="btn btn-sm btn-ghost" data-action="goto" data-view="payables"><i class="fa fa-scale-unbalanced"></i> Payables</button>
+      <button class="btn btn-sm btn-primary" data-action="new-record" data-collection="suppliers"><i class="fa fa-plus"></i> New Supplier</button>
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    ${kpi('Total Suppliers', suppliers.length, 'Registered in the system','', 'fa-building')}
+    ${kpi('Active Suppliers', suppliers.filter(s=>s.status==='Active').length, 'Currently approved & active','ok','fa-circle-check')}
+    ${kpi('Pending Approval', suppliers.filter(s=>['Pending Approval','Pending Verification','Draft'].includes(s.status)).length, 'Awaiting verification','warn','fa-hourglass-half')}
+    ${kpi('Suspended / Blacklisted', suppliers.filter(s=>['Suspended','Blacklisted'].includes(s.status)).length, 'Restricted from trading','danger','fa-ban')}
+    ${kpi('New Suppliers This Month', newSuppliersThisMonth, thisMonth,'', 'fa-user-plus')}
+  </div>
+
+  <div class="kpi-grid">
+    ${kpi('Open Purchase Orders', openPOs.length, 'Not yet fully received','warn','fa-file-contract')}
+    ${kpi('Pending Deliveries', pendingDelivery.length, 'Approved or in transit','', 'fa-truck')}
+    ${kpi('Completed Purchase Orders', completedPOs.length, 'Delivered / invoiced / paid','ok','fa-circle-check')}
+    ${kpi('Cancelled POs', cancelledPOs.length, 'Withdrawn orders','danger','fa-xmark')}
+    ${kpi('Pending Supplier Quotations', pendingQuotes.length, 'Awaiting supplier response','warn','fa-file-invoice-dollar')}
+  </div>
+
+  <div class="kpi-grid">
+    ${kpi('Total Supplier Purchases', money0(totalPurchases), 'All non-cancelled POs','', 'fa-cart-shopping')}
+    ${kpi('Amount Owed to Suppliers', money0(totalOwed), 'Outstanding payable balance','danger','fa-hand-holding-dollar')}
+    ${kpi('Amount Paid', money0(totalPaid), 'All completed payments','ok','fa-money-bill-transfer')}
+    ${kpi('Overdue Invoices', overdueInvoices.length + ' (' + money0(overdueAmount) + ')', 'Past due date','danger','fa-triangle-exclamation')}
+    ${kpi('Purchases This Month', money0(monthPurchases), thisMonth,'', 'fa-calendar-day')}
+    ${kpi('Purchases This Year', money0(yearPurchases), thisYear,'', 'fa-calendar')}
+  </div>
+
+  <div class="grid-2">
+    <div class="panel">
+      <div class="panel-head"><div class="panel-title"><i class="fa fa-chart-column"></i> Purchases by Month (last 12 months)</div></div>
+      <div class="chart-box"><canvas id="chartMonthly"></canvas></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><div class="panel-title"><i class="fa fa-chart-simple"></i> Top Suppliers by Spend</div></div>
+      <div class="chart-box"><canvas id="chartSuppliers"></canvas></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><div class="panel-title"><i class="fa fa-chart-pie"></i> Purchase Order Status</div></div>
+      <div class="chart-box"><canvas id="chartPOStatus"></canvas></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><div class="panel-title"><i class="fa fa-layer-group"></i> Purchases by Business Division</div></div>
+      <div class="chart-box"><canvas id="chartDivision"></canvas></div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title"><i class="fa fa-clock-rotate-left"></i> Payables Ageing</div>
+        <button class="btn btn-xs btn-ghost" data-action="goto" data-view="payables">Open Payables</button>
+      </div>
+      ${renderAgingSummary()}
+    </div>
+    <div class="panel">
+      <div class="panel-head"><div class="panel-title"><i class="fa fa-triangle-exclamation"></i> Attention Required</div></div>
+      ${renderAttentionList()}
+    </div>
+  </div>
+  `;
+}
+
+function renderAgingSummary(){
+  const buckets = payablesBuckets();
+  const total = buckets.reduce((a,b)=>a+b.amount,0);
+  if(total <= 0) return '<div class="chart-empty" style="height:120px">No outstanding supplier balances. 🎉</div>';
+  const colors = ['#22c55e','#facc15','#fb923c','#f87171','#dc2626'];
+  const segs = buckets.map((b,i)=>{
+    const pct = total ? (b.amount/total*100) : 0;
+    if(pct < 1) return '';
+    return `<div class="aging-seg" style="width:${pct}%;background:${colors[i]}" title="${esc(b.label)}: ${money(b.amount)}">${pct>9?Math.round(pct)+'%':''}</div>`;
+  }).join('');
+  return `
+    <div class="aging-bar">${segs}</div>
+    <ul class="mini-list">
+      ${buckets.map((b,i)=>`<li><span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:${colors[i]};margin-right:.5rem"></span>${esc(b.label)}</span><span class="val">${money(b.amount)}</span></li>`).join('')}
+      <li style="border-top:1px solid #2d3a4f;margin-top:.4rem;padding-top:.6rem"><strong>Total Payables</strong><span class="val">${money(total)}</span></li>
+    </ul>`;
+}
+
+function renderAttentionList(){
+  const items = [];
+  list('invoices').forEach(i=>{
+    const st = invoiceStatus(i);
+    if(st === 'Overdue') items.push({label:`Invoice ${i.supplierInvoiceNo||i.invoiceId} — ${supLabel(i.supplierKey)}`, val: money(invoiceBalance(i)), view:'invoices'});
+  });
+  list('purchaseOrders').forEach(p=>{
+    if(['Approved','Sent to Supplier','Partially Delivered'].includes(p.status) && p.expectedDelivery){
+      const d = daysFromToday(p.expectedDelivery);
+      if(d !== null && d <= 3) items.push({label:`PO ${p.poNo} delivery ${d<0?Math.abs(d)+'d overdue':'due in '+d+'d'}`, val: money(poTotal(p)), view:'purchaseOrders'});
+    }
+  });
+  list('contracts').forEach(c=>{
+    if(c.endDate){
+      const d = daysFromToday(c.endDate);
+      if(d !== null && d <= 30) items.push({label:`Contract ${c.contractNo} ${d<0?'expired':'expires in '+d+'d'}`, val: esc(c.title||''), view:'contracts'});
+    }
+  });
+  list('documents').forEach(dc=>{
+    if(dc.expiryDate){
+      const d = daysFromToday(dc.expiryDate);
+      if(d !== null && d <= 30) items.push({label:`Document "${dc.title}" ${d<0?'expired':'expires in '+d+'d'}`, val: esc(dc.docType||''), view:'documents'});
+    }
+  });
+  list('followups').forEach(f=>{
+    if(f.status === 'Open' || f.status === 'In Progress'){
+      const d = daysFromToday(f.dueDate);
+      if(d !== null && d <= 0) items.push({label:`Follow-up ${f.followupId} — ${f.type}`, val: d<0? Math.abs(d)+'d overdue':'Due today', view:'followups'});
+    }
+  });
+  list('rfqs').forEach(r=>{
+    if(r.validityDate && ['Sent to Supplier','Quotation Received'].includes(r.status)){
+      const d = daysFromToday(r.validityDate);
+      if(d !== null && d <= 3) items.push({label:`Quotation ${r.rfqNo} ${d<0?'expired':'expires in '+d+'d'}`, val: money(rfqTotal(r)), view:'rfqs'});
+    }
+  });
+  list('disputes').forEach(d=>{
+    if(d.status === 'Open' || d.status === 'In Progress') items.push({label:`Dispute ${d.disputeId} — ${d.reason}`, val: money(d.amount), view:'disputes'});
+  });
+
+  if(!items.length) return '<div class="chart-empty" style="height:120px">Nothing requires immediate attention.</div>';
+  return `<ul class="mini-list">${items.slice(0,12).map(i=>`<li><span>${esc(i.label)}</span><span class="val">${i.val}</span></li>`).join('')}</ul>`;
+}
+
+/* ---------- NOTIFICATIONS ---------- */
+function viewNotifications(){
+  const groups = [];
+  const overdue = list('invoices').filter(i=>invoiceStatus(i)==='Overdue');
+  if(overdue.length) groups.push({
+    title:'Overdue Supplier Invoices', icon:'fa-triangle-exclamation', color:'danger',
+    items: overdue.map(i=>`${i.supplierInvoiceNo||i.invoiceId} — ${supLabel(i.supplierKey)} — ${money(invoiceBalance(i))} — due ${fmtDate(i.dueDate)}`)
+  });
+
+  const pend = list('purchaseOrders').filter(p=>['Approved','Sent to Supplier','Partially Delivered'].includes(p.status));
+  if(pend.length) groups.push({
+    title:'Pending / In-Transit Deliveries', icon:'fa-truck', color:'warn',
+    items: pend.map(p=>`PO ${p.poNo} — ${supLabel(p.supplierKey)} — expected ${fmtDate(p.expectedDelivery)}`)
+  });
+
+  const partial = list('grns').filter(g=>{
+    const it = g.items||[];
+    const ord = it.reduce((a,b)=>a+num(b.qtyOrdered),0);
+    const rec = it.reduce((a,b)=>a+num(b.qtyReceived),0);
+    return ord > rec;
+  });
+  if(partial.length) groups.push({
+    title:'Partially Delivered Orders', icon:'fa-boxes-packing', color:'warn',
+    items: partial.map(g=>`GRN ${g.grnNo} — PO ${g.poRef||'—'} — ${supLabel(g.supplierKey)}`)
+  });
+
+  const expiring = list('contracts').filter(c=>c.endDate && daysFromToday(c.endDate) !== null && daysFromToday(c.endDate) <= 30);
+  if(expiring.length) groups.push({
+    title:'Contracts Expiring / Expired', icon:'fa-file-signature', color:'warn',
+    items: expiring.map(c=>`${c.contractNo} — ${c.title||''} — ends ${fmtDate(c.endDate)}`)
+  });
+
+  const docs = list('documents').filter(d=>d.expiryDate && daysFromToday(d.expiryDate) !== null && daysFromToday(d.expiryDate) <= 30);
+  if(docs.length) groups.push({
+    title:'Supplier Documents Expiring', icon:'fa-folder-open', color:'warn',
+    items: docs.map(d=>`${d.title} — ${supLabel(d.supplierKey)} — expires ${fmtDate(d.expiryDate)}`)
+  });
+
+  const quotes = list('rfqs').filter(r=>r.validityDate && daysFromToday(r.validityDate) !== null && daysFromToday(r.validityDate) <= 3 && !['Converted to PO','Cancelled'].includes(r.status));
+  if(quotes.length) groups.push({
+    title:'Supplier Quotations Expiring', icon:'fa-file-invoice-dollar', color:'warn',
+    items: quotes.map(r=>`${r.rfqNo} — ${supLabel(r.supplierKey)} — valid until ${fmtDate(r.validityDate)}`)
+  });
+
+  const fus = list('followups').filter(f=>['Open','In Progress'].includes(f.status) && f.dueDate && daysFromToday(f.dueDate) !== null && daysFromToday(f.dueDate) <= 0);
+  if(fus.length) groups.push({
+    title:'Follow-ups Due', icon:'fa-list-check', color:'warn',
+    items: fus.map(f=>`${f.followupId} — ${f.type} — ${supLabel(f.supplierKey)} — due ${fmtDate(f.dueDate)}`)
+  });
+
+  const disputes = list('disputes').filter(d=>['Open','In Progress'].includes(d.status));
+  if(disputes.length) groups.push({
+    title:'Open Disputes', icon:'fa-scale-balanced', color:'danger',
+    items: disputes.map(d=>`${d.disputeId} — ${d.reason} — ${supLabel(d.supplierKey)} — ${money(d.amount)}`)
+  });
+
+  const body = groups.length ? groups.map(g=>`
+    <div class="panel">
+      <div class="panel-head"><div class="panel-title"><i class="fa ${g.icon}" style="color:${g.color==='danger'?'#f87171':'#fbbf24'}"></i> ${esc(g.title)} <span class="badge b-${g.color}">${g.items.length}</span></div></div>
+      <ul class="mini-list">${g.items.slice(0,20).map(i=>`<li><span>${esc(i)}</span></li>`).join('')}</ul>
+    </div>`).join('') : `<div class="empty-state"><i class="fa fa-circle-check"></i><h4>All clear</h4><p>There are no outstanding notifications at this time.</p></div>`;
+
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title"><i class="fa fa-bell"></i> Notifications</div>
+      <div class="page-sub">Automatically generated alerts across suppliers, procurement and finance</div>
+    </div>
+  </div>
+  ${body}`;
+}
+
+/* ---------- PAYABLES ---------- */
+function payablesBuckets(){
+  const buckets = [
+    {label:'Current (not yet due)', amount:0, min:-999999, max:0},
+    {label:'1 – 30 days overdue', amount:0, min:1, max:30},
+    {label:'31 – 60 days overdue', amount:0, min:31, max:60},
+    {label:'61 – 90 days overdue', amount:0, min:61, max:90},
+    {label:'90+ days overdue', amount:0, min:91, max:999999}
+  ];
+  list('invoices').forEach(i=>{
+    if(i.status === 'Cancelled') return;
+    const bal = invoiceBalance(i);
+    if(bal <= 0.005) return;
+    const overdueDays = i.dueDate ? -daysFromToday(i.dueDate) : 0;
+    const d = overdueDays < 0 ? 0 : overdueDays;
+    if(d === 0){ buckets[0].amount += bal; }
+    else if(d <= 30){ buckets[1].amount += bal; }
+    else if(d <= 60){ buckets[2].amount += bal; }
+    else if(d <= 90){ buckets[3].amount += bal; }
+    else { buckets[4].amount += bal; }
+  });
+  return buckets;
+}
+
+function viewPayables(){
+  const buckets = payablesBuckets();
+  const total = buckets.reduce((a,b)=>a+b.amount,0);
+
+  /* per-supplier summary */
+  const bySupplier = {};
+  list('invoices').forEach(i=>{
+    if(i.status === 'Cancelled') return;
+    const bal = invoiceBalance(i);
+    if(bal <= 0.005) return;
+    const k = i.supplierKey || 'UNKNOWN';
+    if(!bySupplier[k]) bySupplier[k] = {total:0, current:0, d30:0, d60:0, d90:0, d90p:0, count:0};
+    bySupplier[k].total += bal;
+    bySupplier[k].count++;
+    const od = i.dueDate ? -daysFromToday(i.dueDate) : 0;
+    const d = od < 0 ? 0 : od;
+    if(d === 0) bySupplier[k].current += bal;
+    else if(d <= 30) bySupplier[k].d30 += bal;
+    else if(d <= 60) bySupplier[k].d60 += bal;
+    else if(d <= 90) bySupplier[k].d90 += bal;
+    else bySupplier[k].d90p += bal;
+  });
+
+  const rows = Object.keys(bySupplier).map(k=>{
+    const s = bySupplier[k];
+    return `<tr>
+      <td>${esc(supLabel(k))}</td>
+      <td class="t-center">${s.count}</td>
+      <td class="t-right">${money(s.current)}</td>
+      <td class="t-right">${money(s.d30)}</td>
+      <td class="t-right">${money(s.d60)}</td>
+      <td class="t-right">${money(s.d90)}</td>
+      <td class="t-right">${money(s.d90p)}</td>
+      <td class="t-right"><strong>${money(s.total)}</strong></td>
+      <td class="t-center"><button class="btn btn-xs btn-ghost" data-action="statement" data-id="${esc(k)}"><i class="fa fa-file-lines"></i></button></td>
+    </tr>`;
+  }).join('');
+
+  const overdueList = list('invoices')
+    .filter(i=>invoiceStatus(i)==='Overdue')
+    .sort((a,b)=> String(a.dueDate||'').localeCompare(String(b.dueDate||'')));
+
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title"><i class="fa fa-scale-unbalanced"></i> Accounts Payable</div>
+      <div class="page-sub">Outstanding supplier liabilities and ageing analysis</div>
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card danger"><div class="kpi-label">Total Payables</div><div class="kpi-value">${money0(total)}</div><div class="kpi-foot">Outstanding to all suppliers</div></div>
+    ${buckets.map((b,i)=>`<div class="kpi-card ${i===0?'ok':i<3?'warn':'danger'}"><div class="kpi-label">${esc(b.label)}</div><div class="kpi-value">${money0(b.amount)}</div><div class="kpi-foot">${total?((b.amount/total*100).toFixed(1)):0}% of payables</div></div>`).join('')}
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><div class="panel-title"><i class="fa fa-table-list"></i> Payables by Supplier</div></div>
+    <div class="table-scroll">
+      <table class="data-table">
+        <thead><tr>
+          <th>Supplier</th><th class="t-center">Invoices</th>
+          <th class="t-right">Current</th><th class="t-right">1–30 d</th>
+          <th class="t-right">31–60 d</th><th class="t-right">61–90 d</th>
+          <th class="t-right">90+ d</th><th class="t-right">Total</th><th class="t-center">Statement</th>
+        </tr></thead>
+        <tbody>${rows || '<tr class="no-rows"><td colspan="9">No outstanding supplier balances.</td></tr>'}</tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><div class="panel-title"><i class="fa fa-triangle-exclamation"></i> Overdue Invoices</div></div>
+    <div class="table-scroll">
+      <table class="data-table">
+        <thead><tr><th>Invoice</th><th>Supplier</th><th>Invoice Date</th><th>Due Date</th><th class="t-right">Total</th><th class="t-right">Balance</th><th class="t-center">Days Overdue</th></tr></thead>
+        <tbody>${overdueList.length ? overdueList.map(i=>`<tr>
+          <td class="mono">${esc(i.supplierInvoiceNo||i.invoiceId)}</td>
+          <td>${esc(supLabel(i.supplierKey))}</td>
+          <td>${fmtDate(i.invoiceDate)}</td>
+          <td>${fmtDate(i.dueDate)}</td>
+          <td class="t-right">${money(invoiceTotal(i))}</td>
+          <td class="t-right">${money(invoiceBalance(i))}</td>
+          <td class="t-center"><span class="badge b-danger">${Math.abs(daysFromToday(i.dueDate))}</span></td>
+        </tr>`).join('') : '<tr class="no-rows"><td colspan="7">No overdue invoices.</td></tr>'}</tbody>
+      </table>
+    </div>
+  </div>`;
+}
+
+/* ---------- STATEMENTS ---------- */
+function viewStatements(){
+  const suppliers = list('suppliers').sort((a,b)=>String(a.name||'').localeCompare(String(b.name||'')));
+  const selected = state.tab.statementSupplier || (suppliers[0] ? suppliers[0]._id : '');
+  const rows = buildStatement(selected);
+  const opening = 0;
+  let running = opening;
+  const ledger = rows.map(r=>{
+    running += r.debit - r.credit;
+    return Object.assign({}, r, {balance: running});
+  });
+
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title"><i class="fa fa-file-lines"></i> Supplier Statements</div>
+      <div class="page-sub">Full transaction history for each supplier account</div>
+    </div>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+      <select class="filter-select" id="statementSupplier" data-action="select-supplier">
+        <option value="">— Select a supplier —</option>
+        ${suppliers.map(s=>`<option value="${esc(s._id)}" ${selected===s._id?'selected':''}>${esc(s.name)}</option>`).join('')}
+      </select>
+      <button class="btn btn-sm btn-ghost" data-action="print-statement"><i class="fa fa-print"></i> Print</button>
+      <button class="btn btn-sm btn-ghost" data-action="export-statement"><i class="fa fa-file-csv"></i> CSV</button>
+    </div>
+  </div>
+
+  ${!selected ? `<div class="empty-state"><i class="fa fa-file-lines"></i><h4>No supplier selected</h4><p>Select a supplier above to generate a statement of account.</p></div>` : `
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-title"><i class="fa fa-user-tie"></i> ${esc(supLabel(selected))}</div>
+      <div style="font-size:.85rem;color:#8ba0bc">Outstanding Balance: <strong style="color:#f87171">${money(supplierPayables(selected))}</strong></div>
+    </div>
+    <div class="table-scroll">
+      <table class="data-table">
+        <thead><tr><th>Date</th><th>Reference</th><th>Description</th><th class="t-right">Debit (Purchase)</th><th class="t-right">Credit (Payment)</th><th class="t-right">Balance</th></tr></thead>
+        <tbody>
+          <tr><td colspan="5" style="color:#8ba0bc"><em>Opening Balance</em></td><td class="t-right"><strong>${money(opening)}</strong></td></tr>
+          ${ledger.length ? ledger.map(r=>`<tr>
+            <td>${fmtDate(r.date)}</td>
+            <td class="mono">${esc(r.ref)}</td>
+            <td>${esc(r.desc)}</td>
+            <td class="t-right">${r.debit?money(r.debit):'—'}</td>
+            <td class="t-right">${r.credit?money(r.credit):'—'}</td>
+            <td class="t-right">${money(r.balance)}</td>
+          </tr>`).join('') : '<tr class="no-rows"><td colspan="6">No transactions recorded for this supplier.</td></tr>'}
+          <tr style="background:#0f1a27">
+            <td colspan="3"><strong>Closing Balance</strong></td>
+            <td class="t-right"><strong>${money(ledger.reduce((a,r)=>a+r.debit,0))}</strong></td>
+            <td class="t-right"><strong>${money(ledger.reduce((a,r)=>a+r.credit,0))}</strong></td>
+            <td class="t-right"><strong style="color:#38bdf8">${money(running)}</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>`}`;
+}
+
+function buildStatement(supplierKey){
+  if(!supplierKey) return [];
+  const rows = [];
+  list('invoices').filter(i=>i.supplierKey===supplierKey && i.status!=='Cancelled').forEach(i=>{
+    rows.push({
+      date: i.invoiceDate || '',
+      ref: i.supplierInvoiceNo || i.invoiceId,
+      desc: 'Supplier Invoice'+(i.poRef? ' (PO '+i.poRef+')':''),
+      debit: invoiceTotal(i),
+      credit: 0
+    });
+  });
+  list('payments').filter(p=>p.supplierKey===supplierKey && p.status!=='Reversed').forEach(p=>{
+    rows.push({
+      date: p.paymentDate || '',
+      ref: p.paymentId || '',
+      desc: 'Payment — '+(p.method||'')+(p.reference? ' ('+p.reference+')':''),
+      debit: 0,
+      credit: num(p.amount)
+    });
+  });
+  list('creditNotes').filter(c=>c.supplierKey===supplierKey && c.status==='Applied').forEach(c=>{
+    rows.push({
+      date: c.date || '',
+      ref: c.cnNo || '',
+      desc: 'Credit Note — '+(c.reason||''),
+      debit: 0,
+      credit: num(c.amount)
+    });
+  });
+  return rows.sort((a,b)=> String(a.date).localeCompare(String(b.date)));
+}
+
+/* ---------- PRICE BOARD ---------- */
+function viewPriceBoard(){
+  const products = list('products');
+  const groups = {};
+  products.forEach(p=>{
+    const key = (p.name||'Unnamed').toLowerCase().trim();
+    if(!groups[key]) groups[key] = {name:p.name||'Unnamed', items:[]};
+    groups[key].items.push(p);
+  });
+
+  const keys = Object.keys(groups).sort();
+  const cards = keys.map(k=>{
+    const g = groups[k];
+    g.items.sort((a,b)=> num(a.supplierPrice) - num(b.supplierPrice));
+    const best = num(g.items[0].supplierPrice);
+    const rows = g.items.map(p=>{
+      const isBest = num(p.supplierPrice) === best && best > 0;
+      return `<tr>
+        <td>${esc(supLabel(p.supplierKey))}</td>
+        <td>${esc(p.condition||'—')}</td>
+        <td class="t-right" style="${isBest?'color:#4ade80;font-weight:700':''}">${money(p.supplierPrice)}</td>
+        <td>${badge(p.availability)}</td>
+        <td>${esc(p.warranty||'—')}</td>
+        <td>${fmtDate(p.dateUpdated)}</td>
+      </tr>`;
+    }).join('');
+    return `<div class="panel">
+      <div class="panel-head">
+        <div class="panel-title"><i class="fa fa-tag"></i> ${esc(g.name)} <span class="badge b-info">${g.items.length} supplier${g.items.length>1?'s':''}</span></div>
+        ${best>0?`<div style="font-size:.8rem;color:#8ba0bc">Best price: <strong style="color:#4ade80">${money(best)}</strong></div>`:''}
+      </div>
+      <div class="table-scroll">
+        <table class="data-table" style="min-width:auto">
+          <thead><tr><th>Supplier</th><th>Condition</th><th class="t-right">Cost</th><th>Availability</th><th>Warranty</th><th>Updated</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+    </div>`;
+  }).join('');
+
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title"><i class="fa fa-tags"></i> Supplier Price Board</div>
+      <div class="page-sub">Brokerage comparison board — supplier costs by product, condition and availability</div>
+    </div>
+    <button class="btn btn-sm btn-primary" data-action="new-record" data-collection="products"><i class="fa fa-plus"></i> New Catalogue Item</button>
+  </div>
+  ${keys.length ? cards : `<div class="empty-state"><i class="fa fa-tags"></i><h4>No catalogue items yet</h4><p>Add products and services under “Products &amp; Services” to populate the brokerage price board.</p></div>`}`;
+}
+
+/* ---------- QUOTATION COMPARISON ---------- */
+function viewQuoteCompare(){
+  const rfqs = list('rfqs').sort((a,b)=> String(b._id).localeCompare(String(a._id)));
+  const sel = state.compareSelection || [];
+  const selected = rfqs.filter(r=> sel.includes(r._id));
+
+  const rows = rfqs.map(r=>`<tr>
+    <td class="t-center"><input type="checkbox" data-action="toggle-compare" data-id="${esc(r._id)}" ${sel.includes(r._id)?'checked':''} style="accent-color:#38bdf8"></td>
+    <td class="mono">${esc(r.rfqNo)}</td>
+    <td>${esc(r.requirementRef||'—')}</td>
+    <td>${esc(supLabel(r.supplierKey))}</td>
+    <td>${fmtDate(r.validityDate)}</td>
+    <td class="t-right">${money(rfqTotal(r))}</td>
+    <td>${badge(r.status)}</td>
+  </tr>`).join('');
+
+  let comparison = '';
+  if(selected.length >= 2){
+    const bestTotal = Math.min.apply(null, selected.map(r=>rfqTotal(r)));
+    comparison = `
+    <div class="panel">
+      <div class="panel-head"><div class="panel-title"><i class="fa fa-code-compare"></i> Comparison of ${selected.length} Quotations</div></div>
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead><tr>
+            <th>Supplier</th><th>RFQ</th><th>Validity</th>
+            <th class="t-right">Items Subtotal</th><th class="t-right">Tax</th>
+            <th class="t-right">Delivery</th><th class="t-right">Total</th>
+            <th>Warranty</th><th>Payment Terms</th><th class="t-center">Rank</th>
+          </tr></thead>
+          <tbody>
+            ${selected.slice().sort((a,b)=>rfqTotal(a)-rfqTotal(b)).map((r,idx)=>{
+              const t = itemsTotal(r.items,{delivery:r.deliveryCharge});
+              const isBest = rfqTotal(r) === bestTotal;
+              return `<tr>
+                <td><strong>${esc(supLabel(r.supplierKey))}</strong></td>
+                <td class="mono">${esc(r.rfqNo)}</td>
+                <td>${fmtDate(r.validityDate)}</td>
+                <td class="t-right">${money(t.sub - t.disc)}</td>
+                <td class="t-right">${money(t.tax)}</td>
+                <td class="t-right">${money(t.delivery)}</td>
+                <td class="t-right" style="${isBest?'color:#4ade80;font-weight:700':''}">${money(t.total)}</td>
+                <td>${esc(r.warranty||'—')}</td>
+                <td>${esc(r.paymentTerms||'—')}</td>
+                <td class="t-center">${idx===0?'<span class="badge b-ok">Lowest</span>':'#'+(idx+1)}</td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+      </div>
+      <div class="note-box" style="margin-top:1rem;margin-bottom:0">
+        <i class="fa fa-circle-info"></i>
+        Comparison is based on the recorded figures only. Delivery reliability, warranty terms, payment terms and supplier performance should also be considered before selecting a supplier.
+      </div>
+    </div>`;
+  }
+
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title"><i class="fa fa-code-compare"></i> Quotation Comparison</div>
+      <div class="page-sub">Select two or more supplier quotations to compare them side by side</div>
+    </div>
+    <button class="btn btn-sm btn-primary" data-action="new-record" data-collection="rfqs"><i class="fa fa-plus"></i> New RFQ</button>
+  </div>
+
+  <div class="table-wrap" style="margin-bottom:1.4rem">
+    <div class="table-toolbar">
+      <div class="search-box"><i class="fa fa-search"></i><input type="text" placeholder="Search quotations…" data-table-search="quotecompare" oninput="filterTable('quotecompare')"></div>
+      <div style="flex:1"></div>
+      <button class="btn btn-sm btn-ghost" data-action="clear-compare"><i class="fa fa-xmark"></i> Clear Selection</button>
+    </div>
+    <div class="table-scroll">
+      <table class="data-table" id="tbl_quotecompare">
+        <thead><tr><th class="t-center" style="width:40px"></th><th>RFQ No.</th><th>Requirement</th><th>Supplier</th><th>Valid Until</th><th class="t-right">Total</th><th>Status</th></tr></thead>
+        <tbody>${rows || '<tr class="no-rows"><td colspan="7">No supplier quotations recorded yet.</td></tr>'}</tbody>
+      </table>
+    </div>
+  </div>
+
+  ${comparison || `<div class="note-box"><i class="fa fa-circle-info"></i> Select at least two quotations from the table above to generate a comparison.</div>`}`;
+}
+
+/* ---------- REPORTS ---------- */
+const REPORTS = [
+  {id:'supplier-master', title:'Supplier Master Report', group:'Supplier', icon:'fa-building',
+   desc:'Complete listing of all registered suppliers.',
+   run:()=> ({columns:['Supplier ID','Name','Type','Categories','Contact Person','Phone','Email','Town','Status','Payment Terms'], rows:list('suppliers').map(s=>[s.supplierId,s.name,s.type,(s.categories||[]).join(', '),s.contactPerson,s.phone,s.email,s.town,s.status,s.paymentTerms])})},
+  {id:'active-suppliers', title:'Active Supplier Report', group:'Supplier', icon:'fa-circle-check',
+   desc:'Suppliers with Active or Approved status.',
+   run:()=> ({columns:['Supplier ID','Name','Type','Phone','Payment Terms','Credit Limit'], rows:list('suppliers').filter(s=>['Active','Approved'].includes(s.status)).map(s=>[s.supplierId,s.name,s.type,s.phone,s.paymentTerms,money(s.creditLimit)])})},
+  {id:'supplier-category', title:'Supplier Category Report', group:'Supplier', icon:'fa-sitemap',
+   desc:'Suppliers grouped by their assigned categories.',
+   run:()=>{
+     const rows = [];
+     list('suppliers').forEach(s=>{
+       const cats = (s.categories && s.categories.length)? s.categories : ['(Uncategorised)'];
+       cats.forEach(c=> rows.push([c, s.supplierId, s.name, s.status]));
+     });
+     return {columns:['Category','Supplier ID','Supplier','Status'], rows};
+   }},
+  {id:'supplier-contacts', title:'Supplier Contact Report', group:'Supplier', icon:'fa-address-book',
+   desc:'Contact directory of all suppliers.',
+   run:()=> ({columns:['Supplier','Contact Person','Phone','WhatsApp','Email','Sales Rep','Accounts Rep','Town'], rows:list('suppliers').map(s=>[s.name,s.contactPerson,s.phone,s.whatsapp,s.email,s.salesRep,s.accountsRep,s.town])})},
+  {id:'supplier-catalogue', title:'Supplier Product Catalogue', group:'Supplier', icon:'fa-boxes-stacked',
+   desc:'All catalogue items with their supplier and price.',
+   run:()=> ({columns:['Product ID','Product','Supplier','Brand','Condition','Price','Availability','Warranty'], rows:list('products').map(p=>[p.productId,p.name,supLabel(p.supplierKey),p.brand,p.condition,money(p.supplierPrice),p.availability,p.warranty])})},
+  {id:'supplier-price-list', title:'Supplier Price List', group:'Supplier', icon:'fa-tags',
+   desc:'Current supplier price list by product.',
+   run:()=> ({columns:['Supplier','Product','Condition','Price','MOQ','Lead Time','Updated'], rows:list('products').map(p=>[supLabel(p.supplierKey),p.name,p.condition,money(p.supplierPrice),p.moq,p.leadTime,p.dateUpdated])})},
+  {id:'price-history', title:'Supplier Price Change History', group:'Supplier', icon:'fa-chart-line',
+   desc:'Recorded supplier price changes over time.',
+   run:()=> ({columns:['Date','Product','Supplier','Condition','Price','Source'], rows:list('priceHistory').sort((a,b)=>String(a.date).localeCompare(String(b.date))).map(p=>[p.date,p.productName,supLabel(p.supplierKey),p.condition,money(p.price),p.source])})},
+
+  {id:'po-report', title:'Purchase Orders Report', group:'Procurement', icon:'fa-file-contract',
+   desc:'All purchase orders with totals and status.',
+   run:()=> ({columns:['PO No.','Date','Supplier','Project','Total','Status','Expected Delivery'], rows:list('purchaseOrders').map(p=>[p.poNo,p.date,supLabel(p.supplierKey),p.project,money(poTotal(p)),p.status,p.expectedDelivery])})},
+  {id:'po-pending', title:'Pending Purchase Orders', group:'Procurement', icon:'fa-hourglass-half',
+   desc:'Purchase orders not yet fully received.',
+   run:()=> ({columns:['PO No.','Supplier','Date','Expected','Total','Status'], rows:list('purchaseOrders').filter(p=>['Draft','Pending Approval','Approved','Sent to Supplier','Partially Delivered'].includes(p.status)).map(p=>[p.poNo,supLabel(p.supplierKey),p.date,p.expectedDelivery,money(poTotal(p)),p.status])})},
+  {id:'rfq-report', title:'Supplier Quotations Report', group:'Procurement', icon:'fa-file-invoice-dollar',
+   desc:'All RFQs and received quotations.',
+   run:()=> ({columns:['RFQ No.','Requirement','Supplier','Request Date','Valid Until','Total','Status'], rows:list('rfqs').map(r=>[r.rfqNo,r.requirementRef,supLabel(r.supplierKey),r.requestDate,r.validityDate,money(rfqTotal(r)),r.status])})},
+  {id:'pr-report', title:'Purchase Requests Report', group:'Procurement', icon:'fa-clipboard-list',
+   desc:'All internal purchase requests.',
+   run:()=> ({columns:['PR No.','Department','Requester','Project','Required By','Priority','Est. Cost','Status'], rows:list('purchaseRequests').map(p=>[p.prNo,p.department,p.requester,p.project,p.requiredDate,p.priority,money(itemsTotal(p.items,{noTax:true}).total),p.approvalStatus])})},
+  {id:'grn-report', title:'Goods Received Report', group:'Procurement', icon:'fa-truck-ramp-box',
+   desc:'All goods received notes and delivery variances.',
+   run:()=> ({columns:['GRN No.','PO Ref','Supplier','Delivery Date','Received By','Ordered','Received','Status'], rows:list('grns').map(g=>{
+      const it = g.items||[];
+      return [g.grnNo,g.poRef,supLabel(g.supplierKey),g.deliveryDate,g.receivedBy,
+        it.reduce((a,b)=>a+num(b.qtyOrdered),0), it.reduce((a,b)=>a+num(b.qtyReceived),0), g.status];
+   })})},
+  {id:'returns-report', title:'Supplier Returns Report', group:'Procurement', icon:'fa-rotate-left',
+   desc:'All returns made to suppliers.',
+   run:()=> ({columns:['Return No.','Date','Supplier','PO Ref','Reason','Value','Status'], rows:list('returns').map(r=>[r.returnNo,r.date,supLabel(r.supplierKey),r.poRef,r.reason,money(itemsTotal(r.items,{noTax:true}).total),r.status])})},
+
+  {id:'payables-report', title:'Supplier Payables Report', group:'Financial', icon:'fa-scale-unbalanced',
+   desc:'Outstanding balances by supplier.',
+   run:()=>{
+     const m = {};
+     list('invoices').filter(i=>i.status!=='Cancelled').forEach(i=>{
+       const bal = invoiceBalance(i);
+       if(bal <= 0.005) return;
+       const k = i.supplierKey||'UNKNOWN';
+       m[k] = (m[k]||0) + bal;
+     });
+     return {columns:['Supplier','Outstanding Balance'],
+       rows:Object.keys(m).map(k=>[supLabel(k), money(m[k])])};
+   }},
+  {id:'payment-history', title:'Supplier Payment History', group:'Financial', icon:'fa-money-bill-transfer',
+   desc:'All payments made to suppliers.',
+   run:()=> ({columns:['Payment ID','Date','Supplier','Invoice','Method','Reference','Amount','Status'], rows:list('payments').map(p=>[p.paymentId,p.paymentDate,supLabel(p.supplierKey),invLabel(p.invoiceRef),p.method,p.reference,money(p.amount),p.status])})},
+  {id:'outstanding-invoices', title:'Outstanding Supplier Invoices', group:'Financial', icon:'fa-file-invoice',
+   desc:'Invoices with a remaining balance.',
+   run:()=> ({columns:['Invoice','Supplier','Invoice Date','Due Date','Total','Paid','Balance','Status'],
+     rows:list('invoices').filter(i=>invoiceBalance(i) > 0.005).map(i=>[i.supplierInvoiceNo||i.invoiceId,supLabel(i.supplierKey),i.invoiceDate,i.dueDate,money(invoiceTotal(i)),money(invoicePaid(i._id)),money(invoiceBalance(i)),invoiceStatus(i)])})},
+  {id:'overdue-invoices', title:'Overdue Supplier Invoices', group:'Financial', icon:'fa-triangle-exclamation',
+   desc:'Invoices past their due date.',
+   run:()=> ({columns:['Invoice','Supplier','Due Date','Balance','Days Overdue'],
+     rows:list('invoices').filter(i=>invoiceStatus(i)==='Overdue').map(i=>[i.supplierInvoiceNo||i.invoiceId,supLabel(i.supplierKey),i.dueDate,money(invoiceBalance(i)),Math.abs(daysFromToday(i.dueDate))])})},
+  {id:'spend-supplier', title:'Spending by Supplier', group:'Financial', icon:'fa-chart-simple',
+   desc:'Total purchase value per supplier.',
+   run:()=>{
+     const m = {};
+     list('purchaseOrders').filter(p=>p.status!=='Cancelled').forEach(p=>{
+       const k = p.supplierKey||'UNKNOWN';
+       m[k] = (m[k]||0) + poTotal(p);
+     });
+     return {columns:['Supplier','Total Purchases'],
+       rows:Object.keys(m).sort((a,b)=>m[b]-m[a]).map(k=>[supLabel(k), money(m[k])])};
+   }},
+  {id:'spend-month', title:'Spending by Month', group:'Financial', icon:'fa-calendar',
+   desc:'Monthly purchase totals.',
+   run:()=>{
+     const m = {};
+     list('purchaseOrders').filter(p=>p.status!=='Cancelled').forEach(p=>{
+       const k = monthKey(p.date);
+       if(!k) return;
+       m[k] = (m[k]||0) + poTotal(p);
+     });
+     return {columns:['Month','Total Purchases'],
+       rows:Object.keys(m).sort().map(k=>[monthLabel(k), money(m[k])])};
+   }},
+  {id:'spend-category', title:'Spending by Division', group:'Financial', icon:'fa-layer-group',
+   desc:'Purchase totals by business division.',
+   run:()=>{
+     const m = {};
+     list('purchaseOrders').filter(p=>p.status!=='Cancelled').forEach(p=>{
+       const k = p.division || '(Unassigned)';
+       m[k] = (m[k]||0) + poTotal(p);
+     });
+     return {columns:['Division','Total Purchases'],
+       rows:Object.keys(m).sort((a,b)=>m[b]-m[a]).map(k=>[k, money(m[k])])};
+   }},
+  {id:'spend-project', title:'Spending by Project', group:'Financial', icon:'fa-diagram-project',
+   desc:'Purchase totals by project / job.',
+   run:()=>{
+     const m = {};
+     list('purchaseOrders').filter(p=>p.status!=='Cancelled').forEach(p=>{
+       const k = p.project || '(No Project)';
+       m[k] = (m[k]||0) + poTotal(p);
+     });
+     return {columns:['Project','Total Purchases'],
+       rows:Object.keys(m).sort((a,b)=>m[b]-m[a]).map(k=>[k, money(m[k])])};
+   }},
+
+  {id:'delivery-performance', title:'Supplier Delivery Performance', group:'Performance', icon:'fa-truck',
+   desc:'Delivery accuracy based on received quantities.',
+   run:()=>{
+     const m = {};
+     list('grns').forEach(g=>{
+       const k = g.supplierKey||'UNKNOWN';
+       if(!m[k]) m[k] = {orders:0, complete:0, outstanding:0};
+       const it = g.items||[];
+       const ord = it.reduce((a,b)=>a+num(b.qtyOrdered),0);
+       const rec = it.reduce((a,b)=>a+num(b.qtyReceived),0);
+       m[k].orders++;
+       if(rec >= ord && ord > 0) m[k].complete++;
+       m[k].outstanding += Math.max(0, ord-rec);
+     });
+     return {columns:['Supplier','GRNs','Complete Deliveries','Outstanding Units','Fulfilment %'],
+       rows:Object.keys(m).map(k=>{
+         const s = m[k];
+         const pct = s.orders? ((s.complete/s.orders)*100).toFixed(1)+'%' : '—';
+         return [supLabel(k), s.orders, s.complete, s.outstanding, pct];
+       })};
+   }},
+  {id:'defect-report', title:'Defective & Returned Goods', group:'Performance', icon:'fa-bug',
+   desc:'Returns and defects per supplier.',
+   run:()=>{
+     const m = {};
+     list('returns').forEach(r=>{
+       const k = r.supplierKey||'UNKNOWN';
+       if(!m[k]) m[k] = {count:0, value:0};
+       m[k].count++;
+       m[k].value += itemsTotal(r.items,{noTax:true}).total;
+     });
+     return {columns:['Supplier','Returns','Return Value'],
+       rows:Object.keys(m).map(k=>[supLabel(k), m[k].count, money(m[k].value)])};
+   }},
+  {id:'dispute-report', title:'Supplier Disputes Report', group:'Performance', icon:'fa-scale-balanced',
+   desc:'All recorded supplier disputes.',
+   run:()=> ({columns:['Dispute ID','Opened','Supplier','Reason','Amount','Assigned','Status'], rows:list('disputes').map(d=>[d.disputeId,d.dateOpened,supLabel(d.supplierKey),d.reason,money(d.amount),d.assignedTo,d.status])})},
+  {id:'contract-report', title:'Contract Register', group:'Performance', icon:'fa-file-signature',
+   desc:'All supplier contracts and expiry dates.',
+   run:()=> ({columns:['Contract No.','Title','Supplier','Start','End','Renewal','Status'], rows:list('contracts').map(c=>[c.contractNo,c.title,supLabel(c.supplierKey),c.startDate,c.endDate,c.renewalDate,c.status])})},
+  {id:'document-report', title:'Supplier Document Register', group:'Performance', icon:'fa-folder-open',
+   desc:'All supplier documents and their validity.',
+   run:()=> ({columns:['Document ID','Supplier','Type','Title','Issue Date','Expiry Date','Status'], rows:list('documents').map(d=>[d.docId,supLabel(d.supplierKey),d.docType,d.title,d.issueDate,d.expiryDate,d.status])})}
+];
+
+function viewReports(){
+  const groups = {};
+  REPORTS.forEach(r=>{ (groups[r.group] = groups[r.group]||[]).push(r); });
+
+  const selected = state.reportSelection ? REPORTS.find(r=>r.id===state.reportSelection) : null;
+  let output = '';
+  if(selected){
+    const data = selected.run();
+    output = `
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title"><i class="fa ${selected.icon}"></i> ${esc(selected.title)}</div>
+        <div style="display:flex;gap:.5rem">
+          <button class="btn btn-sm btn-ghost" data-action="export-report"><i class="fa fa-file-csv"></i> CSV</button>
+          <button class="btn btn-sm btn-ghost" data-action="print-report"><i class="fa fa-print"></i> Print</button>
+          <button class="btn btn-sm btn-ghost" data-action="clear-report"><i class="fa fa-xmark"></i> Close</button>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="data-table" id="reportTable">
+          <thead><tr>${data.columns.map(c=>`<th>${esc(c)}</th>`).join('')}</tr></thead>
+          <tbody>${data.rows.length ? data.rows.map(r=>`<tr>${r.map(c=>`<td>${esc(c===undefined||c===null||c===''?'—':c)}</td>`).join('')}</tr>`).join('') : `<tr class="no-rows"><td colspan="${data.columns.length}">No records available for this report.</td></tr>`}</tbody>
+        </table>
+      </div>
+      <div style="margin-top:.8rem;font-size:.8rem;color:#7d93b3">${data.rows.length} record(s) &nbsp;·&nbsp; Generated ${new Date().toLocaleString('en-GB')}</div>
+    </div>`;
+  }
+
+  const cards = Object.keys(groups).map(g=>`
+    <div class="panel">
+      <div class="panel-head"><div class="panel-title"><i class="fa fa-folder"></i> ${esc(g)} Reports</div></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.8rem">
+        ${groups[g].map(r=>`
+          <div class="detail-item" style="cursor:pointer" data-action="run-report" data-id="${esc(r.id)}">
+            <div style="display:flex;align-items:center;gap:.6rem">
+              <i class="fa ${r.icon}" style="color:#38bdf8;font-size:1.1rem"></i>
+              <div>
+                <div class="dv" style="font-weight:600">${esc(r.title)}</div>
+                <div style="font-size:.74rem;color:#7d93b3;margin-top:.15rem">${esc(r.desc)}</div>
+              </div>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title"><i class="fa fa-chart-pie"></i> Reports</div>
+      <div class="page-sub">Operational, financial and supplier performance reporting</div>
+    </div>
+  </div>
+  ${output}
+  ${cards}`;
+}
+
+/* ---------- AUDIT ---------- */
+function viewAudit(){
+  const logs = list('audit').sort((a,b)=> String(b.ts||'').localeCompare(String(a.ts||'')));
+  const rows = logs.slice(0,400).map(l=>`<tr>
+    <td>${l.ts? new Date(l.ts).toLocaleString('en-GB') : '—'}</td>
+    <td>${esc(l.user||'—')}</td>
+    <td>${badge(l.action)}</td>
+    <td>${esc(l.collection||'—')}</td>
+    <td class="mono">${esc(l.recordId||'—')}</td>
+    <td>${esc(l.label||'—')}</td>
+    <td style="font-size:.78rem;color:#8ba0bc">${esc(l.details||'')}</td>
+  </tr>`).join('');
+
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title"><i class="fa fa-shield-halved"></i> Audit Trail</div>
+      <div class="page-sub">Immutable record of all create, update, delete and sensitive-change events</div>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <div class="table-toolbar">
+      <div class="search-box"><i class="fa fa-search"></i><input type="text" placeholder="Search audit log…" data-table-search="audit" oninput="filterTable('audit')"></div>
+    </div>
+    <div class="table-scroll">
+      <table class="data-table" id="tbl_audit" style="min-width:900px">
+        <thead><tr><th>Timestamp</th><th>User / Role</th><th>Action</th><th>Module</th><th>Record ID</th><th>Reference</th><th>Details</th></tr></thead>
+        <tbody>${rows || '<tr class="no-rows"><td colspan="7">No audit entries recorded yet.</td></tr>'}</tbody>
+      </table>
+    </div>
+  </div>`;
+}
+
+/* ---------- SETTINGS ---------- */
+function viewSettings(){
+  const s = settings();
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title"><i class="fa fa-gear"></i> System Settings</div>
+      <div class="page-sub">Company profile, tax configuration and document numbering</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><div class="panel-title"><i class="fa fa-building"></i> Company Profile</div></div>
+    <form id="settingsCompany" class="form-grid">
+      <div class="form-field"><label>Company Name</label><input type="text" name="name" value="${esc(s.company.name)}"></div>
+      <div class="form-field"><label>Tagline / Motto</label><input type="text" name="motto" value="${esc(s.company.motto)}"></div>
+      <div class="form-field"><label>Phone</label><input type="text" name="phone" value="${esc(s.company.phone)}"></div>
+      <div class="form-field"><label>Email</label><input type="text" name="email" value="${esc(s.company.email)}"></div>
+      <div class="form-field span-2"><label>Physical Address</label><input type="text" name="address" value="${esc(s.company.address)}"></div>
+      <div class="form-field"><label>Website</label><input type="text" name="website" value="${esc(s.company.website)}"></div>
+      <div class="form-field"><label>KRA PIN</label><input type="text" name="pin" value="${esc(s.company.pin)}"></div>
+      <div class="form-field span-2"><button type="submit" class="btn btn-primary"><i class="fa fa-floppy-disk"></i> Save Company Profile</button></div>
+    </form>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><div class="panel-title"><i class="fa fa-percent"></i> Tax &amp; Currency Configuration</div></div>
+    <form id="settingsTax" class="form-grid">
+      <div class="form-field"><label>Base Currency</label>
+        <select name="currency">${CURRENCIES.map(c=>`<option ${s.tax.currency===c?'selected':''}>${c}</option>`).join('')}</select>
+      </div>
+      <div class="form-field"><label>Default Tax / VAT Rate (%)</label><input type="number" step="0.01" name="defaultVatRate" value="${esc(s.tax.defaultVatRate)}"></div>
+      <div class="form-field"><label>Tax Enabled</label>
+        <select name="vatEnabled"><option value="true" ${s.tax.vatEnabled?'selected':''}>Enabled</option><option value="false" ${!s.tax.vatEnabled?'selected':''}>Disabled</option></select>
+      </div>
+      <div class="form-field span-2"><div class="note-box" style="margin:0"><i class="fa fa-circle-info"></i> Tax rates are fully configurable. The system does not hard-code any jurisdiction-specific tax assumptions — update these values whenever tax rules or business circumstances change.</div></div>
+      <div class="form-field span-2"><button type="submit" class="btn btn-primary"><i class="fa fa-floppy-disk"></i> Save Tax Configuration</button></div>
+    </form>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><div class="panel-title"><i class="fa fa-hashtag"></i> Document Numbering Prefixes</div></div>
+    <form id="settingsNumbering" class="form-grid">
+      ${Object.keys(DEFAULT_SETTINGS.numbering).map(k=>`
+        <div class="form-field"><label>${esc(COLLECTIONS[k] ? COLLECTIONS[k].label : k)}</label>
+        <input type="text" name="${esc(k)}" value="${esc(s.numbering[k]||'')}"></div>`).join('')}
+      <div class="form-field span-2"><button type="submit" class="btn btn-primary"><i class="fa fa-floppy-disk"></i> Save Numbering</button></div>
+    </form>
+    <div class="note-box" style="margin-top:1rem;margin-bottom:0"><i class="fa fa-triangle-exclamation"></i> Changing a prefix affects only new records. Existing document numbers are never modified.</div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><div class="panel-title"><i class="fa fa-sitemap"></i> Default Supplier Categories</div></div>
+    <p style="font-size:.86rem;color:#9fb8d6;margin-bottom:1rem">
+      The system starts with an empty category list. You may load a standard starter set covering your business divisions
+      (IT, Electrical, CCTV, Solar, Security, Graphic Design, Procurement and Electronics). Existing categories are never overwritten.
+    </p>
+    <button class="btn btn-outline" data-action="load-default-categories"><i class="fa fa-download"></i> Load Default Supplier Categories</button>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><div class="panel-title"><i class="fa fa-database"></i> Data Management</div></div>
+    <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+      <button class="btn btn-ghost" data-action="export-all"><i class="fa fa-file-export"></i> Export All Data (JSON)</button>
+      <button class="btn btn-ghost" data-action="goto" data-view="audit"><i class="fa fa-shield-halved"></i> View Audit Trail</button>
+    </div>
+    <div class="note-box" style="margin-top:1rem;margin-bottom:0">
+      <i class="fa fa-circle-info"></i> This system is connected to Firebase Realtime Database at
+      <span class="mono">https://ngt-supplier-manager-system-default-rtdb.firebaseio.com/</span>.
+      All records are stored live and shared across every device that opens this application.
+    </div>
+  </div>`;
+}
+
+/* ---------- SUPPLIER FORM-BASED VIEWS ---------- */
+function viewCollection(collection){
+  const cfg = COLLECTIONS[collection];
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title"><i class="fa ${cfg.icon}"></i> ${esc(cfg.plural)}</div>
+      <div class="page-sub">${esc(collectionSubtitle(collection))}</div>
+    </div>
+  </div>
+  ${genericTable(collection)}`;
+}
+
+function collectionSubtitle(c){
+  const map = {
+    suppliers:'Master database of all product, service and subcontractor suppliers',
+    categories:'Configurable category tree covering all Ngure Gacheru Technologies divisions',
+    products:'Supplier-linked catalogue of products and services with pricing',
+    priceHistory:'Historical supplier pricing — previous prices are never overwritten',
+    rfqs:'Requests for quotation and supplier quotations received',
+    purchaseRequests:'Internal purchase requests raised by departments and projects',
+    purchaseOrders:'Purchase orders issued to suppliers',
+    grns:'Goods received notes — record exactly what was delivered',
+    invoices:'Supplier invoices linked to purchase orders and goods received notes',
+    payments:'Payments made to suppliers, linked to invoices and POs',
+    returns:'Returns of damaged, defective or incorrect goods to suppliers',
+    creditNotes:'Supplier credit notes and refunds',
+    disputes:'Supplier disputes and their resolution status',
+    contracts:'Supplier contracts, pricing agreements and expiry monitoring',
+    documents:'Supplier document repository with expiry tracking',
+    communications:'Full log of supplier communications',
+    followups:'Actionable follow-ups on quotations, deliveries, payments and renewals'
+  };
+  return map[c] || '';
+}
+
+/* ----------------------------------------------------------------------------
+   22. VIEW ROUTER
+---------------------------------------------------------------------------- */
+const VIEWS = {
+  dashboard: viewDashboard,
+  notifications: viewNotifications,
+  payables: viewPayables,
+  statements: viewStatements,
+  priceboard: viewPriceBoard,
+  quotecompare: viewQuoteCompare,
+  reports: viewReports,
+  audit: viewAudit,
+  settings: viewSettings
+};
+
+function render(){
+  renderSidebar();
+  renderHeaderMeta();
+
+  const main = $('#main');
+  const view = state.view;
+  let html = '';
+
+  if(VIEWS[view]) html = VIEWS[view]();
+  else if(COLLECTIONS[view]) html = viewCollection(view);
+  else html = viewDashboard();
+
+  main.innerHTML = `<div class="main-inner">${html}</div>`;
+
+  afterRender(view);
+}
+
+function renderSidebar(){
+  const sb = $('#sidebar');
+  let html = '';
+  NAV.forEach(group=>{
+    const items = group.items.filter(i => i.roles.includes(state.role));
+    if(!items.length) return;
+    html += `<div class="nav-group-title">${esc(group.group)}</div>`;
+    items.forEach(i=>{
+      let count = '';
+      if(i.id === 'notifications'){
+        const n = countNotifications();
+        if(n) count = `<span class="nav-tag">${n}</span>`;
+      }
+      if(i.id === 'followups'){
+        const n = list('followups').filter(f=>['Open','In Progress'].includes(f.status)).length;
+        if(n) count = `<span class="nav-tag">${n}</span>`;
+      }
+      html += `<div class="nav-item ${state.view===i.id?'active':''}" data-action="goto" data-view="${i.id}">
+        <i class="fa ${i.icon}"></i><span>${esc(i.label)}</span>${count}
+      </div>`;
+    });
+  });
+  sb.innerHTML = html;
+}
+
+function renderHeaderMeta(){
+  const n = countNotifications();
+  const badgeEl = $('#notifCount');
+  if(n){ badgeEl.style.display = 'flex'; badgeEl.textContent = n > 99 ? '99+' : n; }
+  else badgeEl.style.display = 'none';
+
+  const roleSel = $('#roleSelect');
+  if(roleSel && !roleSel.options.length){
+    roleSel.innerHTML = ALL.map(r=>`<option>${r}</option>`).join('');
+    roleSel.value = state.role;
+  }
+}
+
+function countNotifications(){
+  let n = 0;
+  n += list('invoices').filter(i=>invoiceStatus(i)==='Overdue').length;
+  n += list('contracts').filter(c=>c.endDate && daysFromToday(c.endDate)!==null && daysFromToday(c.endDate)<=30).length;
+  n += list('documents').filter(d=>d.expiryDate && daysFromToday(d.expiryDate)!==null && daysFromToday(d.expiryDate)<=30).length;
+  n += list('followups').filter(f=>['Open','In Progress'].includes(f.status) && f.dueDate && daysFromToday(f.dueDate)!==null && daysFromToday(f.dueDate)<=0).length;
+  n += list('disputes').filter(d=>['Open','In Progress'].includes(d.status)).length;
+  n += list('rfqs').filter(r=>r.validityDate && daysFromToday(r.validityDate)!==null && daysFromToday(r.validityDate)<=3 && !['Converted to PO','Cancelled'].includes(r.status)).length;
+  return n;
+}
+
+function afterRender(view){
+  if(view === 'dashboard') drawDashboardCharts();
+
+  /* animate on view */
+  requestAnimationFrame(()=>{
+    $$('.animate-on-view').forEach(el=>el.classList.add('visible'));
+  });
+
+  /* settings forms */
+  const sc = $('#settingsCompany');
+  if(sc) sc.addEventListener('submit', async e=>{
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(sc).entries());
+    await DB.ref('settings/company').update(data);
+    toast('Company profile saved','ok');
+  });
+
+  const st = $('#settingsTax');
+  if(st) st.addEventListener('submit', async e=>{
+    e.preventDefault();
+    const d = Object.fromEntries(new FormData(st).entries());
+    await DB.ref('settings/tax').update({
+      currency: d.currency,
+      defaultVatRate: num(d.defaultVatRate),
+      vatEnabled: d.vatEnabled === 'true'
+    });
+    toast('Tax configuration saved','ok');
+  });
+
+  const sn = $('#settingsNumbering');
+  if(sn) sn.addEventListener('submit', async e=>{
+    e.preventDefault();
+    const d = Object.fromEntries(new FormData(sn).entries());
+    await DB.ref('settings/numbering').update(d);
+    toast('Numbering prefixes saved','ok');
+  });
+
+  /* statement supplier selector */
+  const ss = $('#statementSupplier');
+  if(ss) ss.addEventListener('change', ()=>{
+    state.tab.statementSupplier = ss.value;
+    render();
+  });
+}
+
+/* ----------------------------------------------------------------------------
+   23. CHARTS (custom canvas — no external library)
+---------------------------------------------------------------------------- */
+function prepCanvas(canvas){
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.clientWidth || 300;
+  const h = canvas.clientHeight || 220;
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.clearRect(0,0,w,h);
+  return {ctx, w, h};
+}
+
+function drawBarChart(canvas, labels, values, color){
+  const {ctx, w, h} = prepCanvas(canvas);
+  const padL = 62, padR = 14, padT = 16, padB = 46;
+  const cw = w - padL - padR;
+  const ch = h - padT - padB;
+
+  const max = Math.max.apply(null, values.concat([0])) || 1;
+  const steps = 4;
+
+  ctx.strokeStyle = '#1e2c3a';
+  ctx.fillStyle = '#6b85a6';
+  ctx.font = '10px Inter, sans-serif';
+  ctx.lineWidth = 1;
+
+  for(let i=0;i<=steps;i++){
+    const y = padT + ch - (ch/steps)*i;
+    ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(padL+cw, y); ctx.stroke();
+    const val = (max/steps)*i;
+    ctx.textAlign = 'right';
+    ctx.fillText(shortNum(val), padL-8, y+3);
+  }
+
+  const n = values.length || 1;
+  const slot = cw / n;
+  const barW = Math.min(38, slot*0.6);
+
+  values.forEach((v,i)=>{
+    const bh = max ? (v/max)*ch : 0;
+    const x = padL + slot*i + (slot-barW)/2;
+    const y = padT + ch - bh;
+    const grad = ctx.createLinearGradient(0,y,0,padT+ch);
+    grad.addColorStop(0, color || '#38bdf8');
+    grad.addColorStop(1, 'rgba(56,189,248,.25)');
+    ctx.fillStyle = grad;
+    roundRect(ctx, x, y, barW, Math.max(bh,1), 4);
+    ctx.fill();
+
+    ctx.fillStyle = '#7d93b3';
+    ctx.font = '9.5px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    const lab = String(labels[i]||'');
+    ctx.fillText(lab.length>9? lab.slice(0,8)+'…' : lab, x+barW/2, padT+ch+16);
+  });
+}
+
+function drawHBarChart(canvas, labels, values, color){
+  const {ctx, w, h} = prepCanvas(canvas);
+  const padL = 120, padR = 60, padT = 12, padB = 12;
+  const cw = w - padL - padR;
+  const rows = Math.max(values.length, 1);
+  const rowH = Math.min(34, (h - padT - padB) / rows);
+  const barH = Math.max(10, rowH * 0.55);
+  const max = Math.max.apply(null, values.concat([0])) || 1;
+
+  values.forEach((v,i)=>{
+    const y = padT + i*rowH + (rowH-barH)/2;
+    const bw = max ? (v/max)*cw : 0;
+    ctx.fillStyle = '#16233a';
+    roundRect(ctx, padL, y, cw, barH, 5); ctx.fill();
+    const grad = ctx.createLinearGradient(padL,0,padL+cw,0);
+    grad.addColorStop(0, color||'#38bdf8');
+    grad.addColorStop(1, 'rgba(56,189,248,.35)');
+    ctx.fillStyle = grad;
+    roundRect(ctx, padL, y, Math.max(bw,2), barH, 5); ctx.fill();
+
+    ctx.fillStyle = '#9fb8d6';
+    ctx.font = '10.5px Inter, sans-serif';
+    ctx.textAlign = 'right';
+    let lab = String(labels[i]||'');
+    if(lab.length > 18) lab = lab.slice(0,17)+'…';
+    ctx.fillText(lab, padL-8, y + barH/2 + 3.5);
+
+    ctx.fillStyle = '#38bdf8';
+    ctx.textAlign = 'left';
+    ctx.fillText(shortNum(v), padL + bw + 6, y + barH/2 + 3.5);
+  });
+}
+
+function drawDoughnut(canvas, labels, values, colors){
+  const {ctx, w, h} = prepCanvas(canvas);
+  const cx = w/2, cy = h/2 - 6;
+  const R = Math.min(w,h)/2 - 26;
+  const r = R * 0.6;
+  const total = values.reduce((a,b)=>a+b,0);
+
+  if(!total){
+    ctx.fillStyle = '#4f6b8c';
+    ctx.font = '12px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('No data available', cx, cy);
+    return;
+  }
+
+  let start = -Math.PI/2;
+  values.forEach((v,i)=>{
+    const angle = (v/total) * Math.PI*2;
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,R,start,start+angle);
+    ctx.closePath();
+    ctx.fillStyle = colors[i % colors.length];
+    ctx.fill();
+    ctx.strokeStyle = '#111c29';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    start += angle;
+  });
+
+  ctx.beginPath();
+  ctx.arc(cx,cy,r,0,Math.PI*2);
+  ctx.fillStyle = '#111c29';
+  ctx.fill();
+
+  ctx.fillStyle = '#e0e7ff';
+  ctx.font = 'bold 15px Inter, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(String(values.reduce((a,b)=>a+b,0)), cx, cy+2);
+  ctx.fillStyle = '#7d93b3';
+  ctx.font = '9.5px Inter, sans-serif';
+  ctx.fillText('RECORDS', cx, cy+16);
+
+  /* legend */
+  let ly = h - 4;
+  ctx.textAlign = 'left';
+  ctx.font = '10px Inter, sans-serif';
+  let lx = 10;
+  labels.forEach((l,i)=>{
+    if(i > 5) return;
+    ctx.fillStyle = colors[i % colors.length];
+    ctx.fillRect(lx, ly-8, 8, 8);
+    ctx.fillStyle = '#8ba0bc';
+    const txt = String(l).slice(0,12);
+    ctx.fillText(txt, lx+12, ly);
+    lx += ctx.measureText(txt).width + 30;
+  });
+}
+
+function roundRect(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.lineTo(x+w-r,y);
+  ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h-r);
+  ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  ctx.lineTo(x+r,y+h);
+  ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+  ctx.lineTo(x,y+r);
+  ctx.quadraticCurveTo(x,y,x+r,y);
+  ctx.closePath();
+}
+
+function shortNum(v){
+  const n = num(v);
+  if(Math.abs(n) >= 1000000) return (n/1000000).toFixed(1)+'M';
+  if(Math.abs(n) >= 1000) return (n/1000).toFixed(0)+'K';
+  return String(Math.round(n));
+}
+
+function drawDashboardCharts(){
+  const months = lastNMonths(12);
+  const monthly = months.map(m =>
+    list('purchaseOrders').filter(p=> monthKey(p.date)===m && p.status!=='Cancelled')
+      .reduce((a,p)=>a+poTotal(p),0)
+  );
+  const c1 = document.getElementById('chartMonthly');
+  if(c1) drawBarChart(c1, months.map(monthLabel), monthly, '#38bdf8');
+
+  const spend = {};
+  list('purchaseOrders').filter(p=>p.status!=='Cancelled').forEach(p=>{
+    const k = p.supplierKey||'UNKNOWN';
+    spend[k] = (spend[k]||0) + poTotal(p);
+  });
+  const topKeys = Object.keys(spend).sort((a,b)=>spend[b]-spend[a]).slice(0,7);
+  const c2 = document.getElementById('chartSuppliers');
+  if(c2){
+    if(topKeys.length) drawHBarChart(c2, topKeys.map(k=>supLabel(k)), topKeys.map(k=>spend[k]), '#22d3ee');
+    else drawHBarChart(c2, [], [], '#22d3ee');
+  }
+
+  const statuses = PO_STATUSES;
+  const counts = statuses.map(s => list('purchaseOrders').filter(p=>p.status===s).length);
+  const active = statuses.map((s,i)=>({s, c:counts[i]})).filter(x=>x.c>0);
+  const c3 = document.getElementById('chartPOStatus');
+  if(c3){
+    drawDoughnut(c3,
+      active.map(x=>x.s),
+      active.map(x=>x.c),
+      ['#38bdf8','#22c55e','#f59e0b','#f87171','#818cf8','#22d3ee','#a3e635','#fb923c','#e879f9','#94a3b8']);
+  }
+
+  const divSpend = {};
+  list('purchaseOrders').filter(p=>p.status!=='Cancelled').forEach(p=>{
+    const k = p.division || 'Unassigned';
+    divSpend[k] = (divSpend[k]||0) + poTotal(p);
+  });
+  const divKeys = Object.keys(divSpend).sort((a,b)=>divSpend[b]-divSpend[a]).slice(0,8);
+  const c4 = document.getElementById('chartDivision');
+  if(c4){
+    if(divKeys.length) drawHBarChart(c4, divKeys, divKeys.map(k=>divSpend[k]), '#818cf8');
+    else drawHBarChart(c4, [], [], '#818cf8');
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   24. CSV / EXPORT / PRINT
+---------------------------------------------------------------------------- */
+function toCSV(headers, rows){
+  const esc_ = v => {
+    const s = String(v===undefined||v===null?'':v).replace(/"/g,'""');
+    return /[",\n]/.test(s) ? `"${s}"` : s;
+  };
+  return [headers.map(esc_).join(','), ...rows.map(r=>r.map(esc_).join(','))].join('\r\n');
+}
+function download(filename, content, mime){
+  const blob = new Blob([content], {type: mime||'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 1500);
+}
+function exportCollectionCSV(collection){
+  const cfg = COLLECTIONS[collection];
+  const rows = list(collection);
+  if(!rows.length){ toast('No data to export','err'); return; }
+  const headers = cfg.columns.map(c=>c.label);
+  const data = rows.map(r=> cfg.columns.map(c=>{
+    if(c.fmt){
+      const v = c.fmt(r[c.key], r);
+      return String(v).replace(/<[^>]*>/g,'');
+    }
+    return r[c.key]===undefined?'':r[c.key];
+  }));
+  download(collection+'-'+today()+'.csv', toCSV(headers, data));
+  toast('CSV exported','ok');
+}
+function printHTML(title, innerHtml){
+  const w = window.open('', '_blank');
+  if(!w){ toast('Please allow pop-ups to print','err'); return; }
+  w.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>${esc(title)}</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;color:#111;padding:26px;}
+    h1{font-size:19px;margin-bottom:2px;}
+    h2{font-size:13px;font-weight:normal;color:#555;margin-bottom:18px;}
+    table{width:100%;border-collapse:collapse;font-size:11.5px;margin-top:12px;}
+    th,td{border:1px solid #bbb;padding:6px 8px;text-align:left;}
+    th{background:#eef3f8;}
+    .r{text-align:right;}
+    .head{border-bottom:2px solid #333;padding-bottom:10px;margin-bottom:14px;}
+    .meta{font-size:11px;color:#666;margin-top:6px;}
+    .block{margin-bottom:16px;font-size:12px;}
+    .block strong{display:inline-block;min-width:150px;}
+  </style></head><body>
+  <div class="head">
+    <h1>${esc(settings().company.name)}</h1>
+    <h2>${esc(settings().company.motto)}</h2>
+    <div class="meta">${esc(settings().company.address||'')} ${settings().company.phone? ' | Tel: '+esc(settings().company.phone):''} ${settings().company.email? ' | '+esc(settings().company.email):''}</div>
+  </div>
+  <h1 style="font-size:16px">${esc(title)}</h1>
+  <div class="meta">Generated: ${new Date().toLocaleString('en-GB')}</div>
+  ${innerHtml}
+  <script>window.onload=function(){window.print();}<\/script>
+  </body></html>`);
+  w.document.close();
+}
+function printRecord(collection, id){
+  const rec = find(collection, id);
+  if(!rec) return;
+  const cfg = COLLECTIONS[collection];
+  let rows = '';
+  let lastGroup = null;
+  cfg.fields.forEach(f=>{
+    if(f.group && f.group !== lastGroup){
+      lastGroup = f.group;
+      rows += `<tr><th colspan="2" style="background:#dde6ef">${esc(f.group)}</th></tr>`;
+    }
+    let v = rec[f.key];
+    if(f.type==='multiselect') v = Array.isArray(v)? v.join(', ') : '';
+    if(f.type==='select' && f.key==='supplierKey') v = supLabel(v);
+    if(f.type==='date') v = fmtDate(v);
+    if(v===undefined||v==='') v = '—';
+    rows += `<tr><td style="width:250px"><strong>${esc(f.label)}</strong></td><td>${esc(v)}</td></tr>`;
+  });
+
+  let itemsHtml = '';
+  if(cfg.items && Array.isArray(rec.items) && rec.items.length){
+    itemsHtml = `<table><thead><tr>${cfg.items.map(c=>`<th>${esc(c.label)}</th>`).join('')}</tr></thead>
+      <tbody>${rec.items.map(it=>`<tr>${cfg.items.map(c=>`<td>${esc(it[c.key]===undefined?'':it[c.key])}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+    const t = itemsTotal(rec.items,{delivery:rec.deliveryCharge, noTax:cfg.totals&&cfg.totals.noTax});
+    itemsHtml += `<table style="margin-top:8px"><tbody>
+      <tr><td class="r"><strong>Subtotal</strong></td><td class="r" style="width:160px">${money(t.sub)}</td></tr>
+      ${!(cfg.totals&&cfg.totals.noTax)?`<tr><td class="r"><strong>Discount</strong></td><td class="r">${money(t.disc)}</td></tr>
+      <tr><td class="r"><strong>Tax</strong></td><td class="r">${money(t.tax)}</td></tr>`:''}
+      ${t.delivery?`<tr><td class="r"><strong>Delivery</strong></td><td class="r">${money(t.delivery)}</td></tr>`:''}
+      <tr><td class="r"><strong>TOTAL</strong></td><td class="r"><strong>${money(t.total)}</strong></td></tr>
+    </tbody></table>`;
+  }
+
+  printHTML(cfg.label+' — '+(rec[cfg.idField]||''), `<table>${rows}</table>${itemsHtml}`);
+}
+function printReport(){
+  const sel = state.reportSelection ? REPORTS.find(r=>r.id===state.reportSelection) : null;
+  if(!sel){ toast('Open a report first','err'); return; }
+  const data = sel.run();
+  const html = `<table><thead><tr>${data.columns.map(c=>`<th>${esc(c)}</th>`).join('')}</tr></thead>
+    <tbody>${data.rows.map(r=>`<tr>${r.map(c=>`<td>${esc(c===undefined||c===null||c===''?'—':c)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+  printHTML(sel.title, html);
+}
+function printStatement(){
+  const key = state.tab.statementSupplier;
+  if(!key){ toast('Select a supplier first','err'); return; }
+  const rows = buildStatement(key);
+  let running = 0;
+  const body = rows.map(r=>{
+    running += r.debit - r.credit;
+    return `<tr><td>${fmtDate(r.date)}</td><td>${esc(r.ref)}</td><td>${esc(r.desc)}</td>
+      <td class="r">${r.debit?money(r.debit):'—'}</td>
+      <td class="r">${r.credit?money(r.credit):'—'}</td>
+      <td class="r">${money(running)}</td></tr>`;
+  }).join('');
+  const html = `<div class="block"><strong>Supplier:</strong> ${esc(supLabel(key))}</div>
+    <table><thead><tr><th>Date</th><th>Reference</th><th>Description</th><th class="r">Debit</th><th class="r">Credit</th><th class="r">Balance</th></tr></thead>
+    <tbody>${body}
+    <tr><td colspan="3"><strong>Closing Balance</strong></td>
+    <td class="r"><strong>${money(rows.reduce((a,r)=>a+r.debit,0))}</strong></td>
+    <td class="r"><strong>${money(rows.reduce((a,r)=>a+r.credit,0))}</strong></td>
+    <td class="r"><strong>${money(running)}</strong></td></tr></tbody></table>`;
+  printHTML('Supplier Statement — '+supLabel(key), html);
+}
+
+/* ----------------------------------------------------------------------------
+   25. GLOBAL EVENT HANDLING
+---------------------------------------------------------------------------- */
+document.addEventListener('click', async (e)=>{
+
+  /* overlay click closes modal */
+  if(e.target.classList && e.target.classList.contains('modal-overlay')){
+    closeModal();
+    return;
+  }
+
+  const t = e.target.closest('[data-action]');
+  if(!t) return;
+  const action = t.dataset.action;
+
+  switch(action){
+
+    case 'toggle-sidebar': {
+      $('#sidebar').classList.toggle('open');
+      break;
+    }
+
+    case 'goto': {
+      const v = t.dataset.view;
+      state.view = v;
+      state.reportSelection = null;
+      $('#sidebar').classList.remove('open');
+      window.scrollTo({top:0, behavior:'smooth'});
+      render();
+      break;
+    }
+
+    case 'close-modal': closeModal(); break;
+
+    case 'new-record': {
+      e.preventDefault();
+      await openNewForm(t.dataset.collection);
+      break;
+    }
+
+    case 'edit-record': {
+      e.preventDefault();
+      closeModal();
+      setTimeout(()=> openEditForm(t.dataset.collection, t.dataset.id), 60);
+      break;
+    }
+
+    case 'view-record': {
+      e.preventDefault();
+      openDetail(t.dataset.collection, t.dataset.id);
+      break;
+    }
+
+    case 'delete-record': {
+      e.preventDefault();
+      const c = t.dataset.collection, id = t.dataset.id;
+      const rec = find(c, id);
+      const label = rec ? (rec[COLLECTIONS[c].idField] || rec.name || 'this record') : 'this record';
+      if(confirm(`Permanently delete ${label}?\n\nThis action cannot be undone and will be recorded in the audit trail.`)){
+        closeModal();
+        await deleteRecord(c, id);
+      }
+      break;
+    }
+
+    case 'add-item': {
+      e.preventDefault();
+      const form = $('#recordForm');
+      const collection = form.dataset.collection || state.editingCollection;
+      const cfg = COLLECTIONS[currentFormCollection()];
+      const blank = {};
+      (cfg.items||[]).forEach(c=> blank[c.key] = '');
+      modalItems.push(blank);
+      refreshItemsEditor();
+      break;
+    }
+
+    case 'remove-item': {
+      e.preventDefault();
+      const idx = parseInt(t.dataset.idx,10);
+      modalItems.splice(idx,1);
+      refreshItemsEditor();
+      break;
+    }
+
+    case 'sort': {
+      const c = t.dataset.collection, k = t.dataset.key;
+      const cur = state.sort[c];
+      state.sort[c] = { key:k, dir: (cur && cur.key===k && cur.dir==='asc') ? 'desc' : 'asc' };
+      render();
+      break;
+    }
+
+    case 'export-csv': exportCollectionCSV(t.dataset.collection); break;
+
+    case 'run-report': {
+      state.reportSelection = t.dataset.id;
+      render();
+      window.scrollTo({top:0,behavior:'smooth'});
+      break;
+    }
+    case 'clear-report': state.reportSelection = null; render(); break;
+    case 'print-report': printReport(); break;
+    case 'print-statement': printStatement(); break;
+    case 'print-record': printRecord(t.dataset.collection, t.dataset.id); break;
+
+    case 'export-report': {
+      const sel = state.reportSelection ? REPORTS.find(r=>r.id===state.reportSelection) : null;
+      if(!sel){ toast('Open a report first','err'); break; }
+      const data = sel.run();
+      download(sel.id+'-'+today()+'.csv', toCSV(data.columns, data.rows.map(r=>r.map(c=>c===undefined?'':c))));
+      toast('CSV exported','ok');
+      break;
+    }
+
+    case 'export-statement': {
+      const key = state.tab.statementSupplier;
+      if(!key){ toast('Select a supplier first','err'); break; }
+      const rows = buildStatement(key);
+      let running = 0;
+      const data = rows.map(r=>{
+        running += r.debit - r.credit;
+        return [r.date, r.ref, r.desc, r.debit||'', r.credit||'', running];
+      });
+      download('statement-'+today()+'.csv', toCSV(['Date','Reference','Description','Debit','Credit','Balance'], data));
+      toast('CSV exported','ok');
+      break;
+    }
+
+    case 'statement': {
+      state.view = 'statements';
+      state.tab.statementSupplier = t.dataset.id;
+      render();
+      break;
+    }
+
+    case 'load-default-categories': {
+      if(!confirm('Load the standard supplier category set?\n\nExisting categories will not be modified.')) break;
+      await loadDefaultCategories();
+      break;
+    }
+
+    case 'export-all': {
+      const payload = JSON.stringify(state.data, null, 2);
+      download('ngt-supplier-system-'+today()+'.json', payload, 'application/json');
+      toast('Full data export downloaded','ok');
+      break;
+    }
+
+    case 'clear-compare': {
+      state.compareSelection = [];
+      render();
+      break;
+    }
+  }
+});
+
+/* checkbox toggle for comparison */
+document.addEventListener('change', (e)=>{
+  const t = e.target;
+  if(t.dataset && t.dataset.action === 'toggle-compare'){
+    const id = t.dataset.id;
+    if(t.checked){
+      if(!state.compareSelection.includes(id)) state.compareSelection.push(id);
+    }else{
+      state.compareSelection = state.compareSelection.filter(x=>x!==id);
+    }
+    render();
+    return;
+  }
+
+  if(t.dataset && t.dataset.filterCollection){
+    const c = t.dataset.filterCollection;
+    state.filters[c] = state.filters[c] || {};
+    state.filters[c][t.dataset.filterKey] = t.value;
+    render();
+    return;
+  }
+
+  if(t.id === 'roleSelect'){
+    state.role = t.value;
+    const allowed = NAV.some(g=>g.items.some(i=> i.id===state.view && i.roles.includes(state.role)));
+    if(!allowed) state.view = 'dashboard';
+    render();
+    return;
+  }
+});
+
+/* live item editing */
+document.addEventListener('input', (e)=>{
+  const t = e.target;
+  if(t.dataset && t.dataset.itemIdx !== undefined){
+    const idx = parseInt(t.dataset.itemIdx, 10);
+    const key = t.dataset.itemKey;
+    if(!modalItems[idx]) modalItems[idx] = {};
+    modalItems[idx][key] = t.value;
+    updateTotalsBar();
+  }
+});
+
+function currentFormCollection(){
+  return window.__currentFormCollection || 'suppliers';
+}
+
+function refreshItemsEditor(){
+  const cfg = COLLECTIONS[currentFormCollection()];
+  const body = document.getElementById('itemsBody');
+  if(!body) return;
+  const cols = cfg.items || [];
+  if(!modalItems.length){
+    body.innerHTML = `<tr><td colspan="${cols.length+1}" style="text-align:center;padding:1.2rem;color:#5c7a9c">No line items yet — click "Add Line".</td></tr>`;
+    updateTotalsBar();
+    return;
+  }
+  body.innerHTML = modalItems.map((it, idx)=>{
+    const tds = cols.map(c=>{
+      const val = it[c.key] !== undefined ? it[c.key] : '';
+      const step = c.type === 'number' ? 'step="0.01"' : '';
+      return `<td style="width:${c.width||'auto'}"><input type="number" ${step} data-item-idx="${idx}" data-item-key="${esc(c.key)}" value="${esc(val)}"></td>`;
+    }).join('');
+    return `<tr>${tds}<td style="width:44px" class="t-center">
+      <button type="button" class="btn btn-xs btn-danger" data-action="remove-item" data-idx="${idx}"><i class="fa fa-trash"></i></button></td></tr>`;
+  }).join('');
+  updateTotalsBar();
+}
+
+function updateTotalsBar(){
+  const bar = document.getElementById('totalsBar');
+  if(!bar) return;
+  const cfg = COLLECTIONS[currentFormCollection()];
+  bar.innerHTML = buildTotalsHtml(cfg);
+}
+
+/* reload item editor inputs (keeps values after add/remove) */
+const _origRefresh = refreshItemsEditor;
+
+/* ----------------------------------------------------------------------------
+   26. DEFAULT CATEGORY LOADER
+---------------------------------------------------------------------------- */
+async function loadDefaultCategories(){
+  try{
+    const existing = list('categories');
+    const existingNames = new Set(existing.map(c=>String(c.name||'').toLowerCase()));
+    let order = existing.length;
+
+    for(const group of DEFAULT_SETTINGS.defaultCategories){
+      let groupRef = null;
+      if(!existingNames.has(group.name.toLowerCase())){
+        const ref = DB.ref('categories').push();
+        await ref.set({
+          categoryId: 'CAT-' + String(++order).padStart(3,'0'),
+          name: group.name,
+          parent: '',
+          division: group.division,
+          description: 'Standard category group'
+        });
+        existingNames.add(group.name.toLowerCase());
+      }
+      for(const child of (group.children||[])){
+        if(existingNames.has(child.toLowerCase())) continue;
+        const ref = DB.ref('categories').push();
+        await ref.set({
+          categoryId: 'CAT-' + String(++order).padStart(3,'0'),
+          name: child,
+          parent: group.name,
+          division: group.division,
+          description: ''
+        });
+        existingNames.add(child.toLowerCase());
+      }
+    }
+    toast('Default supplier categories loaded','ok');
+  }catch(err){
+    toast('Failed to load categories: '+err.message,'err');
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   27. FIREBASE LISTENER
+---------------------------------------------------------------------------- */
+function setConnection(stateName){
+  const pill = $('#connPill');
+  const txt = $('#connText');
+  pill.classList.remove('online','offline');
+  if(stateName === 'online'){ pill.classList.add('online'); txt.textContent = 'Live · Connected'; }
+  else if(stateName === 'offline'){ pill.classList.add('offline'); txt.textContent = 'Offline'; }
+  else { txt.textContent = 'Connecting…'; }
+}
+
+DB.ref('.info/connected').on('value', snap=>{
+  setConnection(snap.val() ? 'online' : 'offline');
+});
+
+DB.ref('/').on('value', snap=>{
+  state.data = snap.val() || {};
+  if(!state.ready){
+    state.ready = true;
+    const suppliers = list('suppliers');
+    if(suppliers.length && !state.tab.statementSupplier){
+      state.tab.statementSupplier = suppliers[0]._id;
+    }
+  }
+  render();
+}, err=>{
+  console.error(err);
+  setConnection('offline');
+  toast('Database read error: '+err.message,'err');
+});
+
+/* ----------------------------------------------------------------------------
+   28. BOOT
+---------------------------------------------------------------------------- */
+document.addEventListener('DOMContentLoaded', ()=>{
+  setConnection('connecting');
+
+  /* default settings bootstrap — only written if missing, never overwrites */
+  DB.ref('settings').once('value').then(snap=>{
+    const cur = snap.val() || {};
+    const patch = {};
+    if(!cur.company) patch.company = DEFAULT_SETTINGS.company;
+    if(!cur.tax) patch.tax = DEFAULT_SETTINGS.tax;
+    if(!cur.numbering) patch.numbering = DEFAULT_SETTINGS.numbering;
+    if(Object.keys(patch).length) DB.ref('settings').update(patch);
+  }).catch(()=>{});
+
+  window.addEventListener('resize', ()=>{
+    if(state.view === 'dashboard') drawDashboardCharts();
+  });
+
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape') closeModal();
+  });
+
+  render();
+});
+
+/* expose a few functions used by inline handlers */
+window.filterTable = filterTable;
+</script>
+</body>
+</html>
